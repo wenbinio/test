@@ -1,0 +1,141 @@
+﻿l_english:
+ # Stark Events
+ stark_book.0001.t:0 "A Raven from the South"
+ stark_book.0001.desc:0 "A raven has arrived bearing the royal seal. The King requests your presence in King's Landing to serve as Hand. Your friend Jon Arryn has died under mysterious circumstances. The realm needs you."
+ stark_book.0001.a:0 "I will answer the call of duty"
+ stark_book.0001.a.flavor:0 "Winter is coming, but the realm needs its servants in summer too."
+ stark_book.0001.a.tt:0 "You will journey to King's Landing"
+ stark_book.0001.b:0 "My place is in the North"
+ 
+ stark_book.0002.t:0 "Arrival in the Capital"
+ stark_book.0002.desc:0 "King's Landing sprawls before you, a city of a million souls. The stench is overwhelming, but somewhere in these streets lie the answers to Jon Arryn's death. Will you investigate or focus solely on your duties as Hand?"
+ stark_book.0002.a:0 "I must know what killed Jon Arryn"
+ stark_book.0002.b:0 "I am here to serve the King, nothing more"
+ 
+ stark_book.0003.t:0 "A Dangerous Discovery"
+ stark_book.0003.desc:0 "Your investigation has borne fruit. The truth you've uncovered could shake the foundations of the realm. The succession itself may be called into question. But revealing such knowledge carries grave risk."
+ stark_book.0003.a:0 "Truth and honor demand I speak"
+ stark_book.0003.b:0 "I must tread carefully with this knowledge"
+ 
+ stark_book.0004.t:0 "The Throne Room"
+ stark_book.0004.desc:0 "Your enemies have moved against you. Surrounded by gold cloaks who owe you no loyalty, you face a choice that will echo through history. Will you bend for mercy or stand firm on principle?"
+ stark_book.0004.a:0 "I will speak the truth, come what may"
+ stark_book.0004.a.tt:0 "Honor may cost everything, but it cannot be bought"
+ stark_book.0004.b:0 "Perhaps there is still a way out"
+ 
+ stark_book.1000.t:0 "The North Remembers"
+ stark_book.1000.desc:0 "News from the South has shaken the realm. Your father is dead, executed by order of a boy king. The North cries out for vengeance. Your bannermen look to you for leadership in this dark hour."
+ stark_book.1000.a:0 "We will have justice"
+ stark_book.1000.a.tt:0 "The pack survives"
+ 
+ stark_book.1001.t:0 "The King in the North"
+ stark_book.1001.desc:0 "Your bannermen have proclaimed you King in the North. They will follow you to war against the throne. This is a declaration that cannot be undone - the realm will brand you rebel and traitor. But the North remembers, and the North knows no king but the King in the North whose name is Stark."
+ stark_book.1001.a:0 "I accept their acclamation"
+ stark_book.1001.b:0 "We must make peace with the throne"
+ 
+ stark_book.1002.t:0 "The Price of Alliance"
+ stark_book.1002.desc:0 "Lord Frey controls the crossing of the Green Fork. His price for passage is a marriage pact - you must wed one of his daughters. Your bannermen urge you to accept. The war cannot be won without his support."
+ stark_book.1002.a:0 "I will honor this agreement"
+ stark_book.1002.b:0 "I will marry for love, not strategy"
+ 
+ stark_book.1003.t:0 "The Twins"
+ stark_book.1003.desc:0 "You have returned to the Twins to make amends with Lord Frey. A wedding feast has been prepared. Musicians play, and wine flows freely. Yet something feels wrong. The doors are closing, and strange glances pass between Frey's men."
+ stark_book.1003.a:0 "What treachery is this?"
+ stark_book.1003.a.tt:0 "The Freys send their regards"
+ stark_book.1003.b:0 "We must escape now!"
+ 
+ stark_book.2000.t:0 "Survival"
+ stark_book.2000.desc:0 "Your family has been scattered by war and treachery. Many you loved are gone. But you yet live, and while there is life, there is hope for vengeance and restoration. What path will you take?"
+ stark_book.2000.a:0 "Hide and survive until the time is right"
+ stark_book.2000.b:0 "Strike back at our enemies now"
+ 
+ # Lannister Events
+ lannister_book.0001.t:0 "The Game of Thrones"
+ lannister_book.0001.desc:0 "The pieces are in position. Your husband the King is easily led, and those who might oppose you are either far away or distracted. Now is the time to consolidate power for your family, for your children, for yourself."
+ lannister_book.0001.a:0 "I will play the game to win"
+ lannister_book.0001.b:0 "I will rule wisely and well"
+ 
+ lannister_book.0002.t:0 "Dangerous Truths"
+ lannister_book.0002.desc:0 "Someone is asking uncomfortable questions. They probe into matters best left buried. The Hand grows suspicious. If the truth emerges, everything you've built will crumble."
+ lannister_book.0002.a:0 "Remove the threat before it's too late"
+ lannister_book.0002.b:0 "Perhaps they will lose interest on their own"
+ 
+ lannister_book.0100.t:0 "Accused"
+ lannister_book.0100.desc:0 "You stand accused of a crime you did not commit. Your own family seems content to watch you hang. The court bays for your blood. But you still have one card left to play - the ancient right of trial by combat."
+ lannister_book.0100.a:0 "I demand trial by combat"
+ lannister_book.0100.b:0 "I confess to the crime"
+ 
+ lannister_book.0101.t:0 "The Duel"
+ lannister_book.0101.desc:0 "Your champion fights for your life in the arena. The crowd roars as steel clashes. The combat is brutal and decisive. When the dust settles, will you be vindicated or condemned?"
+ lannister_book.0101.a:0 "Your champion has fallen"
+ lannister_book.0101.b:0 "Victory! You are proven innocent"
+ 
+ lannister_book.0102.t:0 "A Desperate Gambit"
+ lannister_book.0102.desc:0 "Condemned to die, you await execution in your cell. But in the darkness, you hear footsteps. Someone has come - whether to offer escape or ensure your silence, you cannot be sure. This may be your only chance."
+ lannister_book.0102.a:0 "Take the chance and flee"
+ lannister_book.0102.b:0 "Face your fate with dignity"
+ 
+ lannister_book.0103.t:0 "Across the Narrow Sea"
+ lannister_book.0103.desc:0 "You have crossed the narrow sea to Essos, leaving behind everything you knew. In the Free Cities, you are anonymous - no longer the despised dwarf of a great house, but a man who must make his own way. And yet, you hear whispers of dragons to the east..."
+ lannister_book.0103.a:0 "Seek out these dragons and their queen"
+ lannister_book.0103.b:0 "Make a quiet life here"
+ 
+ lannister_book.0200.t:0 "Honor and Love"
+ lannister_book.0200.desc:0 "You have always been torn between your duties as a knight and your forbidden love. The Kingsguard swears to take no wife, hold no lands, father no children. Yet your heart pulls you in another direction. What matters more?"
+ lannister_book.0200.a:0 "I am a knight first"
+ lannister_book.0200.b:0 "Love conquers all"
+ 
+ # Targaryen Events
+ targaryen_book.0001.t:0 "A Wedding Gift"
+ targaryen_book.0001.desc:0 "Among your wedding gifts are three petrified dragon eggs. They are beautiful beyond measure, ancient and precious. Some say they are worth a small fortune. Others say they are merely pretty stones from a dead age."
+ targaryen_book.0001.a:0 "These are treasures beyond price"
+ targaryen_book.0001.b:0 "Sell them for gold we desperately need"
+ 
+ targaryen_book.0002.t:0 "The Pyre"
+ targaryen_book.0002.desc:0 "Your husband is dead, and tradition demands his body be burned. The dragon eggs sit nearby, precious stones to be consumed in flame. But you feel a strange pull toward the fire, as if the flames call to your blood. The old words echo in your mind: 'Fire and Blood.'"
+ targaryen_book.0002.a:0 "Walk into the flames"
+ targaryen_book.0002.a.flavor:0 "I am the blood of the dragon"
+ targaryen_book.0002.b:0 "This is madness. Mourn properly"
+ 
+ targaryen_book.0003.t:0 "From the Ashes"
+ targaryen_book.0003.desc:0 "As dawn breaks, the ashes cool. You stand unburnt among the embers, and in your arms - three living dragons. For the first time in over a century, dragons have returned to the world. And they know you as their mother."
+ targaryen_book.0003.a:0 "The dragons are my children"
+ 
+ targaryen_book.0004.t:0 "The Slave Markets"
+ targaryen_book.0004.desc:0 "You stand before the slavers of Astapor. They offer you the Unsullied - eight thousand perfect warriors, trained from childhood to obey without question. The price is steep: one of your dragons. But with such an army, you could conquer kingdoms."
+ targaryen_book.0004.a:0 "I agree to the trade"
+ targaryen_book.0004.b:0 "I will not trade my dragons"
+ 
+ targaryen_book.0005.t:0 "Breaker of Chains"
+ targaryen_book.0005.desc:0 "The Unsullied are yours. The slaver smugly presents you with the whip. But you are Targaryen, and you bow to no slaver. With dragons at your back and an army that now answers to you alone, you have the power to change everything."
+ targaryen_book.0005.a:0 "Dracarys"
+ targaryen_book.0005.a.flavor:0 "I free every slave in this city"
+ targaryen_book.0005.b:0 "Accept the transaction as agreed"
+ 
+ targaryen_book.0006.t:0 "The Queen's Dilemma"
+ targaryen_book.0006.desc:0 "Meereen is yours, but ruling proves harder than conquering. The freedmen look to you for guidance. Former slaves need food, shelter, purpose. Your advisors urge you to sail for Westeros while your enemies are divided. But is it right to abandon those you freed?"
+ targaryen_book.0006.a:0 "I will stay and learn to rule justly"
+ targaryen_book.0006.b:0 "Westeros is my true destination"
+ 
+ targaryen_book.0007.t:0 "The Sons of the Harpy"
+ targaryen_book.0007.desc:0 "Masked killers strike in the night, murdering your freedmen and Unsullied. The Sons of the Harpy want their old world back. They will not stop until you are driven out or destroyed. How will you respond to this insurgency?"
+ targaryen_book.0007.a:0 "Hunt them down and execute them all"
+ targaryen_book.0007.b:0 "Seek to negotiate and find compromise"
+ 
+ targaryen_book.0008.t:0 "A Political Match"
+ targaryen_book.0008.desc:0 "To secure peace, the noble families of Meereen offer you a marriage to one of their own. It would legitimize your rule and potentially end the violence. But it would also mean binding yourself to this city, perhaps forever."
+ targaryen_book.0008.a:0 "I accept for the sake of peace"
+ targaryen_book.0008.b:0 "I will not be bought or sold"
+ 
+ targaryen_book.0010.t:0 "Westeros Awaits"
+ targaryen_book.0010.desc:0 "The time has come. Your dragons are grown, your army is ready, and your fleet is assembled. Across the narrow sea lies Westeros - the land of your birth, stolen from your family by the Usurper. Now you will take it back with fire and blood."
+ targaryen_book.0010.a:0 "We sail for Westeros"
+ targaryen_book.0010.a.tt:0 "I will take what is mine"
+ 
+ # Character Modifiers
+ dragon_mother:0 "Mother of Dragons"
+ dragon_mother_desc:0 "This character has birthed dragons and commands them"
+ commander_of_unsullied:0 "Commander of the Unsullied"
+ commander_of_unsullied_desc:0 "This character commands the legendary Unsullied warriors"
+ torn_by_love:0 "Torn by Love"
+ torn_by_love_desc:0 "Conflicted between duty and desire"
