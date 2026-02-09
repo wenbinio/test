@@ -15,7 +15,7 @@ stark_book.0001 = {
 	}
 	
 	trigger = {
-		has_trait = stark_bloodline
+		dynasty = dynasty:dynn_stark
 		has_title = title:c_winterfell
 		NOT = { has_character_flag = ned_summons_received }
 		year >= 298
@@ -230,7 +230,7 @@ stark_book.1000 = {
 	
 	trigger = {
 		any_child = {
-			has_trait = stark_bloodline
+			dynasty = dynasty:dynn_stark
 			is_alive = yes
 		}
 	}
@@ -238,7 +238,7 @@ stark_book.1000 = {
 	immediate = {
 		every_child = {
 			limit = {
-				has_trait = stark_bloodline
+				dynasty = dynasty:dynn_stark
 			}
 			add_character_flag = avenge_father
 		}
@@ -382,7 +382,7 @@ stark_book.1003 = {
 		every_child = {
 			limit = {
 				is_alive = yes
-				has_trait = stark_bloodline
+				dynasty = dynasty:dynn_stark
 			}
 			trigger_event = {
 				id = stark_book.2000

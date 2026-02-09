@@ -48,16 +48,16 @@ mod/agot_book_events/
 ## Requirements
 
 - Crusader Kings 3 version 1.12.* or compatible
-- A Game of Thrones mod (the events reference traits like `stark_bloodline`, `lannister_bloodline`, `targaryen_bloodline`)
+- A Game of Thrones mod (events use AGOT dynasty IDs: `dynn_stark`, `dynn_lannister`, `dynn_targaryen`)
 
 ## Compatibility Notes
 
-This mod is designed to work alongside the CK3 AGOT mod. Key assumptions and areas to verify:
+This mod is designed to work alongside the CK3 AGOT mod. The following compatibility measures have been applied:
 
-- **Bloodline traits**: Events trigger on `stark_bloodline`, `lannister_bloodline`, and `targaryen_bloodline`. Confirm these match the actual trait IDs used by the AGOT mod — they may use dynasty checks or different trait names (e.g. `blood_of_old_valyria`).
-- **Title keys**: Events reference `title:c_winterfell` and `title:c_kings_landing`. Verify these match AGOT's title hierarchy (county-level vs barony-level).
-- **Combat trait**: Jaime's event uses `has_trait = skilled_swordsman`. If the AGOT mod uses a different warrior trait (e.g. `knight`, `formidable_fighter`), this trigger should be updated.
-- **Themes and backgrounds**: All themes (`crown`, `intrigue`, `death`, `war`, `mystical`, `wedding`, `realm`, `stewardship`, `duel`) and override backgrounds (`throne_room`, `burning_building`, `feast`) are standard CK3 assets and should work without modification.
+- **Dynasty checks**: Events use `dynasty = dynasty:dynn_stark`, `dynasty:dynn_lannister`, and `dynasty:dynn_targaryen` instead of bloodline traits, matching the AGOT mod's dynasty-based character identification.
+- **Title keys**: Events reference `title:c_winterfell` and `title:c_kings_landing` at the county level. Cersei's events check for a spouse holding King's Landing rather than holding it directly.
+- **Combat check**: Jaime's event uses `prowess >= 12` instead of a specific combat trait, ensuring compatibility regardless of which warrior traits the AGOT mod defines.
+- **Themes and backgrounds**: All themes (`crown`, `intrigue`, `death`, `war`, `mystical`, `wedding`, `realm`, `stewardship`, `duel`) and override backgrounds (`throne_room`, `burning_building`, `feast`) are standard CK3 assets and work without modification.
 - **Effects and modifiers**: Custom modifier names (`dragon_mother`, `commander_of_unsullied`, `torn_by_love`) are defined within this mod and do not conflict with AGOT.
 
 ## Story Event Expansion Plan

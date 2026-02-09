@@ -11,10 +11,10 @@ lannister_book.0001 = {
 	theme = intrigue
 	
 	trigger = {
-		has_trait = lannister_bloodline
+		dynasty = dynasty:dynn_lannister
 		is_female = yes
 		is_married = yes
-		has_title = title:c_kings_landing
+		any_spouse = { has_title = title:c_kings_landing }
 		NOT = { has_character_flag = schemes_initiated }
 		year >= 298
 	}
@@ -155,7 +155,7 @@ lannister_book.0100 = {
 	theme = intrigue
 	
 	trigger = {
-		has_trait = lannister_bloodline
+		dynasty = dynasty:dynn_lannister
 		has_trait = dwarf
 		NOT = { has_character_flag = trial_occurred }
 		any_sibling = {
@@ -337,9 +337,9 @@ lannister_book.0200 = {
 	theme = war
 	
 	trigger = {
-		has_trait = lannister_bloodline
+		dynasty = dynasty:dynn_lannister
 		is_male = yes
-		has_trait = skilled_swordsman
+		prowess >= 12
 		NOT = { has_character_flag = honor_crisis }
 		year >= 299
 	}

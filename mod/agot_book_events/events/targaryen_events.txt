@@ -11,7 +11,7 @@ targaryen_book.0001 = {
 	theme = mystical
 	
 	trigger = {
-		has_trait = targaryen_bloodline
+		dynasty = dynasty:dynn_targaryen
 		is_female = yes
 		age >= 14
 		NOT = { has_character_flag = received_dragon_eggs }
