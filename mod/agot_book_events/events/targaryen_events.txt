@@ -1,0 +1,441 @@
+﻿# Events for House Targaryen storyline
+# The rise of the Dragon Queen
+
+namespace = targaryen_book
+
+# Daenerys receives dragon eggs
+targaryen_book.0001 = {
+	type = character_event
+	title = targaryen_book.0001.t
+	desc = targaryen_book.0001.desc
+	theme = mystical
+	
+	trigger = {
+		has_trait = targaryen_bloodline
+		is_female = yes
+		age >= 14
+		NOT = { has_character_flag = received_dragon_eggs }
+		year >= 298
+	}
+	
+	immediate = {
+		add_character_flag = received_dragon_eggs
+	}
+	
+	weight_multiplier = {
+		base = 100
+	}
+	
+	# Treasure the mysterious gift
+	option = {
+		name = targaryen_book.0001.a
+		
+		add_character_flag = values_dragon_eggs
+		add_prestige = 50
+		
+		trigger_event = {
+			id = targaryen_book.0002
+			days = 180
+		}
+		
+		ai_chance = {
+			base = 90
+		}
+	}
+	
+	# Sell them for wealth
+	option = {
+		name = targaryen_book.0001.b
+		
+		add_gold = 500
+		add_character_flag = sold_dragon_eggs
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# Death of Khal and the pyre
+targaryen_book.0002 = {
+	type = character_event
+	title = targaryen_book.0002.t
+	desc = targaryen_book.0002.desc
+	theme = death
+	
+	trigger = {
+		has_character_flag = values_dragon_eggs
+		is_married = yes
+		NOT = { has_character_flag = khal_died }
+	}
+	
+	immediate = {
+		add_character_flag = khal_died
+	}
+	
+	# Step into the flames with the eggs (book path)
+	option = {
+		name = targaryen_book.0002.a
+		flavor = targaryen_book.0002.a.flavor
+		
+		add_character_flag = walked_into_fire
+		
+		random_list = {
+			85 = {
+				add_character_flag = survived_pyre
+				trigger_event = {
+					id = targaryen_book.0003
+					days = 1
+				}
+			}
+			15 = {
+				add_character_flag = died_in_flames
+			}
+		}
+		
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = 20
+				has_trait = brave
+			}
+		}
+	}
+	
+	# Mourn conventionally
+	option = {
+		name = targaryen_book.0002.b
+		
+		add_character_flag = mourned_normally
+		stress_impact = {
+			base = major_stress_impact_gain
+		}
+		
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+# Birth of dragons
+targaryen_book.0003 = {
+	type = character_event
+	title = targaryen_book.0003.t
+	desc = targaryen_book.0003.desc
+	theme = mystical
+	override_background = {
+		reference = burning_building
+	}
+	
+	trigger = {
+		has_character_flag = survived_pyre
+		NOT = { has_character_flag = dragons_hatched }
+	}
+	
+	immediate = {
+		add_character_flag = dragons_hatched
+		add_character_flag = mother_of_dragons
+	}
+	
+	# Embrace your destiny
+	option = {
+		name = targaryen_book.0003.a
+		
+		add_character_modifier = {
+			name = dragon_mother
+			years = 100
+		}
+		add_prestige = 1000
+		add_dread = 20
+		
+		trigger_event = {
+			id = targaryen_book.0004
+			days = 365
+		}
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# Building an army - Unsullied
+targaryen_book.0004 = {
+	type = character_event
+	title = targaryen_book.0004.t
+	desc = targaryen_book.0004.desc
+	theme = war
+	
+	trigger = {
+		has_character_flag = mother_of_dragons
+		NOT = { has_character_flag = visited_slavers_bay }
+	}
+	
+	immediate = {
+		add_character_flag = visited_slavers_bay
+	}
+	
+	weight_multiplier = {
+		base = 90
+	}
+	
+	# Trade for the Unsullied army
+	option = {
+		name = targaryen_book.0004.a
+		
+		add_character_flag = acquired_unsullied
+		add_character_modifier = {
+			name = commander_of_unsullied
+			years = 50
+		}
+		
+		trigger_event = {
+			id = targaryen_book.0005
+			days = 7
+		}
+		
+		ai_chance = {
+			base = 85
+		}
+	}
+	
+	# Seek other means
+	option = {
+		name = targaryen_book.0004.b
+		
+		add_character_flag = rejected_unsullied
+		
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# Liberation of slaves
+targaryen_book.0005 = {
+	type = character_event
+	title = targaryen_book.0005.t
+	desc = targaryen_book.0005.desc
+	theme = realm
+	
+	trigger = {
+		has_character_flag = acquired_unsullied
+		NOT = { has_character_flag = freed_slaves }
+	}
+	
+	immediate = {
+		add_character_flag = freed_slaves
+	}
+	
+	# Free all the slaves (book path)
+	option = {
+		name = targaryen_book.0005.a
+		flavor = targaryen_book.0005.a.flavor
+		
+		add_character_flag = breaker_of_chains
+		add_prestige = 500
+		add_piety = 100
+		
+		trigger_event = {
+			id = targaryen_book.0006
+			days = 180
+		}
+		
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 15
+				has_trait = compassionate
+			}
+		}
+	}
+	
+	# Maintain the system for stability
+	option = {
+		name = targaryen_book.0005.b
+		
+		add_character_flag = maintained_slavery
+		add_gold = 300
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# Ruling Meereen
+targaryen_book.0006 = {
+	type = character_event
+	title = targaryen_book.0006.t
+	desc = targaryen_book.0006.desc
+	theme = stewardship
+	
+	trigger = {
+		has_character_flag = breaker_of_chains
+		NOT = { has_character_flag = ruling_meereen }
+	}
+	
+	immediate = {
+		add_character_flag = ruling_meereen
+	}
+	
+	# Stay and learn to rule
+	option = {
+		name = targaryen_book.0006.a
+		
+		add_character_flag = learning_to_rule
+		add_stewardship = 1
+		
+		trigger_event = {
+			id = targaryen_book.0007
+			days = 365
+		}
+		
+		ai_chance = {
+			base = 70
+		}
+	}
+	
+	# Sail for Westeros immediately
+	option = {
+		name = targaryen_book.0006.b
+		
+		add_character_flag = sailing_to_westeros
+		
+		trigger_event = {
+			id = targaryen_book.0010
+			days = 90
+		}
+		
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+# The Sons of the Harpy insurgency
+targaryen_book.0007 = {
+	type = character_event
+	title = targaryen_book.0007.t
+	desc = targaryen_book.0007.desc
+	theme = war
+	
+	trigger = {
+		has_character_flag = learning_to_rule
+		NOT = { has_character_flag = harpy_crisis }
+	}
+	
+	immediate = {
+		add_character_flag = harpy_crisis
+	}
+	
+	# Respond with force
+	option = {
+		name = targaryen_book.0007.a
+		
+		add_character_flag = crushed_insurgency
+		add_dread = 15
+		
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+	# Seek diplomatic solution
+	option = {
+		name = targaryen_book.0007.b
+		
+		add_character_flag = negotiated_peace
+		add_prestige = 100
+		
+		trigger_event = {
+			id = targaryen_book.0008
+			days = 60
+		}
+		
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# Political marriage proposal
+targaryen_book.0008 = {
+	type = character_event
+	title = targaryen_book.0008.t
+	desc = targaryen_book.0008.desc
+	theme = wedding
+	
+	trigger = {
+		has_character_flag = negotiated_peace
+		is_married = no
+		NOT = { has_character_flag = marriage_proposal_received }
+	}
+	
+	immediate = {
+		add_character_flag = marriage_proposal_received
+	}
+	
+	# Accept for peace
+	option = {
+		name = targaryen_book.0008.a
+		
+		add_character_flag = political_marriage
+		
+		ai_chance = {
+			base = 60
+		}
+	}
+	
+	# Refuse and stand alone
+	option = {
+		name = targaryen_book.0008.b
+		
+		add_character_flag = refused_marriage
+		add_prestige = 50
+		
+		trigger_event = {
+			id = targaryen_book.0010
+			days = 180
+		}
+		
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# Journey to Westeros begins
+targaryen_book.0010 = {
+	type = character_event
+	title = targaryen_book.0010.t
+	desc = targaryen_book.0010.desc
+	theme = realm
+	
+	trigger = {
+		has_character_flag = mother_of_dragons
+		OR = {
+			has_character_flag = sailing_to_westeros
+			has_character_flag = refused_marriage
+		}
+		NOT = { has_character_flag = westeros_journey_started }
+	}
+	
+	immediate = {
+		add_character_flag = westeros_journey_started
+	}
+	
+	# Set sail with your forces
+	option = {
+		name = targaryen_book.0010.a
+		
+		add_character_flag = returning_home
+		add_prestige = 300
+		
+		custom_tooltip = targaryen_book.0010.a.tt
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+}

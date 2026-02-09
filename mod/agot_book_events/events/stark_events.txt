@@ -1,0 +1,457 @@
+﻿# Events for House Stark storyline from the books
+# Triggers major plot points to railroad characters toward book outcomes
+
+namespace = stark_book
+
+# Ned Stark receives summons to King's Landing
+stark_book.0001 = {
+	type = character_event
+	title = stark_book.0001.t
+	desc = stark_book.0001.desc
+	theme = crown
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	
+	trigger = {
+		has_trait = stark_bloodline
+		has_title = title:c_winterfell
+		NOT = { has_character_flag = ned_summons_received }
+		year >= 298
+		is_ruler = yes
+	}
+	
+	immediate = {
+		add_character_flag = ned_summons_received
+	}
+	
+	weight_multiplier = {
+		base = 100
+	}
+	
+	# Accept the summons (book path)
+	option = {
+		name = stark_book.0001.a
+		flavor = stark_book.0001.a.flavor
+		
+		add_character_flag = journey_to_kings_landing
+		add_prestige = 200
+		
+		custom_tooltip = stark_book.0001.a.tt
+		
+		trigger_event = {
+			id = stark_book.0002
+			days = 30
+		}
+		
+		ai_chance = {
+			base = 90
+		}
+	}
+	
+	# Refuse (alternate path, low chance)
+	option = {
+		name = stark_book.0001.b
+		
+		add_prestige = -100
+		add_character_flag = refused_kings_summons
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# Arrival at King's Landing
+stark_book.0002 = {
+	type = character_event
+	title = stark_book.0002.t
+	desc = stark_book.0002.desc
+	theme = intrigue
+	
+	trigger = {
+		has_character_flag = journey_to_kings_landing
+		NOT = { has_character_flag = arrived_kings_landing }
+	}
+	
+	immediate = {
+		add_character_flag = arrived_kings_landing
+	}
+	
+	# Investigate Jon Arryn's death
+	option = {
+		name = stark_book.0002.a
+		
+		add_character_flag = investigating_arryn_death
+		
+		trigger_event = {
+			id = stark_book.0003
+			days = 14
+		}
+		
+		ai_chance = {
+			base = 85
+		}
+	}
+	
+	# Focus on duties only
+	option = {
+		name = stark_book.0002.b
+		
+		add_character_flag = ignored_arryn_mystery
+		
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# Discovery of dangerous secrets
+stark_book.0003 = {
+	type = character_event
+	title = stark_book.0003.t
+	desc = stark_book.0003.desc
+	theme = intrigue
+	override_background = {
+		reference = throne_room
+	}
+	
+	trigger = {
+		has_character_flag = investigating_arryn_death
+		NOT = { has_character_flag = discovered_secret }
+	}
+	
+	immediate = {
+		add_character_flag = discovered_secret
+	}
+	
+	# Confront the Queen (book path - dangerous)
+	option = {
+		name = stark_book.0003.a
+		
+		add_character_flag = confronted_queen
+		stress_impact = {
+			base = major_stress_impact_gain
+		}
+		
+		trigger_event = {
+			id = stark_book.0004
+			days = 7
+		}
+		
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 20
+				has_trait = honest
+			}
+		}
+	}
+	
+	# Keep silent and plan carefully
+	option = {
+		name = stark_book.0003.b
+		
+		add_character_flag = planning_carefully
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# The trap is sprung
+stark_book.0004 = {
+	type = character_event
+	title = stark_book.0004.t
+	desc = stark_book.0004.desc
+	theme = death
+	override_background = {
+		reference = throne_room
+	}
+	
+	trigger = {
+		has_character_flag = confronted_queen
+		NOT = { has_character_flag = trap_sprung }
+	}
+	
+	immediate = {
+		add_character_flag = trap_sprung
+	}
+	
+	# Face execution with honor
+	option = {
+		name = stark_book.0004.a
+		
+		add_character_flag = died_with_honor
+		custom_tooltip = stark_book.0004.a.tt
+		
+		# This triggers succession and War of Five Kings
+		trigger_event = {
+			id = stark_book.1000
+			days = 1
+		}
+		
+		ai_chance = {
+			base = 75
+		}
+	}
+	
+	# Attempt escape (low success)
+	option = {
+		name = stark_book.0004.b
+		
+		random_list = {
+			10 = {
+				add_character_flag = escaped_execution
+			}
+			90 = {
+				add_character_flag = failed_escape
+				trigger_event = {
+					id = stark_book.0004
+					days = 1
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+# War of Five Kings trigger event
+stark_book.1000 = {
+	type = character_event
+	title = stark_book.1000.t
+	desc = stark_book.1000.desc
+	theme = war
+	
+	trigger = {
+		any_child = {
+			has_trait = stark_bloodline
+			is_alive = yes
+		}
+	}
+	
+	immediate = {
+		every_child = {
+			limit = {
+				has_trait = stark_bloodline
+			}
+			add_character_flag = avenge_father
+		}
+	}
+	
+	option = {
+		name = stark_book.1000.a
+		
+		custom_tooltip = stark_book.1000.a.tt
+	}
+}
+
+# Robb Stark crowned King in the North
+stark_book.1001 = {
+	type = character_event
+	title = stark_book.1001.t
+	desc = stark_book.1001.desc
+	theme = crown
+	
+	trigger = {
+		has_character_flag = avenge_father
+		is_male = yes
+		age >= 16
+		has_title = title:c_winterfell
+		NOT = { has_character_flag = crowned_king_north }
+	}
+	
+	immediate = {
+		add_character_flag = crowned_king_north
+	}
+	
+	weight_multiplier = {
+		base = 100
+	}
+	
+	# Accept the crown
+	option = {
+		name = stark_book.1001.a
+		
+		add_prestige = 500
+		add_character_flag = king_in_the_north
+		
+		trigger_event = {
+			id = stark_book.1002
+			days = 180
+		}
+		
+		ai_chance = {
+			base = 95
+		}
+	}
+	
+	# Refuse and bend the knee
+	option = {
+		name = stark_book.1001.b
+		
+		add_prestige = -200
+		
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# Red Wedding setup - alliance with Freys
+stark_book.1002 = {
+	type = character_event
+	title = stark_book.1002.t
+	desc = stark_book.1002.desc
+	theme = wedding
+	
+	trigger = {
+		has_character_flag = king_in_the_north
+		NOT = { has_character_flag = frey_alliance_made }
+	}
+	
+	immediate = {
+		add_character_flag = frey_alliance_made
+	}
+	
+	# Honor the marriage pact (book path)
+	option = {
+		name = stark_book.1002.a
+		
+		add_character_flag = honored_marriage_pact
+		add_prestige = 100
+		
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 40
+				has_trait = honest
+			}
+		}
+	}
+	
+	# Break the pact for love
+	option = {
+		name = stark_book.1002.b
+		
+		add_character_flag = broke_marriage_pact
+		
+		trigger_event = {
+			id = stark_book.1003
+			days = 90
+		}
+		
+		ai_chance = {
+			base = 70
+		}
+	}
+}
+
+# The Red Wedding
+stark_book.1003 = {
+	type = character_event
+	title = stark_book.1003.t
+	desc = stark_book.1003.desc
+	theme = death
+	override_background = {
+		reference = feast
+	}
+	
+	trigger = {
+		has_character_flag = broke_marriage_pact
+		NOT = { has_character_flag = red_wedding_occurred }
+	}
+	
+	immediate = {
+		add_character_flag = red_wedding_occurred
+	}
+	
+	# The betrayal unfolds
+	option = {
+		name = stark_book.1003.a
+		
+		add_character_flag = died_red_wedding
+		custom_tooltip = stark_book.1003.a.tt
+		
+		# Transfer to next character
+		every_child = {
+			limit = {
+				is_alive = yes
+				has_trait = stark_bloodline
+			}
+			trigger_event = {
+				id = stark_book.2000
+				days = 30
+			}
+		}
+		
+		ai_chance = {
+			base = 90
+		}
+	}
+	
+	# Somehow escape (very low chance)
+	option = {
+		name = stark_book.1003.b
+		
+		random_list = {
+			5 = {
+				add_character_flag = survived_red_wedding
+				add_prestige = -500
+			}
+			95 = {
+				add_character_flag = died_red_wedding
+			}
+		}
+		
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# Younger Stark children's survival events
+stark_book.2000 = {
+	type = character_event
+	title = stark_book.2000.t
+	desc = stark_book.2000.desc
+	theme = intrigue
+	
+	trigger = {
+		has_character_flag = avenge_father
+		is_alive = yes
+		age < 18
+		NOT = { has_character_flag = survival_path_chosen }
+	}
+	
+	immediate = {
+		add_character_flag = survival_path_chosen
+	}
+	
+	# Go into hiding/exile
+	option = {
+		name = stark_book.2000.a
+		
+		add_character_flag = in_hiding
+		
+		ai_chance = {
+			base = 80
+		}
+	}
+	
+	# Try to reclaim the North immediately
+	option = {
+		name = stark_book.2000.b
+		
+		add_character_flag = seeking_vengeance
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}

@@ -1,0 +1,336 @@
+﻿# Events for House Lannister storyline
+# Power plays and political machinations
+
+namespace = lannister_book
+
+# Cersei's machinations begin
+lannister_book.0001 = {
+	type = character_event
+	title = lannister_book.0001.t
+	desc = lannister_book.0001.desc
+	theme = intrigue
+	
+	trigger = {
+		has_trait = lannister_bloodline
+		is_female = yes
+		is_married = yes
+		has_title = title:c_kings_landing
+		NOT = { has_character_flag = schemes_initiated }
+		year >= 298
+	}
+	
+	immediate = {
+		add_character_flag = schemes_initiated
+	}
+	
+	weight_multiplier = {
+		base = 100
+	}
+	
+	# Secure power through manipulation
+	option = {
+		name = lannister_book.0001.a
+		
+		add_character_flag = playing_the_game
+		add_intrigue = 1
+		
+		trigger_event = {
+			id = lannister_book.0002
+			days = 60
+		}
+		
+		ai_chance = {
+			base = 85
+		}
+	}
+	
+	# Rule justly and fairly
+	option = {
+		name = lannister_book.0001.b
+		
+		add_character_flag = ruling_fairly
+		add_prestige = 100
+		
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# The web of secrets
+lannister_book.0002 = {
+	type = character_event
+	title = lannister_book.0002.t
+	desc = lannister_book.0002.desc
+	theme = intrigue
+	
+	trigger = {
+		has_character_flag = playing_the_game
+		NOT = { has_character_flag = secrets_threatened }
+	}
+	
+	immediate = {
+		add_character_flag = secrets_threatened
+	}
+	
+	# Eliminate threats proactively (book path)
+	option = {
+		name = lannister_book.0002.a
+		
+		add_character_flag = eliminating_threats
+		add_dread = 10
+		
+		trigger_event = {
+			id = lannister_book.0003
+			days = 30
+		}
+		
+		ai_chance = {
+			base = 80
+		}
+	}
+	
+	# Wait and observe
+	option = {
+		name = lannister_book.0002.b
+		
+		add_character_flag = waiting_watching
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# Tyrion's trial
+lannister_book.0100 = {
+	type = character_event
+	title = lannister_book.0100.t
+	desc = lannister_book.0100.desc
+	theme = intrigue
+	
+	trigger = {
+		has_trait = lannister_bloodline
+		has_trait = dwarf
+		NOT = { has_character_flag = trial_occurred }
+		any_sibling = {
+			has_character_flag = playing_the_game
+		}
+	}
+	
+	immediate = {
+		add_character_flag = trial_occurred
+	}
+	
+	weight_multiplier = {
+		base = 80
+	}
+	
+	# Demand trial by combat
+	option = {
+		name = lannister_book.0100.a
+		
+		add_character_flag = trial_by_combat
+		
+		trigger_event = {
+			id = lannister_book.0101
+			days = 7
+		}
+		
+		ai_chance = {
+			base = 75
+		}
+	}
+	
+	# Accept guilt
+	option = {
+		name = lannister_book.0100.b
+		
+		add_character_flag = accepted_guilt
+		add_prestige = -300
+		
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+# Trial by combat outcome
+lannister_book.0101 = {
+	type = character_event
+	title = lannister_book.0101.t
+	desc = lannister_book.0101.desc
+	theme = duel
+	
+	trigger = {
+		has_character_flag = trial_by_combat
+		NOT = { has_character_flag = combat_resolved }
+	}
+	
+	immediate = {
+		add_character_flag = combat_resolved
+	}
+	
+	# Champion loses (book path)
+	option = {
+		name = lannister_book.0101.a
+		
+		add_character_flag = champion_lost
+		
+		trigger_event = {
+			id = lannister_book.0102
+			days = 1
+		}
+		
+		ai_chance = {
+			base = 70
+		}
+	}
+	
+	# Champion wins
+	option = {
+		name = lannister_book.0101.b
+		
+		add_character_flag = champion_won
+		add_prestige = 200
+		
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+# Escape and exile
+lannister_book.0102 = {
+	type = character_event
+	title = lannister_book.0102.t
+	desc = lannister_book.0102.desc
+	theme = intrigue
+	
+	trigger = {
+		has_character_flag = champion_lost
+		NOT = { has_character_flag = escape_attempted }
+	}
+	
+	immediate = {
+		add_character_flag = escape_attempted
+	}
+	
+	# Take the opportunity to flee
+	option = {
+		name = lannister_book.0102.a
+		
+		add_character_flag = fled_to_essos
+		
+		trigger_event = {
+			id = lannister_book.0103
+			days = 90
+		}
+		
+		ai_chance = {
+			base = 85
+		}
+	}
+	
+	# Face your fate
+	option = {
+		name = lannister_book.0102.b
+		
+		add_character_flag = accepted_fate
+		
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# Journey across the narrow sea
+lannister_book.0103 = {
+	type = character_event
+	title = lannister_book.0103.t
+	desc = lannister_book.0103.desc
+	theme = stewardship
+	
+	trigger = {
+		has_character_flag = fled_to_essos
+		NOT = { has_character_flag = reached_essos }
+	}
+	
+	immediate = {
+		add_character_flag = reached_essos
+	}
+	
+	# Seek out dragons and power
+	option = {
+		name = lannister_book.0103.a
+		
+		add_character_flag = seeking_dragons
+		add_intrigue = 1
+		
+		ai_chance = {
+			base = 80
+		}
+	}
+	
+	# Start a new life in obscurity
+	option = {
+		name = lannister_book.0103.b
+		
+		add_character_flag = new_life
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# Jaime's honor crisis
+lannister_book.0200 = {
+	type = character_event
+	title = lannister_book.0200.t
+	desc = lannister_book.0200.desc
+	theme = war
+	
+	trigger = {
+		has_trait = lannister_bloodline
+		is_male = yes
+		has_trait = skilled_swordsman
+		NOT = { has_character_flag = honor_crisis }
+		year >= 299
+	}
+	
+	immediate = {
+		add_character_flag = honor_crisis
+	}
+	
+	weight_multiplier = {
+		base = 70
+	}
+	
+	# Choose honor over love
+	option = {
+		name = lannister_book.0200.a
+		
+		add_character_flag = chose_honor
+		add_prestige = 150
+		
+		ai_chance = {
+			base = 60
+		}
+	}
+	
+	# Choose love over duty
+	option = {
+		name = lannister_book.0200.b
+		
+		add_character_flag = chose_love
+		add_character_modifier = {
+			name = torn_by_love
+			days = 365
+		}
+		
+		ai_chance = {
+			base = 40
+		}
+	}
+}
