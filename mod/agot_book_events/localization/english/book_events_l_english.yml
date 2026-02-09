@@ -60,6 +60,11 @@
  lannister_book.0002.a:0 "Remove the threat before it's too late"
  lannister_book.0002.b:0 "Perhaps they will lose interest on their own"
  
+ lannister_book.0003.t:0 "The Iron Grip"
+ lannister_book.0003.desc:0 "The threats to your secret have been dealt with, but the power vacuum left behind is dangerous. With the Hand gone and the King easily swayed, the regency is yours for the taking. None remain who would dare oppose you openly."
+ lannister_book.0003.a:0 "The realm shall bend to my will"
+ lannister_book.0003.b:0 "I will share the burden of governance"
+ 
  lannister_book.0100.t:0 "Accused"
  lannister_book.0100.desc:0 "You stand accused of a crime you did not commit. Your own family seems content to watch you hang. The court bays for your blood. But you still have one card left to play - the ancient right of trial by combat."
  lannister_book.0100.a:0 "I demand trial by combat"

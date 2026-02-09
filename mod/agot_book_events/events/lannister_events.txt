@@ -102,6 +102,51 @@ lannister_book.0002 = {
 	}
 }
 
+# Consolidation of power
+lannister_book.0003 = {
+	type = character_event
+	title = lannister_book.0003.t
+	desc = lannister_book.0003.desc
+	theme = intrigue
+	override_background = {
+		reference = throne_room
+	}
+	
+	trigger = {
+		has_character_flag = eliminating_threats
+		NOT = { has_character_flag = power_consolidated }
+	}
+	
+	immediate = {
+		add_character_flag = power_consolidated
+	}
+	
+	# Seize the regency (book path)
+	option = {
+		name = lannister_book.0003.a
+		
+		add_character_flag = seized_regency
+		add_prestige = 200
+		add_dread = 15
+		
+		ai_chance = {
+			base = 80
+		}
+	}
+	
+	# Share power with allies
+	option = {
+		name = lannister_book.0003.b
+		
+		add_character_flag = shared_power
+		add_prestige = 50
+		
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
 # Tyrion's trial
 lannister_book.0100 = {
 	type = character_event
