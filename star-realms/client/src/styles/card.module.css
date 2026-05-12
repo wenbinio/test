@@ -1,0 +1,171 @@
+.card {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0e1525 0%, #060a14 100%);
+  border: 1px solid var(--border);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text);
+  font-size: 11px;
+  cursor: default;
+  user-select: none;
+  transition:
+    transform 160ms ease-out,
+    box-shadow 160ms ease-out,
+    border-color 160ms ease-out,
+    opacity 160ms ease-out;
+  flex-shrink: 0;
+}
+
+.card.clickable {
+  cursor: pointer;
+}
+.card.clickable:hover {
+  transform: translateY(-6px);
+  border-color: var(--faction);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 0 1px var(--faction),
+    0 0 18px color-mix(in srgb, var(--faction) 35%, transparent);
+}
+
+.card.disabled {
+  opacity: 0.45;
+}
+
+.card.activated {
+  filter: saturate(0.4) brightness(0.7);
+}
+
+.card .top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+}
+.card .name {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.2;
+  flex: 1;
+}
+.card .cost {
+  background: var(--faction);
+  color: #06080f;
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  font-size: 11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.card .glyph {
+  height: 36px;
+  display: grid;
+  place-items: center;
+  margin: 2px 0;
+  color: var(--faction);
+  opacity: 0.85;
+}
+.card .glyph svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--faction) 50%, transparent));
+}
+.card .text {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--text-dim);
+  flex: 1;
+  overflow: hidden;
+}
+.card .text .ability {
+  margin-bottom: 2px;
+}
+.card .text .ability.ally::before { content: "◆ "; color: var(--faction); }
+.card .text .ability.scrap::before { content: "✕ "; color: var(--bad); }
+.card .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border);
+  padding-top: 4px;
+  margin-top: auto;
+}
+.card .defense {
+  font-family: "Orbitron", monospace;
+  color: var(--faction);
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.card.faction-trade   { --faction: var(--f-trade);   }
+.card.faction-blob    { --faction: var(--f-blob);    }
+.card.faction-machine { --faction: var(--f-machine); }
+.card.faction-star    { --faction: var(--f-star);    }
+.card.faction-neutral { --faction: var(--f-neutral); }
+
+/* Faction accent strip on the left edge. */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--faction);
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 0 8px var(--faction);
+}
+
+/* Card back (face-down) */
+.cardback {
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at center, rgba(110, 198, 255, 0.12), transparent 65%),
+    repeating-linear-gradient(45deg, #0a0d18 0 6px, #0e1525 6px 12px);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-family: "Orbitron", monospace;
+  letter-spacing: 0.2em;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* Pile counters (deck, discard) */
+.pile {
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 10px;
+  border: 1px dashed var(--border-strong);
+  display: grid;
+  place-items: center;
+  color: var(--text-dim);
+  background: rgba(10, 13, 24, 0.45);
+  flex-shrink: 0;
+}
+.pile .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+.pile .count {
+  font-family: "Orbitron", monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}

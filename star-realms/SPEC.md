@@ -1,10 +1,12 @@
 # Star Realms — Co-op Web Rebuild
 ## Product Specification & Requirements
 
-**Status:** Draft v0.1 — awaiting sign-off
+**Status:** v0.3 — decisions locked, implementation in progress
 **Owner:** wenbinio
 **Branch:** `claude/rebuild-star-realms-ui-3X5lc`
-**Target deploy:** privately hosted on owner's domain
+**Target deploy:** Cloudflare Workers + Durable Objects (backend) +
+Cloudflare Pages (static client), all on owner's private domain via
+Cloudflare DNS
 
 > Legal note: Star Realms is © Wise Wizard Games. This is a private,
 > non-commercial fan rebuild of the UI/UX for personal use among invited
@@ -240,18 +242,35 @@ trigger ally (each player's tableau is independent).
 
 ### 6.1 Tech Stack
 
-- **Frontend:** React 18 + TypeScript + Vite. State via Zustand
-  (small, fits the single-room scope). Styling via plain CSS modules
-  with custom properties for theming (no Tailwind dependency to keep
-  bundle small).
-- **Backend:** Node 20 + TypeScript + Express (static + REST health)
-  + Socket.IO 4 (real-time). Authoritative game engine runs server-side.
-- **Shared:** `shared/src/types.ts` consumed by both halves via local
-  workspace import.
-- **Persistence (v1):** in-memory only. Game state lost on server
-  restart. Room codes recycled after 4 h of inactivity.
-- **Persistence (v1.1, optional):** SQLite via `better-sqlite3` for
-  game history and chat logs.
+- **Frontend:** React 18 + TypeScript + Vite. State via Zustand. Plain
+  CSS modules with custom properties for theming (no Tailwind, small
+  bundle). Native `WebSocket` to talk to the Worker — no `socket.io`.
+- **Backend:** **Cloudflare Workers + Durable Objects**.
+  - One **`GameRoom` Durable Object** per active room. The DO holds
+    the authoritative `GameState` in memory, persists snapshots to its
+    own storage on every mutation, and survives evictions.
+  - Up to 2 WebSocket clients connect to a single DO. Hibernation API
+    is used so idle rooms cost nothing.
+  - Intents (`play`, `buy`, `attack`, `end-turn`, `chat`) arrive as
+    JSON frames. The DO processes them serially (single-threaded by
+    design), mutates state, and broadcasts new state to both sockets.
+  - Boss AI runs inline inside `end-turn`.
+- **Auth:** invite-link only. Room creation returns a `roomId` (6-char
+  base32) + per-player `playerToken` (HMAC-signed JSON, secret stored
+  as a Worker secret). The token is stored in `localStorage` keyed by
+  room for reconnect. No accounts, no email, no third-party IdP.
+- **Shared:** `shared/src/types.ts` + `shared/src/cards.ts` consumed by
+  both the client (Vite bundle) and the worker (esbuild bundle) via
+  workspace imports.
+- **Persistence:** Durable Object Storage (KV per DO). One `state` key
+  holds the current `GameState`; one `meta` key holds room metadata
+  and player tokens. A scheduled Worker cron sweeps DOs idle for >24 h
+  (calls a `purge` endpoint on each, which deletes its storage).
+- **Hosting/Deploy:** `wrangler deploy` ships the Worker + DO. The
+  client is built with `npm --workspace=client run build` and deployed
+  to Cloudflare Pages. The owner's private domain is mapped to both
+  via a Cloudflare zone (Pages on `play.example.com`, Worker on
+  `play-api.example.com`).
 
 ### 6.2 Repo Layout
 
@@ -259,13 +278,16 @@ trigger ally (each player's tableau is independent).
 star-realms/
 ├── SPEC.md
 ├── README.md
-├── package.json            # workspaces: client, server, shared
-├── shared/                 # types + card definitions
-├── server/                 # Node + Socket.IO
+├── package.json            # workspaces: client, worker, shared
+├── shared/                 # types + card definitions + engine helpers
+├── worker/                 # Cloudflare Worker + GameRoom Durable Object
+│   ├── wrangler.toml
 │   └── src/
-│       ├── index.ts        # HTTP + socket bootstrap
-│       ├── net/            # socket handlers, rooms
-│       └── game/           # engine, cards, boss AI
+│       ├── index.ts        # HTTP routes, WS upgrade, DO routing
+│       ├── room.ts         # GameRoom Durable Object class
+│       ├── engine.ts       # Game rules (play/buy/attack/end-turn)
+│       ├── boss.ts         # Boss AI + threat spawning
+│       └── token.ts        # HMAC-signed player tokens
 └── client/                 # React + Vite
     └── src/
         ├── components/
@@ -274,40 +296,65 @@ star-realms/
         └── styles/
 ```
 
-### 6.3 Socket Protocol (summary; full schema in `shared/src/types.ts`)
+### 6.3 Wire Protocol (full schema in `shared/src/types.ts`)
 
-Client → Server: `lobby:create`, `lobby:join`, `lobby:start`,
-`game:play`, `game:buy`, `game:attackBoss`, `game:attackThreat`,
-`game:endTurn`, `game:chat`.
+**HTTP (client → Worker):**
 
-Server → Client: `state` (authoritative full state push after each
-mutation), `toast`, `chat`.
+| Method | Path                       | Purpose                                |
+| ------ | -------------------------- | -------------------------------------- |
+| POST   | `/rooms`                   | Create room. Body `{ name }`. Returns `{ roomId, playerToken }`. |
+| POST   | `/rooms/:id/join`          | Join existing room. Body `{ name }`. Returns `{ playerToken }`. |
+| GET    | `/rooms/:id/ws`            | Upgrade to WebSocket. Auth via `?t=<playerToken>`.              |
+| GET    | `/health`                  | Liveness for monitoring.                                        |
 
-Authoritative model: clients never compute game outcomes. They submit
-intents; the server validates, mutates, and broadcasts new state. Full
-state broadcast (not delta) for v1 — bandwidth is trivial for a 2-player
-card game.
+**WebSocket (bidirectional JSON frames):**
+
+Client → Server:
+`{ kind: "play", instanceId }`,
+`{ kind: "buy", instanceId }`,
+`{ kind: "attack", target: { kind: "boss" } | { kind: "threat", instanceId } }`,
+`{ kind: "endTurn" }`,
+`{ kind: "startGame" }`,
+`{ kind: "chat", text }`,
+`{ kind: "ping" }`.
+
+Server → Client:
+`{ kind: "state", state: GameState }` — full state, broadcast after
+every mutation,
+`{ kind: "chat", from, text, ts }`,
+`{ kind: "toast", level, text }`,
+`{ kind: "pong" }`.
+
+Authoritative model: clients never compute game outcomes. They send
+intents; the DO validates, mutates, persists, and broadcasts new state
+to both connected sockets. Full state (not delta) for v1 — payload is
+< 8 KB for a typical mid-game position.
 
 ### 6.4 Hosting & Deployment
 
-- Single Node process serves both the API/sockets and the static client
-  bundle.
-- Reverse-proxy behind nginx/Caddy on the owner's domain with HTTPS
-  (Let's Encrypt).
-- WebSocket upgrade allowed on the same origin (no CORS work needed).
-- `systemd` unit (or pm2) to keep the process alive.
-- One env var: `PORT` (default 8080).
-- Optional: `ADMIN_TOKEN` env var to allow `/admin/health` and
-  `/admin/rooms` endpoints behind a header.
+- **Worker + DO:** `cd worker && wrangler deploy`. Routed to
+  `play-api.<your-domain>` via Cloudflare. Secrets set via
+  `wrangler secret put TOKEN_SECRET` (HMAC key for player tokens).
+- **Client:** `npm --workspace=client run build`, then deploy
+  `client/dist/` to Cloudflare Pages routed at `play.<your-domain>`
+  (or connect the GitHub repo to Pages for auto-deploy).
+- DNS managed in Cloudflare. HTTPS handled by Cloudflare automatically.
+- Required Worker bindings: `ROOMS` (Durable Object namespace,
+  class = `GameRoom`).
+- Required Worker secrets: `TOKEN_SECRET` (32+ random bytes),
+  `ALLOWED_ORIGIN` (e.g. `https://play.example.com`) for CORS allow-list.
+- Required client env (Vite): `VITE_API_BASE` (e.g.
+  `https://play-api.example.com`).
 
 ### 6.5 Build & Dev
 
 - `npm install` at repo root installs all workspaces.
-- `npm run dev` runs `server` (ts-node-dev) + `client` (vite) in
-  parallel with proxy from `:5173` → `:8080`.
-- `npm run build` produces `client/dist` and `server/dist`.
-- `npm start` runs the compiled server, which also serves
-  `client/dist` statically.
+- `npm run dev` runs `worker` (`wrangler dev` on `:8787`) and `client`
+  (Vite on `:5173`) in parallel. Vite proxies `/api/*` → `:8787`.
+- `npm run build` builds the client (`client/dist`) and type-checks
+  the worker.
+- `npm run deploy` runs `wrangler deploy` for the worker; Pages picks
+  up the client bundle on push (or via `wrangler pages deploy`).
 
 ---
 
@@ -326,25 +373,48 @@ card game.
 
 ---
 
-## 8. Data Model (server-side, in memory)
+## 8. Data Model (inside `GameRoom` Durable Object)
 
 ```
-Room {
-  id: string (6-char base32)
+DO storage keys
+├── meta            // RoomMeta
+└── state           // GameState | null (null until startGame)
+
+RoomMeta {
+  id: string                 // 6-char base32, matches DO name
   createdAt: number
-  players: Player[]          // length 0..2
-  state: GameState | null    // null until lobby:start
+  lastActivity: number
+  players: PlayerMeta[]      // length 0..2
 }
 
-Player {
-  id: string (uuid)          // server-assigned, returned to client
-  token: string              // for reconnect; stored in localStorage
-  socketId: string | null    // null when disconnected
+PlayerMeta {
+  id: string                 // uuid v4
   name: string
+  tokenHash: string          // HMAC of the signed token (for verify)
+  connected: boolean         // updated when WS opens/closes
 }
 ```
 
-Card defs are loaded once at server boot from `shared/src/cards.ts`.
+In-memory only inside the DO:
+- `Map<playerId, WebSocket>` of live sockets.
+- The latest `GameState` (loaded from storage on cold start).
+
+Card defs are bundled into the worker from `shared/src/cards.ts`. The
+client receives the same defs as part of the first `state` frame so it
+never needs a separate fetch.
+
+## 8.1 Open Questions
+
+All §10 open questions are resolved as of v0.3:
+
+1. Boss curve — T1 50/1/3, T2 75/2/2, T3 100/3/1. Difficulty modes:
+   Standard=T1, Hard=T1→T2, Endless=T1→T2→T3.
+2. Card art — typographic + geometric SVG faction glyphs.
+3. Sound — deferred to v1.1.
+4. Auth — invite-link only, HMAC-signed `playerToken` per player.
+5. Persistence — Durable Object Storage. Idle-room sweep at 24 h.
+6. Deploy — Cloudflare Workers + DO (backend) + Cloudflare Pages
+   (frontend), private domain via Cloudflare DNS.
 
 ---
 
@@ -364,17 +434,7 @@ Card defs are loaded once at server boot from `shared/src/cards.ts`.
 
 ## 10. Open Questions
 
-1. **Difficulty curves** — do you want me to design boss tiers myself
-   or do you have a specific escalation in mind?
-2. **Card art** — placeholder geometric SVG, AI-generated, or just
-   typographic cards? (Affects bundle size + time.)
-3. **Sound** — in scope for v1 or defer?
-4. **Authentication beyond room codes** — is a single shared password
-   on the lobby acceptable, or pure invite-link-only?
-5. **Persistence** — okay with in-memory only for v1, or do you need
-   game-history persistence from day one?
-6. **Domain & deploy environment** — what's the target (bare VPS,
-   Docker, Fly.io, etc.)? Affects the deploy guide I write in M6.
+(Resolved — see §8.1.)
 
 ---
 

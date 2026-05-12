@@ -1,17 +1,22 @@
-// Shared types between Star Realms client and co-op server.
+// Shared types between Star Realms client and the Cloudflare Worker
+// (GameRoom Durable Object). Anything in this file must be safe to
+// run in both browser and Workers/Deno-style runtimes (no Node APIs).
 
 export type Faction = "neutral" | "trade" | "blob" | "machine" | "star";
 
 export type CardType = "ship" | "base" | "outpost" | "threat";
 
+export type DifficultyMode = "standard" | "hard" | "endless";
+
 export interface CardAbility {
-  // Plain-English description shown on the card.
+  // Plain-English description shown on the card (paraphrased — not
+  // copied from the printed game).
   text: string;
-  // Identifier the engine can dispatch on. Engine resolution lives server-side.
+  // Identifier the engine dispatches on.
   effect: string;
   // Whether the ability is gated by an ally (same-faction in play).
   ally?: boolean;
-  // Whether the ability triggers when the card is scrapped from in-play / discard.
+  // Whether the ability triggers when the card is scrapped.
   scrap?: boolean;
 }
 
@@ -31,9 +36,9 @@ export interface CardDef {
 export interface CardInstance {
   instanceId: string;
   defId: string;
-  // Whether the card has had its primary abilities played this turn.
+  // Whether the card's primary abilities resolved this turn.
   activated?: boolean;
-  // Whether its ally ability has resolved this turn.
+  // Whether its ally ability resolved this turn.
   allyUsed?: boolean;
 }
 
@@ -63,19 +68,18 @@ export interface PlayerState {
 }
 
 export interface BossState {
-  // Co-op opponent ("Hostile Worlds"-style boss).
   name: string;
   authority: number;
   maxAuthority: number;
-  threats: CardInstance[]; // Active threats in play
-  nextThreatIn: number;    // Turns until next threat spawns
-  damagePerTurn: number;   // Combat damage the boss deals each end-of-round
-  tier: number;            // Escalates over time
+  threats: CardInstance[];
+  nextThreatIn: number;
+  damagePerTurn: number;
+  tier: 1 | 2 | 3;
 }
 
 export interface SharedState {
   tradeRow: CardInstance[];
-  tradeDeck: number;          // Count only (hidden info).
+  tradeDeck: number;
   explorerPile: number;
   scrapHeap: CardInstance[];
 }
@@ -84,13 +88,13 @@ export type Phase = "lobby" | "playing" | "victory" | "defeat";
 
 export interface GameState {
   roomId: string;
+  difficulty: DifficultyMode;
   phase: Phase;
   round: number;
   activePlayerId: string | null;
   players: PlayerState[];
   boss: BossState;
   shared: SharedState;
-  // Card definitions snapshotted into state so the client never needs to fetch separately.
   cardDefs: Record<string, CardDef>;
   log: LogEntry[];
 }
@@ -102,25 +106,53 @@ export interface LogEntry {
   kind: "info" | "play" | "buy" | "attack" | "boss" | "system";
 }
 
-// ===== Socket protocol =====
+// ===== Wire protocol =====
+// HTTP request/response bodies.
 
-export interface ClientToServerEvents {
-  "lobby:create": (payload: { name: string }, ack: (res: AckRoom) => void) => void;
-  "lobby:join":   (payload: { name: string; roomId: string }, ack: (res: AckRoom) => void) => void;
-  "lobby:start":  (payload: { roomId: string }, ack: (res: Ack) => void) => void;
-  "game:play":    (payload: { roomId: string; instanceId: string }, ack: (res: Ack) => void) => void;
-  "game:buy":     (payload: { roomId: string; instanceId: string }, ack: (res: Ack) => void) => void;
-  "game:attackBoss": (payload: { roomId: string; amount: number }, ack: (res: Ack) => void) => void;
-  "game:attackThreat": (payload: { roomId: string; instanceId: string }, ack: (res: Ack) => void) => void;
-  "game:endTurn": (payload: { roomId: string }, ack: (res: Ack) => void) => void;
-  "game:chat":    (payload: { roomId: string; text: string }) => void;
+export interface CreateRoomRequest {
+  name: string;
+  difficulty?: DifficultyMode;
 }
 
-export interface ServerToClientEvents {
-  "state": (state: GameState) => void;
-  "toast": (msg: { kind: "info" | "warn" | "error"; text: string }) => void;
-  "chat":  (msg: { from: string; text: string; ts: number }) => void;
+export interface CreateRoomResponse {
+  roomId: string;
+  playerId: string;
+  playerToken: string; // HMAC-signed JWT-style token
 }
 
-export type Ack = { ok: true } | { ok: false; error: string };
-export type AckRoom = { ok: true; roomId: string; playerId: string } | { ok: false; error: string };
+export interface JoinRoomRequest {
+  name: string;
+}
+
+export interface JoinRoomResponse {
+  roomId: string;
+  playerId: string;
+  playerToken: string;
+}
+
+export interface ErrorResponse {
+  error: string;
+}
+
+// WebSocket frames.
+
+export type ClientFrame =
+  | { kind: "startGame" }
+  | { kind: "play"; instanceId: string }
+  | { kind: "buy"; instanceId: string }
+  | { kind: "activateBase"; instanceId: string }
+  | { kind: "scrapTrade"; instanceId: string } // scrap explorer-style ability
+  | { kind: "attack"; target: AttackTarget }
+  | { kind: "endTurn" }
+  | { kind: "chat"; text: string }
+  | { kind: "ping" };
+
+export type AttackTarget =
+  | { kind: "boss" }
+  | { kind: "threat"; instanceId: string };
+
+export type ServerFrame =
+  | { kind: "state"; state: GameState }
+  | { kind: "chat"; from: string; text: string; ts: number }
+  | { kind: "toast"; level: "info" | "warn" | "error"; text: string }
+  | { kind: "pong" };

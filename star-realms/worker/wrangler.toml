@@ -1,0 +1,20 @@
+name = "star-realms-worker"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Single Durable Object class per game room. Hibernation API is used so
+# idle rooms cost nothing.
+[[durable_objects.bindings]]
+name = "ROOMS"
+class_name = "GameRoom"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["GameRoom"]
+
+# Secrets to set with `wrangler secret put`:
+#   TOKEN_SECRET    32+ random bytes, HMAC key for player tokens
+#   ALLOWED_ORIGIN  e.g. https://play.example.com
+[vars]
+# Override per-env via wrangler.toml [env.production.vars] or secrets.

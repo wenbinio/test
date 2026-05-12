@@ -1,0 +1,21 @@
+{
+  "name": "star-realms",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "client",
+    "worker"
+  ],
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:worker dev:client",
+    "dev:client": "npm --workspace=@star-realms/client run dev",
+    "dev:worker": "npm --workspace=@star-realms/worker run dev",
+    "build": "npm --workspace=@star-realms/client run build",
+    "deploy:worker": "npm --workspace=@star-realms/worker run deploy",
+    "typecheck": "npm --workspace=@star-realms/client run typecheck && npm --workspace=@star-realms/worker run typecheck"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
