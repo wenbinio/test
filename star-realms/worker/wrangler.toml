@@ -13,6 +13,17 @@ class_name = "GameRoom"
 tag = "v1"
 new_classes = ["GameRoom"]
 
+# Optional: D1 database for game-history persistence. Create with:
+#   wrangler d1 create star-realms
+#   wrangler d1 execute star-realms --file=./schema.sql
+# Then fill in database_id below. Leaving it commented out is fine —
+# history persistence is best-effort and the game runs without it.
+#
+# [[d1_databases]]
+# binding = "HISTORY"
+# database_name = "star-realms"
+# database_id = "REPLACE_WITH_YOUR_DB_ID"
+
 # Secrets to set with `wrangler secret put`:
 #   TOKEN_SECRET    32+ random bytes, HMAC key for player tokens
 #   ALLOWED_ORIGIN  e.g. https://play.example.com

@@ -10,6 +10,7 @@ interface Env {
   ROOMS: DurableObjectNamespace;
   TOKEN_SECRET: string;
   ALLOWED_ORIGIN?: string;
+  HISTORY?: D1Database;
 }
 
 export default {
@@ -22,6 +23,47 @@ export default {
     }
     if (url.pathname === "/health") {
       return json({ ok: true }, 200, corsHeaders(env, origin));
+    }
+
+    // GET /history — recent finished games (read-only). Returns empty
+    // array if no D1 binding is configured.
+    if (req.method === "GET" && url.pathname === "/history") {
+      if (!env.HISTORY) {
+        return json({ games: [] }, 200, corsHeaders(env, origin));
+      }
+      const limit = Math.min(50, parseInt(url.searchParams.get("limit") ?? "20", 10) || 20);
+      try {
+        const r = await env.HISTORY.prepare(
+          `SELECT id, room_id, difficulty, outcome, rounds, boss_tier, players_json, started_at, ended_at
+             FROM game_history
+             ORDER BY ended_at DESC
+             LIMIT ?`,
+        ).bind(limit).all<{
+          id: string;
+          room_id: string;
+          difficulty: string;
+          outcome: string;
+          rounds: number;
+          boss_tier: number;
+          players_json: string;
+          started_at: number;
+          ended_at: number;
+        }>();
+        const games = (r.results ?? []).map((row) => ({
+          id: row.id,
+          roomId: row.room_id,
+          difficulty: row.difficulty,
+          outcome: row.outcome,
+          rounds: row.rounds,
+          bossTier: row.boss_tier,
+          players: JSON.parse(row.players_json),
+          startedAt: row.started_at,
+          endedAt: row.ended_at,
+        }));
+        return json({ games }, 200, corsHeaders(env, origin));
+      } catch (e) {
+        return json({ error: e instanceof Error ? e.message : "history query failed" }, 500, corsHeaders(env, origin));
+      }
     }
 
     // POST /rooms — create

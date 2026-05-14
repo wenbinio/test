@@ -1,7 +1,7 @@
 # Star Realms — Co-op Web Rebuild
 ## Product Specification & Requirements
 
-**Status:** v0.4 — M0–M4 implemented; M5–M6 remaining
+**Status:** v0.5 — M0–M6 implemented; v1 feature-complete
 **Owner:** wenbinio
 **Branch:** `claude/rebuild-star-realms-ui-3X5lc`
 **Target deploy:** Cloudflare Workers + Durable Objects (backend) +

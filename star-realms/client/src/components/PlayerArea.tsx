@@ -1,6 +1,7 @@
 import type { GameState, PlayerState } from "@star-realms/shared/types";
 import { Card, CardBack, Pile } from "./Card";
 import { useStore } from "../state/store";
+import { usePulseOnChange } from "../lib/usePulseOnChange";
 
 interface SelfProps {
   state: GameState;
@@ -64,25 +65,28 @@ interface PartnerProps {
 
 export function PartnerArea({ state, partner }: PartnerProps) {
   const isTurn = state.activePlayerId === partner.id;
+  const authPulse = usePulseOnChange(partner.authority);
+  const tradePulse = usePulseOnChange(partner.trade);
+  const combatPulse = usePulseOnChange(partner.combat);
   return (
-    <div className="partner">
+    <div className="partner" role="region" aria-label={`Partner ${partner.name}`}>
       <h3>
         PARTNER · {partner.name}
         {isTurn && <span style={{color: "var(--good)"}}> · their turn</span>}
         {!partner.connected && <span style={{color: "var(--warn)"}}> · offline</span>}
       </h3>
-      <div className="player-stats" style={{ marginBottom: 8 }}>
+      <div className="player-stats" style={{ marginBottom: 8 }} role="status" aria-live="polite">
         <div className="stat authority">
           <span className="label">Authority</span>
-          <span className="value">{partner.authority}</span>
+          <span className={`value ${authPulse}`}>{partner.authority}</span>
         </div>
         <div className="stat trade">
           <span className="label">Trade</span>
-          <span className="value">{partner.trade}</span>
+          <span className={`value ${tradePulse}`}>{partner.trade}</span>
         </div>
         <div className="stat combat">
           <span className="label">Combat</span>
-          <span className="value">{partner.combat}</span>
+          <span className={`value ${combatPulse}`}>{partner.combat}</span>
         </div>
       </div>
       <div className="row" style={{ alignItems: "flex-start" }}>

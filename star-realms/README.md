@@ -127,8 +127,38 @@ In the Pages project → Custom Domains → add `play.your-domain.com`.
 - ✅ M4 — choice-driven effects (scrap, trade-or-auth, Blob World,
   free-ship-top, scrap-trade-row, target-threat); base activation;
   card inspector (right-click any card, or focus + `i`)
-- ⏳ M5 — animations, sound, a11y audit
-- ⏳ M6 — idle-room purge cron + history persistence
+- ✅ M5 — animations (card-enter, resource pulse, boss-strike shake,
+  turn banner), WebAudio sound effects (off by default, `M` to toggle),
+  keyboard shortcuts (`E` end turn, `A` attack boss, `?` help,
+  `Esc` close modals), focus rings, skip link, ARIA roles + live
+  regions, `prefers-reduced-motion` respected
+- ✅ M6 — idle-room purge via self-managing DO alarms (no cron
+  required), optional D1 history persistence with `GET /history`
+  endpoint
+
+## Optional: enable game-history persistence (D1)
+
+Game history is optional. Without it the game runs fine; `GET /history`
+returns an empty array. To enable:
+
+```bash
+cd worker
+wrangler d1 create star-realms
+# copy the `database_id` it prints into wrangler.toml under
+# the commented [[d1_databases]] block, uncommenting it.
+
+wrangler d1 execute star-realms --file=./schema.sql           # local dev
+wrangler d1 execute star-realms --remote --file=./schema.sql  # production
+
+wrangler deploy
+```
+
+After the game ends each room writes a single row (best-effort, never
+blocks gameplay). Query the recent games:
+
+```bash
+curl https://play-api.your-domain.com/history?limit=20
+```
 
 ---
 

@@ -8,9 +8,10 @@ interface Props {
   instance?: CardInstance;
   onClick?: () => void;
   disabled?: boolean;
+  enterAnim?: boolean;
 }
 
-export function Card({ def, instance, onClick, disabled }: Props) {
+export function Card({ def, instance, onClick, disabled, enterAnim }: Props) {
   const inspect = useStore((st) => st.inspect);
   const clickable = !!onClick && !disabled;
   const klass = [
@@ -19,6 +20,7 @@ export function Card({ def, instance, onClick, disabled }: Props) {
     clickable ? s.clickable : "",
     disabled ? s.disabled : "",
     instance?.activated ? s.activated : "",
+    enterAnim ? "card-enter" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -31,7 +33,8 @@ export function Card({ def, instance, onClick, disabled }: Props) {
         e.preventDefault();
         inspect(def);
       }}
-      role={clickable ? "button" : undefined}
+      role={clickable ? "button" : "group"}
+      aria-label={`${def.name}, ${def.faction} ${def.type}${def.cost ? `, cost ${def.cost}` : ""}${def.defense != null ? `, defense ${def.defense}` : ""}`}
       tabIndex={clickable ? 0 : -1}
       onKeyDown={(e) => {
         if (clickable && (e.key === "Enter" || e.key === " ")) {

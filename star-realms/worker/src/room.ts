@@ -28,12 +28,18 @@ export interface RoomMeta {
     connected: boolean;
   }[];
   difficulty: "standard" | "hard" | "endless";
+  historyWritten?: boolean;
 }
 
 interface Env {
   TOKEN_SECRET: string;
   ALLOWED_ORIGIN?: string;
+  HISTORY?: D1Database;
 }
+
+// Idle-room purge threshold. After this much time without activity, the
+// DO wipes its own storage on alarm wake.
+const IDLE_PURGE_MS = 24 * 60 * 60 * 1000; // 24h
 
 export class GameRoom implements DurableObject {
   private sockets = new Map<string, WebSocket>(); // playerId -> socket
@@ -66,8 +72,73 @@ export class GameRoom implements DurableObject {
   }
 
   private async persist() {
-    if (this.meta) await this.ctx.storage.put("meta", this.meta);
+    if (this.meta) {
+      this.meta.lastActivity = Date.now();
+      await this.ctx.storage.put("meta", this.meta);
+    }
     if (this.state) await this.ctx.storage.put("state", this.state);
+    // Schedule (or extend) the idle-purge alarm.
+    await this.ctx.storage.setAlarm(Date.now() + IDLE_PURGE_MS);
+    // Best-effort history write if the game just ended.
+    await this.writeHistoryIfFinished();
+  }
+
+  // Cloudflare invokes this when the alarm fires.
+  async alarm() {
+    await this.ensureLoaded();
+    if (!this.meta) return;
+    const idleFor = Date.now() - this.meta.lastActivity;
+    if (idleFor < IDLE_PURGE_MS) {
+      // Activity happened between scheduling and firing — reschedule.
+      await this.ctx.storage.setAlarm(this.meta.lastActivity + IDLE_PURGE_MS);
+      return;
+    }
+    // Close any lingering sockets, then wipe.
+    for (const ws of this.sockets.values()) {
+      try { ws.close(1001, "Room purged after 24h idle"); } catch { /* ignore */ }
+    }
+    this.sockets.clear();
+    await this.ctx.storage.deleteAll();
+    this.meta = null;
+    this.state = null;
+  }
+
+  // Best-effort: write the finished game to D1 if a binding is present.
+  // Failures are logged and swallowed — they must not break gameplay.
+  private async writeHistoryIfFinished() {
+    if (!this.env.HISTORY || !this.state || !this.meta) return;
+    if (this.state.phase !== "victory" && this.state.phase !== "defeat") return;
+    if (this.meta.historyWritten) return;
+    try {
+      const id = `${this.meta.id}-${this.meta.createdAt}`;
+      const players = this.state.players.map((p) => ({
+        name: p.name,
+        authority: p.authority,
+        cardsBought: p.deck.length + p.discard.length + p.hand.length + p.inPlay.length + p.bases.length - 10,
+      }));
+      await this.env.HISTORY.prepare(
+        `INSERT OR REPLACE INTO game_history
+         (id, room_id, difficulty, outcome, rounds, boss_tier, players_json, log_json, started_at, ended_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      )
+        .bind(
+          id,
+          this.meta.id,
+          this.state.difficulty,
+          this.state.phase,
+          this.state.round,
+          this.state.boss.tier,
+          JSON.stringify(players),
+          JSON.stringify(this.state.log.slice(-50)),
+          this.meta.createdAt,
+          Date.now(),
+        )
+        .run();
+      this.meta.historyWritten = true;
+      await this.ctx.storage.put("meta", this.meta);
+    } catch (e) {
+      console.error("history write failed", e);
+    }
   }
 
   // ---------- HTTP entry ----------

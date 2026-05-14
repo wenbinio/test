@@ -80,6 +80,52 @@ body::before {
   opacity: 0.6;
 }
 
+/* Focus ring — used everywhere for keyboard nav. */
+:focus-visible {
+  outline: 2px solid rgba(110, 198, 255, 0.85);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Visually hidden but available to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link for keyboard users. */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  background: var(--bg-2);
+  color: var(--text);
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  z-index: 100;
+  transition: top 120ms ease-out;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* Reduced motion: kill anything decorative. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -469,3 +515,108 @@ h1, h2, h3 {
 }
 .endscreen.victory h1 { color: var(--good); text-shadow: 0 0 24px rgba(61,220,132,0.45); }
 .endscreen.defeat h1  { color: var(--bad);  text-shadow: 0 0 24px rgba(255,90,95,0.45); }
+
+/* ===== M5: animations + interactive polish ===== */
+
+@keyframes value-pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); text-shadow: 0 0 18px currentColor; }
+  100% { transform: scale(1); }
+}
+.value-pulse { animation: value-pulse 360ms ease-out; }
+
+@keyframes boss-strike {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+.boss-strike { animation: boss-strike 320ms ease-in-out; }
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) rotate(-2deg);
+    filter: brightness(1.4);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+    filter: brightness(1);
+  }
+}
+.card-enter { animation: card-enter 260ms ease-out; }
+
+@keyframes turn-banner {
+  0%   { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  20%  { opacity: 1; transform: translateY(0)   scale(1); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.turn-banner {
+  position: fixed;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  padding: 8px 18px;
+  background: rgba(10, 13, 24, 0.92);
+  border: 1px solid rgba(110, 198, 255, 0.55);
+  box-shadow: 0 0 24px rgba(110, 198, 255, 0.25);
+  border-radius: 24px;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.18em;
+  font-size: 13px;
+  pointer-events: none;
+  animation: turn-banner 1800ms ease-out forwards;
+}
+
+/* Help overlay */
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 6, 13, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 45;
+}
+.help-card {
+  width: min(540px, 92vw);
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+}
+.help-card h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--f-trade);
+}
+.help-card dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  font-size: 13px;
+  margin: 0;
+}
+.help-card dt {
+  font-family: "Orbitron", monospace;
+  color: var(--info);
+  letter-spacing: 0.08em;
+}
+.help-card dd {
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Mute / help icon buttons */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.icon-btn svg { width: 16px; height: 16px; }
