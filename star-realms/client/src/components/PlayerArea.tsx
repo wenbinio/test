@@ -19,12 +19,23 @@ export function SelfArea({ state, me }: SelfProps) {
         <Pile label="Discard" count={me.discard.length} />
         {me.bases.length > 0 && (
           <div>
-            <div style={{ fontSize: 10, color: "var(--text-muted)", marginBottom: 4 }}>BASES</div>
+            <div style={{ fontSize: 10, color: "var(--text-muted)", marginBottom: 4 }}>
+              BASES <span style={{ opacity: 0.6 }}>· click to activate</span>
+            </div>
             <div className="row">
               {me.bases.map((b) => {
                 const def = state.cardDefs[b.defId];
                 if (!def) return null;
-                return <Card key={b.instanceId} def={def} instance={b} />;
+                const usable = isMyTurn && !b.activated;
+                return (
+                  <Card
+                    key={b.instanceId}
+                    def={def}
+                    instance={b}
+                    disabled={!usable}
+                    onClick={() => send({ kind: "activateBase", instanceId: b.instanceId })}
+                  />
+                );
               })}
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type {
+  CardDef,
   ClientFrame,
   GameState,
   ServerFrame,
@@ -31,6 +32,7 @@ interface StoreState {
   chat: ChatMsg[];
   toasts: Toast[];
   ws: WebSocket | null;
+  inspecting: CardDef | null;
 
   createRoom: (name: string, difficulty: "standard" | "hard" | "endless") => Promise<void>;
   joinRoom: (roomId: string, name: string) => Promise<void>;
@@ -38,6 +40,7 @@ interface StoreState {
   disconnect: () => void;
   send: (frame: ClientFrame) => void;
   dismissToast: (id: number) => void;
+  inspect: (def: CardDef | null) => void;
 }
 
 const SESSION_KEY = "star-realms.session";
@@ -65,6 +68,7 @@ export const useStore = create<StoreState>((set, get) => ({
   chat: [],
   toasts: [],
   ws: null,
+  inspecting: null,
 
   async createRoom(name, difficulty) {
     const r = await fetch(`${API_BASE}/rooms`, {
@@ -116,6 +120,10 @@ export const useStore = create<StoreState>((set, get) => ({
 
   dismissToast(id) {
     set({ toasts: get().toasts.filter((t) => t.id !== id) });
+  },
+
+  inspect(def) {
+    set({ inspecting: def });
   },
 }));
 

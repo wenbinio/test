@@ -65,7 +65,59 @@ export interface PlayerState {
   trade: number;
   combat: number;
   connected: boolean;
+  // A turn-scoped flag set by Freighter's ally ability. Next ship the
+  // player buys goes on top of their deck instead of into discard.
+  nextBuyToTop?: boolean;
 }
+
+// A PendingChoice pauses turn progression until the player selects an
+// option. Only one choice can be active at a time; the engine queues
+// the rest on `player.choiceQueue` (private to the engine — not
+// surfaced to other player).
+export type PendingChoice =
+  | {
+      kind: "scrap_hand_or_discard";
+      playerId: string;
+      prompt: string;
+      optional: boolean;
+      sourceDefId: string;
+      options: { instanceId: string; zone: "hand" | "discard" }[];
+    }
+  | {
+      kind: "trade_or_auth";
+      playerId: string;
+      prompt: string;
+      amount: number;
+      sourceDefId: string;
+    }
+  | {
+      kind: "blob_world";
+      playerId: string;
+      prompt: string;
+      sourceDefId: string;
+      blobsPlayed: number;
+    }
+  | {
+      kind: "free_ship";
+      playerId: string;
+      prompt: string;
+      sourceDefId: string;
+      options: { instanceId: string }[];
+    }
+  | {
+      kind: "scrap_trade_row";
+      playerId: string;
+      prompt: string;
+      sourceDefId: string;
+      options: { instanceId: string }[];
+    }
+  | {
+      kind: "destroy_threat";
+      playerId: string;
+      prompt: string;
+      sourceDefId: string;
+      options: { instanceId: string }[];
+    };
 
 export interface BossState {
   name: string;
@@ -97,6 +149,9 @@ export interface GameState {
   shared: SharedState;
   cardDefs: Record<string, CardDef>;
   log: LogEntry[];
+  // The currently-blocking pending choice, if any. While set, no other
+  // intent is accepted from the active player except `resolveChoice`.
+  pendingChoice?: PendingChoice | null;
 }
 
 export interface LogEntry {
@@ -141,11 +196,20 @@ export type ClientFrame =
   | { kind: "play"; instanceId: string }
   | { kind: "buy"; instanceId: string }
   | { kind: "activateBase"; instanceId: string }
-  | { kind: "scrapTrade"; instanceId: string } // scrap explorer-style ability
+  | { kind: "scrapExplorer"; instanceId: string } // scrap an Explorer from in-play for +2 combat
   | { kind: "attack"; target: AttackTarget }
   | { kind: "endTurn" }
+  | { kind: "resolveChoice"; payload: ResolveChoicePayload }
   | { kind: "chat"; text: string }
   | { kind: "ping" };
+
+export type ResolveChoicePayload =
+  | { kind: "scrap_hand_or_discard"; instanceId: string | null } // null = skip (only when optional)
+  | { kind: "trade_or_auth"; pick: "trade" | "auth" }
+  | { kind: "blob_world"; pick: "five_combat" | "per_blob" }
+  | { kind: "free_ship"; instanceId: string }
+  | { kind: "scrap_trade_row"; instanceId: string }
+  | { kind: "destroy_threat"; instanceId: string };
 
 export type AttackTarget =
   | { kind: "boss" }

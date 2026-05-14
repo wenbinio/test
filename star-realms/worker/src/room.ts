@@ -8,11 +8,13 @@ import type {
   ServerFrame,
 } from "@star-realms/shared/types";
 import {
+  activateBase,
   attack,
   buyCard,
   createInitialState,
   endTurn,
   playCard,
+  resolveChoice,
 } from "./engine";
 import { randomPlayerId, signToken } from "./token";
 
@@ -216,9 +218,18 @@ export class GameRoom implements DurableObject {
           endTurn(this.state, playerId);
           break;
         case "activateBase":
-        case "scrapTrade":
-          // M4 — currently unimplemented; ack without effect.
-          this.send(ws, { kind: "toast", level: "info", text: "Not yet implemented." });
+          if (!this.state) throw new Error("No game in progress.");
+          activateBase(this.state, playerId, frame.instanceId);
+          break;
+        case "resolveChoice":
+          if (!this.state) throw new Error("No game in progress.");
+          resolveChoice(this.state, playerId, frame.payload);
+          break;
+        case "scrapExplorer":
+          // Optional polish — current engine treats Explorer scrap as
+          // "play card, gain +2 combat then scrap" via its abilities,
+          // resolved client-side as a play action. Acknowledged but no-op.
+          this.send(ws, { kind: "toast", level: "info", text: "Use Play to trigger Explorer." });
           return;
       }
       await this.persist();

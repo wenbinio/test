@@ -119,15 +119,15 @@ In the Pages project → Custom Domains → add `play.your-domain.com`.
 
 ## Status
 
-This is the **M0–M3** scaffold (see SPEC §9):
-
 - ✅ M0 — monorepo + types + cards + theme
 - ✅ M1 — lobby, room codes, WebSocket sync, chat, reconnect
 - ✅ M2 — engine + game state skeleton + turn flow
-- ✅ M3 — play / buy / attack-boss / attack-threat / end-turn working;
-  Trade Federation, Blob, Star Empire, Machine Cult + basic effects
-- ⏳ M4 — choice-driven effects (scrap, blob-world choice, free-ship-top, etc.)
-- ⏳ M5 — UX polish (animations, sound, modal inspector, a11y pass)
+- ✅ M3 — play / buy / attack-boss / attack-threat / end-turn; four
+  factions wired with their direct-effect abilities
+- ✅ M4 — choice-driven effects (scrap, trade-or-auth, Blob World,
+  free-ship-top, scrap-trade-row, target-threat); base activation;
+  card inspector (right-click any card, or focus + `i`)
+- ⏳ M5 — animations, sound, a11y audit
 - ⏳ M6 — idle-room purge cron + history persistence
 
 ---

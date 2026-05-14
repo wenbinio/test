@@ -1,5 +1,6 @@
 import type { CardDef, CardInstance } from "@star-realms/shared/types";
 import { FactionGlyph } from "./FactionGlyph";
+import { useStore } from "../state/store";
 import s from "../styles/card.module.css";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export function Card({ def, instance, onClick, disabled }: Props) {
+  const inspect = useStore((st) => st.inspect);
   const clickable = !!onClick && !disabled;
   const klass = [
     s.card,
@@ -25,6 +27,10 @@ export function Card({ def, instance, onClick, disabled }: Props) {
     <div
       className={klass}
       onClick={clickable ? onClick : undefined}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        inspect(def);
+      }}
       role={clickable ? "button" : undefined}
       tabIndex={clickable ? 0 : -1}
       onKeyDown={(e) => {
@@ -32,8 +38,12 @@ export function Card({ def, instance, onClick, disabled }: Props) {
           e.preventDefault();
           onClick!();
         }
+        if (e.key === "i" || e.key === "I") {
+          e.preventDefault();
+          inspect(def);
+        }
       }}
-      title={def.name}
+      title={`${def.name} — right-click to inspect`}
     >
       <div className={s.top}>
         <div className={s.name}>{def.name}</div>

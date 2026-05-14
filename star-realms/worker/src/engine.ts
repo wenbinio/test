@@ -5,26 +5,28 @@
 import {
   ALL_DEFS,
   BOSS_TIERS,
-  CARD_DEFS_BY_ID,
   EXPLORER,
   STARTERS,
   THREAT_DECK,
+  TRADE_DECK,
   bossTiersForDifficulty,
   buildTradeDeck,
 } from "@star-realms/shared/cards";
 import type {
   AttackTarget,
+  CardDef,
   CardInstance,
   DifficultyMode,
   GameState,
   LogEntry,
+  PendingChoice,
   PlayerState,
+  ResolveChoicePayload,
 } from "@star-realms/shared/types";
 
 // ---------- RNG (seeded, deterministic per-room) ----------
 
 function makeRng(seed: number) {
-  // Mulberry32. Good enough for shuffles.
   let t = seed >>> 0;
   return () => {
     t = (t + 0x6d2b79f5) >>> 0;
@@ -69,7 +71,6 @@ export function createInitialState(args: {
       ...Array(2).fill("starter.viper"),
     ];
     const shuffled = shuffle(startDeckIds, rng).map(newInstance);
-    // First player draws 3 cards (standard 2-player rule), second draws 5.
     const handSize = idx === 0 ? 3 : 5;
     const hand = shuffled.splice(0, handSize);
     return {
@@ -113,9 +114,8 @@ export function createInitialState(args: {
       scrapHeap: [],
     },
     cardDefs,
-    log: [
-      logEntry("system", `Room ${roomId} started — difficulty: ${difficulty}.`),
-    ],
+    log: [logEntry("system", `Room ${roomId} started — difficulty: ${difficulty}.`)],
+    pendingChoice: null,
   };
 }
 
@@ -131,69 +131,162 @@ function pushLog(state: GameState, kind: LogEntry["kind"], text: string) {
   if (state.log.length > 200) state.log.splice(0, state.log.length - 200);
 }
 
+// ---------- Validation guard ----------
+
+function requireNoPendingChoice(state: GameState) {
+  if (state.pendingChoice)
+    throw new Error("Resolve the current choice first.");
+}
+
 // ---------- Effects ----------
-// Effect strings have the form "kind:arg" or just "kind". The engine
-// dispatches via a small switch. Many effects are simple resource
-// nudges; a few require deferred player choice (e.g. scrap) — those are
-// no-ops in v1 and logged as TODO.
 
 function applyEffect(
   state: GameState,
   player: PlayerState,
   effect: string,
-  isAlly: boolean,
+  source: CardDef,
 ) {
-  const [kind, rawArg] = effect.split(":");
+  const [kind, rawArg, raw2] = effect.split(":");
   const arg = rawArg ? parseInt(rawArg, 10) : 0;
+
   switch (kind) {
     case "trade":
       player.trade += arg;
-      break;
+      return;
     case "combat":
       player.combat += arg;
-      break;
+      return;
     case "authority":
       player.authority += arg;
-      break;
+      return;
     case "draw":
       drawCards(player, arg, state);
-      break;
+      return;
     case "draw_if_bases": {
-      const [, threshold, n] = effect.split(":");
-      if (player.bases.length >= parseInt(threshold!, 10))
-        drawCards(player, parseInt(n!, 10), state);
-      break;
+      const threshold = arg;
+      const n = parseInt(raw2 ?? "1", 10);
+      if (player.bases.length >= threshold) drawCards(player, n, state);
+      return;
     }
     case "mitigate":
-      // Reduce boss damage next round.
       state.boss.damagePerTurn = Math.max(0, state.boss.damagePerTurn - arg);
-      pushLog(state, "play", `${player.name} mitigates ${arg} boss damage next round.`);
-      break;
-    case "destroy_threat":
-      // Player will select a threat; for v1 auto-destroy the first.
-      if (state.boss.threats.length > 0) {
-        const t = state.boss.threats.shift()!;
-        pushLog(state, "play", `${player.name} destroys ${state.cardDefs[t.defId]!.name}.`);
+      pushLog(state, "play", `${player.name} mitigates ${arg} boss damage.`);
+      return;
+    case "destroy_threat": {
+      if (state.boss.threats.length === 0) {
+        pushLog(state, "info", `(No threats to destroy.)`);
+        return;
       }
-      break;
-    // Effects requiring player choice (scrap, blob world choice, etc.)
-    // are TODO. They are intentionally no-ops for v1.0 — engine ships in
-    // M3 and these resolve in M4.
+      if (state.boss.threats.length === 1) {
+        const t = state.boss.threats.shift()!;
+        const def = state.cardDefs[t.defId];
+        pushLog(state, "play", `${player.name} destroys ${def?.name ?? "?"}.`);
+        return;
+      }
+      queueChoice(state, player, {
+        kind: "destroy_threat",
+        playerId: player.id,
+        prompt: `Destroy a threat (${source.name}).`,
+        sourceDefId: source.id,
+        options: state.boss.threats.map((t) => ({ instanceId: t.instanceId })),
+      });
+      return;
+    }
     case "choose_trade_or_auth":
-      player.trade += arg; // default to trade until UI choice ships
-      break;
-    case "blob_world_choice":
-      player.combat += 5;
-      break;
+      queueChoice(state, player, {
+        kind: "trade_or_auth",
+        playerId: player.id,
+        prompt: `${source.name}: gain Trade or Authority?`,
+        amount: arg,
+        sourceDefId: source.id,
+      });
+      return;
+    case "blob_world_choice": {
+      const blobsPlayed = [...player.inPlay, ...player.bases].filter((c) => {
+        const d = state.cardDefs[c.defId];
+        return d && d.faction === "blob";
+      }).length;
+      queueChoice(state, player, {
+        kind: "blob_world",
+        playerId: player.id,
+        prompt: `Blob World: +5 Combat, or +1 per Blob you've played (${blobsPlayed})?`,
+        sourceDefId: source.id,
+        blobsPlayed,
+      });
+      return;
+    }
     case "wildcard_ally":
-      // Handled in ally detection.
-      break;
+      // Handled in ally detection on play.
+      return;
+    case "may_scrap_hand_or_discard":
+    case "scrap_hand_or_discard": {
+      const options = [
+        ...player.hand.map((c) => ({ instanceId: c.instanceId, zone: "hand" as const })),
+        ...player.discard.map((c) => ({ instanceId: c.instanceId, zone: "discard" as const })),
+      ];
+      if (options.length === 0) return;
+      queueChoice(state, player, {
+        kind: "scrap_hand_or_discard",
+        playerId: player.id,
+        prompt: `${source.name}: scrap a card from your hand or discard.`,
+        optional: kind === "may_scrap_hand_or_discard",
+        sourceDefId: source.id,
+        options,
+      });
+      return;
+    }
+    case "free_ship_top": {
+      const options = state.shared.tradeRow
+        .filter((c) => state.cardDefs[c.defId]?.type === "ship")
+        .map((c) => ({ instanceId: c.instanceId }));
+      if (options.length === 0) return;
+      queueChoice(state, player, {
+        kind: "free_ship",
+        playerId: player.id,
+        prompt: `${source.name}: take a free ship to the top of your deck.`,
+        sourceDefId: source.id,
+        options,
+      });
+      return;
+    }
+    case "buy_to_top":
+      player.nextBuyToTop = true;
+      pushLog(state, "play", `${player.name}: next ship bought goes on top of deck.`);
+      return;
+    case "scrap_trade_row": {
+      const options = state.shared.tradeRow.map((c) => ({ instanceId: c.instanceId }));
+      if (options.length === 0) return;
+      queueChoice(state, player, {
+        kind: "scrap_trade_row",
+        playerId: player.id,
+        prompt: `${source.name}: scrap a card from the trade row.`,
+        sourceDefId: source.id,
+        options,
+      });
+      return;
+    }
+    case "draw_on_destroyed":
+      // Resolved when the base is destroyed — M4 has no boss-attacks-base,
+      // so this is a no-op until friendly-fire mechanics exist.
+      return;
+    case "boss_spawn_faster":
+    case "boss_damage":
+    case "minus_draw":
+    case "minus_trade":
+    case "shield_boss":
+      // Passive threat effects. Read at the right time, not applied here.
+      return;
     default:
-      // Unimplemented in v1.0 (M4 will cover): may_scrap_*, scrap_*,
-      // free_ship_top, buy_to_top, draw_on_destroyed.
       pushLog(state, "info", `(TODO: effect "${kind}")`);
   }
-  void isAlly;
+}
+
+// pendingChoice is a single slot in v1. If a card has multiple
+// choice-triggering abilities, the second will overwrite the first —
+// acceptable since no v1 card chains more than one choice.
+function queueChoice(_state: GameState, _player: PlayerState, c: PendingChoice) {
+  _state.pendingChoice = c;
+  pushLog(_state, "info", c.prompt);
 }
 
 function drawCards(player: PlayerState, n: number, state: GameState) {
@@ -211,13 +304,9 @@ function drawCards(player: PlayerState, n: number, state: GameState) {
 
 // ---------- Player actions ----------
 
-export function activePlayer(state: GameState): PlayerState | null {
-  return state.players.find((p) => p.id === state.activePlayerId) ?? null;
-}
-
 export function playCard(state: GameState, playerId: string, instanceId: string) {
-  if (state.activePlayerId !== playerId)
-    throw new Error("Not your turn.");
+  requireNoPendingChoice(state);
+  if (state.activePlayerId !== playerId) throw new Error("Not your turn.");
   const player = state.players.find((p) => p.id === playerId);
   if (!player) throw new Error("Unknown player.");
   const idx = player.hand.findIndex((c) => c.instanceId === instanceId);
@@ -233,44 +322,88 @@ export function playCard(state: GameState, playerId: string, instanceId: string)
     player.inPlay.push(card);
   }
 
-  // Primary abilities
   for (const ab of def.abilities.filter((a) => !a.ally && !a.scrap)) {
-    applyEffect(state, player, ab.effect, false);
+    applyEffect(state, player, ab.effect, def);
   }
 
-  // Ally check: another in-play or base card of same faction (excluding self).
   const hasAlly =
     def.faction !== "neutral" &&
-    [...player.inPlay, ...player.bases].some(
-      (c) =>
-        c.instanceId !== card.instanceId &&
-        (state.cardDefs[c.defId]?.faction === def.faction ||
-          // Mech World grants wildcard ally for its own turn.
-          state.cardDefs[c.defId]?.id === "machine.mech_world"),
-    );
+    [...player.inPlay, ...player.bases].some((c) => {
+      if (c.instanceId === card.instanceId) return false;
+      const d = state.cardDefs[c.defId];
+      if (!d) return false;
+      return d.faction === def.faction || d.id === "machine.mech_world";
+    });
+
   if (hasAlly && !card.allyUsed) {
     for (const ab of def.abilities.filter((a) => a.ally)) {
-      applyEffect(state, player, ab.effect, true);
+      applyEffect(state, player, ab.effect, def);
     }
     card.allyUsed = true;
   }
+  // Newly played card may unlock ally for an already-in-play same-faction
+  // card that hadn't yet seen an ally.
+  if (def.faction !== "neutral") {
+    for (const c of [...player.inPlay, ...player.bases]) {
+      if (c.instanceId === card.instanceId) continue;
+      if (c.allyUsed) continue;
+      const d = state.cardDefs[c.defId];
+      if (!d) continue;
+      if (d.faction !== def.faction && def.id !== "machine.mech_world") continue;
+      for (const ab of d.abilities.filter((a) => a.ally)) {
+        applyEffect(state, player, ab.effect, d);
+      }
+      c.allyUsed = true;
+    }
+  }
 
+  card.activated = true;
   pushLog(state, "play", `${player.name} plays ${def.name}.`);
 }
 
+export function activateBase(state: GameState, playerId: string, instanceId: string) {
+  requireNoPendingChoice(state);
+  if (state.activePlayerId !== playerId) throw new Error("Not your turn.");
+  const player = state.players.find((p) => p.id === playerId);
+  if (!player) throw new Error("Unknown player.");
+  const base = player.bases.find((b) => b.instanceId === instanceId);
+  if (!base) throw new Error("Base not in play.");
+  if (base.activated) throw new Error("Base already activated this turn.");
+  const def = state.cardDefs[base.defId];
+  if (!def) throw new Error("Unknown card def.");
+
+  for (const ab of def.abilities.filter((a) => !a.ally && !a.scrap)) {
+    applyEffect(state, player, ab.effect, def);
+  }
+  base.activated = true;
+
+  const hasAlly = [...player.inPlay, ...player.bases].some((c) => {
+    if (c.instanceId === base.instanceId) return false;
+    const d = state.cardDefs[c.defId];
+    return d?.faction === def.faction || d?.id === "machine.mech_world";
+  });
+  if (hasAlly && !base.allyUsed) {
+    for (const ab of def.abilities.filter((a) => a.ally)) {
+      applyEffect(state, player, ab.effect, def);
+    }
+    base.allyUsed = true;
+  }
+
+  pushLog(state, "play", `${player.name} activates ${def.name}.`);
+}
+
 export function buyCard(state: GameState, playerId: string, instanceId: string) {
-  if (state.activePlayerId !== playerId)
-    throw new Error("Not your turn.");
+  requireNoPendingChoice(state);
+  if (state.activePlayerId !== playerId) throw new Error("Not your turn.");
   const player = state.players.find((p) => p.id === playerId);
   if (!player) throw new Error("Unknown player.");
 
-  // Explorer is special — instance id "explorer" requested by client.
   if (instanceId === "explorer") {
     if (state.shared.explorerPile <= 0) throw new Error("Explorer pile empty.");
     if (player.trade < EXPLORER.cost) throw new Error("Not enough trade.");
     player.trade -= EXPLORER.cost;
     state.shared.explorerPile -= 1;
-    player.discard.push(newInstance(EXPLORER.id));
+    placeBoughtCard(player, newInstance(EXPLORER.id));
     pushLog(state, "buy", `${player.name} buys an Explorer.`);
     return;
   }
@@ -284,27 +417,34 @@ export function buyCard(state: GameState, playerId: string, instanceId: string) 
 
   player.trade -= def.cost;
   state.shared.tradeRow.splice(rowIdx, 1);
-  player.discard.push(card);
-
-  // Refill the row from a fresh shuffle if needed (v1 uses the full pool
-  // minus cards already on the table).
+  placeBoughtCard(player, card);
   refillTradeRow(state);
 
   pushLog(state, "buy", `${player.name} buys ${def.name}.`);
 }
 
+function placeBoughtCard(player: PlayerState, c: CardInstance) {
+  if (player.nextBuyToTop) {
+    player.deck.unshift(c);
+    player.nextBuyToTop = false;
+  } else {
+    player.discard.push(c);
+  }
+}
+
 function refillTradeRow(state: GameState) {
   while (state.shared.tradeRow.length < 5 && state.shared.tradeDeck > 0) {
-    // We don't track the actual hidden trade-deck contents post-setup;
-    // for v1 we draw from the full pool minus on-table cards. M4 will
-    // properly model the trade deck. Picking a deterministic random
-    // unused def is good enough as a placeholder.
     const inUse = new Set<string>([
       ...state.shared.tradeRow.map((c) => c.defId),
       ...state.shared.scrapHeap.map((c) => c.defId),
     ]);
     const pool = ALL_DEFS.filter(
-      (d) => d.type !== "threat" && d.id !== EXPLORER.id && !STARTERS.includes(d) && !inUse.has(d.id),
+      (d) =>
+        d.type !== "threat" &&
+        d.id !== EXPLORER.id &&
+        !STARTERS.includes(d) &&
+        TRADE_DECK.some((t) => t.def.id === d.id) &&
+        !inUse.has(d.id),
     );
     if (pool.length === 0) break;
     const pick = pool[Math.floor(Math.random() * pool.length)]!;
@@ -314,14 +454,13 @@ function refillTradeRow(state: GameState) {
 }
 
 export function attack(state: GameState, playerId: string, target: AttackTarget) {
-  if (state.activePlayerId !== playerId)
-    throw new Error("Not your turn.");
+  requireNoPendingChoice(state);
+  if (state.activePlayerId !== playerId) throw new Error("Not your turn.");
   const player = state.players.find((p) => p.id === playerId);
   if (!player) throw new Error("Unknown player.");
   if (player.combat <= 0) throw new Error("No combat.");
 
   if (target.kind === "boss") {
-    // Cannot attack boss while a shield threat is active.
     const shielded = state.boss.threats.some((t) =>
       state.cardDefs[t.defId]?.abilities.some((a) => a.effect === "shield_boss"),
     );
@@ -334,7 +473,6 @@ export function attack(state: GameState, playerId: string, target: AttackTarget)
     return;
   }
 
-  // Threat target
   const idx = state.boss.threats.findIndex((t) => t.instanceId === target.instanceId);
   if (idx === -1) throw new Error("Threat not found.");
   const threat = state.boss.threats[idx]!;
@@ -368,41 +506,129 @@ function advanceBossTier(state: GameState) {
 }
 
 export function endTurn(state: GameState, playerId: string) {
-  if (state.activePlayerId !== playerId)
-    throw new Error("Not your turn.");
+  requireNoPendingChoice(state);
+  if (state.activePlayerId !== playerId) throw new Error("Not your turn.");
   const player = state.players.find((p) => p.id === playerId);
   if (!player) throw new Error("Unknown player.");
 
-  // Discard hand + in-play (bases stay).
   player.discard.push(...player.hand, ...player.inPlay);
   player.hand = [];
   player.inPlay = [];
   player.trade = 0;
   player.combat = 0;
+  player.nextBuyToTop = false;
   for (const b of player.bases) {
     b.activated = false;
     b.allyUsed = false;
   }
 
-  // Draw 5.
-  drawCards(player, 5, state);
+  // Apply per-turn "minus_draw" threat penalty if active.
+  const minusDraw = state.boss.threats.reduce((acc, t) => {
+    const d = state.cardDefs[t.defId];
+    const ab = d?.abilities.find((a) => a.effect.startsWith("minus_draw:"));
+    if (!ab) return acc;
+    return acc + parseInt(ab.effect.split(":")[1] ?? "0", 10);
+  }, 0);
+  drawCards(player, Math.max(0, 5 - minusDraw), state);
 
-  // Pass turn.
   const idx = state.players.findIndex((p) => p.id === playerId);
   const nextIdx = (idx + 1) % state.players.length;
   state.activePlayerId = state.players[nextIdx]!.id;
 
-  // If we wrapped around to player 0, the round ends — boss reacts.
   if (nextIdx === 0) {
     state.round += 1;
     bossReact(state);
   }
 }
 
+// ---------- Pending-choice resolution ----------
+
+export function resolveChoice(
+  state: GameState,
+  playerId: string,
+  payload: ResolveChoicePayload,
+) {
+  if (!state.pendingChoice) throw new Error("No pending choice.");
+  const choice = state.pendingChoice;
+  if (choice.playerId !== playerId) throw new Error("Not your choice.");
+  const player = state.players.find((p) => p.id === playerId);
+  if (!player) throw new Error("Unknown player.");
+  if (choice.kind !== payload.kind) throw new Error("Choice kind mismatch.");
+
+  switch (payload.kind) {
+    case "scrap_hand_or_discard": {
+      const c = choice.kind === "scrap_hand_or_discard" ? choice : null;
+      if (!c) throw new Error("Bad choice.");
+      if (payload.instanceId == null) {
+        if (!c.optional) throw new Error("Must scrap a card.");
+        pushLog(state, "play", `${player.name} skips scrap.`);
+        break;
+      }
+      const fromHand = player.hand.findIndex((x) => x.instanceId === payload.instanceId);
+      if (fromHand !== -1) {
+        const [removed] = player.hand.splice(fromHand, 1);
+        state.shared.scrapHeap.push(removed!);
+        pushLog(state, "play", `${player.name} scraps ${state.cardDefs[removed!.defId]?.name}.`);
+      } else {
+        const fromDisc = player.discard.findIndex((x) => x.instanceId === payload.instanceId);
+        if (fromDisc === -1) throw new Error("Card not in hand or discard.");
+        const [removed] = player.discard.splice(fromDisc, 1);
+        state.shared.scrapHeap.push(removed!);
+        pushLog(state, "play", `${player.name} scraps ${state.cardDefs[removed!.defId]?.name}.`);
+      }
+      break;
+    }
+    case "trade_or_auth": {
+      const c = choice.kind === "trade_or_auth" ? choice : null;
+      if (!c) throw new Error("Bad choice.");
+      if (payload.pick === "trade") player.trade += c.amount;
+      else player.authority += c.amount;
+      pushLog(state, "play", `${player.name} gains ${c.amount} ${payload.pick === "trade" ? "Trade" : "Authority"}.`);
+      break;
+    }
+    case "blob_world": {
+      const c = choice.kind === "blob_world" ? choice : null;
+      if (!c) throw new Error("Bad choice.");
+      if (payload.pick === "five_combat") player.combat += 5;
+      else player.combat += c.blobsPlayed;
+      pushLog(state, "play", `${player.name} channels Blob World.`);
+      break;
+    }
+    case "free_ship": {
+      const c = choice.kind === "free_ship" ? choice : null;
+      if (!c) throw new Error("Bad choice.");
+      const idx = state.shared.tradeRow.findIndex((x) => x.instanceId === payload.instanceId);
+      if (idx === -1) throw new Error("Card not in trade row.");
+      const [taken] = state.shared.tradeRow.splice(idx, 1);
+      player.deck.unshift(taken!);
+      refillTradeRow(state);
+      pushLog(state, "play", `${player.name} grabs ${state.cardDefs[taken!.defId]?.name} to deck top.`);
+      break;
+    }
+    case "scrap_trade_row": {
+      const idx = state.shared.tradeRow.findIndex((x) => x.instanceId === payload.instanceId);
+      if (idx === -1) throw new Error("Card not in trade row.");
+      const [taken] = state.shared.tradeRow.splice(idx, 1);
+      state.shared.scrapHeap.push(taken!);
+      refillTradeRow(state);
+      pushLog(state, "play", `${player.name} scraps ${state.cardDefs[taken!.defId]?.name} from the row.`);
+      break;
+    }
+    case "destroy_threat": {
+      const idx = state.boss.threats.findIndex((x) => x.instanceId === payload.instanceId);
+      if (idx === -1) throw new Error("Threat not found.");
+      const [removed] = state.boss.threats.splice(idx, 1);
+      pushLog(state, "play", `${player.name} destroys ${state.cardDefs[removed!.defId]?.name}.`);
+      break;
+    }
+  }
+
+  state.pendingChoice = null;
+}
+
 // ---------- Boss AI ----------
 
 function bossReact(state: GameState) {
-  // Spawn threat if due.
   state.boss.nextThreatIn -= 1;
   if (state.boss.nextThreatIn <= 0) {
     const pool = THREAT_DECK;
@@ -412,10 +638,17 @@ function bossReact(state: GameState) {
     pushLog(state, "boss", `Boss deploys ${def.name}.`);
   }
 
-  // Damage the player with highest authority.
+  // Sum any extra boss damage from threat passives.
+  const extra = state.boss.threats.reduce((acc, t) => {
+    const d = state.cardDefs[t.defId];
+    const ab = d?.abilities.find((a) => a.effect.startsWith("boss_damage:"));
+    return ab ? acc + parseInt(ab.effect.split(":")[1] ?? "0", 10) : acc;
+  }, 0);
+  const dmg = state.boss.damagePerTurn + extra;
+
   const sorted = [...state.players].sort((a, b) => b.authority - a.authority);
-  const targets = sorted.filter((p) => p.authority === sorted[0]!.authority);
-  const dmg = state.boss.damagePerTurn;
+  const top = sorted[0]!.authority;
+  const targets = sorted.filter((p) => p.authority === top);
   for (const p of targets) {
     p.authority -= dmg;
     pushLog(state, "boss", `Boss strikes ${p.name} for ${dmg}.`);

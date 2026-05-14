@@ -4,12 +4,16 @@ import { Lobby } from "./components/Lobby";
 import { WaitingRoom } from "./components/WaitingRoom";
 import { GameBoard } from "./components/GameBoard";
 import { Toasts } from "./components/Toasts";
+import { ChoicePrompt } from "./components/ChoicePrompt";
+import { CardInspector } from "./components/CardInspector";
 
 export function App() {
   const session = useStore((s) => s.session);
   const state = useStore((s) => s.state);
   const connected = useStore((s) => s.connected);
   const disconnect = useStore((s) => s.disconnect);
+  const inspecting = useStore((s) => s.inspecting);
+  const inspect = useStore((s) => s.inspect);
 
   // Auto-resume when we have a stored session but no live socket.
   useEffect(() => {
@@ -31,12 +35,20 @@ export function App() {
     }
   }, [session]);
 
+  const overlays = (
+    <>
+      {state?.pendingChoice && <ChoicePrompt state={state} myId={session?.playerId ?? null} />}
+      <CardInspector def={inspecting} onClose={() => inspect(null)} />
+      <Toasts />
+    </>
+  );
+
   if (!session) {
     return (
       <div className="app-shell">
         <Topbar connected={false} roomId={null} onLeave={null} />
         <Lobby />
-        <Toasts />
+        {overlays}
       </div>
     );
   }
@@ -46,7 +58,7 @@ export function App() {
       <div className="app-shell">
         <Topbar connected={connected} roomId={session.roomId} onLeave={disconnect} />
         <WaitingRoom roomId={session.roomId} />
-        <Toasts />
+        {overlays}
       </div>
     );
   }
@@ -57,7 +69,7 @@ export function App() {
         <Topbar connected={connected} roomId={session.roomId} onLeave={disconnect} />
         <GameBoard state={state} myId={session.playerId} />
         <EndScreen phase={state.phase} onLeave={disconnect} />
-        <Toasts />
+        {overlays}
       </div>
     );
   }
@@ -66,7 +78,7 @@ export function App() {
     <div className="app-shell">
       <Topbar connected={connected} roomId={session.roomId} onLeave={disconnect} />
       <GameBoard state={state} myId={session.playerId} />
-      <Toasts />
+      {overlays}
     </div>
   );
 }
