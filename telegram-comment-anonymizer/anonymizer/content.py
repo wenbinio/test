@@ -1,49 +1,20 @@
-"""Extracting re-postable content from an incoming comment.
-
-We capture everything needed to recreate a message *before* deleting the
-original, so the author's identity can be removed without losing the content.
-"""
+"""Classify and extract re-postable content from a raw Telegram message dict."""
 
 from __future__ import annotations
 
-import html
 from dataclasses import dataclass
 from typing import Optional
 
-from aiogram.enums import ContentType
-from aiogram.types import Message, MessageEntity
-from aiogram.utils.text_decorations import html_decoration
+from .entities import render_html
 
 # Media that carries a caption we can prefix with the alias.
-CAPTIONABLE = {"photo", "video", "animation", "document", "audio", "voice"}
+CAPTIONABLE = ("photo", "video", "animation", "document", "audio", "voice")
 # Media with no caption field; we just re-send it.
-NONCAPTION = {"video_note", "sticker"}
+NONCAPTION = ("video_note", "sticker")
+# Types we cannot rebuild from fields, handled via copyMessage instead.
+FALLBACK = ("poll", "dice", "location", "venue", "contact", "game")
 
-# Content types we re-create ourselves (by file_id / text).
-_RECONSTRUCTIBLE = {ContentType.TEXT}
-# Content types we cannot rebuild from fields, so we fall back to copy_message.
-FALLBACK_TYPES = {
-    ContentType.POLL,
-    ContentType.DICE,
-    ContentType.LOCATION,
-    ContentType.VENUE,
-    ContentType.CONTACT,
-    ContentType.GAME,
-}
-
-# Everything the bot will act on. Anything else (service messages such as joins,
-# pins, etc.) is ignored entirely.
-HANDLED_CONTENT = {
-    ContentType.TEXT,
-    ContentType.PHOTO,
-    ContentType.VIDEO,
-    ContentType.ANIMATION,
-    ContentType.DOCUMENT,
-    ContentType.AUDIO,
-    ContentType.VOICE,
-    ContentType.VIDEO_NOTE,
-    ContentType.STICKER,
-} | FALLBACK_TYPES
+_MEDIA_ORDER = CAPTIONABLE + NONCAPTION
 
 
 @dataclass
@@ -53,44 +24,34 @@ class Repostable:
     file_id: Optional[str]  # None for plain text
 
 
-def render_html(text: Optional[str], entities: Optional[list[MessageEntity]]) -> str:
-    """Render message text/caption to safe HTML, preserving formatting."""
-    if not text:
-        return ""
-    if not entities:
-        return html.escape(text)
-    return html_decoration.unparse(text, entities)
-
-
-def _caption(message: Message) -> str:
-    return render_html(message.caption, message.caption_entities)
-
-
-def extract(message: Message) -> Optional[Repostable]:
-    """Return a :class:`Repostable` for re-creatable messages, else ``None``.
-
-    ``None`` means either a service message or a type that must be handled via
-    the copy_message fallback.
-    """
-    ct = message.content_type
-
-    if ct == ContentType.TEXT:
-        return Repostable("text", render_html(message.text, message.entities), None)
-    if ct == ContentType.PHOTO:
-        return Repostable("photo", _caption(message), message.photo[-1].file_id)
-    if ct == ContentType.VIDEO:
-        return Repostable("video", _caption(message), message.video.file_id)
-    if ct == ContentType.ANIMATION:
-        return Repostable("animation", _caption(message), message.animation.file_id)
-    if ct == ContentType.DOCUMENT:
-        return Repostable("document", _caption(message), message.document.file_id)
-    if ct == ContentType.AUDIO:
-        return Repostable("audio", _caption(message), message.audio.file_id)
-    if ct == ContentType.VOICE:
-        return Repostable("voice", _caption(message), message.voice.file_id)
-    if ct == ContentType.VIDEO_NOTE:
-        return Repostable("video_note", "", message.video_note.file_id)
-    if ct == ContentType.STICKER:
-        return Repostable("sticker", "", message.sticker.file_id)
-
+def kind(message: dict) -> Optional[str]:
+    """Return the re-buildable content kind, or ``None``."""
+    if "text" in message:
+        return "text"
+    for key in _MEDIA_ORDER:
+        if key in message:
+            return key
     return None
+
+
+def is_fallback(message: dict) -> bool:
+    return any(key in message for key in FALLBACK)
+
+
+def _file_id(message: dict, k: str) -> str:
+    if k == "photo":
+        return message["photo"][-1]["file_id"]  # largest size
+    return message[k]["file_id"]
+
+
+def extract(message: dict) -> Optional[Repostable]:
+    """Return a :class:`Repostable`, or ``None`` if the type isn't re-buildable."""
+    k = kind(message)
+    if k is None:
+        return None
+    if k == "text":
+        return Repostable("text", render_html(message.get("text"), message.get("entities")), None)
+    if k in CAPTIONABLE:
+        caption = render_html(message.get("caption"), message.get("caption_entities"))
+        return Repostable(k, caption, _file_id(message, k))
+    return Repostable(k, "", _file_id(message, k))  # video_note / sticker

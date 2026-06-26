@@ -1,2 +1,2 @@
-aiogram>=3.7,<4
-python-dotenv>=1.0
+# No runtime dependencies — this bot uses only the Python standard library.
+# For development/tests, see requirements-dev.txt.

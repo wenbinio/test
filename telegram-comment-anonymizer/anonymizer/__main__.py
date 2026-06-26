@@ -2,16 +2,14 @@
 
 from __future__ import annotations
 
-import asyncio
 import logging
 
-from aiogram import Bot, Dispatcher
-
 from .config import load_settings
-from .handlers import Anonymizer
+from .core import Anonymizer
+from .telegram import Bot
 
 
-async def main() -> None:
+def main() -> None:
     settings = load_settings()
     logging.basicConfig(
         level=getattr(logging, settings.log_level, logging.INFO),
@@ -19,26 +17,20 @@ async def main() -> None:
     )
 
     bot = Bot(settings.token)
-    dispatcher = Dispatcher()
-    dispatcher.include_router(Anonymizer(settings).router)
-
-    me = await bot.me()
+    me = bot.call("getMe")
     logging.getLogger("anonymizer").info(
         "Started as @%s. Add me as an admin (with 'Delete messages') to your "
         "channel's discussion group to anonymize comments.",
-        me.username,
+        me.get("username"),
     )
 
-    try:
-        await dispatcher.start_polling(
-            bot, allowed_updates=dispatcher.resolve_used_update_types()
-        )
-    finally:
-        await bot.session.close()
+    anonymizer = Anonymizer(settings, bot)
+    anonymizer.me_id = me["id"]
+    anonymizer.run()
 
 
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        main()
     except (KeyboardInterrupt, SystemExit):
         pass

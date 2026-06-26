@@ -6,14 +6,6 @@ import hashlib
 import os
 from dataclasses import dataclass
 
-try:  # optional convenience: load a local .env if python-dotenv is installed
-    from dotenv import load_dotenv
-
-    load_dotenv()
-except ImportError:  # pragma: no cover - dotenv is optional
-    pass
-
-
 _TRUTHY = {"1", "true", "yes", "on"}
 _VALID_STYLES = {"name", "number", "fixed"}
 
@@ -32,6 +24,21 @@ class Settings:
     log_level: str
 
 
+def _load_dotenv(path: str = ".env") -> None:
+    """Minimal .env loader so there are no third-party dependencies."""
+    try:
+        with open(path, encoding="utf-8") as handle:
+            for line in handle:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                value = value.strip().strip('"').strip("'")
+                os.environ.setdefault(key.strip(), value)
+    except FileNotFoundError:
+        pass
+
+
 def _parse_ids(raw: str) -> frozenset[int]:
     ids = set()
     for chunk in raw.replace(" ", "").split(","):
@@ -45,6 +52,8 @@ def _parse_ids(raw: str) -> frozenset[int]:
 
 
 def load_settings() -> Settings:
+    _load_dotenv()
+
     token = os.environ.get("BOT_TOKEN", "").strip()
     if not token:
         raise SystemExit(
