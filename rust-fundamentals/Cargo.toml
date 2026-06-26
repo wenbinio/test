@@ -1,0 +1,49 @@
+[package]
+name = "rust-fundamentals"
+version = "0.1.0"
+edition = "2021"
+
+[[example]]
+name = "01_hello_world"
+
+[[example]]
+name = "02_variables_types"
+
+[[example]]
+name = "03_functions"
+
+[[example]]
+name = "04_control_flow"
+
+[[example]]
+name = "05_ownership"
+
+[[example]]
+name = "06_borrowing"
+
+[[example]]
+name = "07_structs"
+
+[[example]]
+name = "08_enums"
+
+[[example]]
+name = "09_error_handling"
+
+[[example]]
+name = "10_collections"
+
+[[example]]
+name = "11_traits"
+
+[[example]]
+name = "12_generics"
+
+[[example]]
+name = "13_closures"
+
+[[example]]
+name = "14_iterators"
+
+[[example]]
+name = "15_lifetimes"
