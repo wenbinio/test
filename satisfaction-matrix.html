@@ -213,7 +213,7 @@
     analyzable occupations). Bars are sorted by % very satisfied; NORC itself ranks by mean score (1–4), so the
     printed ranks in the tooltips occasionally disagree with % order. The middle of the distribution remains
     unpublished here.</p>
-    <span class="metric-chip" data-tip="Metric: percentage of respondents in that occupation answering 'very satisfied' to the GSS job-satisfaction item. This is NOT comparable to burnout rates or well-being composites shown in other panels.">metric: % “very satisfied” with job</span>
+    <span class="metric-chip" data-tip="Exact GSS item (verbatim from the fetched table footnote): 'On the whole, how satisfied are you with the work you do—would you say you are very satisfied, moderately satisfied, a little dissatisfied, or very dissatisfied?' The chart shows % answering 'very satisfied'. NOT comparable to burnout rates or well-being composites shown in other panels.">metric: % “very satisfied” with job</span>
     <div class="legend-row">
       <span><span class="key-swatch" style="background:var(--series-1)"></span> occupation</span>
       <span><span class="key-swatch" style="background:var(--accent)"></span> ⤵ has within-discipline drill-down (click)</span>
@@ -358,9 +358,9 @@
       {"occ": "Psychologists", "value": 66.9, "tier": "T1", "note": "Rank #8 by mean (3.59). Verified against Table 1."},
       {"occ": "Security &amp; financial services sales", "value": 65.4, "tier": "T1", "note": "Rank #12 by mean (3.55). RECOVERED in round-two verification — this cell was NO DATA until the primary table was fetched."},
       {"occ": "Operating engineers", "value": 64.1, "tier": "T1", "note": "Rank #10 by mean (3.56). RECOVERED: the circulating 64.1 — removed in round one as untraceable — turned out to be correct once the primary table was fetched."},
-      {"occ": "Office supervisors", "value": 60.8, "tier": "T1", "note": "Rank #11 by mean (3.55). RECOVERED with a correction: the circulating 80.6% traces to a digit-transposition typo in the NORC report's own prose; Table 1 reads 60.8."},
+      {"occ": "Office supervisors", "value": 60.8, "tier": "T3", "note": "Rank #11 by mean (3.55). CONFLICT INSIDE THE PRIMARY, resolved by three independent reads this session: the report's own prose says 80.6%, its Table 1 says 60.8. The table value is used because it is internally coherent (a 3.55 mean sits below operating engineers' 3.56 → 64.1%, while 80.6% would imply a mean near firefighters' 3.67). T3 because both figures are printed in the source."},
       {"occ": "All occupations (average)", "value": 47, "tier": "T2", "avg": true, "note": "Approximate workforce-wide share 'very satisfied'; recurs consistently across secondary sources but is not printed in the GSS News tables — remains T2."},
-      {"occ": "Expediters", "value": 37.0, "tier": "T1", "note": "Bottom-12 member by mean (2.97). ADDED in round-two verification — absent from every secondary list consulted in round one."},
+      {"occ": "Expediters", "value": 37.0, "tier": "T1", "note": "Bottom rank #10 by mean (2.97). Per the report, includes customer-service clerks and complaint desk clerks. ADDED in round-two verification — absent from every secondary list consulted in round one."},
       {"occ": "Butchers &amp; meat cutters", "value": 31.8, "tier": "T1", "note": "Bottom-12 member by mean (2.97). ADDED in round-two verification — absent from every secondary list consulted in round one."},
       {"occ": "Waiters / servers", "value": 27.0, "tier": "T1", "note": "Bottom rank #2 by mean (2.85). Verified against Table 1."},
       {"occ": "Bartenders", "value": 26.4, "tier": "T1", "note": "Bottom rank #4 by mean (2.88). Verified against Table 1."},
@@ -373,7 +373,7 @@
       {"occ": "Misc. food preparation", "value": 23.6, "tier": "T1", "note": "Bottom rank #9 by mean (2.95). Verified against Table 1."},
       {"occ": "Laborers, except construction", "value": 21.4, "tier": "T1", "note": "Lowest % very satisfied in the table; bottom rank #3 by mean (2.86). Verified against Table 1."}
     ],
-    "methodNote": "NORC ranks both lists by MEAN satisfaction score (1–4 scale), not by % very satisfied — which is why rank order and % order disagree in places. Data span GSS 1972–2006. Per-occupation sample sizes, the minimum-N inclusion threshold, and the mid-distribution table are not in the fetched GSS News excerpt; secondary coverage reports >27,000 respondents and 198 analyzable occupations."
+    "methodNote": "Exact GSS item (from the fetched table footnote): 'On the whole, how satisfied are you with the work you do—would you say you are very satisfied, moderately satisfied, a little dissatisfied, or very dissatisfied?' Mean score runs 1 (very dissatisfied) to 4 (very satisfied). NORC ranks both lists by MEAN, not by % very satisfied — which is why rank order and % order disagree in places. The source's prose contains at least two slips against its own Table 1 (office supervisors 80.6 vs 60.8; freight handlers 23.9 vs 25.8) — the table is used throughout. Per-occupation sample sizes, the minimum-N inclusion threshold, and the mid-distribution table are not in the fetched GSS News excerpt; secondary coverage reports >27,000 respondents and 198 analyzable occupations."
   },
   "healthcare": {
     "satCards": [
@@ -551,7 +551,7 @@
      "body": "Round two fetched GSS News No. 21 (July 2007), which reproduces the top-12 and bottom-12 tables verbatim — those are now T1, and three formerly-NO-DATA cells were recovered. Still missing: the full April 2007 report ('Job Satisfaction in America') with the mid-distribution occupations, per-occupation sample sizes, and the minimum-N inclusion threshold. Secondary coverage reports 198 analyzable occupations."}
   ],
   "removed": [
-    {"claim": "Office supervisors 80.6% very satisfied (NORC)", "why": "RESOLVED in round two: the 80.6% traces to a digit-transposition typo in the NORC report's own prose. Table 1 reads 60.8% — now displayed at T1. Round one's incoherence flag was correct."},
+    {"claim": "Office supervisors 80.6% very satisfied (NORC)", "why": "RESOLVED as a contradiction INSIDE the primary: the report's prose prints 80.6% while its own Table 1 prints 60.8 (mean 3.55). Confirmed by three independent reads of the fetched PDF this session. The internally-coherent table value (60.8) is displayed, at T3 because both figures appear in the source. Round one's incoherence flag was correct."},
     {"claim": "Operating engineers 64.1% (NORC)", "why": "RESOLVED in round two: the value was correct after all — recovered from Table 1 of the primary and now displayed at T1. Round one removed it because no traceable source existed at the time."},
     {"claim": "Roofers are the least-happy occupation (14% very happy)", "why": "CORRECTED in round two: roofers are 14.2% very happy — second-lowest; garage &amp; service-station attendants (13.2%) are lowest. Roofers ARE the lowest-ranked occupation on job satisfaction by NORC's mean-score ranking."},
     {"claim": "Lawyers: 45.2% very satisfied + 38.5% satisfied (Heinz, Hull &amp; Harter 1999)", "why": "The fetched Indiana L.J. primary gives only the combined figure — 84% satisfied or very satisfied, N=788. The 45.2/38.5 split is not in the article and was removed."},

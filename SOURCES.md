@@ -46,10 +46,16 @@ satisfied** — the key to the round-one "ranking trap."
   2.88; freight/stock handlers 25.8 · 2.91; apparel sales 23.9 · 2.93; cashiers 25.0 · 2.94; misc.
   food preparation 23.6 · 2.95; expediters 37.0 · 2.97; butchers & meat cutters 31.8 · 2.97;
   furniture/home-furnishing sales 25.2 · 2.99.
-- **Recovered cells** (NO DATA in round one → T1 in round two): operating engineers 64.1 (the
-  removed seed was correct after all); office supervisors 60.8 (the circulating 80.6% traces to a
-  **digit-transposition typo in the NORC report's own prose** — the table reads 60.8); security &
-  financial services sales 65.4.
+- **Recovered cells** (NO DATA in round one): operating engineers 64.1 → T1 (the removed seed was
+  correct after all); security & financial services sales 65.4 → T1; office supervisors 60.8 →
+  **T3** — the primary contradicts itself (prose prints 80.6%, Table 1 prints 60.8, mean 3.55),
+  confirmed by three independent reads of the fetched PDF this session; the internally-coherent
+  table value is displayed with the conflict stated.
+- **Prose-vs-table slips inside the primary** (table used throughout): office supervisors 80.6 vs
+  60.8; freight/stock handlers 23.9 (prose) vs 25.8 (table).
+- **Exact item wording** (from the fetched table footnote): "On the whole, how satisfied are you
+  with the work you do—would you say you are very satisfied, moderately satisfied, a little
+  dissatisfied, or very dissatisfied?" Mean score runs 1–4.
 - **Added occupations** absent from every round-one secondary list: expediters 37.0; butchers &
   meat cutters 31.8.
 - **Corrections**: clergy decimal settled at 87.2 (87.3 variant wrong); roofers are 14.2% "very
