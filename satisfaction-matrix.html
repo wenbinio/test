@@ -178,26 +178,55 @@
     </div>
   </header>
 
+  <!-- ============ ABSTRACT ============ -->
+  <section class="panel" id="abstract-panel">
+    <h2>Abstract</h2>
+    <p class="sub" style="max-width:84ch"><strong>Occupational Satisfaction Matrix: a verification-first synthesis of
+    job-satisfaction evidence across occupations, within disciplines, and at the fit meta-analytic layer.</strong>
+    We assembled every load-bearing figure from the cross-occupation NORC/GSS ranking (Smith 2007), within-discipline
+    studies in healthcare (Halasy 2021; Shanafelt 2011–2023; Medscape 2024; Merck 2020; Lo Sasso/Starkel 2015), law
+    (Krieger &amp; Sheldon 2015; After the JD III; Heinz, Hull &amp; Harter 1999; Australian judicial surveys), and
+    academia (French 2020; Bozeman &amp; Gaughan 2011; Frei &amp; Grund 2022), plus the interest-fit meta-analytic
+    layer (Hoff 2020; Wiegand 2021; Michaelis &amp; Findeisen 2022; Kristof-Brown 2005) — and subjected every figure
+    to two adversarial verification rounds before display. Round one, run under a network policy that blocked nearly
+    all primary sources, capped most figures at consistent-secondary (T2); round two, after egress opened, checked
+    primary texts directly — promoting the full NORC occupation tables, the six-wave physician-burnout series, and
+    four discipline studies to primary-verified (T1), recovering three previously unverifiable cells (one exposing a
+    digit-transposition typo in the source report's own prose), and correcting five circulating claims. Three results
+    organize the artifact. First, self-determination factors dominate well-being where credentials and pay do not
+    (autonomy r=.66 vs income r=.192 and law review r=.00, N=6,226; judges &gt; public service &gt; large-firm
+    prestige practice). Second, measured interest–work fit predicts satisfaction only weakly (ρ=.19, k=105,
+    N≈39,602), with a primary-verified null for interest and skill congruence in German vocational training
+    (N=4,097) — structure appears to matter more than content-matching. Third, verification itself is a finding:
+    twelve circulating claims failed checking or required correction, and every cell without a verifiable figure is
+    rendered as explicit NO DATA. Confidence tiers, metric definitions, and sample sizes travel with every number;
+    an authored six-axis work-modality framework is included strictly as an interpretive layer, visually segregated
+    from measured data.</p>
+  </section>
+
   <!-- ============ CROSS-OCCUPATION (NORC/GSS) ============ -->
   <section class="panel" id="norc-panel">
     <h2>Cross-occupation ranking — NORC/GSS</h2>
-    <p class="sub">Smith, T.W. (2007), <em>Job Satisfaction in the United States</em>, NORC/University of Chicago,
-    pooled General Social Survey data (&gt;27,000 respondents). The published report ranked occupations at the top
-    and bottom of the distribution; the middle was not retrievable this session.</p>
+    <p class="sub">Smith, T.W. (2007), <em>Job Satisfaction in America</em>, NORC/University of Chicago (April 2007);
+    the top-12 and bottom-12 tables were verified this session against the primary excerpt in GSS News No.&nbsp;21
+    (July 2007). Pooled General Social Survey data 1972–2006 (secondary coverage: &gt;27,000 respondents, 198
+    analyzable occupations). Bars are sorted by % very satisfied; NORC itself ranks by mean score (1–4), so the
+    printed ranks in the tooltips occasionally disagree with % order. The middle of the distribution remains
+    unpublished here.</p>
     <span class="metric-chip" data-tip="Metric: percentage of respondents in that occupation answering 'very satisfied' to the GSS job-satisfaction item. This is NOT comparable to burnout rates or well-being composites shown in other panels.">metric: % “very satisfied” with job</span>
     <div class="legend-row">
       <span><span class="key-swatch" style="background:var(--series-1)"></span> occupation</span>
       <span><span class="key-swatch" style="background:var(--accent)"></span> ⤵ has within-discipline drill-down (click)</span>
-      <span><span class="key-swatch hatch"></span> NO DATA</span>
       <span><span class="key-swatch" style="background:var(--baseline);height:8px"></span> workforce average</span>
     </div>
     <div id="norc-chart"></div>
-    <p class="note">Ranking trap, shown not hidden: several secondary write-ups call <strong>roofers</strong> the single
-    least-satisfied occupation. In the verified figures, laborers-except-construction (21.4%) sit lower on
-    <em>satisfaction</em>; roofers are lowest on the report's separate <em>general happiness</em> measure (14% “very
-    happy”), the likely source of the confusion. Lawyers, physicians, and university faculty do not appear in the
-    retrievable top/bottom lists — their discipline panels below use discipline-specific studies with different
-    metrics, kept in separate panels by design.</p>
+    <p class="note">Ranking trap, resolved by the primary table: NORC ranks both lists by <em>mean score</em> (1–4),
+    not by % very satisfied. So <strong>roofers</strong> genuinely are the lowest-<em>ranked</em> occupation
+    (mean 2.84) even though <strong>laborers-except-construction</strong> have the lowest <em>%</em> (21.4) — both
+    “least satisfied” claims are right about different columns of the same table. On the separate happiness measure
+    roofers are second-lowest (14.2% “very happy”), above garage &amp; service-station attendants (13.2%). Lawyers,
+    physicians, and university faculty do not appear in the published extremes — their discipline panels below use
+    discipline-specific studies with different metrics, kept in separate panels by design.</p>
   </section>
 
   <!-- ============ WITHIN-DISCIPLINE DRILL-DOWNS ============ -->
@@ -219,7 +248,7 @@
       <span class="metric-chip" data-tip="Metric: % of physicians in the specialty self-reporting burnout, Medscape Physician Burnout &amp; Depression Report 2024, N=9,226 US physicians, 29+ specialties. A burnout rate is NOT (1 − satisfaction).">metric: % reporting burnout — Medscape 2024, N=9,226</span>
       <div id="medscape-chart"></div>
       <h3 style="margin-top:20px">US physician burnout over time
-        <span class="tier t2" data-tip="Shanafelt et al. longitudinal series, Maslach Burnout Inventory, ≥1 symptom of burnout. Values from indexed abstracts with exact numerators/denominators; primary PDFs not fetchable this session.">T2</span></h3>
+        <span class="tier t1" data-tip="Shanafelt et al. longitudinal series, Maslach Burnout Inventory, ≥1 symptom of burnout. All six waves primary-verified in round two against official PubMed abstracts (NCBI E-utilities), with exact numerators/denominators and field windows.">T1</span></h3>
       <span class="metric-chip" data-tip="Metric: % of surveyed US physicians with ≥1 symptom of burnout on the Maslach Burnout Inventory (emotional exhaustion or depersonalization). Shanafelt et al., Arch Intern Med 2012 &amp; Mayo Clinic Proceedings 2015–2025.">metric: % with ≥1 MBI burnout symptom</span>
       <div class="chart-scroll" id="shanafelt-chart"></div>
     </div>
@@ -292,13 +321,18 @@
   <footer>
     <h2 style="font-size:15px;color:var(--ink-2)">Methodology &amp; limits</h2>
     <p>Built 2026-07-07 by a multi-agent research pipeline: five parallel research agents (one per domain) extracted
-    figures and citations; an independent verifier agent then adversarially re-checked every figure with freshly
-    phrased searches (seed numbers excluded from queries to avoid echo confirmation) and attempted primary fetches.</p>
-    <p><strong>Session constraint:</strong> this research environment's network egress policy blocked direct fetches
-    to almost all publishers and archives (HTTP 403 at the gateway). Web search worked. Exactly one primary source
-    passed the gateway — the Krieger &amp; Sheldon (2015) PDF — which is why that study is the only T1 cluster. All
-    other figures are capped at T2 (multi-query-consistent secondary evidence) or T3 (contested). A follow-up session
-    with open egress could promote T2 figures to T1 against primary texts.</p>
+    figures and citations; independent verifier agents then adversarially re-checked every figure with freshly
+    phrased searches (seed numbers excluded from queries to avoid echo confirmation) and primary fetches, across
+    two rounds.</p>
+    <p><strong>Round one</strong> ran under a network egress policy that returned HTTP 403 for almost all publishers
+    and archives; only the Krieger &amp; Sheldon (2015) PDF passed, making it the sole T1 cluster at first publish.
+    <strong>Round two</strong> ran after the egress policy was opened mid-session: the NORC tables (GSS News No. 21),
+    official PubMed abstracts (via NCBI E-utilities), the After the JD III and Indiana Law Journal PDFs, and the
+    Springer full text of Frei &amp; Grund were fetched directly — promoting most load-bearing figures to T1,
+    recovering three NO DATA cells, adding two occupations, and producing five corrections (all disclosed in the
+    “failed verification &amp; corrections” list). Still unfetchable after round two: ScienceDirect (Hoff, Wiegand,
+    French), Wiley (Kristof-Brown), Medscape (registration wall), and Merck — those figures remain T2, and the middle
+    Medscape specialties remain NO DATA.</p>
     <p>No figure was simulated, interpolated, or estimated. Conflicting values are displayed side by side. Different
     metrics (% very satisfied, burnout %, well-being composites, correlation coefficients) are never merged onto a
     shared scale. Sample sizes are shown where verified and marked unknown where not.</p>
@@ -310,54 +344,56 @@
 <script id="dataset" type="application/json">
 {
   "norc": {
-    "source": "Smith, T.W. (2007). Job Satisfaction in the United States. NORC/University of Chicago. Pooled General Social Survey data, >27,000 respondents.",
+    "source": "Smith, T.W. (2007). Job Satisfaction in America. NORC/University of Chicago, April 2007. Tables verified this session against GSS News No. 21 (July 2007), gss.norc.org. Pooled General Social Survey data 1972–2006.",
     "metric": "% very satisfied with job",
     "rows": [
-      {"occ": "Clergy", "value": 87.2, "tier": "T2", "note": "Rank #1. Decimal resolved to 87.2 (an 87.3 variant appeared once in secondary coverage)."},
-      {"occ": "Firefighters", "value": 80.1, "tier": "T2", "note": "Rank #2. Value consistent across independent searches."},
-      {"occ": "Physical therapists", "value": 78.1, "tier": "T2", "drill": "healthcare", "note": "Rank #3. This GSS figure is the only cross-checkable PT satisfaction number — no discipline-specific PT study surfaced a matching figure."},
-      {"occ": "Authors", "value": 74.2, "tier": "T3", "note": "Top-list membership confirmed; only the rounded 74% was independently retrieved — decimal unverified."},
-      {"occ": "Special education teachers", "value": 70.1, "tier": "T3", "note": "Top-list membership confirmed (also tops the happiness list); exact decimal from a single synthesis."},
-      {"occ": "Teachers", "value": 69.2, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
-      {"occ": "Education administrators", "value": 68.4, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
-      {"occ": "Painters &amp; sculptors", "value": 67.3, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
-      {"occ": "Psychologists", "value": 66.9, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
-      {"occ": "Operating engineers", "value": null, "tier": "ND", "note": "Occupation confirmed as a top-12 member, but the circulating value (64.1) has no traceable source — omitted rather than shown."},
-      {"occ": "Office supervisors", "value": null, "tier": "ND", "note": "Top-list member, but the circulating value (80.6) is numerically incoherent with the published ranking — discarded as fabrication-suspect."},
-      {"occ": "Security &amp; financial services sales", "value": null, "tier": "ND", "note": "Named as a top-12 member; no percentage found anywhere."},
-      {"occ": "All occupations (average)", "value": 47, "tier": "T2", "avg": true, "note": "Approximate workforce-wide share 'very satisfied'; recurs consistently across sources."},
-      {"occ": "Waiters / servers", "value": 27.0, "tier": "T2", "note": "Bottom list. Value independently confirmed."},
-      {"occ": "Bartenders", "value": 26.4, "tier": "T2", "note": "Bottom list. Value independently confirmed."},
-      {"occ": "Freight / stock / material handlers", "value": 25.8, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
-      {"occ": "Roofers", "value": 25.3, "tier": "T3", "note": "CONFLICT: often mislabeled the single least-satisfied job. Laborers (21.4) are lower on satisfaction; roofers are lowest on the separate happiness measure (14% very happy)."},
-      {"occ": "Furniture / home-furnishing sales", "value": 25.2, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
-      {"occ": "Cashiers", "value": 25.0, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
-      {"occ": "Apparel salespersons", "value": 23.9, "tier": "T3", "note": "Rank corroborated (7th least satisfied); exact decimal not independently retrieved."},
-      {"occ": "Hand packers &amp; packagers", "value": 23.7, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
-      {"occ": "Misc. food preparation", "value": 23.6, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
-      {"occ": "Laborers, except construction", "value": 21.4, "tier": "T2", "note": "Numerically the lowest verified occupation. Value independently confirmed."}
+      {"occ": "Clergy", "value": 87.2, "tier": "T1", "note": "Rank #1 by mean (3.79 on the 1–4 scale). Verified against Table 1 of the primary; the 87.3 variant circulating in secondary coverage is wrong."},
+      {"occ": "Firefighters", "value": 80.1, "tier": "T1", "note": "Rank #3 by mean (3.67) — behind physical therapists despite the higher %, because NORC ranks by mean score, not by % very satisfied."},
+      {"occ": "Physical therapists", "value": 78.1, "tier": "T1", "drill": "healthcare", "note": "Rank #2 by mean (3.72). Verified against Table 1. This GSS figure remains the only cross-checkable PT satisfaction number."},
+      {"occ": "Authors", "value": 74.2, "tier": "T1", "note": "Rank #7 by mean (3.61). Decimal verified against Table 1."},
+      {"occ": "Special education teachers", "value": 70.1, "tier": "T1", "note": "Rank #9 by mean (3.59). Verified against Table 1; also near the top of the happiness list."},
+      {"occ": "Teachers", "value": 69.2, "tier": "T1", "note": "Rank #6 by mean (3.61). Verified against Table 1."},
+      {"occ": "Education administrators", "value": 68.4, "tier": "T1", "note": "Rank #4 by mean (3.62). Verified against Table 1."},
+      {"occ": "Painters &amp; sculptors", "value": 67.3, "tier": "T1", "note": "Rank #5 by mean (3.62). Verified against Table 1."},
+      {"occ": "Psychologists", "value": 66.9, "tier": "T1", "note": "Rank #8 by mean (3.59). Verified against Table 1."},
+      {"occ": "Security &amp; financial services sales", "value": 65.4, "tier": "T1", "note": "Rank #12 by mean (3.55). RECOVERED in round-two verification — this cell was NO DATA until the primary table was fetched."},
+      {"occ": "Operating engineers", "value": 64.1, "tier": "T1", "note": "Rank #10 by mean (3.56). RECOVERED: the circulating 64.1 — removed in round one as untraceable — turned out to be correct once the primary table was fetched."},
+      {"occ": "Office supervisors", "value": 60.8, "tier": "T1", "note": "Rank #11 by mean (3.55). RECOVERED with a correction: the circulating 80.6% traces to a digit-transposition typo in the NORC report's own prose; Table 1 reads 60.8."},
+      {"occ": "All occupations (average)", "value": 47, "tier": "T2", "avg": true, "note": "Approximate workforce-wide share 'very satisfied'; recurs consistently across secondary sources but is not printed in the GSS News tables — remains T2."},
+      {"occ": "Expediters", "value": 37.0, "tier": "T1", "note": "Bottom-12 member by mean (2.97). ADDED in round-two verification — absent from every secondary list consulted in round one."},
+      {"occ": "Butchers &amp; meat cutters", "value": 31.8, "tier": "T1", "note": "Bottom-12 member by mean (2.97). ADDED in round-two verification — absent from every secondary list consulted in round one."},
+      {"occ": "Waiters / servers", "value": 27.0, "tier": "T1", "note": "Bottom rank #2 by mean (2.85). Verified against Table 1."},
+      {"occ": "Bartenders", "value": 26.4, "tier": "T1", "note": "Bottom rank #4 by mean (2.88). Verified against Table 1."},
+      {"occ": "Freight / stock / material handlers", "value": 25.8, "tier": "T1", "note": "Bottom rank #6 by mean (2.91). Verified against Table 1."},
+      {"occ": "Roofers", "value": 25.3, "tier": "T1", "note": "RESOLVED ranking trap: roofers are the LOWEST-ranked occupation by NORC's mean-score ranking (2.84), while laborers have the lowest % very satisfied (21.4) — both 'lowest' claims are right on different columns of the same table. On the separate happiness table roofers are 14.2% very happy: second-lowest, above garage &amp; service-station attendants (13.2%)."},
+      {"occ": "Furniture / home-furnishing sales", "value": 25.2, "tier": "T1", "note": "Bottom rank #12 by mean (2.99). Verified against Table 1."},
+      {"occ": "Cashiers", "value": 25.0, "tier": "T1", "note": "Bottom rank #8 by mean (2.94). Verified against Table 1."},
+      {"occ": "Apparel salespersons", "value": 23.9, "tier": "T1", "note": "Bottom rank #7 by mean (2.93). Verified against Table 1."},
+      {"occ": "Hand packers &amp; packagers", "value": 23.7, "tier": "T1", "note": "Bottom rank #5 by mean (2.88). Verified against Table 1."},
+      {"occ": "Misc. food preparation", "value": 23.6, "tier": "T1", "note": "Bottom rank #9 by mean (2.95). Verified against Table 1."},
+      {"occ": "Laborers, except construction", "value": 21.4, "tier": "T1", "note": "Lowest % very satisfied in the table; bottom rank #3 by mean (2.86). Verified against Table 1."}
     ],
-    "methodNote": "Pooling window contested across write-ups (job-satisfaction module 1988–2006 vs cumulative 1972–2006 GSS); per-occupation minimum-N threshold not retrievable; per-occupation sample sizes not published in retrievable coverage."
+    "methodNote": "NORC ranks both lists by MEAN satisfaction score (1–4 scale), not by % very satisfied — which is why rank order and % order disagree in places. Data span GSS 1972–2006. Per-occupation sample sizes, the minimum-N inclusion threshold, and the mid-distribution table are not in the fetched GSS News excerpt; secondary coverage reports >27,000 respondents and 198 analyzable occupations."
   },
   "healthcare": {
     "satCards": [
-      {"label": "Physician assistants", "value": "82.7%", "tier": "T2", "metric": "% satisfied with their job",
-       "src": "Halasy, West, Shanafelt, O'Laughlin, Satele &amp; Dyrbye — JAAPA 2021;34(6). Random sample of 2,100 PAs; final respondent N not retrievable. Fielded 2016 (pre-COVID, despite the 2021 publication date).",
+      {"label": "Physician assistants", "value": "82.7%", "tier": "T1", "metric": "% satisfied with their job",
+       "src": "Halasy, West, Shanafelt, O'Laughlin, Satele &amp; Dyrbye — JAAPA 2021;34(6), PMID 34031320. Official abstract fetched in round two: '82.7% of PAs were satisfied with their job.' Random sample of 2,100 PAs; analyzed respondent N still not stated in the abstract. Fielded 2016 (pre-COVID, despite the 2021 publication date).",
        "note": "32.2% intended to leave their position; 19.5% to reduce hours."},
-      {"label": "Physical therapists", "value": "78.1%", "tier": "T2", "metric": "% very satisfied (GSS — different metric)",
-       "src": "NORC/GSS (Smith 2007) — cross-reference from the ranking above, not a discipline-specific study.",
+      {"label": "Physical therapists", "value": "78.1%", "tier": "T1", "metric": "% very satisfied (GSS — different metric)",
+       "src": "NORC/GSS (Smith 2007), Table 1 verified against the primary — cross-reference from the ranking above, not a discipline-specific study.",
        "note": "No PT-specific peer-reviewed satisfaction study matching this figure was found."},
       {"label": "Veterinarians", "value": "74%", "tier": "T2", "metric": "% somewhat/extremely satisfied with their career",
        "src": "Merck Animal Health Veterinary Wellbeing Study II (2020, with AVMA/Brakke). N=2,871 usable of 20,000 invited; fielded Sept–Oct 2019.",
-       "note": "A prior seed value of 65% matched no wave or metric and was removed."},
+       "note": "A prior seed value of 65% matched no wave or metric and was removed. Round two could not promote this: the JAVMA executive-summary PubMed record carries no abstract text and Merck's site blocks fetches — stays T2."},
       {"label": "Veterinarians — would recommend the profession", "value": "41% · 48% · 33%", "tier": "T3", "conflict": true, "metric": "% would recommend the profession (contested)",
        "src": "Merck Veterinary Wellbeing Study waves + secondary coverage (Merck.com: 41% overall — 24% for ≤34, 62% for ≥65; one secondary source: 48%; dvm360: 33%).",
        "note": "Three values circulate for this metric. No single number is displayable without wave + age subgroup; all three shown."},
       {"label": "Dentists", "value": "NO HEADLINE FIGURE", "tier": "ND", "nodata": true, "metric": "overall satisfaction %",
-       "src": "Starkel, Guay, Lo Sasso, Vujicic &amp; Warren — JADA 2015. N=2,171 (596 solo / 710 small group / 865 large group).",
-       "note": "The study is real but comparative — satisfaction varies by practice setting; a circulating 48% headline could not be confirmed and was removed."},
+       "src": "Lo Sasso, Starkel, Warren, Guay &amp; Vujicic — JADA 2015;146(8):600–609, PMID 26227645 (author order corrected in round two). N=2,171 (596 solo / 710 small group / 865 large group).",
+       "note": "Abstract fetched in round two: no overall % exists — the circulating 48% headline remains unsupported. Verified comparative finding: small-group dentists report the most satisfaction overall; large-group dentists are most satisfied with income/benefits and least stressed."},
       {"label": "Physicians — job satisfaction", "value": "NO DATA", "tier": "ND", "nodata": true, "metric": "satisfaction % (as distinct from burnout)",
-       "src": "A circulating '44% (Dyrbye 2013)' figure failed verification: Dyrbye et al. 2013 (Mayo Clin Proc 88:1358) measures would-recommend-medicine (52–57%), not a 44% satisfaction rate.",
+       "src": "A circulating '44% (Dyrbye 2013)' figure failed verification. The real paper (Dyrbye et al., Mayo Clin Proc 2013;88:1358, PMID 24290109 — abstract fetched in round two) measures satisfaction and burnout BY CAREER STAGE (early-career physicians lowest satisfaction with career choice; middle-career highest burnout) and contains no 44% figure.",
        "note": "Physician evidence in this artifact is burnout-metric only (below) — a deliberate no-data cell on the satisfaction metric."}
     ],
     "medscape": {
@@ -378,12 +414,12 @@
       "note": "Only the verified extremes are charted; the ~20 middle specialties were not independently verified this session and are shown as an explicit gap band. Do not merge with AMA's separate 2025 survey (42–43.9%) — different instrument."
     },
     "shanafelt": [
-      {"year": 2011, "value": 45.5, "n": "3,310/7,227", "src": "Shanafelt et al., Arch Intern Med 2012;172(18):1377"},
-      {"year": 2014, "value": 54.4, "n": "3,680/6,767", "src": "Shanafelt et al., Mayo Clin Proc 2015;90(12):1600"},
-      {"year": 2017, "value": 43.9, "n": "2,147/4,893", "src": "Shanafelt et al., Mayo Clin Proc 2019;94(9):1681"},
-      {"year": 2020, "value": 38.2, "n": "n≈7,510", "src": "Shanafelt et al., Mayo Clin Proc 2022"},
-      {"year": 2021, "value": 62.8, "n": "n=2,440", "src": "Shanafelt et al., Mayo Clin Proc 2022 (COVID wave; WLI satisfaction fell to 30.2%)"},
-      {"year": 2023, "value": 45.2, "n": "N=7,643", "src": "Shanafelt et al., Mayo Clin Proc 2025 (fielded Oct 2023–Mar 2024). A circulating 48.2% seed was wrong."}
+      {"year": 2011, "value": 45.5, "n": "3,310/7,227", "src": "Shanafelt et al., Arch Intern Med 2012;172(18):1377. Primary abstracts fetched (round two). Footnote: the original 2012 paper printed 45.8% (7,288 completed of 27,276 invited); every later harmonized report restates 45.5% (3,310 of 7,227) — the harmonized series is shown."},
+      {"year": 2014, "value": 54.4, "n": "3,680/6,767", "src": "Shanafelt et al., Mayo Clin Proc 2015;90(12):1600. Primary abstract fetched: 54.4% (3,680 of 6,767); 6,880 completed of 35,922 invited (19.2%), fielded Aug–Oct 2014."},
+      {"year": 2017, "value": 43.9, "n": "2,147/4,893", "src": "Shanafelt et al., Mayo Clin Proc 2019;94(9):1681. Primary abstract fetched: 43.9% (2,147 of 4,893); 5,197 completed of 30,456 (17.1%), fielded Oct 2017–Mar 2018."},
+      {"year": 2020, "value": 38.2, "n": "n=7,510", "src": "Shanafelt et al., Mayo Clin Proc 2022 (PMID 35246286). Primary abstract fetched: 38.2%; 7,510 participants, fielded Nov 2020–Mar 2021."},
+      {"year": 2021, "value": 62.8, "n": "n=2,440", "src": "Shanafelt et al., Mayo Clin Proc 2022 (COVID wave, PMID 36229269). Primary abstract fetched: 62.8%; WLI satisfaction fell from 46.1% to 30.2%; fielded Dec 2021–Jan 2022."},
+      {"year": 2023, "value": 45.2, "n": "N=7,643", "src": "Shanafelt et al., Mayo Clin Proc 2025 (PMID 40202475). Primary abstract fetched: 45.2%; 7,643 participants, fielded Oct 2023–Mar 2024. A circulating 48.2% seed was wrong."}
     ]
   },
   "law": {
@@ -422,16 +458,16 @@
        "src": "Roach Anleu &amp; Mack national surveys.",
        "note": "Magistrates also less satisfied with control over the amount and manner of their work."},
       {"label": "Judicial psychological distress", "value": "52.9%", "tier": "T2", "metric": "% moderate-to-very-high K10 distress (vs 32.8% general population)",
-       "src": "Schrever, Hulbert &amp; Sourdin, J. Judicial Admin 2019; 'Where Stress Presides', Psychiatry, Psychology &amp; Law 2022 (PMC9225743). N=152 judicial officers, 5 Australian courts.",
-       "note": "Magistrates scored higher than judges on all stress variables and lower on autonomy and relatedness satisfaction — the gap was reported as almost entirely explained by those two needs."}
+       "src": "The 52.9%-vs-32.8% split is from Schrever, Hulbert &amp; Sourdin, J. Judicial Admin 2019 (not fetchable). The 2022 follow-up ('Where Stress Presides', Psychiatry, Psychology &amp; Law, PMC9225743) WAS fetched in round two: it confirms N=152 across 5 Australian courts, the needs-based predictors, and magistrates &gt; judges on stress — while reporting depression/anxiety levels similar to the general population.",
+       "note": "Magistrates scored higher than judges on all stress variables and lower on autonomy and relatedness satisfaction — the gap was reported as almost entirely explained by those two needs. The 47%-vs-31% 'emotionally draining' figures are quoted within the fetched 2022 primary (citing Roach Anleu &amp; Mack 2017)."}
     ],
     "otherCards": [
-      {"label": "Decision to become a lawyer", "value": "76%", "tier": "T2", "metric": "% moderately/extremely satisfied with the decision (mean 3.92/5)",
-       "src": "Dinovitzer et al., After the JD III (ABF/NALP 2014), Wave III fielded 2012–13, national cohort of year-2000 bar admits.",
-       "note": "Public-interest lawyers most satisfied of the practice settings; 'business but not practicing law' least."},
-      {"label": "Chicago bar overall satisfaction", "value": "83.7%", "tier": "T2", "metric": "45.2% very satisfied + 38.5% satisfied",
-       "src": "Heinz, Hull &amp; Harter, 74 Ind. L.J. 735 (1999), ~800 Chicago lawyers; Hull, 52 Vand. L. Rev. (1999).",
-       "note": "COUNTER-FINDING: firm size was NOT a significant predictor of dissatisfaction here — large-firm lawyers gave fewer 'very satisfied' but more 'satisfied' answers. This contradicts the often-repeated 'BigLaw least satisfied after controls' claim, which failed verification."},
+      {"label": "Decision to become a lawyer", "value": "76%", "tier": "T1", "metric": "% moderately/extremely satisfied with the decision to become a lawyer",
+       "src": "Dinovitzer et al., After the JD III (ABF/NALP 2014). PDF fetched in round two: '76% ... virtually unchanged from prior waves'; complete surveys from N=2,862 (fielded May 2012–early 2013), national cohort of year-2000 bar admits.",
+       "note": "Public-sector lawyers most satisfied of the practice settings. A circulating mean of 3.92/5 was NOT found in the report and has been dropped."},
+      {"label": "Chicago bar overall satisfaction", "value": "84%", "tier": "T1", "metric": "% satisfied or very satisfied (≈10% neutral, ≈5% dissatisfied, 1.6% very dissatisfied)",
+       "src": "Heinz, Hull &amp; Harter, 74 Ind. L.J. 735 (1999). PDF fetched in round two: N=788 interviewees (82% of target sample), 1994–95 Chicago Lawyers Survey.",
+       "note": "COUNTER-FINDING, strengthened by the primary text: 'practice setting was not a significant predictor. The only significant variable ... was income.' Large-firm lawyers gave ~10 points fewer 'very satisfied' answers but few were dissatisfied. Round-two corrections: overall figure is 84% (not the circulating 83.7%), N is 788 (not ~800), and the widely-quoted 45.2%+38.5% split is NOT in this article."},
       {"label": "Content vs context satisfaction", "value": "qualitative", "tier": "T2", "metric": "directional finding only",
        "src": "Dinovitzer &amp; Garth, 41 Law &amp; Society Rev. 1 (2007), AJD Wave I.",
        "note": "Money/prestige of practice raise satisfaction with pay/prestige ('context'); larger organization size lowers satisfaction with the work itself ('content'). Magnitudes not verified."},
@@ -453,11 +489,11 @@
     },
     "cards": [
       {"label": "Teaching hours vs satisfaction", "value": "negative", "tier": "T2", "metric": "direction only — coefficients &amp; N not retrievable",
-       "src": "Bozeman &amp; Gaughan, J. Higher Education 82(2):154–186 (2011). National sample of science &amp; engineering faculty at Carnegie Research-Extensive universities; exact N unknown (deliberately not reported here).",
+       "src": "Bozeman &amp; Gaughan, J. Higher Education 82(2):154–186 (2011). National sample of science &amp; engineering faculty at Carnegie Research-Extensive universities; exact N unknown (a candidate — 1,794 of 4,916 invited — appears only in secondary search results and remains unverified, so it is deliberately not reported as fact).",
        "note": "Hours teaching undergraduates negatively associated with satisfaction; research/grant hours showed no significant relationship. Tenured &gt; untenured; perceived salary equity and colleague respect were strong positives."},
-      {"label": "Hours mismatch (junior academics)", "value": "negative", "tier": "T2", "metric": "actual-vs-desired weekly HOURS — not role allocation",
-       "src": "Frei &amp; Grund, Working-time mismatch and job satisfaction of junior academics, J. Business Economics 92(7):1125–1166 (2022). Longitudinal, STEM predocs/postdocs; N not retrievable.",
-       "note": "SCOPE CAVEAT: measures total-hours mismatch (overemployment worse than underemployment), not teaching/research/service allocation fit — the closest real study to the allocation-mismatch thesis, but not that study."},
+      {"label": "Hours mismatch (junior academics)", "value": "negative", "tier": "T1", "metric": "actual-vs-desired weekly HOURS — not role allocation",
+       "src": "Frei &amp; Grund, Working-time mismatch and job satisfaction of junior academics, J. Business Economics 92(7):1125–1166 (2022). Springer full text fetched in round two: unbalanced panel of 6,058 observations from 1,949 individuals (3,573 doctoral-student and 2,485 postdoc observations).",
+       "note": "SCOPE CAVEAT: measures total-hours mismatch (overemployment 'unfolds more severe consequences' than underemployment — confirmed verbatim), not teaching/research/service allocation fit — the closest real study to the allocation-mismatch thesis, but not that study."},
       {"label": "Allocation discrepancy → satisfaction?", "value": "UNCONFIRMED LINK", "tier": "T3", "conflict": true, "metric": "current vs ideal vs expected % time",
        "src": "Faculty time allocation at HBCUs, Frontiers in Psychology 2021 (PMC8548608).",
        "note": "Documents allocation discrepancies varying by gender/tenure/URM status, but whether those discrepancies were statistically linked to satisfaction could not be confirmed — shown as an unresolved cell, not a finding."}
@@ -476,9 +512,9 @@
        "note": "Self-reported fit — structurally inflated by common-method variance. The ~3× gap vs measured fit (0.19) is a construct difference, not a contradiction. Person-ORGANIZATION fit → satisfaction is the related 0.44 figure."}
     ],
     "cards": [
-      {"label": "The null result", "value": "NOT significant", "tier": "T2", "conflict": true, "metric": "interest &amp; skill congruence → training satisfaction",
-       "src": "Michaelis &amp; Findeisen, Frontiers in Psychology 13:834543 (2022). German NEPS data, N=4,097 VET trainees.",
-       "note": "Neither interest congruence nor skill congruence significantly predicted training satisfaction. Only Realistic-interest congruence reduced premature contract termination; moderate overeducation ENHANCED satisfaction. Scope: training satisfaction, not general job satisfaction. Reported as-is, unsoftened."},
+      {"label": "The null result", "value": "NOT significant", "tier": "T1", "conflict": true, "metric": "interest &amp; skill congruence → training satisfaction",
+       "src": "Michaelis &amp; Findeisen, Frontiers in Psychology 13:834543 (2022), PMID 35237215. Official abstract fetched in round two — verbatim: 'Training satisfaction is not affected by interest congruence and skill congruence.' German NEPS data, N=4,097 VET trainees.",
+       "note": "Only Realistic-interest congruence reduced premature contract termination; moderate overeducation ENHANCED satisfaction. Scope: training satisfaction, not general job satisfaction. Reported as-is, unsoftened."},
       {"label": "Misfit is asymmetric", "value": "direction varies by RIASEC type", "tier": "T2", "metric": "response-surface analysis (no retrievable effect sizes)",
        "src": "Wiegand, Drasgow &amp; Rounds, Misfit Matters, J. Vocational Behavior 125:103524 (2021). Two large samples; Ns not retrievable.",
        "note": "For Investigative and Artistic interests, satisfaction keeps rising from environment-deficiency through fit into excess; Enterprising and Conventional show the opposite pattern — supporting a needs-supplies (complementary) fit model over simple congruence."}
@@ -511,17 +547,20 @@
      "body": "Burnout is measured per specialty (Medscape, Shanafelt), but no located study tests whether a physician's fit with a specialty's work modality (feedback speed, control, social load) moderates satisfaction or burnout within that specialty."},
     {"title": "Academia: allocation fit as an interaction", "status": "GAP CONFIRMED (search-limited)",
      "body": "Every located study models time allocation as main effects or profile membership (French 2020; Bozeman &amp; Gaughan 2011; Frei &amp; Grund 2022). None treats preferred-vs-actual allocation fit as a moderator of the allocation–satisfaction relationship. Caveat: citation-network searching was blocked this session, so this is 'not found in a genuine search,' not proof of absence."},
-    {"title": "NORC/GSS: the middle of the distribution", "status": "NOT RETRIEVABLE",
-     "body": "Only the top and bottom of the 2007 occupational ranking could be verified; the mid-distribution occupations, per-occupation sample sizes, and the minimum-N inclusion threshold were not retrievable this session."}
+    {"title": "NORC/GSS: the middle of the distribution", "status": "PARTIALLY RESOLVED",
+     "body": "Round two fetched GSS News No. 21 (July 2007), which reproduces the top-12 and bottom-12 tables verbatim — those are now T1, and three formerly-NO-DATA cells were recovered. Still missing: the full April 2007 report ('Job Satisfaction in America') with the mid-distribution occupations, per-occupation sample sizes, and the minimum-N inclusion threshold. Secondary coverage reports 198 analyzable occupations."}
   ],
   "removed": [
-    {"claim": "Office supervisors 80.6% very satisfied (NORC)", "why": "Numerically incoherent — would outrank firefighters (80.1, #2) while the occupation is placed only in the >60% tail. Fabrication-suspect search-synthesis artifact."},
-    {"claim": "Operating engineers 64.1% (NORC)", "why": "Occupation is a genuine top-12 member, but the value has no traceable source. Rendered as NO DATA."},
-    {"claim": "Physicians 44% satisfied (“Dyrbye 2013”)", "why": "Found nowhere. Dyrbye 2013 measures would-recommend-medicine (52–57%), not satisfaction."},
-    {"claim": "Dentists 48% satisfied (Starkel 2015)", "why": "The study is real (N=2,171, satisfaction-by-setting) but no source confirms a 48% headline."},
-    {"claim": "Veterinarians 65% satisfied (Merck 2020)", "why": "Matches no wave or metric; the verified figure is 74% career satisfaction."},
-    {"claim": "Physician burnout 48.2% in 2023 (Shanafelt)", "why": "The verified 2023-wave figure is 45.2% (N=7,643)."},
-    {"claim": "Large-firm practice least satisfying after controls (Hull 1999)", "why": "Contradicted by the actual finding: firm size was not a significant predictor of dissatisfaction in the Chicago-bar data."},
+    {"claim": "Office supervisors 80.6% very satisfied (NORC)", "why": "RESOLVED in round two: the 80.6% traces to a digit-transposition typo in the NORC report's own prose. Table 1 reads 60.8% — now displayed at T1. Round one's incoherence flag was correct."},
+    {"claim": "Operating engineers 64.1% (NORC)", "why": "RESOLVED in round two: the value was correct after all — recovered from Table 1 of the primary and now displayed at T1. Round one removed it because no traceable source existed at the time."},
+    {"claim": "Roofers are the least-happy occupation (14% very happy)", "why": "CORRECTED in round two: roofers are 14.2% very happy — second-lowest; garage &amp; service-station attendants (13.2%) are lowest. Roofers ARE the lowest-ranked occupation on job satisfaction by NORC's mean-score ranking."},
+    {"claim": "Lawyers: 45.2% very satisfied + 38.5% satisfied (Heinz, Hull &amp; Harter 1999)", "why": "The fetched Indiana L.J. primary gives only the combined figure — 84% satisfied or very satisfied, N=788. The 45.2/38.5 split is not in the article and was removed."},
+    {"claim": "After the JD III mean satisfaction 3.92/5", "why": "Not found in the fetched ABF report; the verified figure is 76% moderately/extremely satisfied (N=2,862). The mean was dropped."},
+    {"claim": "Physicians 44% satisfied (“Dyrbye 2013”)", "why": "Found nowhere. The fetched abstract (PMID 24290109) measures satisfaction and burnout by career stage — early-career lowest career-choice satisfaction, middle-career highest burnout — with no 44% figure."},
+    {"claim": "Dentists 48% satisfied (Starkel 2015)", "why": "The study is real (N=2,171, satisfaction-by-setting; abstract fetched in round two, which also corrected the author order to Lo Sasso et al.) but contains no overall %."},
+    {"claim": "Veterinarians 65% satisfied (Merck 2020)", "why": "Matches no wave or metric; the verified figure is 74% career satisfaction (still T2 — primary remains unfetchable)."},
+    {"claim": "Physician burnout 48.2% in 2023 (Shanafelt)", "why": "The primary abstract (PMID 40202475) states 45.2% (7,643 participants) — now T1."},
+    {"claim": "Large-firm practice least satisfying after controls (Hull 1999)", "why": "Contradicted by the fetched primary: 'practice setting was not a significant predictor. The only significant variable ... was income.'"},
     {"claim": "Income inequality within a field depresses income satisfaction (Sandefur &amp; Heinz 1999)", "why": "Not found as stated; closest match is an unpublished conference paper and the Urban Lawyers monograph. No verifiable figure."},
     {"claim": "Teaching-heavy faculty profile has highest turnover intention (French 2020)", "why": "The paper found NO significant profile differences in turnover intentions or affective commitment."}
   ]
@@ -738,7 +777,7 @@
       var p = pts.find(function (q) { return String(q.year) === c.getAttribute("data-year"); });
       bindTip(c, function () {
         return tipHtml({ label: p.year + " wave", value: p.value + "% with ≥1 burnout symptom",
-          metric: "Maslach Burnout Inventory, US physicians · " + p.n, src: p.src, tier: "T2" });
+          metric: "Maslach Burnout Inventory, US physicians · " + p.n, src: p.src, tier: "T1" });
       });
     });
   })();
@@ -903,7 +942,7 @@
   (function renderMaster() {
     var rows = [];
     DATA.norc.rows.forEach(function (r) {
-      rows.push(["NORC/GSS", r.occ, r.value == null ? "NO DATA" : r.value + "%", DATA.norc.metric, DATA.norc.source, "2007", "pooled >27,000 (per-occupation N unpublished)", r.tier, r.note]);
+      rows.push(["NORC/GSS", r.occ, r.value == null ? "NO DATA" : r.value + "%", DATA.norc.metric, DATA.norc.source, "2007", "pooled GSS 1972–2006 (per-occupation N unpublished)", r.tier, r.note]);
     });
     DATA.healthcare.satCards.forEach(function (c) {
       rows.push(["Healthcare", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
