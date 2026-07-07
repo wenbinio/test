@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Occupational Satisfaction Matrix — verified evidence only</title>
+<style>
+  :root {
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --ink-1: #0b0b0b;
+    --ink-2: #52514e;
+    --ink-3: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;      /* regular occupation bars */
+    --accent: #eda100;        /* drill-linked occupations */
+    --nodata-a: #d8d7d0;
+    --nodata-b: #edece6;
+    --t3-edge: #b98a00;
+    --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-1: #1a1a19;
+      --page: #0d0d0d;
+      --ink-1: #ffffff;
+      --ink-2: #c3c2b7;
+      --ink-3: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5;
+      --accent: #c98500;
+      --nodata-a: #33332f;
+      --nodata-b: #262624;
+      --t3-edge: #c98500;
+      --card: #202020;
+    }
+  }
+  :root[data-theme="light"] {
+    --surface-1: #fcfcfb; --page: #f9f9f7; --ink-1: #0b0b0b; --ink-2: #52514e; --ink-3: #898781;
+    --grid: #e1e0d9; --baseline: #c3c2b7; --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6; --accent: #eda100; --nodata-a: #d8d7d0; --nodata-b: #edece6;
+    --t3-edge: #b98a00; --card: #ffffff;
+  }
+  :root[data-theme="dark"] {
+    --surface-1: #1a1a19; --page: #0d0d0d; --ink-1: #ffffff; --ink-2: #c3c2b7; --ink-3: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5; --accent: #c98500; --nodata-a: #33332f; --nodata-b: #262624;
+    --t3-edge: #c98500; --card: #202020;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink-1);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 24px 16px 80px;
+  }
+  main { max-width: 1060px; margin: 0 auto; }
+  h1 { font-size: 26px; letter-spacing: -0.01em; }
+  h2 { font-size: 19px; margin-bottom: 4px; }
+  h3 { font-size: 15px; margin-bottom: 4px; }
+  .sub { color: var(--ink-2); max-width: 74ch; }
+  .panel {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px; margin-top: 20px;
+  }
+  .metric-chip {
+    display: inline-block; font-size: 12px; color: var(--ink-2);
+    border: 1px solid var(--border); border-radius: 999px; padding: 1px 10px; margin: 4px 0 12px;
+    cursor: help;
+  }
+  /* tier badges — text always present, never color-alone */
+  .tier { display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+          border-radius: 4px; padding: 0 5px; vertical-align: 1px; cursor: help; }
+  .tier.t1 { background: var(--ink-1); color: var(--surface-1); }
+  .tier.t2 { border: 1px solid var(--baseline); color: var(--ink-2); }
+  .tier.t3 { border: 1px solid var(--t3-edge); color: var(--t3-edge); }
+  .tier.nd { border: 1px dashed var(--ink-3); color: var(--ink-3); }
+  .legend-row { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--ink-2);
+                align-items: center; margin-top: 10px; }
+  .key-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; }
+  .hatch {
+    background: repeating-linear-gradient(45deg, var(--nodata-a) 0 4px, var(--nodata-b) 4px 8px);
+  }
+  /* bar rows */
+  .brow { display: grid; grid-template-columns: 240px 1fr 58px; gap: 8px; align-items: center;
+          padding: 2px 0; border-radius: 6px; }
+  .brow:focus-visible { outline: 2px solid var(--series-1); }
+  .brow .lab { font-size: 13px; line-height: 1.25; color: var(--ink-2); text-align: right; }
+  .brow .lab .drill-ic { color: var(--ink-1); font-weight: 700; }
+  .brow .val { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--ink-1); }
+  .barwrap { position: relative; height: 18px; }
+  .bar { position: absolute; left: 0; top: 1px; height: 16px;
+         border-radius: 0 4px 4px 0; background: var(--series-1); min-width: 2px; }
+  .bar.acc { background: var(--accent); }
+  .bar.avg { background: var(--baseline); height: 10px; top: 4px; }
+  .bar.nodata { width: 46% !important; border: 1px dashed var(--ink-3); border-left: none;
+                background: repeating-linear-gradient(45deg, var(--nodata-a) 0 4px, var(--nodata-b) 4px 8px); }
+  .brow.clickable { cursor: pointer; }
+  .brow.clickable:hover { background: color-mix(in oklab, var(--surface-1) 88%, var(--ink-1) 12%); }
+  .axisline { border-top: 1px solid var(--grid); margin: 10px 0 4px; position: relative; height: 16px; }
+  .axisline span { position: absolute; transform: translateX(-50%); font-size: 11px; color: var(--ink-3);
+                   font-variant-numeric: tabular-nums; top: 2px; }
+  .group-head { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+                margin: 14px 0 4px; }
+  /* cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .card .big { font-size: 30px; font-weight: 600; line-height: 1.15; }
+  .card .metric { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  .card .src { font-size: 11.5px; color: var(--ink-3); margin-top: 8px; }
+  .card.nodata-card { background: repeating-linear-gradient(45deg, var(--nodata-a) 0 5px, var(--nodata-b) 5px 10px); }
+  .card.nodata-card .big { font-size: 17px; color: var(--ink-2); }
+  .conflict { border-left: 3px solid var(--t3-edge); padding-left: 11px; }
+  /* drill tabs */
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 4px; }
+  .tabs button {
+    font: 600 13px system-ui, sans-serif; color: var(--ink-2); background: none;
+    border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { background: var(--ink-1); color: var(--surface-1); border-color: var(--ink-1); }
+  .drillpane { display: none; margin-top: 12px; }
+  .drillpane.open { display: block; }
+  /* svg charts */
+  svg text { font: 11.5px system-ui, sans-serif; fill: var(--ink-3); }
+  svg .dl { fill: var(--ink-1); font-weight: 600; }
+  .chart-scroll { overflow-x: auto; }
+  /* interpretive framework */
+  .interp { border-style: dashed; }
+  .interp-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+                  color: var(--ink-3); border: 1px dashed var(--ink-3); border-radius: 4px;
+                  padding: 1px 8px; text-transform: uppercase; }
+  table.axes { border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 720px; }
+  table.axes th, table.axes td { padding: 5px 8px; text-align: center; border-bottom: 1px solid var(--grid); }
+  table.axes th { color: var(--ink-3); font-weight: 600; }
+  table.axes td:first-child, table.axes th:first-child { text-align: left; color: var(--ink-2); }
+  .pips { color: var(--ink-2); letter-spacing: 2px; font-size: 11px; cursor: help; }
+  /* gaps + removed */
+  .gapcard { border: 1px dashed var(--ink-3); border-radius: 8px; padding: 12px 14px;
+             background: repeating-linear-gradient(45deg, transparent 0 8px, color-mix(in oklab, var(--surface-1) 92%, var(--ink-3) 8%) 8px 16px); }
+  .gapcard h3 { color: var(--ink-1); }
+  ul.tight { padding-left: 18px; } ul.tight li { margin: 6px 0; color: var(--ink-2); }
+  ul.tight li strong { color: var(--ink-1); }
+  /* master table */
+  .tablewrap { overflow-x: auto; }
+  table.master { border-collapse: collapse; width: 100%; font-size: 12px; min-width: 900px; }
+  table.master th, table.master td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid);
+                                     vertical-align: top; }
+  table.master th { color: var(--ink-3); position: sticky; top: 0; background: var(--surface-1); }
+  table.master td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  /* tooltip */
+  #tip { position: fixed; z-index: 50; max-width: 340px; background: var(--ink-1); color: var(--surface-1);
+         border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.45; pointer-events: none;
+         display: none; box-shadow: 0 4px 18px rgba(0,0,0,.25); }
+  #tip .t-metric { opacity: .75; }
+  #tip .t-note { opacity: .75; margin-top: 4px; }
+  .note { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; max-width: 80ch; }
+  footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-3); max-width: 84ch; }
+  footer p { margin: 6px 0; }
+  @media (max-width: 640px) { .brow { grid-template-columns: 126px 1fr 50px; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Occupational Satisfaction Matrix</h1>
+    <p class="sub">Job-satisfaction evidence across occupations and within three disciplines (healthcare, law,
+    academia), plus the meta-analytic layer on interest–work fit. <strong>Every figure is real and carries its
+    source, metric definition, and a verification tier. Cells with no verifiable figure are shown as NO DATA —
+    the absence is part of the finding.</strong> Hover any mark for its citation.</p>
+    <div class="legend-row" id="tier-legend">
+      <span><span class="tier t1" title="Verified against the primary source in this research session">T1</span> primary source fetched &amp; figure verified this session</span>
+      <span><span class="tier t2" title="Secondary citation, consistent across independent searches; primary not retrievable">T2</span> consistent secondary citation; primary not verified</span>
+      <span><span class="tier t3" title="Contested across sources, or known-confounded — the conflict is stated, never silently resolved">T3</span> contested / confounded (conflict stated)</span>
+      <span><span class="tier nd">NO&nbsp;DATA</span> no verifiable figure exists or was retrievable</span>
+    </div>
+  </header>
+
+  <!-- ============ CROSS-OCCUPATION (NORC/GSS) ============ -->
+  <section class="panel" id="norc-panel">
+    <h2>Cross-occupation ranking — NORC/GSS</h2>
+    <p class="sub">Smith, T.W. (2007), <em>Job Satisfaction in the United States</em>, NORC/University of Chicago,
+    pooled General Social Survey data (&gt;27,000 respondents). The published report ranked occupations at the top
+    and bottom of the distribution; the middle was not retrievable this session.</p>
+    <span class="metric-chip" data-tip="Metric: percentage of respondents in that occupation answering 'very satisfied' to the GSS job-satisfaction item. This is NOT comparable to burnout rates or well-being composites shown in other panels.">metric: % “very satisfied” with job</span>
+    <div class="legend-row">
+      <span><span class="key-swatch" style="background:var(--series-1)"></span> occupation</span>
+      <span><span class="key-swatch" style="background:var(--accent)"></span> ⤵ has within-discipline drill-down (click)</span>
+      <span><span class="key-swatch hatch"></span> NO DATA</span>
+      <span><span class="key-swatch" style="background:var(--baseline);height:8px"></span> workforce average</span>
+    </div>
+    <div id="norc-chart"></div>
+    <p class="note">Ranking trap, shown not hidden: several secondary write-ups call <strong>roofers</strong> the single
+    least-satisfied occupation. In the verified figures, laborers-except-construction (21.4%) sit lower on
+    <em>satisfaction</em>; roofers are lowest on the report's separate <em>general happiness</em> measure (14% “very
+    happy”), the likely source of the confusion. Lawyers, physicians, and university faculty do not appear in the
+    retrievable top/bottom lists — their discipline panels below use discipline-specific studies with different
+    metrics, kept in separate panels by design.</p>
+  </section>
+
+  <!-- ============ WITHIN-DISCIPLINE DRILL-DOWNS ============ -->
+  <section class="panel" id="drill-panel">
+    <h2>Within-discipline drill-downs</h2>
+    <p class="sub">Different studies, different metrics — each chart states its own metric and is never merged onto
+    a shared scale with another metric.</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-pane="healthcare">Healthcare</button>
+      <button role="tab" aria-selected="false" data-pane="law">Law (by setting)</button>
+      <button role="tab" aria-selected="false" data-pane="academia">Academia</button>
+    </div>
+
+    <div class="drillpane open" id="pane-healthcare">
+      <h3>Satisfaction — separate instruments, separate cards (not one scale)</h3>
+      <div class="cards" id="hc-sat-cards"></div>
+      <h3 style="margin-top:20px">Physician burnout by specialty
+        <span class="tier t2" data-tip="Medscape figures independently corroborated across news coverage; the registration-walled report itself was not fetchable. Press coverage sometimes conflates report year with survey-fielding year.">T2</span></h3>
+      <span class="metric-chip" data-tip="Metric: % of physicians in the specialty self-reporting burnout, Medscape Physician Burnout &amp; Depression Report 2024, N=9,226 US physicians, 29+ specialties. A burnout rate is NOT (1 − satisfaction).">metric: % reporting burnout — Medscape 2024, N=9,226</span>
+      <div id="medscape-chart"></div>
+      <h3 style="margin-top:20px">US physician burnout over time
+        <span class="tier t2" data-tip="Shanafelt et al. longitudinal series, Maslach Burnout Inventory, ≥1 symptom of burnout. Values from indexed abstracts with exact numerators/denominators; primary PDFs not fetchable this session.">T2</span></h3>
+      <span class="metric-chip" data-tip="Metric: % of surveyed US physicians with ≥1 symptom of burnout on the Maslach Burnout Inventory (emotional exhaustion or depersonalization). Shanafelt et al., Arch Intern Med 2012 &amp; Mayo Clinic Proceedings 2015–2025.">metric: % with ≥1 MBI burnout symptom</span>
+      <div class="chart-scroll" id="shanafelt-chart"></div>
+    </div>
+
+    <div class="drillpane" id="pane-law">
+      <h3>Well-being by practice setting — Krieger &amp; Sheldon 2015
+        <span class="tier t1" data-tip="PRIMARY VERIFIED: the full paper PDF was fetched twice this session (research pass + independent verifier pass); all means, Ns and correlations below match the paper text exactly.">T1</span></h3>
+      <span class="metric-chip" data-tip="Metric: subjective well-being composite (life satisfaction + positive-minus-negative affect), Krieger &amp; Sheldon, 83 Geo. Wash. L. Rev. (2015). N=6,226 working sample from 7,805 respondents (12.7% response) across 4 US state bars. Scale means shown on their native range — not a percentage.">metric: mean SWB composite (native scale) · N=6,226</span>
+      <div id="ks-setting-chart"></div>
+      <h3 style="margin-top:20px">What correlates with lawyer well-being (same study)
+        <span class="tier t1" data-tip="Correlations read directly from the fetched primary text. Self-determination-theory factors dominate; credential/external factors are near zero.">T1</span></h3>
+      <span class="metric-chip" data-tip="Metric: Pearson r with the SWB composite, N=6,226. Krieger &amp; Sheldon 2015.">metric: Pearson r with well-being</span>
+      <div id="ks-corr-chart"></div>
+      <h3 style="margin-top:20px">Judiciary, nested: judges vs magistrates (Australia)</h3>
+      <div class="cards" id="law-jud-cards"></div>
+      <h3 style="margin-top:20px">Other setting evidence &amp; counter-evidence</h3>
+      <div class="cards" id="law-other-cards"></div>
+    </div>
+
+    <div class="drillpane" id="pane-academia">
+      <h3>Faculty time-allocation profiles — French et al. 2020
+        <span class="tier t2" data-tip="French, Allen, Miller, Kim &amp; Centeno, J. Vocational Behavior 120:103443 (2020). N=1,270 faculty across 11 universities in one US southeastern state. Latent profile analysis. Profile-level satisfaction MEANS were not retrievable — only the verified ordering is shown; no invented numbers.">T2</span></h3>
+      <span class="metric-chip" data-tip="Metric: self-reported job satisfaction compared across latent time-allocation profiles. Only the direction of differences was verifiable; numeric profile means were not retrievable, so none are shown.">metric: satisfaction ordering across profiles (no retrievable means)</span>
+      <div id="french-chart"></div>
+      <p class="note"><strong>Seed correction applied:</strong> a claim circulated that the teaching-heavy profile also had
+      the highest turnover intention. The paper found <em>no significant profile differences</em> in turnover intentions
+      or affective commitment — only satisfaction and work-family balance differed. The wrong claim is listed in the
+      “failed verification” panel.</p>
+      <div class="cards" id="acad-cards" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- ============ META-ANALYTIC LAYER ============ -->
+  <section class="panel" id="meta-panel">
+    <h2>The fit layer — does interest–work fit predict satisfaction?</h2>
+    <p class="sub">Correlations below come from different constructs and are deliberately shown as separate entries,
+    not one scale: <em>measured</em> interest congruence is a far more conservative construct than <em>perceived</em> fit.</p>
+    <div id="meta-chart"></div>
+    <div class="cards" id="meta-cards" style="margin-top:14px"></div>
+  </section>
+
+  <!-- ============ INTERPRETIVE MODALITY AXES ============ -->
+  <section class="panel interp" id="axes-panel">
+    <h2>Work-modality axes <span class="interp-badge" data-tip="These ratings are an interpretive framework authored for this artifact — qualitative judgments, NOT measured data from any study. They are visually separated (dashed border, muted pips) for that reason.">Interpretive — not measured data</span></h2>
+    <p class="sub">A qualitative lens for reading the measured results above: six modality axes per role.
+    Autonomy is rated as <em>volition</em>, not independence — firefighters rate high despite strict hierarchy.
+    The last axis separates roles holding responsibility <em>with</em> control (judges) from responsibility
+    <em>without</em> control (dentists). Pips: ● low ●● medium ●●● high. Hover a row for rationale.</p>
+    <div class="tablewrap"><table class="axes" id="axes-table"></table></div>
+  </section>
+
+  <!-- ============ NEVER MEASURED ============ -->
+  <section class="panel" id="gaps-panel">
+    <h2>What has never been measured</h2>
+    <p class="sub">These absences were checked, not assumed — a genuine search for each study came back empty.
+    The gaps are part of the argument.</p>
+    <div class="cards" id="gap-cards"></div>
+    <h3 style="margin-top:22px">Failed verification — figures that circulated but did not survive checking</h3>
+    <ul class="tight" id="removed-list"></ul>
+  </section>
+
+  <!-- ============ MASTER TABLE ============ -->
+  <section class="panel" id="table-panel">
+    <h2>Every figure, as data</h2>
+    <p class="sub">The table view of the full dataset (the same JSON embedded in this file's source — auditable by
+    reading the page source, no network calls).</p>
+    <div class="tablewrap"><table class="master" id="master-table"></table></div>
+  </section>
+
+  <footer>
+    <h2 style="font-size:15px;color:var(--ink-2)">Methodology &amp; limits</h2>
+    <p>Built 2026-07-07 by a multi-agent research pipeline: five parallel research agents (one per domain) extracted
+    figures and citations; an independent verifier agent then adversarially re-checked every figure with freshly
+    phrased searches (seed numbers excluded from queries to avoid echo confirmation) and attempted primary fetches.</p>
+    <p><strong>Session constraint:</strong> this research environment's network egress policy blocked direct fetches
+    to almost all publishers and archives (HTTP 403 at the gateway). Web search worked. Exactly one primary source
+    passed the gateway — the Krieger &amp; Sheldon (2015) PDF — which is why that study is the only T1 cluster. All
+    other figures are capped at T2 (multi-query-consistent secondary evidence) or T3 (contested). A follow-up session
+    with open egress could promote T2 figures to T1 against primary texts.</p>
+    <p>No figure was simulated, interpolated, or estimated. Conflicting values are displayed side by side. Different
+    metrics (% very satisfied, burnout %, well-being composites, correlation coefficients) are never merged onto a
+    shared scale. Sample sizes are shown where verified and marked unknown where not.</p>
+  </footer>
+</main>
+
+<div id="tip" role="tooltip"></div>
+
+<script id="dataset" type="application/json">
+{
+  "norc": {
+    "source": "Smith, T.W. (2007). Job Satisfaction in the United States. NORC/University of Chicago. Pooled General Social Survey data, >27,000 respondents.",
+    "metric": "% very satisfied with job",
+    "rows": [
+      {"occ": "Clergy", "value": 87.2, "tier": "T2", "note": "Rank #1. Decimal resolved to 87.2 (an 87.3 variant appeared once in secondary coverage)."},
+      {"occ": "Firefighters", "value": 80.1, "tier": "T2", "note": "Rank #2. Value consistent across independent searches."},
+      {"occ": "Physical therapists", "value": 78.1, "tier": "T2", "drill": "healthcare", "note": "Rank #3. This GSS figure is the only cross-checkable PT satisfaction number — no discipline-specific PT study surfaced a matching figure."},
+      {"occ": "Authors", "value": 74.2, "tier": "T3", "note": "Top-list membership confirmed; only the rounded 74% was independently retrieved — decimal unverified."},
+      {"occ": "Special education teachers", "value": 70.1, "tier": "T3", "note": "Top-list membership confirmed (also tops the happiness list); exact decimal from a single synthesis."},
+      {"occ": "Teachers", "value": 69.2, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
+      {"occ": "Education administrators", "value": 68.4, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
+      {"occ": "Painters &amp; sculptors", "value": 67.3, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
+      {"occ": "Psychologists", "value": 66.9, "tier": "T3", "note": "Top-list membership confirmed; exact decimal from a single synthesis."},
+      {"occ": "Operating engineers", "value": null, "tier": "ND", "note": "Occupation confirmed as a top-12 member, but the circulating value (64.1) has no traceable source — omitted rather than shown."},
+      {"occ": "Office supervisors", "value": null, "tier": "ND", "note": "Top-list member, but the circulating value (80.6) is numerically incoherent with the published ranking — discarded as fabrication-suspect."},
+      {"occ": "Security &amp; financial services sales", "value": null, "tier": "ND", "note": "Named as a top-12 member; no percentage found anywhere."},
+      {"occ": "All occupations (average)", "value": 47, "tier": "T2", "avg": true, "note": "Approximate workforce-wide share 'very satisfied'; recurs consistently across sources."},
+      {"occ": "Waiters / servers", "value": 27.0, "tier": "T2", "note": "Bottom list. Value independently confirmed."},
+      {"occ": "Bartenders", "value": 26.4, "tier": "T2", "note": "Bottom list. Value independently confirmed."},
+      {"occ": "Freight / stock / material handlers", "value": 25.8, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
+      {"occ": "Roofers", "value": 25.3, "tier": "T3", "note": "CONFLICT: often mislabeled the single least-satisfied job. Laborers (21.4) are lower on satisfaction; roofers are lowest on the separate happiness measure (14% very happy)."},
+      {"occ": "Furniture / home-furnishing sales", "value": 25.2, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
+      {"occ": "Cashiers", "value": 25.0, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
+      {"occ": "Apparel salespersons", "value": 23.9, "tier": "T3", "note": "Rank corroborated (7th least satisfied); exact decimal not independently retrieved."},
+      {"occ": "Hand packers &amp; packagers", "value": 23.7, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
+      {"occ": "Misc. food preparation", "value": 23.6, "tier": "T3", "note": "Bottom-list membership confirmed; exact decimal not independently retrieved."},
+      {"occ": "Laborers, except construction", "value": 21.4, "tier": "T2", "note": "Numerically the lowest verified occupation. Value independently confirmed."}
+    ],
+    "methodNote": "Pooling window contested across write-ups (job-satisfaction module 1988–2006 vs cumulative 1972–2006 GSS); per-occupation minimum-N threshold not retrievable; per-occupation sample sizes not published in retrievable coverage."
+  },
+  "healthcare": {
+    "satCards": [
+      {"label": "Physician assistants", "value": "82.7%", "tier": "T2", "metric": "% satisfied with their job",
+       "src": "Halasy, West, Shanafelt, O'Laughlin, Satele &amp; Dyrbye — JAAPA 2021;34(6). Random sample of 2,100 PAs; final respondent N not retrievable. Fielded 2016 (pre-COVID, despite the 2021 publication date).",
+       "note": "32.2% intended to leave their position; 19.5% to reduce hours."},
+      {"label": "Physical therapists", "value": "78.1%", "tier": "T2", "metric": "% very satisfied (GSS — different metric)",
+       "src": "NORC/GSS (Smith 2007) — cross-reference from the ranking above, not a discipline-specific study.",
+       "note": "No PT-specific peer-reviewed satisfaction study matching this figure was found."},
+      {"label": "Veterinarians", "value": "74%", "tier": "T2", "metric": "% somewhat/extremely satisfied with their career",
+       "src": "Merck Animal Health Veterinary Wellbeing Study II (2020, with AVMA/Brakke). N=2,871 usable of 20,000 invited; fielded Sept–Oct 2019.",
+       "note": "A prior seed value of 65% matched no wave or metric and was removed."},
+      {"label": "Veterinarians — would recommend the profession", "value": "41% · 48% · 33%", "tier": "T3", "conflict": true, "metric": "% would recommend the profession (contested)",
+       "src": "Merck Veterinary Wellbeing Study waves + secondary coverage (Merck.com: 41% overall — 24% for ≤34, 62% for ≥65; one secondary source: 48%; dvm360: 33%).",
+       "note": "Three values circulate for this metric. No single number is displayable without wave + age subgroup; all three shown."},
+      {"label": "Dentists", "value": "NO HEADLINE FIGURE", "tier": "ND", "nodata": true, "metric": "overall satisfaction %",
+       "src": "Starkel, Guay, Lo Sasso, Vujicic &amp; Warren — JADA 2015. N=2,171 (596 solo / 710 small group / 865 large group).",
+       "note": "The study is real but comparative — satisfaction varies by practice setting; a circulating 48% headline could not be confirmed and was removed."},
+      {"label": "Physicians — job satisfaction", "value": "NO DATA", "tier": "ND", "nodata": true, "metric": "satisfaction % (as distinct from burnout)",
+       "src": "A circulating '44% (Dyrbye 2013)' figure failed verification: Dyrbye et al. 2013 (Mayo Clin Proc 88:1358) measures would-recommend-medicine (52–57%), not a 44% satisfaction rate.",
+       "note": "Physician evidence in this artifact is burnout-metric only (below) — a deliberate no-data cell on the satisfaction metric."}
+    ],
+    "medscape": {
+      "source": "Medscape Physician Burnout &amp; Depression Report 2024, N=9,226 US physicians, 29+ specialties. Overall: 49% burnout, 20% depression.",
+      "high": [
+        {"label": "Emergency medicine", "value": 63},
+        {"label": "OB/GYN", "value": 53},
+        {"label": "Family medicine", "value": 51}
+      ],
+      "low": [
+        {"label": "Otolaryngology", "value": 43},
+        {"label": "Pathology", "value": 41},
+        {"label": "Ophthalmology", "value": 39},
+        {"label": "Psychiatry", "value": 39},
+        {"label": "Plastic surgery", "value": 37}
+      ],
+      "overall": 49,
+      "note": "Only the verified extremes are charted; the ~20 middle specialties were not independently verified this session and are shown as an explicit gap band. Do not merge with AMA's separate 2025 survey (42–43.9%) — different instrument."
+    },
+    "shanafelt": [
+      {"year": 2011, "value": 45.5, "n": "3,310/7,227", "src": "Shanafelt et al., Arch Intern Med 2012;172(18):1377"},
+      {"year": 2014, "value": 54.4, "n": "3,680/6,767", "src": "Shanafelt et al., Mayo Clin Proc 2015;90(12):1600"},
+      {"year": 2017, "value": 43.9, "n": "2,147/4,893", "src": "Shanafelt et al., Mayo Clin Proc 2019;94(9):1681"},
+      {"year": 2020, "value": 38.2, "n": "n≈7,510", "src": "Shanafelt et al., Mayo Clin Proc 2022"},
+      {"year": 2021, "value": 62.8, "n": "n=2,440", "src": "Shanafelt et al., Mayo Clin Proc 2022 (COVID wave; WLI satisfaction fell to 30.2%)"},
+      {"year": 2023, "value": 45.2, "n": "N=7,643", "src": "Shanafelt et al., Mayo Clin Proc 2025 (fielded Oct 2023–Mar 2024). A circulating 48.2% seed was wrong."}
+    ]
+  },
+  "law": {
+    "ksSettings": {
+      "source": "Krieger &amp; Sheldon, What Makes Lawyers Happy?, 83 Geo. Wash. L. Rev. (2015), SSRN 2398989. N=6,226 working sample (7,805 total; 12.7% response; 4 state bars). PRIMARY VERIFIED this session.",
+      "metric": "mean subjective well-being composite",
+      "rows": [
+        {"label": "Judges", "value": 5.76, "n": "N=141", "note": "Highest well-being of all groups — responsibility WITH control."},
+        {"label": "Public service (defenders, prosecutors, legal aid, gov't, non-profit)", "value": 4.98, "n": "N=1,091", "note": "Higher well-being than the Prestige group despite substantially lower income (income gap r=.33 favoring Prestige)."},
+        {"label": "Prestige (100+ lawyer firms; big-ticket transactional/tax/securities/IP)", "value": 4.86, "n": "N=1,434", "note": "Higher income, class rank and law-review share — but lower internal motivation and intrinsic valuing."},
+        {"label": "Other practice", "value": 4.71, "n": "N=2,852", "note": "Residual category."}
+      ],
+      "min": 4.5, "max": 6.0
+    },
+    "ksCorr": {
+      "metric": "Pearson r with SWB composite, N=6,226 (all p<.001 unless noted)",
+      "rows": [
+        {"label": "Autonomy need satisfaction", "value": 0.66, "kind": "sdt"},
+        {"label": "Relatedness need satisfaction", "value": 0.65, "kind": "sdt"},
+        {"label": "Competence need satisfaction", "value": 0.63, "kind": "sdt"},
+        {"label": "Internal (autonomous) work motivation", "value": 0.55, "kind": "sdt"},
+        {"label": "Supervisor autonomy support", "value": 0.44, "kind": "sdt"},
+        {"label": "Intrinsic values orientation", "value": 0.30, "kind": "sdt"},
+        {"label": "Income", "value": 0.192, "kind": "ext"},
+        {"label": "Law-school class rank", "value": 0.12, "kind": "ext", "note": "p<.01"},
+        {"label": "Law-school USNWR ranking", "value": 0.05, "kind": "ext", "note": "p<.01"},
+        {"label": "Law review membership", "value": 0.00, "kind": "ext", "note": "not significant"},
+        {"label": "Billable hours", "value": -0.10, "kind": "ext", "note": "raises income (r=.22) while lowering autonomy, motivation, relatedness"}
+      ]
+    },
+    "judCards": [
+      {"label": "Australian magistrates — overall satisfaction", "value": "≈90%", "tier": "T2", "metric": "% satisfied/very satisfied (approximate)",
+       "src": "Roach Anleu &amp; Mack, national judicial surveys (2008 JJA overview; 2014/2017 waves).",
+       "note": "High satisfaction concentrated in intrinsic aspects of the work; lower for salary/benefits and organisational context."},
+      {"label": "“Work always/often emotionally draining”", "value": "47% vs 31%", "tier": "T2", "metric": "magistrates vs higher-court judges",
+       "src": "Roach Anleu &amp; Mack national surveys.",
+       "note": "Magistrates also less satisfied with control over the amount and manner of their work."},
+      {"label": "Judicial psychological distress", "value": "52.9%", "tier": "T2", "metric": "% moderate-to-very-high K10 distress (vs 32.8% general population)",
+       "src": "Schrever, Hulbert &amp; Sourdin, J. Judicial Admin 2019; 'Where Stress Presides', Psychiatry, Psychology &amp; Law 2022 (PMC9225743). N=152 judicial officers, 5 Australian courts.",
+       "note": "Magistrates scored higher than judges on all stress variables and lower on autonomy and relatedness satisfaction — the gap was reported as almost entirely explained by those two needs."}
+    ],
+    "otherCards": [
+      {"label": "Decision to become a lawyer", "value": "76%", "tier": "T2", "metric": "% moderately/extremely satisfied with the decision (mean 3.92/5)",
+       "src": "Dinovitzer et al., After the JD III (ABF/NALP 2014), Wave III fielded 2012–13, national cohort of year-2000 bar admits.",
+       "note": "Public-interest lawyers most satisfied of the practice settings; 'business but not practicing law' least."},
+      {"label": "Chicago bar overall satisfaction", "value": "83.7%", "tier": "T2", "metric": "45.2% very satisfied + 38.5% satisfied",
+       "src": "Heinz, Hull &amp; Harter, 74 Ind. L.J. 735 (1999), ~800 Chicago lawyers; Hull, 52 Vand. L. Rev. (1999).",
+       "note": "COUNTER-FINDING: firm size was NOT a significant predictor of dissatisfaction here — large-firm lawyers gave fewer 'very satisfied' but more 'satisfied' answers. This contradicts the often-repeated 'BigLaw least satisfied after controls' claim, which failed verification."},
+      {"label": "Content vs context satisfaction", "value": "qualitative", "tier": "T2", "metric": "directional finding only",
+       "src": "Dinovitzer &amp; Garth, 41 Law &amp; Society Rev. 1 (2007), AJD Wave I.",
+       "note": "Money/prestige of practice raise satisfaction with pay/prestige ('context'); larger organization size lowers satisfaction with the work itself ('content'). Magnitudes not verified."},
+      {"label": "Are these surveys too rosy?", "value": "critique", "tier": "T2", "metric": "methodological counterpoint", "conflict": true,
+       "src": "Chambers, Overstating the Satisfaction of Lawyers, 39 Law &amp; Social Inquiry 313 (2014).",
+       "note": "Argues satisfaction surveys overstate lawyer sentiment via ambivalent 'satisfied' responses, survivorship bias (leavers not sampled), and non-response bias from the least satisfied. Displayed alongside — not adjudicated."}
+    ]
+  },
+  "academia": {
+    "french": {
+      "source": "French, Allen, Miller, Kim &amp; Centeno, J. Vocational Behavior 120:103443 (2020). N=1,270 faculty, 11 universities, one US southeastern state; latent profile analysis of teaching/research/service time.",
+      "ordering": [
+        {"label": "“Classic” (research + teaching dual)", "rank": "highest satisfaction &amp; work-family balance"},
+        {"label": "Research-focused", "rank": "higher than teaching-dominated profiles"},
+        {"label": "Teaching-and-service", "rank": "lower band"},
+        {"label": "Teaching-focused", "rank": "lowest satisfaction &amp; work-family balance"}
+      ],
+      "note": "No significant profile differences in turnover intentions or affective commitment. Women were more likely to be in the Teaching profile than the Research profile."
+    },
+    "cards": [
+      {"label": "Teaching hours vs satisfaction", "value": "negative", "tier": "T2", "metric": "direction only — coefficients &amp; N not retrievable",
+       "src": "Bozeman &amp; Gaughan, J. Higher Education 82(2):154–186 (2011). National sample of science &amp; engineering faculty at Carnegie Research-Extensive universities; exact N unknown (deliberately not reported here).",
+       "note": "Hours teaching undergraduates negatively associated with satisfaction; research/grant hours showed no significant relationship. Tenured &gt; untenured; perceived salary equity and colleague respect were strong positives."},
+      {"label": "Hours mismatch (junior academics)", "value": "negative", "tier": "T2", "metric": "actual-vs-desired weekly HOURS — not role allocation",
+       "src": "Frei &amp; Grund, Working-time mismatch and job satisfaction of junior academics, J. Business Economics 92(7):1125–1166 (2022). Longitudinal, STEM predocs/postdocs; N not retrievable.",
+       "note": "SCOPE CAVEAT: measures total-hours mismatch (overemployment worse than underemployment), not teaching/research/service allocation fit — the closest real study to the allocation-mismatch thesis, but not that study."},
+      {"label": "Allocation discrepancy → satisfaction?", "value": "UNCONFIRMED LINK", "tier": "T3", "conflict": true, "metric": "current vs ideal vs expected % time",
+       "src": "Faculty time allocation at HBCUs, Frontiers in Psychology 2021 (PMC8548608).",
+       "note": "Documents allocation discrepancies varying by gender/tenure/URM status, but whether those discrepancies were statistically linked to satisfaction could not be confirmed — shown as an unresolved cell, not a finding."}
+    ]
+  },
+  "meta": {
+    "dots": [
+      {"label": "Measured interest FIT → job satisfaction", "value": 0.19, "ci": "[.16, .21]", "tier": "T2",
+       "src": "Hoff, Song, Wee, Phan &amp; Rounds, J. Vocational Behavior 123:103503 (2020). k=105 studies, 194 effects, N≈39,602, ~65 years of research.",
+       "note": "Stronger for career-choice/occupational satisfaction than day-to-day facet satisfaction; measurement approach moderates."},
+      {"label": "Interest LEVEL → job satisfaction (different construct)", "value": 0.11, "ci": null, "tier": "T2",
+       "src": "Hoff, Wee, Song, Phan &amp; Rounds, Academy of Management Proceedings 2018. k=107, 945 correlations, N=38,695.",
+       "note": "Companion paper measuring interest scores, not fit — kept separate to prevent the common conflation."},
+      {"label": "PERCEIVED person-job fit → job satisfaction", "value": 0.56, "ci": null, "tier": "T2",
+       "src": "Kristof-Brown, Zimmerman &amp; Johnson, Personnel Psychology 58(2):281–342 (2005). k=172 studies, 836 effects.",
+       "note": "Self-reported fit — structurally inflated by common-method variance. The ~3× gap vs measured fit (0.19) is a construct difference, not a contradiction. Person-ORGANIZATION fit → satisfaction is the related 0.44 figure."}
+    ],
+    "cards": [
+      {"label": "The null result", "value": "NOT significant", "tier": "T2", "conflict": true, "metric": "interest &amp; skill congruence → training satisfaction",
+       "src": "Michaelis &amp; Findeisen, Frontiers in Psychology 13:834543 (2022). German NEPS data, N=4,097 VET trainees.",
+       "note": "Neither interest congruence nor skill congruence significantly predicted training satisfaction. Only Realistic-interest congruence reduced premature contract termination; moderate overeducation ENHANCED satisfaction. Scope: training satisfaction, not general job satisfaction. Reported as-is, unsoftened."},
+      {"label": "Misfit is asymmetric", "value": "direction varies by RIASEC type", "tier": "T2", "metric": "response-surface analysis (no retrievable effect sizes)",
+       "src": "Wiegand, Drasgow &amp; Rounds, Misfit Matters, J. Vocational Behavior 125:103524 (2021). Two large samples; Ns not retrievable.",
+       "note": "For Investigative and Artistic interests, satisfaction keeps rising from environment-deficiency through fit into excess; Enterprising and Conventional show the opposite pattern — supporting a needs-supplies (complementary) fit model over simple congruence."}
+    ]
+  },
+  "axes": {
+    "list": ["Autonomy (volition)", "Feedback speed", "Task identity", "Social load", "Physicality", "Responsibility–control coupling"],
+    "roles": [
+      {"role": "Clergy", "pips": [3,2,2,3,1,2], "why": "High volition within doctrine; outcomes (a congregation's life) mostly slow and diffuse but rituals complete; heavy social load; responsibility for souls with limited control over outcomes."},
+      {"role": "Firefighter", "pips": [3,3,3,2,3,3], "why": "The canonical case: strict hierarchy yet high volition in-task; instant feedback; a fire is out or it is not (complete task identity); responsibility tightly coupled to control while on scene."},
+      {"role": "Physical therapist", "pips": [3,3,3,2,3,3], "why": "Owns the treatment plan; functional gains visible session to session; whole-patient outcomes; hands-on."},
+      {"role": "Judge", "pips": [3,2,3,2,1,3], "why": "Responsibility WITH control — decides and owns the decision; feedback slow (appeals); each case a complete unit."},
+      {"role": "Magistrate", "pips": [2,3,2,3,1,2], "why": "Same robe, different modality: high-volume lists, rapid decisions, less control over workload — the measured stress gap vs judges tracks the autonomy/relatedness deficit."},
+      {"role": "BigLaw associate", "pips": [1,2,1,2,1,1], "why": "Work assigned and reviewed upward; fragmented deal/doc slices; responsibility for errors without control of strategy."},
+      {"role": "Public-interest lawyer", "pips": [3,2,3,3,1,2], "why": "Chooses causes and runs own cases; outcomes visible per client; heavy interpersonal load."},
+      {"role": "Emergency physician", "pips": [2,3,2,3,2,1], "why": "Instant feedback and complete episodes, but responsibility for outcomes shaped by system load — throughput, boarding, staffing — outside the physician's control."},
+      {"role": "Dentist", "pips": [2,3,3,2,3,1], "why": "Responsibility WITHOUT control — owns every outcome in a patient's mouth while patient compliance, anatomy and payer constraints sit outside it; solo accountability."},
+      {"role": "Physician assistant", "pips": [2,3,2,3,2,2], "why": "Delegated autonomy with supervision as pressure release: substantial in-task volition, less end-responsibility than the supervising physician."},
+      {"role": "Faculty — “classic” profile", "pips": [3,2,3,2,1,2], "why": "Research chosen, courses owned; feedback slow (reviews, semesters) but tasks complete (a paper, a course)."},
+      {"role": "Faculty — teaching-heavy profile", "pips": [1,2,2,3,1,2], "why": "Load often assigned rather than chosen; repeating fragments of the same course; high social throughput — the measured lowest-satisfaction profile."},
+      {"role": "Cashier", "pips": [1,3,1,3,2,1], "why": "No volition over pace or method; instant but trivial feedback; no complete outcome; accountable for the drawer without control of prices, lines, or systems."},
+      {"role": "Roofer", "pips": [2,3,3,1,3,2], "why": "A finished roof is a complete visible outcome with immediate physical feedback — yet among the lowest measured satisfaction: modality axes alone don't rescue pay, heat, danger and precarity."},
+      {"role": "Bartender", "pips": [2,3,2,3,2,2], "why": "Craft volition within a fixed menu and bar; immediate social feedback; high interpersonal load all shift."}
+    ]
+  },
+  "gaps": [
+    {"title": "Law: satisfaction by doctrine, with controls", "status": "GAP CONFIRMED",
+     "body": "No rigorous study compares satisfaction across doctrinal areas (tax vs litigation vs corporate vs family) with controls. What exists is uncontrolled trade surveying — Vault's associate survey (~17,000 self-selected large-firm associates), Above the Law, Law360 Pulse — with no confound handling and no peer review. Academic work groups lawyers by SETTING, never doctrine."},
+    {"title": "Medicine: modality-fit interactions within specialty", "status": "NOT FOUND",
+     "body": "Burnout is measured per specialty (Medscape, Shanafelt), but no located study tests whether a physician's fit with a specialty's work modality (feedback speed, control, social load) moderates satisfaction or burnout within that specialty."},
+    {"title": "Academia: allocation fit as an interaction", "status": "GAP CONFIRMED (search-limited)",
+     "body": "Every located study models time allocation as main effects or profile membership (French 2020; Bozeman &amp; Gaughan 2011; Frei &amp; Grund 2022). None treats preferred-vs-actual allocation fit as a moderator of the allocation–satisfaction relationship. Caveat: citation-network searching was blocked this session, so this is 'not found in a genuine search,' not proof of absence."},
+    {"title": "NORC/GSS: the middle of the distribution", "status": "NOT RETRIEVABLE",
+     "body": "Only the top and bottom of the 2007 occupational ranking could be verified; the mid-distribution occupations, per-occupation sample sizes, and the minimum-N inclusion threshold were not retrievable this session."}
+  ],
+  "removed": [
+    {"claim": "Office supervisors 80.6% very satisfied (NORC)", "why": "Numerically incoherent — would outrank firefighters (80.1, #2) while the occupation is placed only in the >60% tail. Fabrication-suspect search-synthesis artifact."},
+    {"claim": "Operating engineers 64.1% (NORC)", "why": "Occupation is a genuine top-12 member, but the value has no traceable source. Rendered as NO DATA."},
+    {"claim": "Physicians 44% satisfied (“Dyrbye 2013”)", "why": "Found nowhere. Dyrbye 2013 measures would-recommend-medicine (52–57%), not satisfaction."},
+    {"claim": "Dentists 48% satisfied (Starkel 2015)", "why": "The study is real (N=2,171, satisfaction-by-setting) but no source confirms a 48% headline."},
+    {"claim": "Veterinarians 65% satisfied (Merck 2020)", "why": "Matches no wave or metric; the verified figure is 74% career satisfaction."},
+    {"claim": "Physician burnout 48.2% in 2023 (Shanafelt)", "why": "The verified 2023-wave figure is 45.2% (N=7,643)."},
+    {"claim": "Large-firm practice least satisfying after controls (Hull 1999)", "why": "Contradicted by the actual finding: firm size was not a significant predictor of dissatisfaction in the Chicago-bar data."},
+    {"claim": "Income inequality within a field depresses income satisfaction (Sandefur &amp; Heinz 1999)", "why": "Not found as stated; closest match is an unpublished conference paper and the Urban Lawyers monograph. No verifiable figure."},
+    {"claim": "Teaching-heavy faculty profile has highest turnover intention (French 2020)", "why": "The paper found NO significant profile differences in turnover intentions or affective commitment."}
+  ]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("dataset").textContent);
+  var tip = document.getElementById("tip");
+
+  /* ---------- tooltip ---------- */
+  function showTip(html, x, y) {
+    tip.innerHTML = html;
+    tip.style.display = "block";
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(x + 14, window.innerWidth - w - 10);
+    var top = y + 16 + h > window.innerHeight ? y - h - 10 : y + 16;
+    tip.style.left = Math.max(6, left) + "px";
+    tip.style.top = Math.max(6, top) + "px";
+  }
+  function hideTip() { tip.style.display = "none"; }
+  function bindTip(el, htmlFn) {
+    el.addEventListener("mousemove", function (e) { showTip(htmlFn(), e.clientX, e.clientY); });
+    el.addEventListener("mouseleave", hideTip);
+    el.addEventListener("focus", function () {
+      var r = el.getBoundingClientRect();
+      showTip(htmlFn(), r.left + r.width / 2, r.bottom);
+    });
+    el.addEventListener("blur", hideTip);
+  }
+  // static [data-tip] chips
+  document.querySelectorAll("[data-tip]").forEach(function (el) {
+    el.setAttribute("tabindex", "0");
+    bindTip(el, function () { return esc(el.getAttribute("data-tip")); });
+  });
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function tierBadge(t) {
+    if (t === "T1") return '<span class="tier t1">T1</span>';
+    if (t === "T2") return '<span class="tier t2">T2</span>';
+    if (t === "T3") return '<span class="tier t3">T3</span>';
+    return '<span class="tier nd">NO DATA</span>';
+  }
+  function tipHtml(o) {
+    var s = "<strong>" + o.label + "</strong>";
+    if (o.value != null) s += " — " + o.value;
+    s += "<div class='t-metric'>" + (o.metric || "") + "</div>";
+    if (o.src) s += "<div class='t-note'>" + o.src + "</div>";
+    if (o.note) s += "<div class='t-note'>" + o.note + "</div>";
+    if (o.tier) s += "<div class='t-note'>Tier " + o.tier.replace("ND", ": no data") + "</div>";
+    return s;
+  }
+
+  /* ---------- NORC chart ---------- */
+  (function renderNorc() {
+    var host = document.getElementById("norc-chart");
+    var rows = DATA.norc.rows;
+    var frag = document.createDocumentFragment();
+    var lastGroup = "";
+    rows.forEach(function (r) {
+      var group = r.avg ? "workforce average" : (r.value == null ? (lastGroup || "top of ranking") : (r.value >= 47 ? "top of ranking" : "bottom of ranking"));
+      // NO DATA rows belong to the group they were listed in (top-12 members)
+      if (r.value == null) group = "top of ranking";
+      if (group !== lastGroup) {
+        var gh = document.createElement("div");
+        gh.className = "group-head"; gh.textContent = group;
+        frag.appendChild(gh); lastGroup = group;
+      }
+      var row = document.createElement("div");
+      row.className = "brow" + (r.drill ? " clickable" : "");
+      row.setAttribute("tabindex", "0");
+      var icon = r.drill ? ' <span class="drill-ic">⤵</span>' : "";
+      var lab = document.createElement("div"); lab.className = "lab";
+      lab.innerHTML = r.occ + icon + " " + tierBadge(r.tier);
+      var wrap = document.createElement("div"); wrap.className = "barwrap";
+      var bar = document.createElement("div");
+      if (r.value == null) { bar.className = "bar hatch nodata"; }
+      else {
+        bar.className = "bar" + (r.drill ? " acc" : "") + (r.avg ? " avg" : "");
+        bar.style.width = r.value + "%";
+      }
+      wrap.appendChild(bar);
+      var val = document.createElement("div"); val.className = "val";
+      val.textContent = r.value == null ? "—" : (r.avg ? "≈" + r.value + "%" : r.value.toFixed(1) + "%");
+      row.appendChild(lab); row.appendChild(wrap); row.appendChild(val);
+      bindTip(row, function () {
+        return tipHtml({ label: r.occ, value: r.value == null ? "NO DATA" : r.value + "%",
+          metric: DATA.norc.metric, src: DATA.norc.source, note: r.note, tier: r.tier });
+      });
+      if (r.drill) {
+        row.addEventListener("click", function () { openPane(r.drill, true); });
+        row.addEventListener("keydown", function (e) { if (e.key === "Enter") openPane(r.drill, true); });
+      }
+      frag.appendChild(row);
+    });
+    var axis = document.createElement("div"); axis.className = "axisline";
+    axis.style.marginLeft = "248px"; axis.style.marginRight = "66px";
+    [0, 25, 50, 75, 100].forEach(function (t) {
+      var s = document.createElement("span"); s.style.left = t + "%"; s.textContent = t + "%"; axis.appendChild(s);
+    });
+    host.appendChild(frag); host.appendChild(axis);
+  })();
+
+  /* ---------- drill tabs ---------- */
+  function openPane(name, scroll) {
+    document.querySelectorAll(".tabs button").forEach(function (b) {
+      b.setAttribute("aria-selected", String(b.dataset.pane === name));
+    });
+    document.querySelectorAll(".drillpane").forEach(function (p) {
+      p.classList.toggle("open", p.id === "pane-" + name);
+    });
+    if (scroll) {
+      document.getElementById("drill-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+  document.querySelectorAll(".tabs button").forEach(function (b) {
+    b.addEventListener("click", function () { openPane(b.dataset.pane, false); });
+  });
+
+  /* ---------- generic cards ---------- */
+  function renderCards(hostId, cards) {
+    var host = document.getElementById(hostId);
+    cards.forEach(function (c) {
+      var d = document.createElement("div");
+      d.className = "card" + (c.nodata ? " nodata-card" : "") + (c.conflict ? " conflict" : "");
+      d.setAttribute("tabindex", "0");
+      d.innerHTML = '<h3 style="font-size:13px;color:var(--ink-2)">' + c.label + " " + tierBadge(c.tier) + "</h3>" +
+        '<div class="big">' + c.value + "</div>" +
+        '<div class="metric">' + c.metric + "</div>" +
+        '<div class="src">' + c.src + "</div>";
+      bindTip(d, function () { return tipHtml(c); });
+      host.appendChild(d);
+    });
+  }
+  renderCards("hc-sat-cards", DATA.healthcare.satCards);
+  renderCards("law-jud-cards", DATA.law.judCards);
+  renderCards("law-other-cards", DATA.law.otherCards);
+  renderCards("acad-cards", DATA.academia.cards);
+  renderCards("meta-cards", DATA.meta.cards);
+
+  /* ---------- Medscape bars (verified extremes + explicit gap band) ---------- */
+  (function renderMedscape() {
+    var host = document.getElementById("medscape-chart");
+    var m = DATA.healthcare.medscape;
+    function addRow(r, group) {
+      var row = document.createElement("div"); row.className = "brow"; row.setAttribute("tabindex", "0");
+      row.innerHTML = '<div class="lab">' + r.label + ' <span class="tier t2">T2</span></div>' +
+        '<div class="barwrap"><div class="bar" style="width:' + r.value + '%"></div></div>' +
+        '<div class="val">' + r.value + "%</div>";
+      bindTip(row, function () {
+        return tipHtml({ label: r.label, value: r.value + "% burnout (" + group + ")",
+          metric: "% reporting burnout", src: m.source, note: m.note, tier: "T2" });
+      });
+      host.appendChild(row);
+    }
+    var h = document.createElement("div"); h.className = "group-head"; h.textContent = "highest verified"; host.appendChild(h);
+    m.high.forEach(function (r) { addRow(r, "highest band"); });
+    // overall marker
+    var avg = document.createElement("div"); avg.className = "brow"; avg.setAttribute("tabindex", "0");
+    avg.innerHTML = '<div class="lab">All physicians (overall) <span class="tier t2">T2</span></div>' +
+      '<div class="barwrap"><div class="bar avg" style="width:' + m.overall + '%"></div></div>' +
+      '<div class="val">' + m.overall + "%</div>";
+    bindTip(avg, function () { return tipHtml({ label: "All physicians", value: m.overall + "% burnout", metric: "% reporting burnout, all specialties", src: m.source, tier: "T2" }); });
+    host.appendChild(avg);
+    var gap = document.createElement("div"); gap.className = "brow"; gap.setAttribute("tabindex", "0");
+    gap.innerHTML = '<div class="lab">~20 middle specialties <span class="tier nd">NO DATA</span></div>' +
+      '<div class="barwrap"><div class="bar hatch nodata"></div></div><div class="val">—</div>';
+    bindTip(gap, function () {
+      return tipHtml({ label: "Middle specialties", value: "not verified this session",
+        metric: "% reporting burnout", src: m.source,
+        note: "The full 29-specialty table sits behind Medscape registration; only the extremes were independently corroborated, so the middle is shown as an explicit gap rather than filled in.", tier: "ND" });
+    });
+    host.appendChild(gap);
+    var h2 = document.createElement("div"); h2.className = "group-head"; h2.textContent = "lowest verified"; host.appendChild(h2);
+    m.low.forEach(function (r) { addRow(r, "lowest band"); });
+    var axis = document.createElement("div"); axis.className = "axisline";
+    axis.style.marginLeft = "248px"; axis.style.marginRight = "66px";
+    [0, 25, 50, 75, 100].forEach(function (t) {
+      var s = document.createElement("span"); s.style.left = t + "%"; s.textContent = t + "%"; axis.appendChild(s);
+    });
+    host.appendChild(axis);
+  })();
+
+  /* ---------- Shanafelt trend (SVG line) ---------- */
+  (function renderShanafelt() {
+    var host = document.getElementById("shanafelt-chart");
+    var pts = DATA.healthcare.shanafelt;
+    var W = 640, H = 220, padL = 44, padR = 24, padT = 16, padB = 30;
+    var y0 = 30, y1 = 70; // % scale bounds
+    var x0 = 2010.5, x1 = 2023.5;
+    function X(yr) { return padL + (yr - x0) / (x1 - x0) * (W - padL - padR); }
+    function Y(v) { return padT + (y1 - v) / (y1 - y0) * (H - padT - padB); }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" style="max-width:680px" role="img" aria-label="US physician burnout 2011 to 2023">';
+    [30, 40, 50, 60, 70].forEach(function (g) {
+      s += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + Y(g) + '" y2="' + Y(g) + '" stroke="var(--grid)" stroke-width="1"/>';
+      s += '<text x="' + (padL - 6) + '" y="' + (Y(g) + 4) + '" text-anchor="end">' + g + "%</text>";
+    });
+    var path = pts.map(function (p, i) { return (i ? "L" : "M") + X(p.year) + " " + Y(p.value); }).join(" ");
+    s += '<path d="' + path + '" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+    pts.forEach(function (p) {
+      s += '<circle class="pt" data-year="' + p.year + '" cx="' + X(p.year) + '" cy="' + Y(p.value) + '" r="5" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" tabindex="0"/>';
+      s += '<text x="' + X(p.year) + '" y="' + (H - 8) + '" text-anchor="middle">' + p.year + "</text>";
+    });
+    // selective direct labels: endpoints + the 2021 peak + the 2020 trough
+    [pts[0], pts[3], pts[4], pts[5]].forEach(function (p) {
+      var above = p.value >= 54 ? -10 : -10;
+      s += '<text class="dl" x="' + X(p.year) + '" y="' + (Y(p.value) + (p.year === 2020 ? 20 : above)) + '" text-anchor="middle">' + p.value + "%</text>";
+    });
+    s += "</svg>";
+    host.innerHTML = s;
+    host.querySelectorAll(".pt").forEach(function (c) {
+      var p = pts.find(function (q) { return String(q.year) === c.getAttribute("data-year"); });
+      bindTip(c, function () {
+        return tipHtml({ label: p.year + " wave", value: p.value + "% with ≥1 burnout symptom",
+          metric: "Maslach Burnout Inventory, US physicians · " + p.n, src: p.src, tier: "T2" });
+      });
+    });
+  })();
+
+  /* ---------- K&S settings dot plot ---------- */
+  (function renderKsSettings() {
+    var host = document.getElementById("ks-setting-chart");
+    var cfg = DATA.law.ksSettings;
+    cfg.rows.forEach(function (r) {
+      var row = document.createElement("div"); row.className = "brow"; row.setAttribute("tabindex", "0");
+      var pct = (r.value - cfg.min) / (cfg.max - cfg.min) * 100;
+      row.innerHTML = '<div class="lab">' + r.label + ' <span class="tier t1">T1</span></div>' +
+        '<div class="barwrap"><div style="position:absolute;left:0;right:0;top:8px;border-top:1px solid var(--grid)"></div>' +
+        '<div style="position:absolute;left:' + pct + '%;top:3px;width:12px;height:12px;border-radius:50%;background:var(--series-1);border:2px solid var(--surface-1);transform:translateX(-6px)"></div></div>' +
+        '<div class="val">' + r.value.toFixed(2) + "</div>";
+      bindTip(row, function () {
+        return tipHtml({ label: r.label, value: r.value + " mean SWB (" + r.n + ")",
+          metric: cfg.metric, src: cfg.source, note: r.note, tier: "T1" });
+      });
+      host.appendChild(row);
+    });
+    var axis = document.createElement("div"); axis.className = "axisline";
+    axis.style.marginLeft = "248px"; axis.style.marginRight = "66px"; axis.style.borderTop = "none";
+    [4.5, 5.0, 5.5, 6.0].forEach(function (t) {
+      var s = document.createElement("span");
+      s.style.left = ((t - cfg.min) / (cfg.max - cfg.min) * 100) + "%"; s.textContent = t.toFixed(1);
+      axis.appendChild(s);
+    });
+    host.appendChild(axis);
+    var n = document.createElement("p"); n.className = "note";
+    n.textContent = "Axis shows the observed range of group means (4.5–6.0), not zero-based — these are scale means, not percentages.";
+    host.appendChild(n);
+  })();
+
+  /* ---------- K&S correlations lollipop ---------- */
+  (function renderKsCorr() {
+    var host = document.getElementById("ks-corr-chart");
+    var cfg = DATA.law.ksCorr;
+    var min = -0.15, max = 0.7;
+    function pct(v) { return (v - min) / (max - min) * 100; }
+    var zh = document.createElement("div"); zh.className = "group-head";
+    zh.textContent = "self-determination factors vs external/credential factors"; host.appendChild(zh);
+    cfg.rows.forEach(function (r) {
+      var row = document.createElement("div"); row.className = "brow"; row.setAttribute("tabindex", "0");
+      var left = Math.min(pct(0), pct(r.value)), width = Math.abs(pct(r.value) - pct(0));
+      row.innerHTML = '<div class="lab">' + r.label + "</div>" +
+        '<div class="barwrap">' +
+        '<div style="position:absolute;left:' + pct(0) + '%;top:0;bottom:0;border-left:1px solid var(--baseline)"></div>' +
+        '<div style="position:absolute;left:' + left + "%;width:" + width + '%;top:7px;height:4px;background:' +
+          (r.kind === "sdt" ? "var(--series-1)" : "var(--ink-3)") + '"></div>' +
+        '<div style="position:absolute;left:' + pct(r.value) + '%;top:3px;width:12px;height:12px;border-radius:50%;background:' +
+          (r.kind === "sdt" ? "var(--series-1)" : "var(--ink-3)") + ';border:2px solid var(--surface-1);transform:translateX(-6px)"></div>' +
+        "</div>" +
+        '<div class="val">' + (r.value === 0 ? ".00" : r.value.toFixed(r.value === 0.192 ? 3 : 2).replace("0.", ".")) + "</div>";
+      bindTip(row, function () {
+        return tipHtml({ label: r.label, value: "r = " + r.value,
+          metric: cfg.metric + (r.note ? " · " + r.note : ""),
+          src: DATA.law.ksSettings.source, tier: "T1" });
+      });
+      host.appendChild(row);
+    });
+    var axis = document.createElement("div"); axis.className = "axisline";
+    axis.style.marginLeft = "248px"; axis.style.marginRight = "66px"; axis.style.borderTop = "none";
+    [-0.1, 0, 0.2, 0.4, 0.6].forEach(function (t) {
+      var s = document.createElement("span"); s.style.left = pct(t) + "%";
+      s.textContent = (t === 0 ? "0" : t.toFixed(1)); axis.appendChild(s);
+    });
+    host.appendChild(axis);
+    var lg = document.createElement("div"); lg.className = "legend-row";
+    lg.innerHTML = '<span><span class="key-swatch" style="background:var(--series-1)"></span> self-determination-theory factor</span>' +
+      '<span><span class="key-swatch" style="background:var(--ink-3)"></span> external / credential factor</span>';
+    host.appendChild(lg);
+  })();
+
+  /* ---------- French profiles (qualitative ordering, no numbers) ---------- */
+  (function renderFrench() {
+    var host = document.getElementById("french-chart");
+    var f = DATA.academia.french;
+    var ol = document.createElement("ol");
+    ol.style.cssText = "list-style:none;padding:0;display:grid;gap:6px";
+    f.ordering.forEach(function (o, i) {
+      var li = document.createElement("li");
+      li.setAttribute("tabindex", "0");
+      li.style.cssText = "display:flex;gap:10px;align-items:baseline;border:1px solid var(--border);border-radius:6px;padding:7px 12px;background:var(--card)";
+      li.innerHTML = '<span style="font-weight:700;color:var(--ink-3)">' + (i + 1) + "</span>" +
+        "<span><strong>" + o.label + "</strong> — <span style='color:var(--ink-2)'>" + o.rank + "</span></span>";
+      bindTip(li, function () {
+        return tipHtml({ label: o.label, value: o.rank, metric: "satisfaction ordering (no retrievable means)", src: f.source, note: f.note, tier: "T2" });
+      });
+      ol.appendChild(li);
+    });
+    host.appendChild(ol);
+  })();
+
+  /* ---------- meta dot plot ---------- */
+  (function renderMeta() {
+    var host = document.getElementById("meta-chart");
+    var min = 0, max = 0.7;
+    function pct(v) { return (v - min) / (max - min) * 100; }
+    DATA.meta.dots.forEach(function (r) {
+      var row = document.createElement("div"); row.className = "brow"; row.setAttribute("tabindex", "0");
+      row.innerHTML = '<div class="lab">' + r.label + " " + tierBadge(r.tier) + "</div>" +
+        '<div class="barwrap">' +
+        '<div style="position:absolute;left:0;right:0;top:8px;border-top:1px solid var(--grid)"></div>' +
+        '<div style="position:absolute;left:0;width:' + pct(r.value) + '%;top:7px;height:4px;background:var(--series-1)"></div>' +
+        '<div style="position:absolute;left:' + pct(r.value) + '%;top:3px;width:12px;height:12px;border-radius:50%;background:var(--series-1);border:2px solid var(--surface-1);transform:translateX(-6px)"></div>' +
+        "</div>" +
+        '<div class="val">ρ=' + String(r.value).replace("0.", ".") + "</div>";
+      bindTip(row, function () {
+        return tipHtml({ label: r.label, value: "ρ = " + r.value + (r.ci ? " " + r.ci : ""),
+          metric: "meta-analytic correlation with satisfaction — constructs differ across rows; comparisons across rows are construct comparisons, not effect comparisons",
+          src: r.src, note: r.note, tier: r.tier });
+      });
+      host.appendChild(row);
+    });
+    var axis = document.createElement("div"); axis.className = "axisline";
+    axis.style.marginLeft = "248px"; axis.style.marginRight = "66px"; axis.style.borderTop = "none";
+    [0, 0.2, 0.4, 0.6].forEach(function (t) {
+      var s = document.createElement("span"); s.style.left = pct(t) + "%"; s.textContent = String(t); axis.appendChild(s);
+    });
+    host.appendChild(axis);
+  })();
+
+  /* ---------- interpretive axes table ---------- */
+  (function renderAxes() {
+    var tbl = document.getElementById("axes-table");
+    var head = "<tr><th>Role</th>" + DATA.axes.list.map(function (a) { return "<th>" + a + "</th>"; }).join("") + "</tr>";
+    var body = DATA.axes.roles.map(function (r) {
+      var cells = r.pips.map(function (p) {
+        return '<td><span class="pips">' + "●".repeat(p) + '<span style="opacity:.25">' + "●".repeat(3 - p) + "</span></span></td>";
+      }).join("");
+      return '<tr tabindex="0" data-role="' + esc(r.role) + '"><td>' + r.role + "</td>" + cells + "</tr>";
+    }).join("");
+    tbl.innerHTML = head + body;
+    tbl.querySelectorAll("tr[data-role]").forEach(function (tr) {
+      var r = DATA.axes.roles.find(function (q) { return q.role === tr.getAttribute("data-role"); });
+      bindTip(tr, function () {
+        return "<strong>" + esc(r.role) + "</strong><div class='t-note'>" + esc(r.why) +
+          "</div><div class='t-note'>Interpretive framework — authored rating, not measured data.</div>";
+      });
+    });
+  })();
+
+  /* ---------- gaps + removed ---------- */
+  (function renderGaps() {
+    var host = document.getElementById("gap-cards");
+    DATA.gaps.forEach(function (g) {
+      var d = document.createElement("div"); d.className = "gapcard";
+      d.innerHTML = "<h3>" + g.title + ' <span class="tier nd">' + g.status + "</span></h3>" +
+        '<p style="font-size:12.5px;color:var(--ink-2);margin-top:6px">' + g.body + "</p>";
+      host.appendChild(d);
+    });
+    var ul = document.getElementById("removed-list");
+    DATA.removed.forEach(function (r) {
+      var li = document.createElement("li");
+      li.innerHTML = "<strong>" + r.claim + "</strong> — " + r.why;
+      ul.appendChild(li);
+    });
+  })();
+
+  /* ---------- master table ---------- */
+  (function renderMaster() {
+    var rows = [];
+    DATA.norc.rows.forEach(function (r) {
+      rows.push(["NORC/GSS", r.occ, r.value == null ? "NO DATA" : r.value + "%", DATA.norc.metric, DATA.norc.source, "2007", "pooled >27,000 (per-occupation N unpublished)", r.tier, r.note]);
+    });
+    DATA.healthcare.satCards.forEach(function (c) {
+      rows.push(["Healthcare", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
+    });
+    var m = DATA.healthcare.medscape;
+    m.high.concat(m.low).forEach(function (r) {
+      rows.push(["Healthcare", r.label + " burnout", r.value + "%", "% reporting burnout", m.source, "2024", "N=9,226", "T2", ""]);
+    });
+    rows.push(["Healthcare", "All physicians burnout (Medscape)", m.overall + "%", "% reporting burnout", m.source, "2024", "N=9,226", "T2", ""]);
+    DATA.healthcare.shanafelt.forEach(function (p) {
+      rows.push(["Healthcare", "Physician burnout " + p.year, p.value + "%", "≥1 MBI burnout symptom", p.src, String(p.year), p.n, "T2", ""]);
+    });
+    DATA.law.ksSettings.rows.forEach(function (r) {
+      rows.push(["Law", "SWB — " + r.label, String(r.value), DATA.law.ksSettings.metric, DATA.law.ksSettings.source, "2015", r.n, "T1", r.note]);
+    });
+    DATA.law.ksCorr.rows.forEach(function (r) {
+      rows.push(["Law", "r(SWB) — " + r.label, String(r.value), DATA.law.ksCorr.metric, DATA.law.ksSettings.source, "2015", "N=6,226", "T1", r.note || ""]);
+    });
+    DATA.law.judCards.concat(DATA.law.otherCards).forEach(function (c) {
+      rows.push(["Law", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
+    });
+    DATA.academia.french.ordering.forEach(function (o) {
+      rows.push(["Academia", "Profile: " + o.label, o.rank, "satisfaction ordering (no means retrievable)", DATA.academia.french.source, "2020", "N=1,270", "T2", DATA.academia.french.note]);
+    });
+    DATA.academia.cards.forEach(function (c) {
+      rows.push(["Academia", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
+    });
+    DATA.meta.dots.forEach(function (d) {
+      rows.push(["Meta", d.label, "ρ=" + d.value + (d.ci ? " " + d.ci : ""), "meta-analytic correlation", d.src, "", "", d.tier, d.note || ""]);
+    });
+    DATA.meta.cards.forEach(function (c) {
+      rows.push(["Meta", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
+    });
+    var tbl = document.getElementById("master-table");
+    tbl.innerHTML = "<tr><th>Domain</th><th>Item</th><th>Value</th><th>Metric</th><th>Source</th><th>Year</th><th>Sample</th><th>Tier</th><th>Notes / conflicts</th></tr>" +
+      rows.map(function (r) {
+        return "<tr><td>" + r[0] + "</td><td>" + r[1] + '</td><td class="num">' + r[2] + "</td><td>" + r[3] +
+          "</td><td>" + r[4] + "</td><td>" + r[5] + "</td><td>" + r[6] + "</td><td>" + tierBadge(r[7] === "ND" ? "ND" : r[7]) + "</td><td>" + r[8] + "</td></tr>";
+      }).join("");
+  })();
+})();
+</script>
+</body>
+</html>
