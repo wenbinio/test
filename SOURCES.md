@@ -255,6 +255,34 @@ temporal offset (O*NET ~2019–2023 vs GSS 1988–2006); five-hop probabilistic 
 (369/502 occupations many-to-many); representative-SOC approximation on the 2018 hop; equal
 within-occupation O*NET weighting; coupling index is authored.
 
+## Paper-only citations (PAPER.md) — provenance ledger
+
+These sources are cited in PAPER.md but not in the visualization artifact; their session provenance
+(from the literature-scout and citation-checker agents' fetch logs) is recorded here so every
+[P]/[S] tag in the paper has a ledger entry:
+
+- **Vainre, Anni, Vainik & Mõttus (2025), PsyArXiv** — **[P]**: full 32-page preprint PDF fetched
+  twice this session (scout + citation checker, osf.io/download/j6spz). N=59,042, 263 occupations,
+  η²=.07, prestige non-significant — all read from primary text.
+- **Schmitz, McCluney, Sonnega & Hicken (2019), IJERPH 16(17):3058** — **[P]**: PMC6747317 full
+  text fetched (scout + citation checker); r=.11 confirmed verbatim.
+- **van Veldhoven et al. (2025), PLoS ONE 20(7):e0328508** — **[P]**: PMC12289054 fetched (scout).
+- **Mostafa & Jaafar (2024), Multidisciplinary Reviews 7(7):e2024142** — **[P]**: full PDF fetched
+  (scout); zero O*NET/DOT/GSS mentions confirmed by full-text search.
+- **Beard et al. (2022), Epidemiology 33(2):e8–e9** — **[P: workbook]**: the crosswalk workbook was
+  downloaded and used as pipeline input, and the PMC record (PMC10280701) fetched; the article text
+  itself was not read. (Citation checker corrected the issue number from 33(3) to 33(2).)
+- **Roos & Treiman (1980)**, in *Work, Jobs, and Occupations* — **[P: volume]**: NAP volume page
+  fetched (scout); the chapter's scale details rest on secondary compilation.
+- **Carpenter, Carr, Helppie-McFall & Beckel (2021), Innovation in Aging 5(S1):229–230** — **[S]**:
+  bibliographic record confirmed via PMC; not read in full.
+- **Törnroos, Jokela & Hakulinen (2019), PAID 145:82–88** — **[S]**: sourced from Vainre et al.'s
+  reference list; bibliographic details independently confirmed (title/venue/pages/DOI) by the
+  citation checker; the "~1% of variance" figure rests on Vainre et al.'s summary.
+- **Deci & Ryan (2000); Hackman & Oldham (1976); Karasek (1979); Humphrey, Nahrgang & Morgeson
+  (2007)** — **[U]**: standard-literature citations, bibliographic details confirmed by the
+  citation checker, content not independently verified this session.
+
 ## Interpretive layer disclosure
 
 The six work-modality axes and all per-role pip ratings are an **authored interpretive framework,

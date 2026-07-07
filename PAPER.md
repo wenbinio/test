@@ -1,4 +1,4 @@
-# Autonomy Survives, Prestige Confounds: An Independent-Measurement Linkage of O*NET Work-Modality Characteristics to Occupation-Level Job Satisfaction in the U.S. General Social Survey
+# Autonomy Survives, Prestige Confounds the Rest: An Independent-Measurement Linkage of O*NET Work-Modality Characteristics to Occupation-Level Job Satisfaction in the U.S. General Social Survey
 
 **Provenance.** This paper reports an original computed analysis produced by a multi-agent AI research
 pipeline (Claude, Anthropic) on 2026-07-07: five domain research agents, two adversarial verification
@@ -27,11 +27,12 @@ a mean absolute deviation of 3.3 percentage points across 23 matchable occupatio
 occupation-level correlations with the percentage "very satisfied" were strongest for occupational
 prestige (r = .57), followed by an O*NET autonomy composite (r = .47) and mean education (r = .46);
 a physicality composite correlated negatively (r = −.30). After partialling out both prestige and
-education, autonomy remained significant (partial r = .228, p = .0095) — its "determine tasks,
-priorities and goals" element being the strongest residual predictor (.236) — while physicality
-(+.01), consequence-of-error (−.02), social load (+.08), and a responsibility composite (+.09) fell
-to null. Results replicate across stricter cell thresholds (n ≥ 50), a wider window (1988–2010), and
-a mean-satisfaction outcome. Two modality dimensions (feedback speed, task identity) proved
+education, autonomy remained significant (partial r = .228, nominal p = .0095) — its "determine
+tasks, priorities and goals" element being the strongest residual predictor (.236) — while
+physicality (+.01), consequence-of-error (−.02), social load (+.08), and a responsibility composite
+(+.09) fell to null. P-values are unadjusted; the autonomy result's evidential weight rests on its
+replication across stricter cell thresholds (n ≥ 50), a wider window (1988–2010), single- and
+double-control blocks, and a mean-satisfaction outcome. Two modality dimensions (feedback speed, task identity) proved
 untestable: O*NET contains no corresponding elements. We report an honest tension: prestige is the
 strongest raw ecological correlate, contrary to the strongest structural reading — yet the comparable
 Estonian linkage (Vainre et al., 2025) found prestige non-significant. Autonomy is the one modality
@@ -76,9 +77,11 @@ with O*NET — the nearest analog is an Estonian Biobank × O*NET linkage (Vainr
 paper reports, to our knowledge, the first such U.S. linkage, built with an explicit validation gate
 against the primary NORC tabulation and full disclosure of crosswalk quality.
 
-We test four pre-stated modality constructs (autonomy, social load, physicality,
-responsibility–control coupling), report two as *untestable by design* (feedback speed and task
-identity have no O*NET elements), and evaluate the structural account against the
+We test four modality constructs (autonomy, social load, physicality, responsibility–control
+coupling) whose operationalization and analysis plan were fixed before any correlation was computed
+(see § 3.2, construct-provenance disclosure), report two further constructs as *untestable by
+design* (feedback speed and task identity have no O*NET elements), and evaluate the structural
+account against the
 compensation/status account by asking a single sharp question: **does any modality construct carry
 occupation-level signal after occupational prestige and education are controlled?**
 
@@ -154,6 +157,15 @@ authored formula and is flagged as such wherever reported. **Designed limitation
 no feedback-from-job element and no task-identity element (verified against the 30.3 content
 model); these two modality dimensions are declared untestable rather than proxied.
 
+**Construct provenance (disclosure).** The four modality constructs originated as an interpretive
+lens authored *after* viewing published satisfaction rankings and the discipline studies (see the
+companion visualization's interpretive-axes panel) — they are not a blind a-priori theory. What was
+fixed before any occupation-level correlation was computed is the O*NET element mapping above and
+the analysis plan. The linkage design addresses the residual circularity by scoring the constructs
+against measurements — O*NET incumbents and GSS respondents — that never saw each other, the axes,
+or the rankings; but "chosen a priori" throughout this paper means *prior to the correlational
+test*, not prior to all knowledge of the outcome literature.
+
 ### 3.3 Crosswalk
 
 O*NET-SOC 2019 codes were collapsed to SOC 2018, mapped to 2018 Census occupation codes (Census
@@ -170,19 +182,33 @@ Per-occupation `crosswalk_quality` and `coverage` flags are carried in the resul
 Before any correlation was computed, recomputed occupation percentages were compared with the
 primary NORC tabulation (Table 1 of GSS News No. 21, July 2007, fetched and read directly this
 session). Across the 23 matchable published extremes, mean |Δ| = **3.28** percentage points
-(max 9.1); clergy 89.1 vs 87.2; roofers 26.1 vs 25.3 (Appendix A). The largest deviations occur in
-the smallest cells (e.g., furniture salespersons n = 22, −8.4), consistent with sampling noise
-around an unknown NORC pooling window and cell threshold. Two incidental findings: our recomputed
-office-supervisor value (58.4) sides with the table figure (60.8) over the report's own prose
-(80.6), corroborating the digit-transposition reading; and our exact match on freight handlers
-(25.8 vs 25.8) sides with the table over the prose's 23.9.
+(max 9.1); clergy 89.1 vs 87.2; roofers 26.1 vs 25.3 (Appendix A). Two of the 23 validation cells
+(physical therapists n = 25, roofers n = 26) fall below the n ≥ 30 threshold used for the analytic
+sample and enter the validation only; and one published extreme — "Teachers" — could not be paired
+with an OCC80 cell by title-matching and is absent from the gate (reason undetermined; see
+Appendix A). The largest deviations occur in the smallest cells (e.g., furniture salespersons
+n = 22, −8.4), consistent with sampling noise around an unknown NORC pooling window and cell
+threshold. Two incidental findings: our recomputed office-supervisor value (58.4) sides with the
+table figure (60.8) over the report's own prose (80.6), corroborating the digit-transposition
+reading; and our exact match on freight handlers (25.8 vs 25.8) sides with the table over the
+prose's 23.9.
 
 ### 3.5 Analysis
 
 Unit of analysis: occupation (n = 128). Pearson and Spearman correlations between each
-element/composite and the outcome; partial correlations controlling prestige, education, and both.
-With n = 128 occupations, two-sided p-values accompany every estimate; exact values are in the
-results JSON. No individual-level inference is made.
+element/composite and the outcome; partial correlations controlling prestige, education, and both
+(df = 125 for single-control, df = 124 for double-control blocks). Two-sided p-values accompany
+every estimate; exact values are in the results JSON. No individual-level inference is made.
+
+**Multiplicity.** This design tests 16 predictors across several correlation blocks plus
+sensitivity replications; all p-values are nominal and unadjusted. Under a Bonferroni correction
+across 16 predictors (α ≈ .003), no double-control partial — including the flagship autonomy result
+(p = .0095) — would clear the bar on its p-value alone. The evidential weight we place on autonomy
+therefore rests on its *consistency across independent replications* (both single-control blocks,
+both cell thresholds, both windows, both outcomes; § 4.3), not on any single test. Results near the
+nominal threshold without such replication — the coupling index (p = .041) and the
+deal-with-external-customers element (p = .052) — are reported as exploratory and should be treated
+as likely multiplicity casualties until independently replicated.
 
 ## 4. Results
 
@@ -190,15 +216,15 @@ results JSON. No individual-level inference is made.
 
 | Predictor | Pearson r | p | Spearman ρ |
 |---|---|---|---|
-| Occupational prestige (PRESTG80) | **.568** | <.001 | — |
+| Occupational prestige (PRESTG80) | **.568** | <.001 | .571 |
 | Autonomy composite | **.469** | <.001 | .490 |
 | — Determine tasks, priorities & goals | .460 | <.001 | .492 |
 | — Freedom to make decisions | .437 | <.001 | .446 |
-| Education (mean years) | .463 | <.001 | — |
+| Education (mean years) | .463 | <.001 | .451 |
 | Impact of decisions | .344 | .0001 | .343 |
 | Responsibility for others' health/safety | .291 | .0009 | .308 |
-| Coupling (derived) | .261 | .0029 | — |
-| Responsibility composite | .247 | .0049 | — |
+| Coupling (derived) | .261 | .0029 | .292 |
+| Responsibility composite | .247 | .0049 | .254 |
 | Deal with external customers | .217 | .0139 | .198 |
 | Contact with others | .175 | .0485 | .201 |
 | Consequence of error | .137 | .1235 | .102 |
@@ -236,9 +262,12 @@ Partial correlations with % very satisfied, controlling **both** prestige and ed
 
 Under single controls the pattern is the same: autonomy retains .224 (p = .0111) given prestige
 alone and .292 (p = .0008) given education alone, while physicality is null under either (.011 /
-.015). The raw physicality penalty is therefore fully accounted for by prestige and education; the
-autonomy association is not. The derived coupling index survives the double control (.181,
-p = .0411) but weakens under prestige alone (.160, p = .0707) — suggestive, not established.
+.015). The raw physicality penalty is therefore statistically accounted for by prestige and
+education at the occupation level; the autonomy association is not. The derived coupling index
+survives the double control (.181, p = .0411) but weakens under prestige alone (.160, p = .0707) —
+and per § 3.5, both it and the near-threshold deal-with-external-customers element (.172,
+p = .0523; the one social-load element to approach nominal significance while its composite and
+siblings do not) should be read as exploratory, unadjusted results.
 
 ### 4.3 Sensitivity
 
@@ -253,12 +282,12 @@ physicality −.318; autonomy's double-control partial is .260 (p = .003).
 
 | Axis | Verdict | Basis |
 |---|---|---|
-| Autonomy (volition) | **Supported** | Survives prestige+education controls (.228, p = .0095); strongest residual element .236 |
+| Autonomy (volition) | **Supported** | Survives prestige+education controls (.228, p = .0095) and replicates across all sensitivity blocks; strongest residual element .236 |
 | Feedback speed | **Untestable** | No O*NET element exists |
 | Task identity | **Untestable** | No O*NET element exists |
-| Social load | No independent signal | .13 raw, .08 partial (n.s.) |
-| Physicality | No independent signal | −.30 raw collapses to .01 under controls |
-| Responsibility–control coupling | Weak / suggestive | Derived index .18 (p = .04); consequence-of-error alone −.02 |
+| Social load | Not detected | .13 raw (n.s.), .08 partial (n.s.) — a null throughout; attenuation toward zero cannot be ruled out |
+| Physicality | Explained by status/schooling | −.30 raw (p = .0006) is fully attenuated to .01 under controls — a positive finding about confounding, not an absence of raw signal |
+| Responsibility–control coupling | Weak / exploratory | Derived index .18 (p = .04, unadjusted); consequence-of-error alone −.02; treat as a multiplicity risk pending replication |
 
 ## 5. Discussion
 
@@ -266,17 +295,21 @@ Three conclusions are licensed by these data, one tension must be stated, and tw
 part of the finding.
 
 **Autonomy carries independent occupation-level signal.** The only modality construct surviving
-double controls is autonomy, and its strongest element is not freedom-from-supervision but the
-latitude to *determine one's own tasks, priorities, and goals* — consonant with self-determination
-theory's construal of autonomy as volition rather than independence, with the individual-level
-r = .66 in Krieger and Sheldon (2015), and with the axis's canonical case (firefighters: strict
-hierarchy, high volition, 80.1% very satisfied).
+double controls — and replicating across every sensitivity block — is autonomy, and its strongest
+element is not freedom-from-supervision but the latitude to *determine one's own tasks, priorities,
+and goals*. This is compatible with, though not evidence for, self-determination theory's construal
+of autonomy as volition rather than independence; the much larger individual-level association in
+an unrelated population (r = .66 among lawyers; Krieger & Sheldon, 2015) is a separate,
+non-comparable data point offered as thematic context, not corroboration, and single occupations
+(firefighters: strict hierarchy, high rated volition, 80.1% very satisfied) are illustrations only.
 
-**The physicality penalty is a status artifact.** Physically demanding work is less satisfying at
-the raw ecological level (−.30) but not at all once prestige and education are held constant
-(+.01). Roofers and laborers are not dissatisfied because the work is physical; the physicality
-gradient is carried entirely by its entanglement with status and schooling — a caution against
-reading manual-work dissatisfaction as somatic rather than social.
+**The raw physicality gradient is statistically accounted for by status and schooling.** Physically
+demanding work shows a clear negative association at the raw ecological level (−.30) that is fully
+attenuated once prestige and education are held constant (+.01). At the occupation level, the data
+are consistent with the physicality–satisfaction gradient operating through the status/schooling
+bundle rather than physical demand per se — though this partial-correlation pattern cannot rule out
+a causal role for physical demand, and no claim is made about why individual workers in physical
+occupations report what they report.
 
 **Consequence-of-error is not the active ingredient of "responsibility."** Raw responsibility
 associations run through decision impact and responsibility for people — facets adjacent to
@@ -307,7 +340,8 @@ finding, and a research recommendation.
 2. **Temporal offset.** O*NET ratings are contemporary (~2019–2023); GSS satisfaction is
    1988–2006. Occupation-level stability of work modality is assumed, not shown.
 3. **Crosswalk attenuation.** The 1980→2018 chain requires five probabilistic hops; 369 of 502
-   occupations involve many-to-many splits. Allocation error biases correlations toward zero, so
+   populated occupations involve many-to-many splits (within the 128-occupation analytic sample:
+   114 many-to-many, 14 clean one-to-one). Allocation error biases correlations toward zero, so
    reported effects are more plausibly under- than over-stated — but quality varies by occupation
    (flags shipped per row).
 4. **Representative-SOC approximation** on the SOC-2018→Census-2018 hop, and equal (not
@@ -320,6 +354,9 @@ finding, and a research recommendation.
 7. **No causal claims.** Selection of persons into occupations, compensating differentials, and
    omitted occupation-level variables (income itself, hours, precarity) remain unmodeled; prestige
    and education are coarse proxies for the status/compensation bundle.
+8. **Nominal, unadjusted p-values.** Dozens of tests are reported without multiplicity correction
+   (§ 3.5); only results replicating across independent blocks (autonomy) are treated as findings,
+   and near-threshold results (coupling, deal-with-external-customers) as exploratory.
 
 ## 7. Conclusion
 
@@ -329,8 +366,8 @@ Autonomy, measured as incumbents' rated latitude to decide and to set their own 
 occupation's share of very-satisfied workers beyond what prestige and education explain. Physical
 demand does not; interpersonal load does not; error stakes do not. Two structural dimensions remain
 unmeasured at national scale. The strongest raw correlate, however, is still prestige — so the
-structural claim earns its narrower form only: *given* an occupation's status and schooling, what
-buys additional satisfaction is volition.
+structural claim earns its narrower form only: *given* an occupation's status and schooling, the
+one modality dimension still associated with additional satisfaction is volition.
 
 ## 8. Verification statement
 
@@ -358,7 +395,8 @@ Verification key: **[P]** primary source fetched and read this session; **[S]** 
 verification this session; **[U]** standard literature citation, not independently verified this session.
 
 - Beard, J. D., et al. (2022). Crosswalks to convert U.S. Census Bureau industry and occupation
-  codes, 1980–2018. *Epidemiology, 33*(3). **[P]** (workbook downloaded and used)
+  codes, 1980–2018. *Epidemiology, 33*(2), e8–e9. **[P: workbook]** (the crosswalk workbook itself
+  was downloaded and used, and the PMC record fetched; the journal article text was not read)
 - Carpenter, R., Carr, D., Helppie-McFall, B., & Beckel, J. (2021). Creating a public data resource:
   The HRS–O*NET linkage. *Innovation in Aging, 5*(S1), 229–230. **[S]**
 - Deci, E. L., & Ryan, R. M. (2000). The "what" and "why" of goal pursuits: Human needs and the
@@ -376,18 +414,20 @@ verification this session; **[U]** standard literature citation, not independent
 - Krieger, L. S., & Sheldon, K. M. (2015). What makes lawyers happy? A data-driven prescription to
   redefine professional success. *George Washington Law Review, 83*. **[P]**
 - Kristof-Brown, A. L., Zimmerman, R. D., & Johnson, E. C. (2005). Consequences of individuals' fit
-  at work: A meta-analysis. *Personnel Psychology, 58*(2), 281–342. **[S]**
+  at work: A meta-analysis of person–job, person–organization, person–group, and person–supervisor
+  fit. *Personnel Psychology, 58*(2), 281–342. **[S]**
 - Michaelis, C., & Findeisen, S. (2022). Influence of person-vocation fit on satisfaction and
   persistence in vocational training programs. *Frontiers in Psychology, 13*, 834543. **[P]**
   (abstract-level primary: official abstract fetched)
 - Mostafa, R., & Jaafar, H. J. B. (2024). Revisiting job characteristics and job satisfaction: A
-  systematic review with bibliographic analysis. *Multidisciplinary Reviews, 7*, e2024142. **[P]**
+  systematic review with bibliographic analysis. *Multidisciplinary Reviews, 7*(7), e2024142. **[P]**
 - Roos, P. A., & Treiman, D. J. (1980). DOT scales for the 1970 census classification. In A. R.
   Miller et al. (Eds.), *Work, jobs, and occupations: A critical review of the Dictionary of
   Occupational Titles*. National Academy Press. **[P]** (volume verified; scale detail secondary)
 - Schmitz, L. L., McCluney, C. L., Sonnega, A., & Hicken, M. T. (2019). Interpreting subjective and
-  objective measures of job resources. *International Journal of Environmental Research and Public
-  Health, 16*(17), 3058. **[P]**
+  objective measures of job resources: The importance of sociodemographic context. *International
+  Journal of Environmental Research and Public Health, 16*(17), 3058. **[P]** (PMC full text
+  fetched; r = .11 re-confirmed verbatim during citation checking)
 - Smith, T. W. (2007). *Job satisfaction in America*. NORC/University of Chicago. **[P]** (via GSS
   News No. 21, July 2007, tables read directly)
 - Törnroos, M., Jokela, M., & Hakulinen, C. (2019). The relationship between personality and job
