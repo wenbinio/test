@@ -78,6 +78,7 @@
   .tier.t2 { border: 1px solid var(--baseline); color: var(--ink-2); }
   .tier.t3 { border: 1px solid var(--t3-edge); color: var(--t3-edge); }
   .tier.nd { border: 1px dashed var(--ink-3); color: var(--ink-3); }
+  .tier.c  { border: 1px solid var(--series-1); color: var(--series-1); }
   .legend-row { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--ink-2);
                 align-items: center; margin-top: 10px; }
   .key-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; }
@@ -175,6 +176,7 @@
       <span><span class="tier t2" title="Secondary citation, consistent across independent searches; primary not retrievable">T2</span> consistent secondary citation; primary not verified</span>
       <span><span class="tier t3" title="Contested across sources, or known-confounded — the conflict is stated, never silently resolved">T3</span> contested / confounded (conflict stated)</span>
       <span><span class="tier nd">NO&nbsp;DATA</span> no verifiable figure exists or was retrievable</span>
+      <span><span class="tier c" title="Original analysis computed this session from primary microdata; reproducible pipeline in analysis/linkage/">COMPUTED</span> original analysis from primary microdata, this session</span>
     </div>
   </header>
 
@@ -199,9 +201,14 @@
     N≈39,602), with a primary-verified null for interest and skill congruence in German vocational training
     (N=4,097) — structure appears to matter more than content-matching. Third, verification itself is a finding:
     twelve circulating claims failed checking or required correction, and every cell without a verifiable figure is
-    rendered as explicit NO DATA. Confidence tiers, metric definitions, and sample sizes travel with every number;
-    an authored six-axis work-modality framework is included strictly as an interpretive layer, visually segregated
-    from measured data.</p>
+    rendered as explicit NO DATA. A fourth, computed result then tests the interpretive layer itself: an original
+    linkage analysis joining O*NET work-modality measurements to GSS occupation-level satisfaction (128 occupations,
+    recomputed from microdata this session and validated against the primary NORC table to within 3.3 points) finds
+    occupational prestige the strongest raw correlate (r=.57) but autonomy the only modality construct surviving
+    prestige-and-education controls (partial r=.23, p=.0095); physicality and consequence-of-error wash out, and two
+    axes (feedback speed, task identity) are unmeasurable — O*NET has no such elements. Confidence tiers, metric
+    definitions, and sample sizes travel with every number; the six-axis work-modality framework is included strictly
+    as an interpretive layer, visually segregated from measured data and scored against the linkage test.</p>
   </section>
 
   <!-- ============ CROSS-OCCUPATION (NORC/GSS) ============ -->
@@ -296,8 +303,32 @@
     <p class="sub">A qualitative lens for reading the measured results above: six modality axes per role.
     Autonomy is rated as <em>volition</em>, not independence — firefighters rate high despite strict hierarchy.
     The last axis separates roles holding responsibility <em>with</em> control (judges) from responsibility
-    <em>without</em> control (dentists). Pips: ● low ●● medium ●●● high. Hover a row for rationale.</p>
+    <em>without</em> control (dentists). Pips: ● low ●● medium ●●● high. Hover a row for rationale.
+    <strong>These ratings were authored after seeing the measured results — a circularity addressed by the
+    independent linkage test in the next panel, which scores four of the six axes against data that never saw
+    satisfaction outcomes.</strong></p>
     <div class="tablewrap"><table class="axes" id="axes-table"></table></div>
+  </section>
+
+  <!-- ============ LINKAGE TEST ============ -->
+  <section class="panel" id="linkage-panel">
+    <h2>The linkage test — modality axes vs. independent data
+      <span class="tier c" data-tip="Original analysis computed this session from primary microdata (GSS cumulative file, downloaded from gss.norc.org) and the O*NET 30.3 database. Full method log, per-occupation quality flags, and reproducible pipeline scripts ship in analysis/linkage/ alongside this file. Not a published study — a computed test, disclosed as such.">COMPUTED</span></h2>
+    <p class="sub" id="linkage-intro"></p>
+    <h3 style="margin-top:16px">What survives controls
+      <span class="metric-chip" data-tip="Pearson correlations across n=128 occupations between each O*NET measure and % very satisfied (GSS). 'Raw' is the plain correlation; 'after controls' is the partial correlation holding BOTH occupational prestige (PRESTG80) and mean education constant. Prestige and education rows are the controls themselves and have no partial value.">metric: occupation-level r with % very satisfied · raw → after prestige+education controls</span></h3>
+    <div class="legend-row">
+      <span><span class="key-swatch" style="background:var(--ink-3);border-radius:50%;width:11px;height:11px"></span> raw r</span>
+      <span><span class="key-swatch" style="background:var(--series-1);border-radius:50%;width:11px;height:11px"></span> r after prestige + education controls</span>
+    </div>
+    <div id="dumbbell-chart"></div>
+    <h3 style="margin-top:20px">128 occupations: autonomy vs. satisfaction</h3>
+    <span class="metric-chip" data-tip="Each dot is one 1980-census occupation (GSS 1988–2006, weighted, n≥30 respondents). X: O*NET autonomy composite (mean of z-scores of 'freedom to make decisions' and 'determine tasks, priorities and goals', measured from job incumbents who never saw satisfaction data). Y: % very satisfied (GSS respondents who never saw O*NET). Accent dots = occupations from the NORC published extremes.">x: O*NET autonomy (z) · y: GSS % very satisfied</span>
+    <div class="chart-scroll" id="linkage-scatter"></div>
+    <h3 style="margin-top:20px">Verdicts on the six axes</h3>
+    <div class="cards" id="verdict-cards"></div>
+    <p class="note" id="linkage-tension"></p>
+    <p class="note" id="linkage-limits"></p>
   </section>
 
   <!-- ============ NEVER MEASURED ============ -->
@@ -336,6 +367,12 @@
     <p>No figure was simulated, interpolated, or estimated. Conflicting values are displayed side by side. Different
     metrics (% very satisfied, burnout %, well-being composites, correlation coefficients) are never merged onto a
     shared scale. Sample sizes are shown where verified and marked unknown where not.</p>
+    <p>The linkage panel is an <strong>original computed analysis</strong>, not a citation: GSS cumulative microdata
+    (downloaded from gss.norc.org) recomputed to occupation-level satisfaction, joined to O*NET 30.3 modality
+    measurements through the NIOSH census-code crosswalk chain, validated against the primary NORC table (mean
+    absolute delta 3.3 points across 23 matchable occupations). The reproducible pipeline (four Python scripts), the
+    full method log, per-occupation crosswalk-quality flags, and sensitivity runs (n≥50; 1988–2010; unweighted) ship
+    in <code>analysis/linkage/</code> in the same repository.</p>
   </footer>
 </main>
 
@@ -563,8 +600,48 @@
     {"claim": "Large-firm practice least satisfying after controls (Hull 1999)", "why": "Contradicted by the fetched primary: 'practice setting was not a significant predictor. The only significant variable ... was income.'"},
     {"claim": "Income inequality within a field depresses income satisfaction (Sandefur &amp; Heinz 1999)", "why": "Not found as stated; closest match is an unpublished conference paper and the Urban Lawyers monograph. No verifiable figure."},
     {"claim": "Teaching-heavy faculty profile has highest turnover intention (French 2020)", "why": "The paper found NO significant profile differences in turnover intentions or affective commitment."}
-  ]
+  ],
+  "linkage": {
+    "design": "Independent-measurement linkage: O*NET incumbents/analysts rated each occupation's work modality without ever seeing satisfaction data; GSS respondents reported satisfaction without ever seeing O*NET; the 1980-census occupation code is the only join. Predictors cannot have been authored to fit outcomes — this is the falsifiable version of the modality claim.",
+    "pipeline": "GSS cumulative microdata (gss7224, downloaded from gss.norc.org) → % very satisfied per OCC80 occupation, 1988–2006, WTSSALL-weighted, n≥30 → O*NET 30.3 Work Context/Activities elements aggregated O*NET-SOC 2019 → SOC 2018 → Census 2018 → …backward through NIOSH (Beard 2022) proportional crosswalks… → OCC80. n=128 occupations. Reproducible scripts + full method log in analysis/linkage/.",
+    "validation": {"n_matched": 23, "mean_abs_delta": 3.28, "max_abs_delta": 9.1,
+      "examples": [{"occ": "Clergy", "ours": 89.1, "norc": 87.2}, {"occ": "Roofers", "ours": 26.1, "norc": 25.3}],
+      "note": "Validation gate vs the T1 NORC table: recomputed values matched the primary on average within 3.3 points; the largest deltas are all small-cell occupations (sampling noise, documented per-occupation in analysis/linkage/linkage-results.json)."},
+    "dumbbell": [
+      {"label": "Occupational prestige (PRESTG80)", "raw": 0.568, "partial": null, "role": "control", "note": "Strongest raw correlate of all — see the 'honest tension' note below. Used as a control for the modality tests."},
+      {"label": "Education (mean years)", "raw": 0.463, "partial": null, "role": "control", "note": "Second control."},
+      {"label": "Autonomy composite", "raw": 0.469, "partial": 0.228, "p": "p=.0095", "sig": true, "note": "Mean of z-scores: freedom to make decisions + determine tasks/priorities/goals."},
+      {"label": "· Determine tasks, priorities &amp; goals", "raw": 0.460, "partial": 0.236, "p": "p=.0073", "sig": true, "note": "Single strongest residual predictor after controls."},
+      {"label": "· Freedom to make decisions", "raw": 0.437, "partial": 0.193, "p": "p=.029", "sig": true},
+      {"label": "Coupling (derived index)", "raw": 0.261, "partial": 0.181, "p": "p=.041", "sig": true, "note": "Authored formula: z(autonomy) − z(consequence of error). Suggestive only — not an established construct."},
+      {"label": "Responsibility composite", "raw": 0.247, "partial": 0.095, "p": "n.s.", "sig": false, "note": "Consequence-of-error alone: −.02 after controls."},
+      {"label": "Social load composite", "raw": 0.129, "partial": 0.084, "p": "n.s.", "sig": false},
+      {"label": "Physicality composite", "raw": -0.298, "partial": 0.011, "p": "n.s.", "sig": false, "note": "The raw negative is a prestige/education confound — it collapses to zero under controls."}
+    ],
+    "verdicts": [
+      {"axis": "1 · Autonomy (volition)", "verdict": "SUPPORTED", "detail": "Survives prestige+education controls: partial r=.228, p=.0095, n=128 occupations. The strongest residual element is 'determine tasks, priorities and goals' (.236). The one axis that was already measured in the discipline studies (Krieger &amp; Sheldon r=.66 at individual level) is also the one that survives at occupation level."},
+      {"axis": "2 · Feedback speed", "verdict": "UNTESTABLE", "detail": "O*NET contains no feedback-from-job element (verified: zero matches in the 30.3 content model). Omitted rather than proxied."},
+      {"axis": "3 · Task identity", "verdict": "UNTESTABLE", "detail": "No O*NET task-identity element exists. Omitted rather than proxied."},
+      {"axis": "4 · Social load", "verdict": "NO INDEPENDENT SIGNAL", "detail": "+.13 raw, +.08 after controls (n.s.) — consistent with this axis's own no-consistent-valence caveat: interpersonal throughput cuts both ways."},
+      {"axis": "5 · Physicality", "verdict": "NO INDEPENDENT SIGNAL", "detail": "Raw −.30 vanishes under controls (+.01): physical work predicts low satisfaction only through its entanglement with prestige and education. Confirms the axis is descriptive, not predictive."},
+      {"axis": "6 · Responsibility–control coupling", "verdict": "WEAK / SUGGESTIVE", "detail": "The derived coupling index survives at +.18 (p=.041), but the formula is authored and consequence-of-error alone carries nothing. Suggestive, not established."}
+    ],
+    "tension": "At the raw ecological level, occupational PRESTIGE is the strongest single correlate (+.57) — which pushes against the strongest reading of 'structure beats prestige.' The defensible statement is narrower: autonomy carries signal BEYOND prestige and education, while prestige at occupation level is inseparable from income, selection, and status. For contrast, the only comparable foreign linkage (Vainre et al. 2025, Estonia, 263 occupations) found prestige NOT significant — a cross-country conflict displayed here, not resolved.",
+    "limitations": [
+      "Ecological: occupation-level correlations do not license individual-level claims (van Veldhoven 2025 shows non-homology across levels; Schmitz 2019 shows subjective vs O*NET-objective measures of the same construct correlate only r=.11).",
+      "Temporal offset: O*NET ratings are ~2019–2023; GSS satisfaction is 1988–2006 — assumes occupation-level stability of work modality.",
+      "Crosswalk attenuation: 1980→2018 needs five probabilistic hops; 369 of 502 occupations involve many-to-many splits (per-occupation quality flags in the results file). Measurement error biases correlations toward zero.",
+      "The SOC-2018→Census-2018 hop uses one representative SOC per census code plus hierarchical fallback — approximate, documented.",
+      "Equal weighting of O*NET-SOC codes within a census occupation (no employment weights available).",
+      "Feedback speed and task identity are untestable in O*NET — absence of evidence here, not evidence of absence.",
+      "The coupling index is an authored, derived formula — flagged wherever it appears."
+    ]
+  }
 }
+</script>
+
+<script id="linkage-scatter-data" type="application/json">
+[{"t":"administrators and officials, public administration","n":71,"y":55.34,"a":0.4537,"p":51,"q":1,"x":0},{"t":"financial managers","n":77,"y":54.75,"a":0.7031,"p":59,"q":0,"x":0},{"t":"managers, marketing, advertising, and public relations","n":83,"y":59.18,"a":0.6726,"p":59,"q":1,"x":0},{"t":"administrators, education and related fields","n":101,"y":68.14,"a":0.7837,"p":64,"q":1,"x":1},{"t":"managers, medicine and health","n":69,"y":61.03,"a":-0.0917,"p":69,"q":1,"x":0},{"t":"managers, properties and real estate","n":73,"y":55.38,"a":0.505,"p":39,"q":1,"x":0},{"t":"managers and administrators, n.e.c.","n":1075,"y":52.93,"a":0.4985,"p":51,"q":1,"x":0},{"t":"accountants and auditors","n":205,"y":48.66,"a":0.1332,"p":65,"q":1,"x":0},{"t":"other financial officers","n":124,"y":43.77,"a":0.2888,"p":48,"q":1,"x":0},{"t":"management analysts","n":70,"y":60.13,"a":0.4064,"p":61,"q":0,"x":0},{"t":"personnel, training, and labor relations specialists","n":66,"y":58.77,"a":0.6965,"p":43,"q":1,"x":0},{"t":"purchasing agents and buyers","n":36,"y":60.53,"a":0.3577,"p":41,"q":1,"x":0},{"t":"management related occupations, n.e.c.","n":101,"y":43.36,"a":0.046,"p":49,"q":1,"x":0},{"t":"civil engineers","n":42,"y":54.37,"a":-0.3051,"p":69,"q":1,"x":0},{"t":"electrical and electronic engineers","n":56,"y":40.36,"a":0.4951,"p":64,"q":1,"x":0},{"t":"mechanical engineers","n":35,"y":42.79,"a":0.0007,"p":64,"q":1,"x":0},{"t":"engineers, n.e.c.","n":44,"y":49.42,"a":0.1463,"p":71,"q":1,"x":0},{"t":"computer systems analysts and scientists","n":155,"y":58.34,"a":0.2674,"p":74,"q":1,"x":0},{"t":"physicians","n":78,"y":57.41,"a":1.3134,"p":86,"q":1,"x":0},{"t":"registered nurses","n":297,"y":53.22,"a":0.2542,"p":66,"q":1,"x":0},{"t":"teachers, prekindergarten and kindergarten","n":51,"y":64.09,"a":-0.572,"p":55,"q":0,"x":0},{"t":"teachers, elementary school","n":315,"y":62.43,"a":0.4281,"p":64,"q":1,"x":0},{"t":"teachers, secondary school","n":160,"y":51.69,"a":0.2143,"p":66,"q":1,"x":0},{"t":"teachers, special education","n":40,"y":69.24,"a":0.1604,"p":65,"q":1,"x":1},{"t":"teachers, n.e.c.","n":95,"y":67.6,"a":0.6555,"p":46,"q":1,"x":0},{"t":"counselors, educational and vocational","n":48,"y":55.43,"a":0.2131,"p":57,"q":1,"x":0},{"t":"librarians","n":35,"y":52.29,"a":0.6286,"p":54,"q":0,"x":0},{"t":"economists","n":30,"y":46.3,"a":0.6827,"p":63,"q":1,"x":0},{"t":"psychologists","n":42,"y":73.64,"a":1.015,"p":69,"q":1,"x":1},{"t":"social workers","n":156,"y":38.33,"a":0.3025,"p":52,"q":1,"x":0},{"t":"clergy","n":46,"y":89.15,"a":0.9033,"p":69,"q":1,"x":1},{"t":"lawyers","n":115,"y":51.42,"a":1.3628,"p":75,"q":1,"x":0},{"t":"designers","n":80,"y":50.98,"a":0.1641,"p":47,"q":1,"x":0},{"t":"painters, sculptors, craft-artists, and printmakers","n":59,"y":66.11,"a":0.4505,"p":52,"q":1,"x":1},{"t":"editors and reporters","n":44,"y":56.33,"a":0.3722,"p":60,"q":1,"x":0},{"t":"public relations specialists","n":33,"y":68.27,"a":-0.0617,"p":48,"q":1,"x":0},{"t":"clinical laboratory technologists and technicians","n":49,"y":53.27,"a":-0.6025,"p":68,"q":1,"x":0},{"t":"licensed practical nurses","n":63,"y":53.85,"a":-0.4167,"p":60,"q":0,"x":0},{"t":"health technologists and technicians, n.e.c.","n":66,"y":57.91,"a":-0.5643,"p":57,"q":1,"x":0},{"t":"electrical and electronic technicians","n":80,"y":48.19,"a":-0.0743,"p":60,"q":1,"x":0},{"t":"computer programmers","n":96,"y":48.31,"a":-1.3437,"p":61,"q":0,"x":0},{"t":"legal assistants","n":43,"y":50.95,"a":0.5679,"p":57,"q":1,"x":0},{"t":"technicians, n.e.c.","n":52,"y":42.42,"a":-0.1077,"p":41,"q":1,"x":0},{"t":"supervisors and proprietors, sales occupations","n":420,"y":49.66,"a":0.3264,"p":44,"q":1,"x":0},{"t":"insurance sales occupations","n":104,"y":46.85,"a":0.0161,"p":45,"q":1,"x":0},{"t":"real estate sales occupations","n":127,"y":54.23,"a":1.3704,"p":49,"q":1,"x":0},{"t":"securities and financial services sales occupations","n":45,"y":74.47,"a":0.5979,"p":53,"q":1,"x":1},{"t":"sales occupations, other business services","n":50,"y":51.68,"a":-0.2891,"p":32,"q":1,"x":0},{"t":"sales rep., mining, manufacturing, and wholesale","n":173,"y":47.25,"a":0.7772,"p":49,"q":1,"x":0},{"t":"sales workers, motor vehicles and boats","n":30,"y":65.4,"a":-0.5846,"p":34,"q":1,"x":0},{"t":"sales workers, apparel","n":35,"y":16.47,"a":-0.6326,"p":30,"q":0,"x":1},{"t":"sales workers, other commodities","n":239,"y":43.32,"a":-0.5584,"p":32,"q":1,"x":0},{"t":"cashiers","n":277,"y":21,"a":-1.4441,"p":29,"q":1,"x":1},{"t":"street and door-to-door sales workers","n":59,"y":52.82,"a":0.1366,"p":22,"q":1,"x":0},{"t":"supervisors, general office","n":78,"y":58.4,"a":0.3323,"p":51,"q":1,"x":1},{"t":"supervisors, distribution, scheduling, and adjusting clerks","n":34,"y":43.34,"a":0.3557,"p":42,"q":1,"x":0},{"t":"computer operators","n":36,"y":43.19,"a":0.0608,"p":50,"q":0,"x":0},{"t":"secretaries","n":409,"y":53,"a":-0.011,"p":46,"q":1,"x":0},{"t":"receptionists","n":118,"y":39.74,"a":-0.3218,"p":39,"q":1,"x":0},{"t":"bookkeepers, accounting and auditing clerks","n":205,"y":50.92,"a":-0.5839,"p":47,"q":1,"x":0},{"t":"billing clerks","n":43,"y":38.65,"a":0.1753,"p":31,"q":0,"x":0},{"t":"postal clerks, excluding mail carriers","n":48,"y":42.19,"a":-2.013,"p":42,"q":1,"x":0},{"t":"mail carriers, postal service","n":34,"y":43.66,"a":-2.1603,"p":47,"q":0,"x":0},{"t":"production coordinators","n":33,"y":46.09,"a":0.936,"p":42,"q":1,"x":0},{"t":"traffic, shipping and receiving clerks","n":87,"y":29.94,"a":0.2241,"p":33,"q":1,"x":0},{"t":"stock and inventory clerks","n":78,"y":28.7,"a":-0.3883,"p":27,"q":1,"x":0},{"t":"insurance adjusters, examiners, and investigators","n":52,"y":44.67,"a":0.5461,"p":47,"q":1,"x":0},{"t":"investigators and adjusters, except insurance","n":120,"y":37.3,"a":-1.2046,"p":40,"q":1,"x":0},{"t":"general office clerks","n":164,"y":37.45,"a":-1.1085,"p":34,"q":1,"x":0},{"t":"bank tellers","n":53,"y":33.49,"a":-0.7242,"p":43,"q":1,"x":0},{"t":"data-entry keyers","n":66,"y":22.97,"a":0.7068,"p":41,"q":1,"x":0},{"t":"teachers' aides","n":51,"y":43.58,"a":-0.9364,"p":43,"q":0,"x":0},{"t":"administrative support occupations, n.e.c.","n":104,"y":51.31,"a":-0.7209,"p":33,"q":1,"x":0},{"t":"child care workers, private household","n":68,"y":45.86,"a":0.3459,"p":29,"q":0,"x":0},{"t":"private household cleaners and servants","n":88,"y":46.11,"a":-1.5403,"p":23,"q":1,"x":0},{"t":"firefighting occupations","n":32,"y":82.31,"a":-0.2476,"p":53,"q":1,"x":1},{"t":"police and detectives, public service","n":85,"y":59.96,"a":0.4007,"p":60,"q":1,"x":0},{"t":"correctional institution officers","n":32,"y":21.97,"a":0.0391,"p":40,"q":1,"x":0},{"t":"guards and police, excluding public service","n":79,"y":34.75,"a":0.4446,"p":42,"q":1,"x":0},{"t":"supervisors, food preparation and service occupations","n":47,"y":53.4,"a":-0.6469,"p":35,"q":1,"x":0},{"t":"bartenders","n":54,"y":25.41,"a":-0.6415,"p":25,"q":0,"x":1},{"t":"waiters and waitresses","n":175,"y":27.6,"a":-1.3173,"p":28,"q":1,"x":1},{"t":"cooks, except short order","n":158,"y":39.86,"a":-1.1163,"p":31,"q":1,"x":0},{"t":"kitchen workers, food preparation","n":33,"y":28.58,"a":-1.4045,"p":24,"q":1,"x":0},{"t":"waiters'/waitresses' assistants","n":42,"y":24.27,"a":-1.4564,"p":21,"q":1,"x":0},{"t":"miscellaneous food preparation occupations","n":71,"y":20.4,"a":-1.9914,"p":17,"q":1,"x":1},{"t":"health aids, except nursing","n":79,"y":56.83,"a":-0.611,"p":51,"q":1,"x":0},{"t":"nursing aides, orderlies and attendants","n":286,"y":46.73,"a":-1.2144,"p":42,"q":1,"x":0},{"t":"supervisors, cleaning and building service workers","n":31,"y":46.98,"a":-0.6987,"p":36,"q":1,"x":0},{"t":"maids and housemen","n":72,"y":43.28,"a":-1.2528,"p":20,"q":1,"x":0},{"t":"janitors and cleaners","n":259,"y":36.92,"a":0.1417,"p":22,"q":1,"x":0},{"t":"hairdressers and cosmetologists","n":97,"y":61.38,"a":1.2638,"p":36,"q":1,"x":0},{"t":"child care workers, except private household","n":146,"y":56.58,"a":0.2129,"p":36,"q":1,"x":0},{"t":"personal service occupations, n.e.c.","n":31,"y":50.99,"a":-0.4905,"p":25,"q":1,"x":0},{"t":"farmers, except horticultural","n":105,"y":56.24,"a":0.408,"p":40,"q":1,"x":0},{"t":"farm workers","n":51,"y":49.1,"a":-0.8935,"p":23,"q":1,"x":0},{"t":"groundskeepers and gardeners, except farm","n":58,"y":62.23,"a":-2.0067,"p":29,"q":1,"x":0},{"t":"supervisors, mechanics and repairers","n":34,"y":63.74,"a":0.7953,"p":50,"q":1,"x":0},{"t":"automobile mechanics, except apprentices","n":114,"y":48.92,"a":0.4452,"p":40,"q":1,"x":0},{"t":"bus, truck, and stationary engine mechanics","n":41,"y":48.32,"a":0.255,"p":44,"q":1,"x":0},{"t":"automobile body and related repairers","n":36,"y":52.03,"a":-0.1245,"p":31,"q":1,"x":0},{"t":"industrial machinery repairers","n":51,"y":48.94,"a":-1.121,"p":30,"q":1,"x":0},{"t":"heating, air conditioning, and refrigeration mechanics","n":41,"y":61.36,"a":0.4929,"p":42,"q":1,"x":0},{"t":"supervisors, n.e.c.","n":79,"y":60.02,"a":0.9276,"p":54,"q":1,"x":0},{"t":"carpenters, except apprentices","n":159,"y":51.03,"a":-0.8397,"p":39,"q":1,"x":0},{"t":"electricians, except apprentices","n":96,"y":50.46,"a":0.6398,"p":51,"q":1,"x":0},{"t":"painters, construction and maintenance","n":48,"y":49.55,"a":0.1382,"p":34,"q":1,"x":0},{"t":"plumbers, pipefitters, and steamfitters, except apprentices","n":79,"y":52.71,"a":0.4922,"p":45,"q":1,"x":0},{"t":"supervisors, production occupations","n":141,"y":48.3,"a":0.5033,"p":47,"q":1,"x":0},{"t":"machinists, except apprentices","n":50,"y":37.49,"a":-0.0729,"p":47,"q":1,"x":0},{"t":"printing machine operators","n":44,"y":47.88,"a":0.0423,"p":39,"q":1,"x":0},{"t":"textile sewing machine operators","n":59,"y":35.26,"a":-1.9169,"p":28,"q":0,"x":0},{"t":"miscellaneous and not specified machine operators, n.e.c.","n":100,"y":25.59,"a":-1.3424,"p":30,"q":1,"x":0},{"t":"machine operators, not specified","n":69,"y":28.59,"a":-1.3887,"p":33,"q":1,"x":0},{"t":"welders and cutters","n":71,"y":45.54,"a":-1.5069,"p":42,"q":1,"x":0},{"t":"assemblers","n":128,"y":35.12,"a":-0.9391,"p":35,"q":1,"x":0},{"t":"production inspectors, checkers, and examiners","n":65,"y":33.08,"a":-0.083,"p":36,"q":1,"x":0},{"t":"truck drivers, heavy","n":231,"y":40.94,"a":-0.8128,"p":30,"q":1,"x":0},{"t":"truck drivers, light","n":53,"y":26.57,"a":-0.8128,"p":30,"q":1,"x":0},{"t":"bus drivers","n":75,"y":47.8,"a":-1.1461,"p":32,"q":1,"x":0},{"t":"taxicab drivers and chauffeurs","n":31,"y":58.4,"a":-0.5704,"p":28,"q":1,"x":0},{"t":"operating engineers","n":35,"y":64.82,"a":-0.4695,"p":50,"q":1,"x":1},{"t":"industrial truck and tractor equipment operators","n":49,"y":33.33,"a":0.1364,"p":35,"q":1,"x":0},{"t":"construction laborers","n":141,"y":43.29,"a":-1.4991,"p":36,"q":1,"x":0},{"t":"stock handlers and baggers","n":69,"y":28.28,"a":-0.6075,"p":23,"q":1,"x":0},{"t":"freight, stock, and material handlers, n.e.c.","n":72,"y":25.85,"a":-0.8736,"p":27,"q":1,"x":1},{"t":"hand packers and packagers","n":52,"y":19.24,"a":-1.5457,"p":22,"q":1,"x":1},{"t":"laborers, except construction","n":127,"y":19.85,"a":-0.826,"p":24,"q":1,"x":1}]
 </script>
 
 <script>
@@ -604,6 +681,7 @@
     if (t === "T1") return '<span class="tier t1">T1</span>';
     if (t === "T2") return '<span class="tier t2">T2</span>';
     if (t === "T3") return '<span class="tier t3">T3</span>';
+    if (t === "C") return '<span class="tier c">COMPUTED</span>';
     return '<span class="tier nd">NO DATA</span>';
   }
   function tipHtml(o) {
@@ -921,6 +999,91 @@
     });
   })();
 
+  /* ---------- linkage test ---------- */
+  (function renderLinkage() {
+    var L = DATA.linkage;
+    if (!L) return;
+    var scatterEl = document.getElementById("linkage-scatter-data");
+    var pts = scatterEl ? JSON.parse(scatterEl.textContent) : [];
+    document.getElementById("linkage-intro").innerHTML = L.design + " " + L.pipeline +
+      " <strong>Validation gate:</strong> " + L.validation.note +
+      " Examples: clergy computed " + L.validation.examples[0].ours + " vs NORC " + L.validation.examples[0].norc +
+      "; roofers " + L.validation.examples[1].ours + " vs " + L.validation.examples[1].norc + ".";
+    var host = document.getElementById("dumbbell-chart");
+    var min = -0.35, max = 0.65;
+    function pct(v) { return (v - min) / (max - min) * 100; }
+    L.dumbbell.forEach(function (r) {
+      var row = document.createElement("div"); row.className = "brow"; row.setAttribute("tabindex", "0");
+      var html = '<div class="lab">' + r.label + (r.role === "control" ? ' <span class="tier t2">control</span>' : "") + "</div>" +
+        '<div class="barwrap">' +
+        '<div style="position:absolute;left:' + pct(0) + '%;top:0;bottom:0;border-left:1px solid var(--baseline)"></div>';
+      if (r.partial != null) {
+        var a = Math.min(pct(r.raw), pct(r.partial)), w = Math.abs(pct(r.raw) - pct(r.partial));
+        html += '<div style="position:absolute;left:' + a + "%;width:" + w + '%;top:8px;height:2px;background:var(--grid)"></div>';
+      }
+      html += '<div style="position:absolute;left:' + pct(r.raw) + '%;top:4px;width:11px;height:11px;border-radius:50%;background:var(--ink-3);border:2px solid var(--surface-1);transform:translateX(-6px)"></div>';
+      if (r.partial != null) {
+        html += '<div style="position:absolute;left:' + pct(r.partial) + '%;top:4px;width:11px;height:11px;border-radius:50%;background:var(--series-1);border:2px solid var(--surface-1);transform:translateX(-6px)"></div>';
+      }
+      html += '</div><div class="val">' + (r.partial != null ? "→ " + String(r.partial).replace("0.", ".") : String(r.raw).replace("0.", ".")) + "</div>";
+      row.innerHTML = html;
+      bindTip(row, function () {
+        return tipHtml({ label: r.label,
+          value: "raw r=" + r.raw + (r.partial != null ? " → partial r=" + r.partial + " (" + r.p + ")" : " (control)"),
+          metric: "occupation-level correlation with % very satisfied, n=128 occupations",
+          src: "Computed this session — pipeline &amp; method log in analysis/linkage/", note: r.note });
+      });
+      host.appendChild(row);
+    });
+    var laxis = document.createElement("div"); laxis.className = "axisline";
+    laxis.style.marginLeft = "248px"; laxis.style.marginRight = "66px"; laxis.style.borderTop = "none";
+    [-0.3, 0, 0.2, 0.4, 0.6].forEach(function (t) {
+      var s = document.createElement("span"); s.style.left = pct(t) + "%"; s.textContent = String(t); laxis.appendChild(s);
+    });
+    host.appendChild(laxis);
+    if (pts.length) {
+      var W = 680, H = 380, padL = 48, padR = 18, padT = 14, padB = 34;
+      var xs = pts.map(function (p) { return p.a; });
+      var x0 = Math.min.apply(null, xs) - 0.1, x1 = Math.max.apply(null, xs) + 0.1;
+      function X(v) { return padL + (v - x0) / (x1 - x0) * (W - padL - padR); }
+      function Y(v) { return padT + (100 - v) / 100 * (H - padT - padB); }
+      var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" style="max-width:720px" role="img" aria-label="Autonomy versus satisfaction across 128 occupations">';
+      [0, 25, 50, 75, 100].forEach(function (g) {
+        s += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + Y(g) + '" y2="' + Y(g) + '" stroke="var(--grid)"/><text x="' + (padL - 6) + '" y="' + (Y(g) + 4) + '" text-anchor="end">' + g + "%</text>";
+      });
+      [-1, 0, 1].forEach(function (g) {
+        if (g > x0 && g < x1) s += '<text x="' + X(g) + '" y="' + (H - 22) + '" text-anchor="middle">' + g + "</text>";
+      });
+      s += '<text x="' + (W / 2) + '" y="' + (H - 4) + '" text-anchor="middle">O*NET autonomy composite (z)</text>';
+      pts.forEach(function (p, i) {
+        s += '<circle class="lpt" data-i="' + i + '" cx="' + X(p.a) + '" cy="' + Y(p.y) + '" r="' + (p.x ? 6 : 4.5) + '" fill="' + (p.x ? "var(--accent)" : "var(--series-1)") + '" fill-opacity="' + (p.x ? 1 : 0.75) + '" stroke="var(--surface-1)" stroke-width="2" tabindex="0"/>';
+      });
+      s += "</svg>";
+      var sc = document.getElementById("linkage-scatter"); sc.innerHTML = s;
+      sc.querySelectorAll(".lpt").forEach(function (c) {
+        var p = pts[+c.getAttribute("data-i")];
+        bindTip(c, function () {
+          return tipHtml({ label: p.t, value: p.y.toFixed(1) + "% very satisfied",
+            metric: "autonomy z=" + p.a.toFixed(2) + " · prestige " + p.p + " · GSS n=" + p.n + (p.q ? " · many-to-many crosswalk" : ""),
+            src: "GSS 1988–2006 × O*NET 30.3 (computed this session)",
+            note: p.x ? "NORC published-extreme occupation" : null });
+        });
+      });
+    }
+    var vh = document.getElementById("verdict-cards");
+    L.verdicts.forEach(function (v) {
+      var d = document.createElement("div");
+      d.className = "card" + (v.verdict === "SUPPORTED" ? "" : v.verdict.indexOf("UNTESTABLE") === 0 ? " nodata-card" : " conflict");
+      d.setAttribute("tabindex", "0");
+      d.innerHTML = '<h3 style="font-size:13px;color:var(--ink-2)">' + v.axis + "</h3>" +
+        '<div class="big" style="font-size:19px">' + v.verdict + "</div>" +
+        '<div class="src">' + v.detail + "</div>";
+      vh.appendChild(d);
+    });
+    document.getElementById("linkage-tension").innerHTML = "<strong>Honest tension:</strong> " + L.tension;
+    document.getElementById("linkage-limits").innerHTML = "<strong>Limitations:</strong> " + L.limitations.join(" · ");
+  })();
+
   /* ---------- gaps + removed ---------- */
   (function renderGaps() {
     var host = document.getElementById("gap-cards");
@@ -975,6 +1138,11 @@
     });
     DATA.meta.cards.forEach(function (c) {
       rows.push(["Meta", c.label, c.value, c.metric, c.src, "", "", c.tier, c.note || ""]);
+    });
+    if (DATA.linkage) DATA.linkage.dumbbell.forEach(function (r) {
+      rows.push(["Linkage (computed)", r.label,
+        "r=" + r.raw + (r.partial != null ? " → " + r.partial + " (" + r.p + ")" : " (control)"),
+        "occupation-level r with % very satisfied", "Computed this session from GSS microdata × O*NET 30.3 — pipeline in analysis/linkage/", "2026", "128 occupations", "C", r.note || ""]);
     });
     var tbl = document.getElementById("master-table");
     tbl.innerHTML = "<tr><th>Domain</th><th>Item</th><th>Value</th><th>Metric</th><th>Source</th><th>Year</th><th>Sample</th><th>Tier</th><th>Notes / conflicts</th></tr>" +

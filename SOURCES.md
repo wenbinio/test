@@ -216,6 +216,45 @@ Merck 74% and would-recommend values; Bozeman & Gaughan N; Halasy analyzed N; Sc
 mid-distribution table, per-occupation Ns, and the minimum-N threshold; the Schrever "28.7%"
 subfigure; Sandefur & Heinz claim.
 
+## Linkage analysis (computed this session — original, not a citation)
+
+**Design.** Independent-measurement linkage: O*NET incumbents/analysts rated occupations' work
+modality without seeing satisfaction data; GSS respondents reported satisfaction without seeing
+O*NET; the 1980-census occupation code is the only join. A literature scout confirmed no published
+study crosses GSS occupation-level satisfaction with O*NET (closest analog: Vainre et al. 2025,
+Estonian Biobank × O*NET, 263 occupations, primary-verified preprint — occupation-level partial
+r≈.17–.29; prestige not significant there).
+
+**Pipeline** (reproducible scripts + full method log in `analysis/linkage/`): GSS cumulative
+microdata (gss7224, downloaded from gss.norc.org) → % very satisfied per OCC80 occupation,
+1988–2006, WTSSALL-weighted, n≥30 → n=128 occupations; O*NET 30.3 Work Context/Activities elements
+aggregated backward through O*NET-SOC 2019 → SOC 2018 → Census 2018 → 2010 → 2002 → 2000 → 1990 →
+1980 (NIOSH/Beard 2022 proportional crosswalks, per-occupation quality flags). Sensitivity runs:
+n≥50 (89 occupations), window 1988–2010 (144), unweighted.
+
+**Validation gate vs the T1 NORC table:** mean |Δ| = 3.28 points across 23 matchable extremes
+(clergy computed 89.1 vs 87.2; roofers 26.1 vs 25.3); largest deltas are small-cell occupations.
+
+**Headline results** (occupation-level r with % very satisfied, n=128): prestige +.57 (strongest
+raw), autonomy composite +.47, education +.46, physicality −.30, coupling +.26, responsibility
++.25, social load +.13. After partialling out BOTH prestige and education: autonomy +.228
+(p=.0095; element "determine tasks/priorities/goals" +.236) and the authored coupling index +.181
+(p=.041) survive; physicality (+.01), responsibility (+.09), and social load (+.08) do not.
+Verdicts per modality axis: autonomy SUPPORTED; feedback speed and task identity UNTESTABLE (O*NET
+has no such elements — verified); social load and physicality NO INDEPENDENT SIGNAL;
+responsibility–control coupling WEAK/SUGGESTIVE (derived formula).
+
+**Honest tension:** prestige is the strongest raw correlate — against the strongest reading of the
+central claim; the defensible statement is that autonomy carries signal *beyond* prestige and
+education. The Estonian linkage found prestige not significant — cross-country conflict displayed,
+not resolved.
+
+**Limitations** (full list in the artifact and results JSON): ecological inference only
+(non-homology across levels, van Veldhoven 2025; subjective-vs-objective r=.11, Schmitz 2019);
+temporal offset (O*NET ~2019–2023 vs GSS 1988–2006); five-hop probabilistic crosswalk attenuation
+(369/502 occupations many-to-many); representative-SOC approximation on the 2018 hop; equal
+within-occupation O*NET weighting; coupling index is authored.
+
 ## Interpretive layer disclosure
 
 The six work-modality axes and all per-role pip ratings are an **authored interpretive framework,
