@@ -30,9 +30,11 @@ a physicality composite correlated negatively (r = −.30). After partialling ou
 education, autonomy remained significant (partial r = .228, nominal p = .0095) — its "determine
 tasks, priorities and goals" element being the strongest residual predictor (.236) — while
 physicality (+.01), consequence-of-error (−.02), social load (+.08), and a responsibility composite
-(+.09) fell to null. P-values are unadjusted; the autonomy result's evidential weight rests on its
-replication across stricter cell thresholds (n ≥ 50), a wider window (1988–2010), single- and
-double-control blocks, and a mean-satisfaction outcome. Two modality dimensions (feedback speed, task identity) proved
+(+.09) fell to null. P-values are unadjusted; the autonomy result's evidential weight rests on the
+stability of its *partial* correlation across single- and double-control blocks, both satisfaction
+outcomes, and the stricter n ≥ 50 cell threshold (partial r = .237, p = .027), together with a raw
+correlation that holds under the wider 1988–2010 window (partial correlations were not computed for
+that window). Two modality dimensions (feedback speed, task identity) proved
 untestable: O*NET contains no corresponding elements. We report an honest tension: prestige is the
 strongest raw ecological correlate, contrary to the strongest structural reading — yet the comparable
 Estonian linkage (Vainre et al., 2025) found prestige non-significant. Autonomy is the one modality
@@ -182,11 +184,14 @@ Per-occupation `crosswalk_quality` and `coverage` flags are carried in the resul
 Before any correlation was computed, recomputed occupation percentages were compared with the
 primary NORC tabulation (Table 1 of GSS News No. 21, July 2007, fetched and read directly this
 session). Across the 23 matchable published extremes, mean |Δ| = **3.28** percentage points
-(max 9.1); clergy 89.1 vs 87.2; roofers 26.1 vs 25.3 (Appendix A). Two of the 23 validation cells
-(physical therapists n = 25, roofers n = 26) fall below the n ≥ 30 threshold used for the analytic
-sample and enter the validation only; and one published extreme — "Teachers" — could not be paired
-with an OCC80 cell by title-matching and is absent from the gate (reason undetermined; see
-Appendix A). The largest deviations occur in the smallest cells (e.g., furniture salespersons
+(max 9.1); clergy 89.1 vs 87.2; roofers 26.1 vs 25.3 (Appendix A). Six of the 23 validation cells
+(physical therapists n = 25, authors n = 24, roofers n = 26, expediters n = 26, butchers n = 23,
+furniture salespersons n = 22) fall below the n ≥ 30 threshold used for the analytic sample and
+enter the validation only — so 17 of the 23 published extremes are in the 128-occupation analytic
+sample; and one published extreme — "Teachers" — could not be paired with an OCC80 cell by
+title-matching and is absent from the gate (reason undetermined; see Appendix A). The gate
+validates the *outcome* recomputation at the distribution extremes only: it speaks neither to
+mid-distribution cells nor to the predictor/crosswalk side, which has no external validation. The largest deviations occur in the smallest cells (e.g., furniture salespersons
 n = 22, −8.4), consistent with sampling noise around an unknown NORC pooling window and cell
 threshold. Two incidental findings: our recomputed office-supervisor value (58.4) sides with the
 table figure (60.8) over the report's own prose (80.6), corroborating the digit-transposition
@@ -204,11 +209,14 @@ every estimate; exact values are in the results JSON. No individual-level infere
 sensitivity replications; all p-values are nominal and unadjusted. Under a Bonferroni correction
 across 16 predictors (α ≈ .003), no double-control partial — including the flagship autonomy result
 (p = .0095) — would clear the bar on its p-value alone. The evidential weight we place on autonomy
-therefore rests on its *consistency across independent replications* (both single-control blocks,
-both cell thresholds, both windows, both outcomes; § 4.3), not on any single test. Results near the
-nominal threshold without such replication — the coupling index (p = .041) and the
-deal-with-external-customers element (p = .052) — are reported as exploratory and should be treated
-as likely multiplicity casualties until independently replicated.
+therefore rests on the *consistency of its partial correlation* across both single-control blocks,
+both satisfaction outcomes, and the stricter n ≥ 50 threshold (partial r = .237, p = .027),
+reinforced by a raw correlation that holds across both cell thresholds and both windows (§ 4.3) —
+not on any single test. Partial correlations were computed for the primary and n ≥ 50 samples; the
+1988–2010 sensitivity block carries raw Pearson only. Results near the nominal threshold without
+such replication — the coupling index (p = .041) and the deal-with-external-customers element
+(p = .052) — are reported as exploratory and should be treated as likely multiplicity casualties
+until independently replicated.
 
 ## 4. Results
 
@@ -276,13 +284,18 @@ window (raw Pearson): n ≥ 50 (89 occupations): autonomy .503, determine-tasks 
 physicality −.310, prestige .600, education .486. Window 1988–2010 (144 occupations): autonomy
 .480, coupling .299, physicality −.327, prestige .585, education .516. With the weighted mean
 (1–4) as outcome instead of % very satisfied: prestige .598, autonomy .495, education .462,
-physicality −.318; autonomy's double-control partial is .260 (p = .003).
+physicality −.318; autonomy's double-control partial is .260 (p = .003). Recomputing the double
+control within the stricter n ≥ 50 subsample — the one sensitivity sample reconstructable at the
+occupation level — yields autonomy .237 (p = .027) and determine-tasks .279 (p = .009), with
+physicality still null (−.02); double-control partials were not computed for the 1988–2010 window,
+which is reported as raw Pearson only. (These subsample partials were added to the results JSON
+during adversarial review, verified by two independent computations.)
 
 ### 4.4 Verdicts on the six modality axes
 
 | Axis | Verdict | Basis |
 |---|---|---|
-| Autonomy (volition) | **Supported** | Survives prestige+education controls (.228, p = .0095) and replicates across all sensitivity blocks; strongest residual element .236 |
+| Autonomy (volition) | **Supported** | Survives prestige+education controls (.228, p = .0095); partial replicates under the n ≥ 50 threshold (.237, p = .027) and the mean-satisfaction outcome (.260, p = .003); raw correlation holds across all sensitivity blocks; strongest residual element .236 |
 | Feedback speed | **Untestable** | No O*NET element exists |
 | Task identity | **Untestable** | No O*NET element exists |
 | Social load | Not detected | .13 raw (n.s.), .08 partial (n.s.) — a null throughout; attenuation toward zero cannot be ruled out |
@@ -295,9 +308,10 @@ Three conclusions are licensed by these data, one tension must be stated, and tw
 part of the finding.
 
 **Autonomy carries independent occupation-level signal.** The only modality construct surviving
-double controls — and replicating across every sensitivity block — is autonomy, and its strongest
-element is not freedom-from-supervision but the latitude to *determine one's own tasks, priorities,
-and goals*. This is compatible with, though not evidence for, self-determination theory's construal
+double controls is autonomy — a partial that also holds under the stricter n ≥ 50 threshold (.237)
+and the mean-satisfaction outcome (.260), and whose raw correlation replicates across every
+sensitivity block — and its strongest element is not freedom-from-supervision but the latitude to
+*determine one's own tasks, priorities, and goals*. This is compatible with, though not evidence for, self-determination theory's construal
 of autonomy as volition rather than independence; the much larger individual-level association in
 an unrelated population (r = .66 among lawyers; Krieger & Sheldon, 2015) is a separate,
 non-comparable data point offered as thematic context, not corroboration, and single occupations
@@ -353,7 +367,10 @@ finding, and a research recommendation.
    scales); coupling especially should be treated as exploratory.
 7. **No causal claims.** Selection of persons into occupations, compensating differentials, and
    omitted occupation-level variables (income itself, hours, precarity) remain unmodeled; prestige
-   and education are coarse proxies for the status/compensation bundle.
+   and education are coarse proxies for the status/compensation bundle, and — being themselves
+   measured with error and mutually correlated at r = .82 — cannot fully absorb it, so the autonomy
+   partial may retain status/compensation variance the controls leave behind (residual
+   confounding). The "beyond prestige and education" claim is conditional on this.
 8. **Nominal, unadjusted p-values.** Dozens of tests are reported without multiplicity correction
    (§ 3.5); only results replicating across independent blocks (autonomy) are treated as findings,
    and near-threshold results (coupling, deal-with-external-customers) as exploratory.
@@ -371,15 +388,24 @@ one modality dimension still associated with additional satisfaction is volition
 
 ## 8. Verification statement
 
-Every empirical figure in this paper was checked by independent agents before publication:
-(i) a **numbers checker** (Sonnet) audited every statistic in this manuscript against
-`analysis/linkage/linkage-results.json` and the artifact dataset; (ii) a **citation checker**
-(Sonnet) verified every reference's existence and bibliographic details against live sources, and
-its session-verification status against `SOURCES.md`; (iii) a **methods checker** (Sonnet) reviewed
-statistical reporting and inferential language for overclaim; and (iv) an **adversarial reviewer**
-(Opus) attempted to refute the paper's claims from the underlying data and required revisions
-before sign-off. The checker reports and their resolutions are summarized in
-`analysis/linkage/PAPER-verification.md`.
+Every empirical figure in this paper was checked by independent agents before publication, and
+every checker found something the others did not:
+(i) a **numbers checker** (Sonnet) audited every statistic against
+`analysis/linkage/linkage-results.json` — 96 checks, 0 mismatches; five crosswalk counts it could
+not verify from persisted output were subsequently confirmed by re-running the pipeline step.
+(ii) a **citation checker** (Sonnet) verified all 17 references against live sources — one
+bibliographic error found and fixed (Beard: *Epidemiology* 33(2), not 33(3)); the Vainre and
+Schmitz factual attachments were re-confirmed against primary full text; five provenance tags
+lacked ledger entries, now added to `SOURCES.md`.
+(iii) a **methods checker** (Sonnet) flagged five must-fix issues, all applied: causal-language
+slips, absent multiplicity discussion, a selectively incomplete Spearman column, an "a priori"
+overclaim about construct provenance, and undisclosed sub-threshold validation cells.
+(iv) an **adversarial reviewer** (Opus) reproduced the flagship result exactly, then found two
+defects the prior checkers missed — a raw-vs-partial conflation in the replication claims (fixed;
+the missing n ≥ 50 double-control partial was computed, independently re-verified, and added to the
+results JSON: autonomy .237, p = .027) and a miscount of sub-threshold validation cells (six, not
+two; fixed) — and returned **ACCEPT-WITH-REQUIRED-CHANGES**; all required changes are applied in
+this version. Full reports and resolutions: `analysis/linkage/PAPER-verification.md`.
 
 ## Data and code availability
 
@@ -472,6 +498,5 @@ Recomputed (GSS 1988–2006, weighted) vs Smith (2007) Table 1, % very satisfied
 Mean |Δ| = 3.28; max |Δ| = 9.1. "Teachers" is the one published extreme absent above: it is the only
 NORC row the pipeline's title-matching did not pair with an OCC80 cell, and the reason was not
 determined this session (candidate cause: NORC's "Teachers" aggregates several OCC80 teaching codes;
-unverified). Occupations below the n ≥ 30 threshold (e.g., physical therapists n = 25, roofers
-n = 26) are validated here but excluded from the correlation sample. See
-`linkage-results.json → validation_vs_norc`.
+unverified). Occupations below the n ≥ 30 threshold (six in total; enumerated in § 3.4) are validated here but
+excluded from the correlation sample. See `linkage-results.json → validation_vs_norc`.
