@@ -160,8 +160,9 @@
 
   /* inputs / buttons */
   .row{display:flex; gap:8px; margin-bottom:10px}
-  input[type=text]{flex:1; min-width:0; font-family:var(--mono); font-size:13px; color:var(--ink); background:var(--panel-2); border:1px solid var(--line-strong); border-radius:8px; padding:8px 10px}
-  input[type=text]:focus-visible{outline:2px solid var(--gold-bright); outline-offset:1px; border-color:var(--gold)}
+  input[type=text],input[type=number],select{flex:1; min-width:0; font-family:var(--mono); font-size:13px; color:var(--ink); background:var(--panel-2); border:1px solid var(--line-strong); border-radius:8px; padding:8px 10px}
+  select{cursor:pointer}
+  input[type=text]:focus-visible,input[type=number]:focus-visible,select:focus-visible{outline:2px solid var(--gold-bright); outline-offset:1px; border-color:var(--gold)}
   #decodeInput{letter-spacing:.24em; text-align:center; font-size:15px}
   .btn{font-family:var(--mono); font-size:12px; letter-spacing:.03em; border-radius:8px; cursor:pointer; border:1px solid var(--gold); background:var(--gold); color:#fff; padding:8px 12px; transition:.14s; white-space:nowrap}
   :root[data-theme="dark"] .btn{color:#151607}
@@ -303,6 +304,30 @@
           <div class="slider" data-w="park"><div class="top"><span class="lbl">Parks &amp; green corridors</span><span class="val">70</span></div><input type="range" min="0" max="100" value="70"></div>
           <div class="slider" data-w="transit"><div class="top"><span class="lbl">Walkable public access / heartland</span><span class="val">60</span></div><input type="range" min="0" max="100" value="60"></div>
           <div class="slider" data-w="coast"><div class="top"><span class="lbl">Waterfront &amp; park connectors</span><span class="val">35</span></div><input type="range" min="0" max="100" value="35"></div>
+          <div class="slider" data-w="retail"><div class="top"><span class="lbl">Retail hubs (this edition's coins)</span><span class="val">60</span></div><input type="range" min="0" max="100" value="60"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="group">
+          <h2><span class="n">R</span> Distance clues</h2>
+          <p class="hint">Sqkii's hints often give radii — <i>"at least 800m from where planes land," "within 2.7km of a mall."</i> Add them; the map carves to what survives.</p>
+          <div class="row">
+            <select id="dcType" aria-label="Clue type">
+              <option value="within">within</option>
+              <option value="atleast">at least</option>
+            </select>
+            <input type="number" id="dcKm" min="0.1" step="0.1" value="1.0" aria-label="Kilometres" style="max-width:78px">
+            <span style="align-self:center; font-size:12px; color:var(--muted)">km of</span>
+          </div>
+          <div class="chips" id="dcAnchor" style="margin-bottom:10px">
+            <span class="chip" role="button" tabindex="0" aria-pressed="true" data-a="malls">a mall</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-a="airport">the airport</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-a="orchard">Orchard</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-a="grounds">festival grounds</span>
+          </div>
+          <button class="btn" id="dcAdd" style="width:100%">Add distance clue</button>
+          <ul class="clues" id="dcList" style="margin-top:10px"></ul>
         </div>
       </div>
 
@@ -351,12 +376,13 @@
         <div class="item"><span class="sw" style="background:var(--water-deep)"></span>Water</div>
         <div class="item"><span class="sw" style="background:repeating-linear-gradient(45deg,var(--danger),var(--danger) 3px,transparent 3px,transparent 6px)"></span>Excluded</div>
         <div class="item"><span class="ring"></span>Past find</div>
+        <div class="item"><span class="ring" style="border-color:var(--water-deep); border-style:dashed"></span>Festival ground</div>
         <div class="item"><span class="heatbar"></span>Low → high likelihood</div>
       </div>
       <p class="map-note" id="mapNote"></p>
 
       <div class="results">
-        <h3>Top candidate zones</h3>
+        <h3 id="rhead">Today's Top 5 — search here</h3>
         <p class="rcap" id="rcap">Where the current rules, weights &amp; clues concentrate a single-coin hide.</p>
         <div class="ranks" id="ranks"></div>
       </div>
@@ -441,6 +467,15 @@
       ['Sembawang Park',103.822,1.458],['Pasir Ris',103.952,1.373],['Labrador',103.802,1.266],
       ['West Coast',103.762,1.293],['Kallang Basin',103.868,1.303],['PCN – Serangoon',103.882,1.377],
     ],
+    retail:[ // festival grounds + participating retail hubs (Retail Festival edition)
+      ['Ngee Ann City',103.8348,1.3038],['313@Somerset',103.8385,1.3009],['ION Orchard',103.8318,1.3040],
+      ['Plaza Singapura',103.8455,1.3009],['Bugis Junction',103.8555,1.2996],['Bugis+',103.8555,1.3000],
+      ['Suntec City',103.8590,1.2950],['Funan',103.8500,1.2915],['VivoCity',103.8220,1.2645],
+      ['Junction 8 Bishan',103.8480,1.3505],['AMK Hub',103.8480,1.3690],['NEX Serangoon',103.8720,1.3505],
+      ['Tampines Mall',103.9440,1.3530],['Our Tampines Hub',103.9390,1.3540],['Jurong Point',103.7065,1.3400],
+      ['JEM / Westgate',103.7430,1.3335],['Waterway Point',103.9025,1.4075],['Causeway Point',103.7865,1.4360],
+      ['Compass One Sengkang',103.8950,1.3925],['Northpoint Yishun',103.8360,1.4290],
+    ],
   };
 
   // Confirmed past grand-coin finds (approx coords from reported landmarks).
@@ -474,10 +509,24 @@
     'Bakau','Compassvale','Rumbia','Bangkit','Petir','Pending','Phoenix','Teck','Whye','Fajar','Segar','Jelapang',
     'Senja','Keat','Hong','Caldecott','Marymount','Bright','Lorong','Chuan','Ang','Mo','Kio','Yio','Lentor'];
 
-  const weights = {bench:85, park:70, transit:60, coast:35};
+  // festival grounds (drawn as hub rings in live mode)
+  const HUBS = [
+    {name:'Ngee Ann City Civic Plaza', lon:103.8348, lat:1.3038, note:'Main SRF ground · 4–19 Jul'},
+    {name:'313@Somerset', lon:103.8385, lat:1.3009, note:'Named hunting hub'},
+    {name:'SRF @ Funan', lon:103.8500, lat:1.2915, note:'25–26 Jul'},
+    {name:'SRF @ Bugis', lon:103.8555, lat:1.2996, note:'25–26 Jul'},
+  ];
+
+  const weights = {bench:85, park:70, transit:60, coast:35, retail:60};
+  // mode reshapes emphasis without moving the sliders
+  const modeMult = {
+    classic:{bench:1, park:1, transit:1, coast:1, retail:0.35},
+    live:   {bench:0.7, park:0.7, transit:0.85, coast:0.6, retail:1.9},
+  };
   const rules = {water:true, restricted:true, free:false};
   const regions = new Set();
   const clues = [];
+  const distanceClues = []; // {label, type:'within'|'atleast', km, set:[[name,lon,lat],...]}
   let mode = 'classic';
   let showPast = true;
 
@@ -512,8 +561,9 @@
 
   function compute(){
     cells=[]; let maxScore=1e-6;
-    const active=Object.entries(weights).filter(([k,v])=>v>0);
-    const sscale = mode==='live' ? 1.7 : 1;
+    const MM=modeMult[mode];
+    const active=Object.entries(weights).map(([k,v])=>[k, v*(MM[k]??1)]).filter(([k,v])=>v>0);
+    const sscale = mode==='live' ? 1.5 : 1;
     for(let iy=0;iy<NY;iy++) for(let ix=0;ix<NX;ix++){
       const lon=B.lon0+(ix+0.5)/NX*(B.lon1-B.lon0);
       const lat=B.lat0+(iy+0.5)/NY*(B.lat1-B.lat0);
@@ -528,10 +578,17 @@
         const rs=regionOf(lon,lat); let ok=false; regions.forEach(r=>{ if(rs.has(r)) ok=true; });
         if(!ok) state='excl';
       }
+      if(state==='cand' && distanceClues.length){
+        for(const dc of distanceClues){
+          const d=nearestKm(lon,lat,dc.set);
+          if(dc.type==='within' && d>dc.km){ state='excl'; break; }
+          if(dc.type==='atleast' && d<dc.km){ state='excl'; break; }
+        }
+      }
       if(state==='cand'){
         let wsum=0;
         for(const [k,v] of active){
-          const sigma=(k==='transit'?2.6 : k==='coast'?2.2 : k==='bench'?2.2 : 2.4)*sscale;
+          const sigma=(k==='transit'?2.6 : k==='coast'?2.2 : k==='retail'?2.0 : k==='bench'?2.2 : 2.4)*sscale;
           score += (v/100)*gauss(nearestKm(lon,lat,A[k]),sigma); wsum+=(v/100);
         }
         score = wsum>0 ? score/wsum : 0;
@@ -575,6 +632,16 @@
 
     landPath(); ctx.lineWidth=1.6; ctx.strokeStyle=g('--land-edge'); ctx.stroke();
 
+    // festival grounds (teal hub rings) — live mode
+    if(mode==='live'){
+      ctx.strokeStyle=g('--water-deep'); ctx.fillStyle=g('--water-deep');
+      for(const h of HUBS){
+        const[x,y]=project(h.lon,h.lat,W,H);
+        ctx.beginPath(); ctx.arc(x,y,7.5,0,7); ctx.lineWidth=2; ctx.setLineDash([3,2]); ctx.stroke(); ctx.setLineDash([]);
+        ctx.beginPath(); ctx.arc(x,y,2,0,7); ctx.fill();
+      }
+    }
+
     // past finds (hollow rings)
     if(showPast){
       ctx.font='700 10px ui-monospace,Menlo,monospace';
@@ -612,12 +679,13 @@
       acc[k].sum+=c.norm; acc[k].n++; acc[k].peak=Math.max(acc[k].peak,c.norm);
     }
     topZones=Object.values(acc).map(z=>({...z,val:z.peak*0.65+(z.sum/Math.max(1,z.n))*0.35}))
-      .sort((a,b)=>b.val-a.val).slice(0,6);
+      .sort((a,b)=>b.val-a.val).slice(0,5);
     renderRanks();
   }
 
   function whyText(z){
     const parts=[]; const near=(set,lbl,km)=>{ if(nearestKm(z.lon,z.lat,set)<km) parts.push(lbl); };
+    if(mode==='live') near(A.retail,'retail hub',1.6);
     if(weights.bench>0) near(A.bench,'benches/tree bases',1.8);
     if(weights.park>0) near(A.park,'green space',1.8);
     if(weights.transit>0) near(A.transit,'walkable access',1.6);
@@ -695,15 +763,66 @@
     chip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleChip(chip);} });
   });
 
+  // ---- distance clues ----
+  const DC_LABELS={malls:'a mall',airport:'the airport',orchard:'Orchard',grounds:'festival grounds'};
+  let dcAnchor='malls';
+  function anchorSet(a){
+    if(a==='airport') return [['Changi',103.99,1.357]];
+    if(a==='orchard') return [['Orchard',103.834,1.304]];
+    if(a==='grounds') return HUBS.map(h=>[h.name,h.lon,h.lat]);
+    return A.retail;
+  }
+  document.querySelectorAll('#dcAnchor .chip').forEach(chip=>{
+    const act=()=>{ document.querySelectorAll('#dcAnchor .chip').forEach(c=>c.setAttribute('aria-pressed','false')); chip.setAttribute('aria-pressed','true'); dcAnchor=chip.dataset.a; };
+    chip.addEventListener('click',act);
+    chip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();act();} });
+  });
+  function renderDc(){
+    const el=document.getElementById('dcList');
+    if(!distanceClues.length){ el.innerHTML='<li class="empty">No distance clues</li>'; return; }
+    el.innerHTML=distanceClues.map((d,i)=>`<li><span class="tag">${d.type==='within'?'≤':'≥'} ${d.km}km</span><span>${d.label}</span><button class="x" data-i="${i}" aria-label="Remove">×</button></li>`).join('');
+    el.querySelectorAll('.x').forEach(b=>b.addEventListener('click',()=>{ distanceClues.splice(+b.dataset.i,1); renderDc(); compute(); }));
+  }
+  document.getElementById('dcAdd').addEventListener('click',()=>{
+    const type=document.getElementById('dcType').value;
+    const km=parseFloat(document.getElementById('dcKm').value); if(!(km>0)) return;
+    distanceClues.push({type,km,set:anchorSet(dcAnchor),label:`${type==='within'?'within':'at least'} ${km}km of ${DC_LABELS[dcAnchor]}`});
+    renderDc(); compute();
+  });
+
+  // ---- self-dating festival context ----
+  function festivalContext(){
+    const d=new Date(), m=d.getMonth(), day=d.getDate(), y=d.getFullYear();
+    const fmt=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+    let theme=null, ground=null, active=false;
+    if(y===2026 && m===6){
+      active = day>=4 && day<=26;
+      if(day>=4&&day<=5) theme='Pets & Pawrents weekend';
+      else if(day>=10&&day<=12) theme='TCG & Gaming weekend';
+      else if(day>=17&&day<=19) theme='Lifestyle & Wellness weekend';
+      else if(day>=25&&day<=26) theme='SRF @ Funan & Bugis';
+      ground = (day>=4&&day<=19) ? 'Main ground: Ngee Ann City Civic Plaza'
+             : (day>=25&&day<=26) ? 'Grounds: Funan & Bugis' : 'Between grounds — hubs islandwide';
+    }
+    return {fmt,theme,ground,active};
+  }
+  function applyContext(){
+    const c=festivalContext();
+    document.getElementById('rhead').textContent = `Today's Top 5 · ${c.fmt}`;
+    if(mode==='live'){
+      const bits=[]; if(c.ground) bits.push(c.ground); if(c.theme) bits.push(c.theme);
+      document.getElementById('rcap').innerHTML = (c.active?'<b>Live edition</b> · ':'') + (bits.length?bits.join(' · '):'Retail-hub placement likelihood') + ' — feed today’s 6pm hint to collapse to one coin.';
+    } else {
+      document.getElementById('rcap').textContent = 'Single-coin logic: where rules, history & clues concentrate a hide.';
+    }
+  }
+
   document.querySelectorAll('#mode button').forEach(btn=>btn.addEventListener('click',()=>{
     mode=btn.dataset.mode;
     document.querySelectorAll('#mode button').forEach(b=>b.setAttribute('aria-selected',String(b===btn)));
     document.getElementById('stageTitle').textContent = mode==='live'
       ? 'Coin-density likelihood · 200 coins islandwide' : 'Candidate density · Singapore main island';
-    document.getElementById('rcap').textContent = mode==='live'
-      ? 'Live edition scatters coins near footfall citywide — this shows where accessible public spots concentrate, not one coin.'
-      : 'Where the current rules, weights & clues concentrate a single-coin hide.';
-    updateNote(); compute();
+    applyContext(); updateNote(); compute();
   }));
 
   function updateNote(){
@@ -723,19 +842,19 @@
   });
 
   document.getElementById('reset').addEventListener('click',()=>{
-    Object.assign(weights,{bench:85,park:70,transit:60,coast:35});
+    Object.assign(weights,{bench:85,park:70,transit:60,coast:35,retail:60});
     document.querySelectorAll('.slider').forEach(s=>{ const i=s.querySelector('input'); i.value=weights[s.dataset.w]; i.dispatchEvent(new Event('input')); });
-    regions.clear(); clues.length=0;
+    regions.clear(); clues.length=0; distanceClues.length=0;
     document.querySelectorAll('#regionChips .chip').forEach(c=>c.setAttribute('aria-pressed','false'));
     Object.assign(rules,{water:true,restricted:true,free:false});
     document.getElementById('r_water').checked=true; document.getElementById('r_restricted').checked=true; document.getElementById('r_free').checked=false;
-    renderClues(); compute();
+    renderClues(); renderDc(); compute();
   });
 
   let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(draw,120); });
   window.matchMedia('(prefers-color-scheme:dark)').addEventListener?.('change',draw);
   new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 
-  updateNote(); decode(); renderClues(); compute();
+  applyContext(); updateNote(); decode(); renderClues(); renderDc(); compute();
 })();
 </script>
