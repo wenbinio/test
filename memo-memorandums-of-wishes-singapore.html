@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memorandums of Wishes in Singapore — Legal Memo</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --panel: #ffffff;
+    --text: #1f1c17;
+    --muted: #5c574d;
+    --heading: #14100a;
+    --rule: #d9d3c6;
+    --rule-strong: #b8b0a0;
+    --accent: #6b4f2a;
+    --accent-soft: #8a6d42;
+    --quote-bg: #f0ece2;
+    --quote-border: #a98a55;
+    --table-head-bg: #ece7dc;
+    --table-stripe: #f4f1ea;
+    --link: #7a4d1f;
+    --toc-bg: #f0ece2;
+    --shadow: 0 1px 3px rgba(30, 25, 15, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140f;
+      --panel: #201d16;
+      --text: #e4ded1;
+      --muted: #a49d8d;
+      --heading: #f2ecdd;
+      --rule: #38342a;
+      --rule-strong: #4c4638;
+      --accent: #c9a36a;
+      --accent-soft: #d4b483;
+      --quote-bg: #262219;
+      --quote-border: #a9854f;
+      --table-head-bg: #2a2619;
+      --table-stripe: #241f18;
+      --link: #d3a86a;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f7f5f0;
+    --panel: #ffffff;
+    --text: #1f1c17;
+    --muted: #5c574d;
+    --heading: #14100a;
+    --rule: #d9d3c6;
+    --rule-strong: #b8b0a0;
+    --accent: #6b4f2a;
+    --accent-soft: #8a6d42;
+    --quote-bg: #f0ece2;
+    --quote-border: #a98a55;
+    --table-head-bg: #ece7dc;
+    --table-stripe: #f4f1ea;
+    --link: #7a4d1f;
+    --toc-bg: #f0ece2;
+    --shadow: 0 1px 3px rgba(30, 25, 15, 0.08);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #16140f;
+    --panel: #201d16;
+    --text: #e4ded1;
+    --muted: #a49d8d;
+    --heading: #f2ecdd;
+    --rule: #38342a;
+    --rule-strong: #4c4638;
+    --accent: #c9a36a;
+    --accent-soft: #d4b483;
+    --quote-bg: #262219;
+    --quote-border: #a9854f;
+    --table-head-bg: #2a2619;
+    --table-stripe: #241f18;
+    --link: #d3a86a;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 3rem 1.75rem 5rem;
+  }
+
+  /* Memo header block */
+  .memo-header {
+    border-bottom: 3px double var(--rule-strong);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .memo-title {
+    font-size: 1.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 0 0 1.25rem;
+    text-align: center;
+  }
+
+  .memo-meta {
+    margin: 0;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.35rem 0.9rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .memo-meta dt {
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.82rem;
+    padding-top: 0.15rem;
+  }
+
+  .memo-meta dd {
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* Table of contents */
+  nav.toc {
+    background: var(--toc-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem 1.2rem;
+    margin: 0 0 2.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  nav.toc h2 {
+    margin: 0 0 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: none;
+    padding: 0;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.4rem;
+    columns: 2;
+    column-gap: 2rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    nav.toc ol { columns: 1; }
+  }
+
+  nav.toc li { margin: 0.25rem 0; break-inside: avoid; }
+
+  a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  a:hover { border-bottom-color: var(--link); }
+
+  /* Headings */
+  h2, h3, h4 {
+    color: var(--heading);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    margin: 3rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--rule-strong);
+    scroll-margin-top: 1rem;
+  }
+
+  h3 {
+    font-size: 1.12rem;
+    margin: 2rem 0 0.75rem;
+    color: var(--accent);
+  }
+
+  h4 {
+    font-size: 1.02rem;
+    margin: 1.5rem 0 0.6rem;
+  }
+
+  p { margin: 0 0 1rem; }
+
+  strong { font-weight: 700; color: var(--heading); }
+
+  em { font-style: italic; }
+
+  /* Lists */
+  ol, ul { margin: 0 0 1.2rem; padding-left: 1.6rem; }
+
+  li { margin: 0.5rem 0; }
+
+  li > ul, li > ol { margin: 0.5rem 0 0.5rem; }
+
+  /* Blockquotes — judicial quotations */
+  blockquote {
+    margin: 1.2rem 0;
+    padding: 0.85rem 1.3rem;
+    background: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  blockquote p { margin: 0; }
+
+  /* Horizontal rules */
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  /* Table of Authorities */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.25rem 0 1.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 46rem;
+    font-size: 0.92rem;
+    background: var(--panel);
+  }
+
+  thead th {
+    background: var(--table-head-bg);
+    color: var(--heading);
+    text-align: left;
+    font-weight: 700;
+    padding: 0.7rem 0.85rem;
+    border-bottom: 2px solid var(--rule-strong);
+    vertical-align: bottom;
+  }
+
+  tbody td {
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  tbody tr:nth-child(even) { background: var(--table-stripe); }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  td:first-child, th:first-child {
+    text-align: center;
+    width: 2.5rem;
+    color: var(--muted);
+  }
+
+  .conclusion {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--quote-bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .memo-footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="memo-header">
+    <h1 class="memo-title">Memorandum</h1>
+    <dl class="memo-meta">
+      <dt>Re</dt>
+      <dd>Legal status of Memorandums (Letters) of Wishes in Singapore — (a) whether legally binding; (b) whether they take precedence over a trust deed or will</dd>
+      <dt>Date</dt>
+      <dd>13 July 2026</dd>
+      <dt>Jurisdiction</dt>
+      <dd>Singapore (with persuasive Commonwealth authority as received in Singapore)</dd>
+    </dl>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#executive-summary">Executive Summary</a></li>
+      <li><a href="#part-i">I. What a Memorandum of Wishes Is</a></li>
+      <li><a href="#part-ii">II. Question (a): Are Memorandums of Wishes Legally Binding in Singapore?</a></li>
+      <li><a href="#part-iii">III. Question (b): Does a Memorandum of Wishes Take Precedence Over a Trust Deed or Will?</a></li>
+      <li><a href="#part-iv">IV. Related Issue: Disclosure of a Memorandum of Wishes to Beneficiaries</a></li>
+      <li><a href="#part-v">V. Table of Authorities</a></li>
+      <li><a href="#part-vi">VI. Practical Implications</a></li>
+      <li><a href="#part-vii">VII. Caveats</a></li>
+    </ol>
+  </nav>
+
+  <section id="executive-summary">
+    <h2>Executive Summary</h2>
+
+    <ol>
+      <li><strong>A memorandum of wishes (also "letter of wishes" or "statement of wishes") is not legally binding in Singapore.</strong> It is a precatory, informal document by which a settlor (or testator) communicates non-binding guidance to trustees (or executors/beneficiaries) on how they might exercise their discretions. Singapore courts have consistently treated such documents as creating <strong>no legal obligation</strong> on the trustee, protector, or beneficiaries: <em>Re BKR</em> [2015] SGCA 26 at [159]; <em>Ivanishvili v Credit Suisse Trust Ltd</em> [2023] SGHC(I) 9 at [100], [425]–[427]; <em>Shiraz Abidally Husain v Husain Safdar Abidally</em> [2007] SGCA 16; <em>Official Assignee (Tay Teng Tiang William) v Tay Lee Kiang Liza</em> [2013] SGHC 239 at [79].</li>
+
+      <li><strong>It does not take precedence over a trust deed or a will.</strong> The trust deed is the governing instrument; the memorandum of wishes cannot amend it, cut down the trustee's dispositive discretions, or be enforced against its terms. As against a will, a memorandum of wishes that does not comply with the formalities of s 6 of the Wills Act 1838 has <strong>no testamentary effect</strong> and cannot vary or override the will. The hierarchy is: <strong>trust deed / will → statute and general law → memorandum of wishes (guidance only)</strong>.</li>
+
+      <li>Four important qualifications:
+        <ul>
+          <li><strong>Trustees must still <em>consider</em> the wishes.</strong> A settlor's wishes are a material consideration in the exercise of fiduciary discretion, and a trustee who ignores a relevant letter of wishes (or slavishly follows it without independent judgment) may have its exercise of discretion impugned. Singapore courts treat the document as one the trustee is entitled — and, where discretions are flexible, expected — to have regard to: <em>Suhaidah bte Mohd Noor v Syed Ahmad Jamal Alsagoff</em> [2014] SGHC 116 at [30]; cf. <em>Pitt v Holt</em> [2013] UKSC 26 at [66] (obiter, persuasive).</li>
+          <li><strong>Drafting can change its character.</strong> If the "wishes" document uses <strong>mandatory rather than permissive language</strong>, it may evidence settlor control that undermines the trust structure or expands the trustee's exposure — the express distinction drawn in <em>Ivanishvili</em> [2023] SGHC(I) 9 at [426]–[427], contrasting the permissive Mandalay Trust memorandum with the mandatory letter of wishes in <em>Zhang Hong Li v DBS Bank (Hong Kong) Ltd</em> (HKCFA).</li>
+          <li><strong>Beneficiaries can voluntarily bind themselves to it.</strong> A memorandum of wishes can acquire contractual force through the beneficiaries' own agreement to comply with it — the ratio of <em>Shiraz Abidally</em> [2007] SGCA 16 (family agreement to honour a Muslim father's letter of wishes enforced).</li>
+          <li><strong>A pervasive pattern of binding "wishes" invites sham/alter-ego attack.</strong> Where a settlor in substance retains control, the trust (not merely the memorandum) is at risk.</li>
+        </ul>
+      </li>
+
+      <li><strong>All Singapore decisions located that substantively engage with a memorandum/letter/statement of wishes are catalogued in Part V.</strong> No Singapore court has yet ruled on whether a <em>beneficiary</em> can compel disclosure of a letter of wishes; the governing framework would be the discretionary, court-supervision approach of <em>Schmidt v Rosewood Trust Ltd</em> [2003] 2 AC 709, adopted in Singapore in <em>Mustaq Ahmad v Providentia Wealth Management Ltd</em> [2023] SGHCF 52.</li>
+    </ol>
+  </section>
+
+  <hr>
+
+  <section id="part-i">
+    <h2>I. What a Memorandum of Wishes Is</h2>
+
+    <p>A memorandum or letter of wishes is a private, informal document — usually addressed by the settlor to the trustee of a (typically discretionary) trust, or by a testator to executors or family — expressing how the author would <em>like</em> discretions to be exercised: who should benefit, in what proportions, when, and subject to what considerations. Its defining features, all reflected in the Singapore cases, are that it is:</p>
+
+    <ul>
+      <li><strong>Precatory</strong>, not dispositive: it accompanies, and is subordinate to, the operative instrument (trust deed or will);</li>
+      <li><strong>Revocable and updateable</strong> at will, without formality (<em>Official Assignee v Tay Lee Kiang Liza</em> [2013] SGHC 239 at [19]: settlor's later letter superseded his earlier one; <em>De La Sala</em> trustee memorandum: settlor "was allowed to change his wishes relating to the trust fund from time to time" — [2017] SGHC 14 at [453]–[455]);</li>
+      <li><strong>Conventionally confidential</strong> (<em>Kuntjoro Wibawa v Harianty Wibawa</em> [2016] SGHC 109 at [100]: court noted without criticism that the letter of wishes was "confidential" and not in evidence).</li>
+    </ul>
+
+    <p>The Mandalay Trust memorandum in <em>Ivanishvili</em> states the classic self-description: its "purpose" was "to record information to assist in the administration of the trust and the exercise of any discretion and powers pursuant to the trust deed", recording that the trustee "<strong>may have regard to</strong>" the principal beneficiary's recommendations ([2023] SGHC(I) 9 at [100]).</p>
+  </section>
+
+  <hr>
+
+  <section id="part-ii">
+    <h2>II. Question (a): Are Memorandums of Wishes Legally Binding in Singapore?</h2>
+
+    <h3>A. The general rule: not binding</h3>
+
+    <p>No Singapore statute gives a memorandum of wishes legal force (the Trustees Act 1967 is silent on them), and every Singapore decision to consider the point treats the document as non-binding:</p>
+
+    <ol>
+      <li><strong><em>Re BKR</em> [2015] SGCA 26; [2015] 4 SLR 81 (Court of Appeal).</strong> In assessing an elderly settlor's mental capacity to establish a BVI trust, the Court of Appeal described the legal effect of her letter of wishes in unambiguous terms: although her letter of wishes expressed the desire that the trust moneys go to charities after her death, the daughter-protector "had the discretion to do what she liked with the money; in other words, [she] <strong>had no legal obligation to carry out her wishes</strong>" (at [159]). This is the clearest appellate statement in Singapore that a letter of wishes imposes no legal obligation.</li>
+
+      <li><strong><em>Ivanishvili v Credit Suisse Trust Ltd</em> [2023] SGHC(I) 9 (SICC).</strong> The fullest Singapore judicial analysis of a memorandum of wishes. The court characterised the Mandalay Trust "Memorandum of Wishes" as administrative guidance under which the trustee "<strong>may</strong> have regard to [the settlor's] recommendations" (at [100], [425]), and drew the operative distinction at [427]:
+        <blockquote><p>"A trustee who is permitted to have regard to a beneficiary's recommendations free of any direction that such be accepted as final is in a different position from a trustee who should, ought to or even must have regard to the beneficiary's recommendation with the stipulation that it be treated as final."</p></blockquote>
+        <p>Permissive wishes language therefore left the trustee's duties (and liability for breach) fully intact; the memorandum neither bound the trustee to follow the settlor nor relieved the trustee of independent judgment.</p>
+      </li>
+
+      <li><strong><em>Shiraz Abidally Husain v Husain Safdar Abidally</em> [2007] SGCA 16 (Court of Appeal)</strong>, on appeal from <em>Husain Safdar Abidally v Shiraz Abidally Husain</em> [2006] SGHC 174. A Muslim testator left a will (disposing of the one-third permitted under Muslim law) and a handwritten "letter of wishes" asking that his bank moneys be divided equally among his six children "and not according to Muslim law". It was <strong>common ground, accepted by both courts</strong>, that "a letter of wishes is not binding on the beneficiaries, but they can agree to comply with it" ([2006] SGHC 174 at [9]); the respondent indeed sought a declaration that the letter was "null and void to the extent of its testamentary and distributive effect" ([2007] SGCA 16 at [10]). The letter took effect <strong>only</strong> because all six children unanimously agreed to honour it — and the Court of Appeal enforced <em>that agreement</em>, construing its substance as an agreement for equal division (at [19]–[20]).</li>
+
+      <li><strong><em>Official Assignee (Tay Teng Tiang William) v Tay Lee Kiang Liza</em> [2013] SGHC 239.</strong> Distributions from a family trust departed from the proportions in the patriarch-settlor's letter of wishes. The High Court held "there is nothing to this point": once the trustee resolved to distribute, the beneficiaries "agreed that the property should instead be distributed among themselves in different proportions from that set out … in his letter of wishes. In my judgment, they were entitled to do so" (at [79]). The settlor had himself superseded his first letter (10-year vesting wish) with a later letter (immediate determination) (at [19]) — illustrating both the non-binding character and free revocability of such documents.</li>
+
+      <li><strong><em>CBB v Wong Tien Leong William</em> [2026] SGHC 53</strong> (the <em>Re BKR</em> sequel, disciplinary-review proceedings). The court's analysis proceeded on the footing that letters of wishes are informal, non-binding instruments: the protector's own letter of wishes was "given the same weight as" the settlor's, and it was "open to [the protector] <strong>to override</strong> BKR's [letter of wishes]" (at [11], [182]–[183]) — a design the court flagged as a serious conflict-of-interest risk precisely <em>because</em> such letters carry no binding force and can be displaced.</li>
+
+      <li><strong><em>Kho Choon Keng v Lian Keng Enterprises Pte Ltd</em> [2024] SGHC 191</strong> (company-law context). A dying patriarch's handwritten "Statement of Wishes" to his four sons was treated as "strong evidence" of his intention that they run the company as a quasi-partnership, but of "limited relevance" and "<strong>superseded by later material events</strong>" (at [73]–[74]) — wishes documents inform, they do not bind.</li>
+    </ol>
+
+    <p>The Singapore position accords with the Commonwealth mainstream: <em>Breakspear v Ackland</em> [2008] EWHC 220 (Ch); [2009] Ch 32 (the leading English authority on wish letters: non-binding, conventionally confidential); <em>Hartigan Nominees Pty Ltd v Rydge</em> (1992) 29 NSWLR 405 (NSWCA; memorandum of wishes not disclosable as of right); <em>Re Rabaiotti's 1989 Settlement</em> [2000] JLR 173 (Jersey). None of these has been doubted in Singapore; <em>Hartigan</em> has been cited with approval in Singapore on adjacent points (<em>Lakshmi Prataprai Bhojwani v Moti Harkishindas Bhojwani</em> [2018] SGHC 121). The dictum of Lord Walker in <em>Pitt v Holt</em> [2013] UKSC 26 at [66] — "[t]he settlor's wishes are always a material consideration in the exercise of fiduciary discretions", but must not "displace all independent judgment on the part of the trustees" — is obiter but would be highly persuasive in Singapore.</p>
+
+    <h3>B. Qualifications — ways a memorandum of wishes can acquire legal significance</h3>
+
+    <p>Although not binding <em>as such</em>, a memorandum of wishes is not legally inert:</p>
+
+    <ol>
+      <li><strong>A relevant consideration the trustee must weigh.</strong> Trustees exercising flexible discretionary powers are expected to consider the settlor's wishes; incoming trustees are <em>entitled to receive</em> "any letter of wishes necessary to be considered before exercising any flexible discretionary functions" (<em>Suhaidah v Alsagoff</em> [2014] SGHC 116 at [30], adopting <em>Underhill and Hayton</em>). A discretion exercised in total disregard of (or in blind obedience to) the wishes may be challengeable as an improper exercise of discretion. Conversely, trustees owe no obligation to follow expressed wishes — of settlor or beneficiaries (<em>Foo Jee Seng v Foo Jhee Tuang</em> [2012] SGCA 41 at [54]).</li>
+
+      <li><strong>Contract: beneficiaries' agreement.</strong> Beneficiaries may bind <em>themselves</em> to give effect to the wishes, and that agreement is enforceable as a contract/family arrangement — <em>Shiraz Abidally</em> [2007] SGCA 16 (agreement enforced); <em>Official Assignee v Tay</em> [2013] SGHC 239 (beneficiaries equally free to agree to depart from the wishes).</li>
+
+      <li><strong>Evidence.</strong> Courts routinely use a memorandum of wishes as <em>evidence</em> — of a settlor's intentions and understanding (<em>Wee Chiaw Sek Anna v Ng Li-Ann Genevieve</em> [2012] SGHC 197 at [91]–[96]; <em>Kuntjoro Wibawa</em> [2016] SGHC 109 at [99]–[100]), of capacity or the lack of it (<em>Re BKR</em> at [159]), or of quasi-partnership expectations (<em>Kho Choon Keng</em> at [73]–[74]). The <em>absence</em> of any letter of wishes has likewise been weighed against a party asserting an express trust (<em>Wong Chong Yue v Wong Chong Thai</em> [2011] SGHC 3 at [12]).</li>
+
+      <li><strong>Mandatory language / retained control — the double-edged sword.</strong> Where the document directs rather than requests, it stops functioning as a memorandum of wishes: <em>Ivanishvili</em> at [426]–[427], distinguishing <em>Zhang Hong Li v DBS Bank (Hong Kong) Ltd</em> [2019] HKCFA 45, where the letter of wishes "used mandatory rather than permissive language". Mandatory wishes coupled with trustee obedience in practice supports arguments that the settlor retained beneficial control — feeding sham or "alter ego" analyses and enforcement claims against trust assets (compare the commentary around <em>La Dolce Vita Fine Dining Group Holdings Ltd v Zhang Lan</em> [2022] SGHC 278; [2023] SGHC(A) 22, where the court found the settlor retained beneficial ownership of accounts nominally held under a trust structure — although, for accuracy, <strong>no letter of wishes is discussed in either <em>Zhang Lan</em> judgment</strong>; the association is from commentary only).</li>
+
+      <li><strong>Muslim estates.</strong> Under the Administration of Muslim Law Act 1966 read with Muslim law, a letter of wishes has no testamentary or distributive force (a Muslim testator may in any event dispose of only one-third by will); effect can be given only through the beneficiaries' agreement — the agreed legal framework in <em>Abidally</em> ([2006] SGHC 174 at [9]).</li>
+    </ol>
+
+    <div class="conclusion">
+      <p><strong>Conclusion on (a):</strong> A memorandum of wishes is <strong>not legally binding in Singapore</strong> — not on trustees, not on protectors, not on executors, and not on beneficiaries — though it is a legitimate and often mandatory <em>consideration</em> in the exercise of fiduciary discretion, and it can acquire derivative force through the beneficiaries' own agreement or evidentiary use.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="part-iii">
+    <h2>III. Question (b): Does a Memorandum of Wishes Take Precedence Over a Trust Deed or Will?</h2>
+
+    <p><strong>No — on both counts.</strong></p>
+
+    <h3>A. As against a trust deed</h3>
+
+    <ol>
+      <li><strong>The trust deed is the governing instrument.</strong> The trustee's powers, duties and the beneficial interests are constituted by the deed (and statute/general law). A memorandum of wishes is expressly subordinate: its own conventional purpose is "to assist in the administration of the trust and the exercise of any discretion and powers <strong>pursuant to the trust deed</strong>" (<em>Ivanishvili</em> at [100], [425]). It cannot enlarge, cut down, or amend the deed; a settlor who wants binding dispositive rules must put them <em>in the deed</em> (or use reserved-powers drafting under the deed itself).</li>
+
+      <li><strong>Any conflict is resolved in favour of the deed.</strong> A trustee who follows the wishes <em>in breach of</em> the deed commits a breach of trust; the wishes are no defence. Conversely, a trustee acting within the deed may lawfully depart from the wishes (<em>Official Assignee v Tay</em> at [79]; <em>Re BKR</em> at [159]). In <em>CBB v Wong</em> the very fact that letters of wishes can be stacked, duplicated and overridden — while the deed remains the constant — was central to the court's concern (at [182]–[183]).</li>
+
+      <li><strong>Practical nuance.</strong> If the <em>deed itself</em> elevates wishes documents (e.g., the protector-appointment instrument in <em>Re BKR</em>/<em>CBB</em> stipulating that the protector's opinions "shall be given the same weight as if they were expressed in the form of letters of wishes from me as Settlor"), the <em>weight</em> of such documents in the trustee's deliberations is a function of the deed — again confirming that all normative force flows from the deed, not the memorandum.</li>
+    </ol>
+
+    <h3>B. As against a will</h3>
+
+    <ol>
+      <li><strong>No testamentary force.</strong> Under s 6 of the Wills Act 1838 (2020 Rev Ed), a testamentary disposition must be in writing, signed by the testator, and attested by two witnesses present at the same time. A memorandum of wishes almost never satisfies these formalities and therefore <strong>cannot dispose of property on death, nor vary, revoke or override a will</strong>. In <em>Abidally</em> the letter of wishes was attacked as "null and void to the extent of its testamentary and distributive effect" and took effect only through the beneficiaries' unanimous agreement ([2007] SGCA 16 at [10], [19]).</li>
+
+      <li><strong>Incorporation by reference — narrow and unused.</strong> At common law an unattested document can be incorporated into a will only if it (i) existed at the date of the will, (ii) is referred to in the will as an existing document, and (iii) is identified with certainty. A typical memorandum of wishes — written after the will, or drafted to be updateable — fails these requirements by design. <strong>No Singapore judgment was found applying incorporation by reference to a memorandum of wishes.</strong></li>
+
+      <li><strong>Precatory words do not bind even inside a will.</strong> Singapore courts hold that expressions of "wish" or "desire" — even within a duly executed will or trust document — are precatory and create no obligation: <em>Lau Tyng Tyng v Lau Boon Wee</em> [2014] SGHC 114 at [16], [24] ("wish and strong desire" clause held precatory and non-binding); <em>Zhao Hui Fang v Commissioner of Stamp Duties</em> [2017] SGHC 105 at [48] (testator's expressed "wish" capping improvement spending treated as precatory); <em>Fong Wai Lyn Carolyn v Kao Chai-Chau Linda</em> [2017] SGHC 111 (precatory, prospective language "does not amount to a binding conferral of rights"); see also the certainty-of-intention analysis of Robert Sr's precatory "it is my wish" letters in <em>Ernest Ferdinand Perez De La Sala v Compania De Navegacion Palomar, SA</em> [2018] SGCA 16 at [95]. <em>A fortiori</em>, wishes expressed <em>outside</em> the will cannot prevail over it.</li>
+
+      <li><strong>De facto observance is possible — but voluntary.</strong> Families do in practice distribute estates in accordance with a memorandum of wishes, and Singapore courts take such distributions as effective when actually carried out (<em>CLB v CLC</em> [2021] SGHCF 17 at [58], [77]–[78]; affirmed on the facts, <em>CLB v CLC</em> [2023] SGCA 10). That reflects the beneficiaries' consent (cf. the rule in <em>Saunders v Vautier</em> and family arrangement principles), not any precedence of the memorandum.</li>
+    </ol>
+
+    <div class="conclusion">
+      <p><strong>Conclusion on (b):</strong> A memorandum of wishes ranks <strong>below</strong> both the trust deed and the will. It cannot override, amend or take precedence over either. Where it conflicts with the deed, the deed governs and following the wishes may itself be a breach of trust; where it conflicts with a will, the will (if valid) governs and the memorandum has no testamentary effect at all.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="part-iv">
+    <h2>IV. Related Issue: Disclosure of a Memorandum of Wishes to Beneficiaries</h2>
+
+    <p>Because the question often arises in practice alongside the bindingness question:</p>
+
+    <ul>
+      <li><strong>No Singapore court has yet decided whether a beneficiary can compel disclosure of a letter of wishes.</strong> Full-text searches of the Singapore judgments database found no decision citing <em>Breakspear v Ackland</em> or <em>Re Rabaiotti's Settlement</em>, and <em>Re Londonderry's Settlement</em> [1965] Ch 918 has been engaged in a genuine trust-disclosure context only once.</li>
+
+      <li>The governing framework is now settled at the level of principle: in <em>Mustaq Ahmad @ Mushtaq Ahmad s/o Mustafa v Providentia Wealth Management Ltd</em> [2023] SGHCF 52 at [32]–[36], the court adopted <strong><em>Schmidt v Rosewood Trust Ltd</em> [2003] 2 AC 709</strong>: disclosure is an aspect of the court's inherent supervisory jurisdiction over trusts; "no beneficiary … has any entitlement as of right to disclosure of anything which can plausibly be described as a trust document". See also <em>Chiang Shirley v Chiang Dong Pheng</em> [2015] SGHC 98 at [87] (applying <em>Schmidt</em> via <em>Lewin on Trusts</em>).</li>
+
+      <li>A Singapore court asked to order disclosure of a letter of wishes would therefore exercise a discretion, likely guided by <em>Breakspear</em> (Eng) and <em>Hartigan</em> (NSW) — both of which lean toward confidentiality of wish letters, subject to the court's supervisory override. <em>Hartigan</em> is already part of Singapore discourse (<em>Bhojwani</em> [2018] SGHC 121).</li>
+
+      <li><strong>Successor trustees stand differently:</strong> an incoming trustee is entitled to delivery of trust papers <em>including</em> "any letter of wishes necessary to be considered before exercising any flexible discretionary functions" (<em>Suhaidah v Alsagoff</em> [2014] SGHC 116 at [30]).</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section id="part-v">
+    <h2>V. Table of Authorities — Singapore Cases Engaging Memoranda/Letters/Statements of Wishes</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Case</th>
+            <th>Court / Year</th>
+            <th>What it says about the wishes document</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><em>Husain Safdar Abidally v Shiraz Abidally Husain</em> [2006] SGHC 174</td>
+            <td>HC, 2006</td>
+            <td>Agreed position: "a letter of wishes is not binding on the beneficiaries, but they can agree to comply with it" (at [9])</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><em>Shiraz Abidally Husain v Husain Safdar Abidally</em> [2007] SGCA 16</td>
+            <td>CA, 2007</td>
+            <td>Leading case on effect-through-agreement: family's unanimous agreement to honour father's letter of wishes enforced as to substance (at [19]–[20]); letter itself void as testament</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><em>Wong Chong Yue v Wong Chong Thai</em> [2011] SGHC 3</td>
+            <td>HC, 2011</td>
+            <td>Absence of any letter of wishes weighed against finding an express trust (at [12])</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><em>Wee Chiaw Sek Anna v Ng Li-Ann Genevieve</em> [2012] SGHC 197</td>
+            <td>HC, 2012</td>
+            <td>Letter of wishes ("wanted his trustees to consider…") used as evidence of settlor's intentions only (at [91]–[96])</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><em>Official Assignee (Tay Teng Tiang William) v Tay Lee Kiang Liza</em> [2013] SGHC 239</td>
+            <td>HC, 2013</td>
+            <td>Settlor's later letter superseded earlier one (at [19]); beneficiaries "entitled" to distribute in different proportions from the letter of wishes (at [79])</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><em>Suhaidah bte Mohd Noor v Syed Ahmad Jamal Alsagoff</em> [2014] SGHC 116</td>
+            <td>HC, 2014</td>
+            <td>Incoming trustees entitled to delivery of "any letter of wishes necessary to be considered before exercising any flexible discretionary functions" (at [30])</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><em>Re BKR</em> [2015] SGCA 26; [2015] 4 SLR 81</td>
+            <td>CA, 2015</td>
+            <td>Protector "had no legal obligation to carry out [settlor's] wishes" in the letter of wishes (at [159]); described the letter's contents at [19]</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><em>Kuntjoro Wibawa v Harianty Wibawa</em> [2016] SGHC 109</td>
+            <td>HC, 2016</td>
+            <td>Letter of wishes mirroring settlor's will used as evidence of intent; noted as confidential and not in evidence, without adverse comment (at [69], [99]–[100])</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><em>Compania De Navegacion Palomar, SA v Ernest Ferdinand Perez De La Sala</em> [2017] SGHC 14; <em>De La Sala v Compania</em> [2018] SGCA 16</td>
+            <td>HC 2017 / CA 2018</td>
+            <td>Precatory "wishes" letters and trustee memorandum (wishes "not obliged" to be followed; changeable "from time to time") analysed in certainty-of-intention context (HC at [388], [453]–[455]; CA at [95])</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><em>CLB v CLC</em> [2021] SGHCF 17; [2023] SGCA 10</td>
+            <td>HCF 2021 / CA 2023</td>
+            <td>Estate in fact distributed "in accordance with [the] Memorandum of Wishes"; treated factually, no bindingness analysis (SGHCF 17 at [58], [77]–[78])</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><em>Ivanishvili, Bidzina v Credit Suisse Trust Ltd</em> [2023] SGHC(I) 9</td>
+            <td>SICC, 2023</td>
+            <td>Fullest Singapore analysis: memorandum's purpose is administrative assistance; trustee "may have regard" (permissive) distinguished from mandatory wish letters (<em>Zhang Hong Li</em> (HK)); no relief from trustee's independent duties (at [100], [330], [425]–[427], [459]). (CA(I) appeal, [2024] SGCA(I) 5, does not revisit the memorandum)</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><em>Mustaq Ahmad v Providentia Wealth Management Ltd</em> [2023] SGHCF 52</td>
+            <td>HCF, 2023</td>
+            <td>Adopts <em>Schmidt v Rosewood</em> discretionary approach to trust-document disclosure — the framework for any future letter-of-wishes disclosure application (at [32]–[36])</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><em>Kho Choon Keng v Lian Keng Enterprises Pte Ltd</em> [2024] SGHC 191</td>
+            <td>HC, 2024</td>
+            <td>Patriarch's "Statement of Wishes" strong evidence of quasi-partnership intent but non-binding and "superseded by later material events" (at [73]–[74])</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><em>CBB v Wong Tien Leong William</em> [2026] SGHC 53</td>
+            <td>HC, 2026</td>
+            <td>Letters of wishes can be overridden/duplicated (protector's letter "given the same weight" as settlor's; protector could "override" settlor's letter) — a structural abuse risk (at [11], [182]–[183])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Supporting Singapore authorities on precatory wishes and trustee discretion:</strong> <em>Foo Jee Seng v Foo Jhee Tuang</em> [2012] SGCA 41 at [51], [54]; <em>Lau Tyng Tyng v Lau Boon Wee</em> [2014] SGHC 114 at [16], [24]; <em>Chiang Shirley v Chiang Dong Pheng</em> [2015] SGHC 98 at [87]; <em>Zhao Hui Fang v Commissioner of Stamp Duties</em> [2017] SGHC 105 at [48]; <em>Fong Wai Lyn Carolyn v Kao Chai-Chau Linda</em> [2017] SGHC 111; <em>Lakshmi Prataprai Bhojwani v Moti Harkishindas Bhojwani</em> [2018] SGHC 121.</p>
+
+    <p><strong>Key persuasive Commonwealth authorities (not yet judicially considered in Singapore on this point):</strong> <em>Breakspear v Ackland</em> [2008] EWHC 220 (Ch); [2009] Ch 32 (leading English case: wish letters non-binding and conventionally confidential); <em>Hartigan Nominees Pty Ltd v Rydge</em> (1992) 29 NSWLR 405 (NSWCA); <em>Re Rabaiotti's 1989 Settlement</em> [2000] JLR 173 (Jersey); <em>Schmidt v Rosewood Trust Ltd</em> [2003] 2 AC 709 (PC) (adopted in Singapore); <em>Pitt v Holt</em> [2013] UKSC 26 at [66] (obiter: settlor's wishes "always a material consideration" but must not displace trustees' independent judgment); <em>Zhang Hong Li v DBS Bank (Hong Kong) Ltd</em> [2019] HKCFA 45 (mandatory-language wish letter; distinguished in <em>Ivanishvili</em>).</p>
+
+    <p><strong>Near-misses checked and excluded</strong> (for completeness, since they recur in commentary): <em>Guy Neale v Nine Squares Pty Ltd</em> [2014] SGCA 64 (no wishes document; certainty of intention only); <em>La Dolce Vita v Zhang Lan</em> [2022] SGHC 278 / [2023] SGHC(A) 22 (no letter of wishes discussed in either judgment, despite commentary associating the case with wish letters); <em>Wee Chiaw Sek Anna</em> [2013] SGCA 36 (CA did not address the letter of wishes dealt with below in [2012] SGHC 197).</p>
+  </section>
+
+  <hr>
+
+  <section id="part-vi">
+    <h2>VI. Practical Implications</h2>
+
+    <ol>
+      <li><strong>Anything that must happen should be in the deed or the will, not the memorandum.</strong> Binding dispositive intentions require either trust-deed drafting (fixed interests, conditions, reserved powers, protector consents) or a will executed under s 6 Wills Act.</li>
+      <li><strong>Keep the language precatory.</strong> <em>Ivanishvili</em> shows Singapore courts will parse the verb: "may have regard" preserves the structure; "must/shall treat as final" imports control, undermines the trustee's independence, and (per <em>Zhang Hong Li</em> as read in <em>Ivanishvili</em>) changes the legal analysis.</li>
+      <li><strong>Update it, and expect the latest to be considered.</strong> Later letters supersede earlier ones (<em>Official Assignee v Tay</em>); trustees should retain all versions, and successor trustees are entitled to them (<em>Suhaidah</em>).</li>
+      <li><strong>Do not assume confidentiality is absolute.</strong> Singapore has adopted <em>Schmidt v Rosewood</em>: disclosure of a wish letter to beneficiaries is ultimately in the court's supervisory discretion, with <em>Breakspear</em>/<em>Hartigan</em> likely persuasive but not decisive.</li>
+      <li><strong>Family agreement can crystallise the wishes.</strong> If certainty is wanted after death, a deed of family arrangement in which all (adult, capacitated) beneficiaries agree to implement the memorandum converts moral force into contractual force (<em>Shiraz Abidally</em>).</li>
+      <li><strong>For Muslim estates,</strong> a letter of wishes cannot displace faraid distribution; only the beneficiaries' post-death agreement can (<em>Abidally</em>).</li>
+    </ol>
+  </section>
+
+  <hr>
+
+  <section id="part-vii">
+    <h2>VII. Caveats</h2>
+
+    <ul>
+      <li>Case coverage is based on full-text search of the Singapore judgments database (eLitigation), which reliably covers judgments from about 2000 onwards; no pre-2000 Singapore letter-of-wishes decision is known, but pre-2000 coverage could not be exhaustively verified.</li>
+      <li>This memorandum is legal research, not legal advice, and does not address foreign governing-law trusts administered from Singapore (where the proper law of the trust — e.g., Jersey, BVI — will supply the analysis, applied by Singapore courts as foreign law).</li>
+    </ul>
+  </section>
+
+  <footer class="memo-footer">
+    <p>Memorandum on the Legal Status of Memorandums of Wishes in Singapore — 13 July 2026</p>
+  </footer>
+
+</main>
+</body>
+</html>
