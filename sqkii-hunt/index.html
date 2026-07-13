@@ -1,0 +1,741 @@
+<title>Hunt Board — SQKII Candidate-Zone Map</title>
+<style>
+  :root{
+    --ground:#efe9db; --panel:#faf7ef; --panel-2:#f2ecdd;
+    --ink:#22241d; --muted:#6d6f61; --faint:#9a9c86;
+    --line:#ddd6c3; --line-strong:#c9c0a8;
+    --water:#c3d6d4; --water-deep:#8fb0ad;
+    --land:#e4dcc4; --land-edge:#b7a97f;
+    --gold:#b4831f; --gold-bright:#d8a52f;
+    --danger:#a3492f; --good:#5a7d3c;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 24px -14px rgba(40,36,20,.35);
+    --radius:10px;
+    --mono:ui-monospace,"SF Mono",Menlo,"Cascadia Mono",Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#111309; --panel:#191c11; --panel-2:#20240f;
+      --ink:#ece8d5; --muted:#9fa08c; --faint:#6f7159;
+      --line:#2c3018; --line-strong:#3c4222;
+      --water:#1d2a28; --water-deep:#2b3d3a;
+      --land:#2b2c1c; --land-edge:#5c5730;
+      --gold:#d8a52f; --gold-bright:#f0c559; --danger:#d1694a; --good:#8fb45f;
+      --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 30px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#efe9db; --panel:#faf7ef; --panel-2:#f2ecdd;
+    --ink:#22241d; --muted:#6d6f61; --faint:#9a9c86;
+    --line:#ddd6c3; --line-strong:#c9c0a8;
+    --water:#c3d6d4; --water-deep:#8fb0ad;
+    --land:#e4dcc4; --land-edge:#b7a97f;
+    --gold:#b4831f; --gold-bright:#d8a52f; --danger:#a3492f; --good:#5a7d3c;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 24px -14px rgba(40,36,20,.35);
+  }
+  :root[data-theme="dark"]{
+    --ground:#111309; --panel:#191c11; --panel-2:#20240f;
+    --ink:#ece8d5; --muted:#9fa08c; --faint:#6f7159;
+    --line:#2c3018; --line-strong:#3c4222;
+    --water:#1d2a28; --water-deep:#2b3d3a;
+    --land:#2b2c1c; --land-edge:#5c5730;
+    --gold:#d8a52f; --gold-bright:#f0c559; --danger:#d1694a; --good:#8fb45f;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 30px -16px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{
+    min-height:100vh; background:
+      radial-gradient(120% 80% at 100% 0%, color-mix(in srgb,var(--panel-2) 55%, transparent), transparent 60%),
+      var(--ground);
+    color:var(--ink); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    padding:clamp(14px,3vw,30px);
+  }
+  .board{max-width:1240px; margin:0 auto}
+
+  header.masthead{
+    display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+    gap:16px; padding-bottom:16px; margin-bottom:14px;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .brand-eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 6px;
+  }
+  h1{
+    font-family:var(--serif); font-weight:600; font-size:clamp(26px,4.4vw,42px);
+    line-height:1.02; margin:0; letter-spacing:-.01em; text-wrap:balance;
+  }
+  h1 .sub{display:block; font-family:var(--sans); font-weight:400; font-size:.42em; color:var(--muted); letter-spacing:.01em; margin-top:8px}
+  .badge{
+    font-family:var(--mono); font-size:11px; line-height:1.4; color:var(--muted);
+    border:1px solid var(--line-strong); border-radius:999px; padding:7px 13px;
+    background:var(--panel); white-space:nowrap;
+  }
+  .badge b{color:var(--ink); font-weight:600}
+
+  /* live banner */
+  .live-banner{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px;
+    background:linear-gradient(90deg, color-mix(in srgb,var(--gold) 16%,var(--panel)), var(--panel));
+    border:1px solid var(--line-strong); border-left:4px solid var(--gold);
+    border-radius:var(--radius); padding:11px 15px; margin-bottom:20px; box-shadow:var(--shadow);
+  }
+  .live-banner .pill{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    background:var(--danger); color:#fff; border-radius:5px; padding:3px 8px; font-weight:700;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .live-banner .pill::before{content:""; width:6px; height:6px; border-radius:50%; background:#fff; animation:pulse 2s infinite}
+  .live-banner .lb-txt{font-size:13px; color:var(--ink)}
+  .live-banner .lb-txt b{font-weight:600}
+  .live-banner .lb-txt span{color:var(--muted)}
+
+  .layout{display:grid; grid-template-columns:330px minmax(0,1fr); gap:20px; align-items:start}
+  @media (max-width:920px){ .layout{grid-template-columns:1fr} }
+
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
+  aside.rail{display:flex; flex-direction:column; gap:16px}
+
+  .group{padding:16px 16px 18px}
+  .group + .group{border-top:1px solid var(--line)}
+  .group h2{
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 3px; display:flex; align-items:center; gap:8px;
+  }
+  .group h2 .n{color:var(--gold); font-weight:700}
+  .group .hint{font-size:12px; color:var(--muted); margin:0 0 12px}
+  .sublabel{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin:14px 0 8px; display:flex; align-items:center; gap:7px}
+  .sublabel .tick{color:var(--good)}
+  .sublabel.lore{color:var(--danger)}
+
+  /* official checklist (static) */
+  ul.rules-static{list-style:none; margin:0; padding:0; display:grid; gap:7px}
+  ul.rules-static li{display:flex; gap:9px; font-size:12.5px; color:var(--ink); align-items:flex-start}
+  ul.rules-static li::before{content:"✓"; color:var(--good); font-weight:700; flex:0 0 auto; margin-top:-1px}
+  ul.rules-static li.tell::before{content:"◆"; color:var(--gold); font-size:10px; margin-top:2px}
+
+  /* toggles */
+  .rule{display:flex; align-items:flex-start; gap:11px; padding:8px 0; cursor:pointer}
+  .rule + .rule{border-top:1px dashed var(--line)}
+  .rule input{position:absolute; opacity:0; pointer-events:none}
+  .box{flex:0 0 auto; width:19px; height:19px; margin-top:1px; border-radius:5px; border:1.5px solid var(--line-strong); background:var(--panel-2); display:grid; place-items:center; transition:.15s}
+  .box::after{content:""; width:9px; height:9px; border-radius:2px; background:var(--gold); transform:scale(0); transition:.15s}
+  .rule input:checked + .box{border-color:var(--gold)}
+  .rule input:checked + .box::after{transform:scale(1)}
+  .rule input:focus-visible + .box{outline:2px solid var(--gold-bright); outline-offset:2px}
+  .rule.lore .box::after{background:var(--danger)}
+  .rule.lore input:checked + .box{border-color:var(--danger)}
+  .rule .txt{font-size:13px}
+  .rule .txt small{display:block; color:var(--muted); font-size:11.5px; margin-top:1px}
+
+  /* sliders */
+  .slider{margin:13px 0}
+  .slider .top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px}
+  .slider .lbl{font-size:12.5px}
+  .slider .val{font-family:var(--mono); font-size:12px; color:var(--gold); font-variant-numeric:tabular-nums}
+  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:5px; border-radius:99px; background:linear-gradient(90deg,var(--gold) var(--f,50%), var(--line-strong) var(--f,50%)); outline:none; cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:var(--panel); border:2px solid var(--gold); box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  input[type=range]::-moz-range-thumb{width:15px; height:15px; border-radius:50%; background:var(--panel); border:2px solid var(--gold)}
+  input[type=range]:focus-visible{outline:2px solid var(--gold-bright); outline-offset:3px}
+
+  /* chips */
+  .chips{display:flex; flex-wrap:wrap; gap:7px}
+  .chip{font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; padding:6px 11px; border-radius:999px; border:1px solid var(--line-strong); background:var(--panel-2); color:var(--muted); cursor:pointer; transition:.14s; user-select:none}
+  .chip[aria-pressed="true"]{background:var(--gold); border-color:var(--gold); color:#fff}
+  :root[data-theme="dark"] .chip[aria-pressed="true"]{color:#151607}
+  @media (prefers-color-scheme:dark){ .chip[aria-pressed="true"]{color:#151607} }
+  .chip:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px}
+
+  /* segmented */
+  .seg{display:flex; background:var(--panel-2); border:1px solid var(--line-strong); border-radius:9px; padding:3px; gap:3px}
+  .seg button{flex:1; font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; border:none; background:transparent; color:var(--muted); padding:8px 6px; border-radius:6px; cursor:pointer; transition:.14s}
+  .seg button[aria-selected="true"]{background:var(--gold); color:#fff}
+  :root[data-theme="dark"] .seg button[aria-selected="true"]{color:#151607}
+  @media (prefers-color-scheme:dark){ .seg button[aria-selected="true"]{color:#151607} }
+  .seg button:focus-visible{outline:2px solid var(--gold-bright); outline-offset:1px}
+
+  /* inputs / buttons */
+  .row{display:flex; gap:8px; margin-bottom:10px}
+  input[type=text]{flex:1; min-width:0; font-family:var(--mono); font-size:13px; color:var(--ink); background:var(--panel-2); border:1px solid var(--line-strong); border-radius:8px; padding:8px 10px}
+  input[type=text]:focus-visible{outline:2px solid var(--gold-bright); outline-offset:1px; border-color:var(--gold)}
+  #decodeInput{letter-spacing:.24em; text-align:center; font-size:15px}
+  .btn{font-family:var(--mono); font-size:12px; letter-spacing:.03em; border-radius:8px; cursor:pointer; border:1px solid var(--gold); background:var(--gold); color:#fff; padding:8px 12px; transition:.14s; white-space:nowrap}
+  :root[data-theme="dark"] .btn{color:#151607}
+  @media (prefers-color-scheme:dark){ .btn{color:#151607} }
+  .btn.ghost{background:transparent; color:var(--muted); border-color:var(--line-strong)}
+  .btn:hover{filter:brightness(1.05)}
+  .btn:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px}
+
+  .decode-out{display:flex; flex-wrap:wrap; gap:6px; min-height:10px}
+  .decode-out .m{font-family:var(--serif); font-size:13px; padding:5px 10px; border-radius:7px; border:1px solid var(--line-strong); background:var(--panel-2); cursor:pointer; transition:.14s}
+  .decode-out .m:hover{border-color:var(--gold); color:var(--gold)}
+  .decode-out .none{font-size:12px; color:var(--faint); font-style:italic}
+
+  ul.clues{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
+  ul.clues li{display:flex; align-items:center; gap:8px; font-size:13px; background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:7px 9px}
+  ul.clues .tag{font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--gold); border:1px solid var(--line-strong); border-radius:4px; padding:1px 5px}
+  ul.clues .x{margin-left:auto; color:var(--faint); cursor:pointer; border:none; background:none; font-size:15px; line-height:1; padding:2px 4px}
+  ul.clues .x:hover{color:var(--danger)}
+  ul.clues .empty{justify-content:center; color:var(--faint); font-style:italic; border-style:dashed}
+
+  /* map */
+  .stage{padding:14px}
+  .stage-head{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+  .stage-head .title{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .stage-head .live{display:flex; align-items:center; gap:7px; font-family:var(--mono); font-size:11px; color:var(--muted)}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 70%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  @media (prefers-reduced-motion:reduce){ .dot,.live-banner .pill::before{animation:none} }
+  .canvas-frame{position:relative; border:1px solid var(--line-strong); border-radius:8px; overflow:hidden; background:var(--water); aspect-ratio:16/10}
+  canvas{display:block; width:100%; height:100%}
+  .compass{position:absolute; top:10px; right:12px; font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--muted); text-align:center; pointer-events:none; opacity:.85}
+  .compass b{display:block; color:var(--ink); font-size:13px}
+  .map-note{font-size:11.5px; color:var(--muted); margin:9px 2px 0; line-height:1.45}
+
+  .legend{display:flex; flex-wrap:wrap; gap:12px 16px; margin-top:11px; align-items:center}
+  .legend .item{display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--muted)}
+  .legend .sw{width:24px; height:11px; border-radius:3px; border:1px solid rgba(0,0,0,.12)}
+  .legend .ring{width:13px; height:13px; border-radius:50%; border:2px solid var(--gold); box-sizing:border-box}
+  .heatbar{width:110px; height:11px; border-radius:3px; background:linear-gradient(90deg,rgba(120,150,120,.35),#d6a72e,#d9722e,#be3c32)}
+
+  .results{margin-top:18px}
+  .results h3{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:0 0 4px}
+  .results .rcap{font-size:12px; color:var(--muted); margin:0 0 12px}
+  .ranks{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px}
+  .rank{position:relative; background:var(--panel-2); border:1px solid var(--line); border-radius:9px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; overflow:hidden}
+  .rank::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--gold)}
+  .rank .r-top{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+  .rank .r-name{font-weight:600; font-size:14px; font-family:var(--serif)}
+  .rank .r-idx{font-family:var(--mono); font-size:11px; color:var(--faint)}
+  .rank .r-score{font-family:var(--mono); font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums}
+  .rank .bar{height:6px; border-radius:99px; background:var(--line); overflow:hidden}
+  .rank .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-bright))}
+  .rank .r-why{font-size:11.5px; color:var(--muted); line-height:1.35}
+  .rank.top::before{width:5px; background:var(--gold-bright)}
+  .rank.top .r-name{color:var(--gold)}
+
+  .foot{margin-top:22px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); line-height:1.55}
+  .foot strong{color:var(--ink); font-weight:600}
+  .foot .cols{display:grid; grid-template-columns:1.4fr 1fr; gap:22px; margin-top:4px}
+  @media (max-width:700px){ .foot .cols{grid-template-columns:1fr} }
+  .foot h4{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:0 0 7px}
+  .foot ul{margin:0; padding-left:16px; display:grid; gap:3px}
+  .foot a{color:var(--gold); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--gold) 35%,transparent)}
+  .foot a:hover{border-bottom-color:var(--gold)}
+  .toolbar{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap}
+</style>
+
+<div class="wrap">
+<div class="board">
+
+  <header class="masthead">
+    <div>
+      <p class="brand-eyebrow">Field Survey · Public-Clue Inference</p>
+      <h1>The Hunt Board
+        <span class="sub">Narrowing SQKII's Hunt The Mouse from the rules, clues &amp; history everyone can see</span>
+      </h1>
+    </div>
+    <div class="badge">Built from <b>public sources</b> only<br>No game app, API, or account touched</div>
+  </header>
+
+  <div class="live-banner">
+    <span class="pill">Live now</span>
+    <span class="lb-txt"><b>Singapore Retail Festival Edition</b> · 4–26 Jul 2026 · <b>200 silver coins</b> @ S$500 (S$100k pool), islandwide.
+    <span>Format: in-app map circles that shrink over time + one 6pm daily hint per coin. No public master clue list — hints are per-coin.</span></span>
+  </div>
+
+  <div class="layout">
+
+    <!-- CONTROL RAIL -->
+    <aside class="rail">
+
+      <div class="panel">
+        <div class="group">
+          <h2><span class="n">01</span> Reasoning mode</h2>
+          <p class="hint">The live edition scatters 200 coins citywide near footfall. The classic single-coin logic is what past gold-coin hunts rewarded.</p>
+          <div class="seg" role="tablist" id="mode">
+            <button role="tab" aria-selected="true" data-mode="classic">Single-coin logic</button>
+            <button role="tab" aria-selected="false" data-mode="live">Live · 200-coin</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="group">
+          <h2><span class="n">02</span> Rules — where it can't be</h2>
+          <div class="sublabel"><span class="tick">✓</span> Official exclusions (every edition)</div>
+          <ul class="rules-static">
+            <li>Never underwater or buried underground</li>
+            <li>Never in places of worship</li>
+            <li>No trespassing needed to reach it</li>
+            <li>Not in dangerous or restricted areas</li>
+            <li>No breaking, dismantling or damaging property</li>
+            <li>No climbing — reachable at ground level</li>
+          </ul>
+          <div class="sublabel"><span class="tick">◆</span> Standing "tells" (community-relayed)</div>
+          <ul class="rules-static">
+            <li class="tell">Afraid of the dark &amp; of heights → lit, ground-level, not hidden away</li>
+            <li class="tell">A concrete structure within ~30 steps</li>
+            <li class="tell">Cares for safety &amp; the environment</li>
+          </ul>
+
+          <div class="sublabel">Map filters (spatial)</div>
+          <label class="rule"><input type="checkbox" id="r_water" checked><span class="box"></span>
+            <span class="txt">Exclude open water &amp; reservoirs<small>Official: never underwater</small></span></label>
+          <label class="rule"><input type="checkbox" id="r_restricted" checked><span class="box"></span>
+            <span class="txt">Exclude restricted land<small>Airport, port, military — official: no restricted areas</small></span></label>
+
+          <div class="sublabel lore">Community lore — unconfirmed</div>
+          <label class="rule lore"><input type="checkbox" id="r_free"><span class="box"></span>
+            <span class="txt">Free-entry spots only<small>Not in Sqkii's published rules</small></span></label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="group">
+          <h2><span class="n">03</span> Historical pattern weights</h2>
+          <p class="hint">4 confirmed gold-coin finds: benches &amp; tree bases at ground level, heartland NE/E &amp; the central-north green fringe.</p>
+          <div class="slider" data-w="bench"><div class="top"><span class="lbl">Benches &amp; tree bases (ground fixtures)</span><span class="val">85</span></div><input type="range" min="0" max="100" value="85"></div>
+          <div class="slider" data-w="park"><div class="top"><span class="lbl">Parks &amp; green corridors</span><span class="val">70</span></div><input type="range" min="0" max="100" value="70"></div>
+          <div class="slider" data-w="transit"><div class="top"><span class="lbl">Walkable public access / heartland</span><span class="val">60</span></div><input type="range" min="0" max="100" value="60"></div>
+          <div class="slider" data-w="coast"><div class="top"><span class="lbl">Waterfront &amp; park connectors</span><span class="val">35</span></div><input type="range" min="0" max="100" value="35"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="group">
+          <h2><span class="n">04</span> Clue decoder</h2>
+          <p class="hint">Sqkii encodes place-names as blanks — the 2026 coin's <b>_ _ _ M _ _ _</b> resolved to <b>Thomson</b>. Type letters you know, dots for blanks.</p>
+          <div class="row">
+            <input type="text" id="decodeInput" placeholder="...m..." aria-label="Masked place-name" value="...m...">
+            <button class="btn" id="decodeBtn">Decode</button>
+          </div>
+          <div class="decode-out" id="decodeOut"></div>
+        </div>
+        <div class="group">
+          <h2><span class="n">05</span> Clue filters — region</h2>
+          <p class="hint">When a clue points to one side of the island, keep only that side.</p>
+          <div class="chips" id="regionChips">
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-reg="N">North</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-reg="S">South</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-reg="E">East</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-reg="W">West</span>
+            <span class="chip" role="button" tabindex="0" aria-pressed="false" data-reg="C">Central</span>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <input type="text" id="clueText" placeholder="Log a clue, e.g. &ldquo;near the lions&rdquo;" aria-label="Clue text">
+            <button class="btn" id="clueAdd">Log</button>
+          </div>
+          <ul class="clues" id="clueList"></ul>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAP STAGE -->
+    <section class="panel stage">
+      <div class="stage-head">
+        <span class="title" id="stageTitle">Candidate density · Singapore main island</span>
+        <span class="live"><span class="dot"></span> recomputing live</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas id="map"></canvas>
+        <div class="compass"><b>N</b>↑</div>
+      </div>
+      <div class="legend">
+        <div class="item"><span class="sw" style="background:var(--land)"></span>Land</div>
+        <div class="item"><span class="sw" style="background:var(--water-deep)"></span>Water</div>
+        <div class="item"><span class="sw" style="background:repeating-linear-gradient(45deg,var(--danger),var(--danger) 3px,transparent 3px,transparent 6px)"></span>Excluded</div>
+        <div class="item"><span class="ring"></span>Past find</div>
+        <div class="item"><span class="heatbar"></span>Low → high likelihood</div>
+      </div>
+      <p class="map-note" id="mapNote"></p>
+
+      <div class="results">
+        <h3>Top candidate zones</h3>
+        <p class="rcap" id="rcap">Where the current rules, weights &amp; clues concentrate a single-coin hide.</p>
+        <div class="ranks" id="ranks"></div>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn ghost" id="pastToggle" aria-pressed="true">Past finds: on</button>
+        <button class="btn ghost" id="reset">Reset</button>
+      </div>
+
+      <div class="foot">
+        <div class="cols">
+          <div>
+            <h4>How this stays inside the rules</h4>
+            <p style="margin:0"><strong>Everything here is inference over public information</strong> — the exclusions Sqkii publishes, the clues released on their socials, and where past coins were reported found. It reads nothing from any SQKII app, endpoint, or account, and can't: the value is in reasoning, not access. Coastline, exclusion areas and past-find pins are hand-placed approximations for thinking, not survey-grade coordinates.</p>
+          </div>
+          <div>
+            <h4>Public sources</h4>
+            <ul>
+              <li><a href="https://huntthemouse.sqkii.com/" target="_blank" rel="noopener">huntthemouse.sqkii.com</a> — official</li>
+              <li><a href="https://www.littledayout.com/huntthemouse-gold-coin-hunt-sqkii/" target="_blank" rel="noopener">Little Day Out</a> — rules</li>
+              <li><a href="https://mustsharenews.com/gold-coin-tree-upper-thomson/" target="_blank" rel="noopener">MustShareNews</a> — 2026 find</li>
+              <li><a href="https://mustsharenews.com/hunt-the-mouse-gold-coin/" target="_blank" rel="noopener">MustShareNews</a> — 2024 Bedok find</li>
+              <li><a href="https://forums.hardwarezone.com.sg/threads/anyone-hunting-the-sqkii-coin.7077827/" target="_blank" rel="noopener">HardwareZone</a> — community</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const cv = document.getElementById('map');
+  const ctx = cv.getContext('2d');
+  const B = { lon0:103.60, lon1:104.05, lat0:1.20, lat1:1.48 };
+
+  // Approximate main-island outline (lon,lat). Not survey-accurate.
+  const ISLAND = [
+    [103.635,1.315],[103.66,1.345],[103.66,1.395],[103.69,1.435],[103.72,1.448],
+    [103.78,1.462],[103.83,1.468],[103.865,1.455],[103.90,1.418],[103.925,1.408],
+    [103.965,1.392],[103.995,1.378],[104.01,1.358],[103.995,1.335],[103.965,1.318],
+    [103.93,1.302],[103.885,1.268],[103.85,1.262],[103.80,1.262],[103.755,1.272],
+    [103.71,1.278],[103.675,1.292]
+  ];
+
+  const EXCLUDE = {
+    restricted:[
+      {lon:103.99,lat:1.357,r:4.2}, {lon:103.905,lat:1.345,r:2.4},
+      {lon:103.705,lat:1.405,r:3.2}, {lon:103.665,lat:1.29,r:3.0},
+    ],
+    water:[ {lon:103.805,lat:1.365,r:3.0}, {lon:103.83,lat:1.34,r:1.3}, {lon:103.72,lat:1.345,r:1.1} ],
+    free:[ {lon:103.83,lat:1.252,r:2.6} ],
+  };
+
+  const A = {
+    bench:[ // ground fixtures: benches, town parks, promenades, tree-lined verges (the confirmed motif)
+      ['Marina Promenade',103.86,1.283],['Bishan–AMK Park',103.845,1.363],['Toa Payoh Town Park',103.847,1.334],
+      ['Bedok Central',103.9295,1.3245],['Tampines Central',103.945,1.353],['Bedok Reservoir Park',103.923,1.337],
+      ['Sengkang Riverside',103.895,1.392],['Clementi Woods',103.767,1.323],['Kallang Riverside',103.868,1.303],
+      ['Upper Thomson / Tagore',103.836,1.372],['Hougang / Kovan',103.888,1.359],['Serangoon Gardens',103.865,1.364],
+      ['Punggol Point',103.905,1.416],['Yishun Park',103.835,1.429],
+    ],
+    park:[
+      ['Botanic Gardens',103.815,1.315],['Bishan–AMK Park',103.845,1.363],['East Coast Park',103.925,1.301],
+      ['Gardens by the Bay',103.865,1.281],['Jurong Lake Gardens',103.728,1.338],['Punggol Waterway',103.907,1.402],
+      ['Bukit Timah NR',103.778,1.352],['West Coast Park',103.762,1.293],['Pasir Ris Park',103.952,1.373],
+      ['MacRitchie',103.83,1.345],['Thomson Nature Park',103.822,1.372],
+    ],
+    transit:[
+      ['Jurong East',103.742,1.333],['Clementi',103.765,1.315],['Orchard',103.832,1.304],['City Hall',103.852,1.293],
+      ['Paya Lebar',103.892,1.318],['Tampines',103.945,1.353],['Bedok',103.930,1.324],['Serangoon',103.873,1.350],
+      ['Bishan',103.848,1.351],['Ang Mo Kio',103.850,1.370],['Woodlands',103.786,1.437],['Yishun',103.835,1.429],
+      ['Sengkang',103.895,1.392],['Punggol',103.902,1.405],['Hougang',103.892,1.362],['Kovan',103.885,1.360],
+      ['Springleaf',103.818,1.397],['Upper Thomson',103.833,1.354],
+    ],
+    coast:[
+      ['East Coast',103.925,1.301],['Marina Bay',103.862,1.281],['Punggol Point',103.905,1.416],
+      ['Sembawang Park',103.822,1.458],['Pasir Ris',103.952,1.373],['Labrador',103.802,1.266],
+      ['West Coast',103.762,1.293],['Kallang Basin',103.868,1.303],['PCN – Serangoon',103.882,1.377],
+    ],
+  };
+
+  // Confirmed past grand-coin finds (approx coords from reported landmarks).
+  const PAST = [
+    {year:'2026', name:'Tagore Rd tree base', lon:103.836, lat:1.372, note:'S$250k · under a rock at a tree root, Upper Thomson'},
+    {year:'2024', name:'Bedok Blk 208 bench', lon:103.9295, lat:1.3245, note:'S$500k · wedged in a bench plank gap by FairPrice'},
+    {year:'2019', name:'Hougang tree', lon:103.888, lat:1.359, note:'S$100k · beneath a roadside tree, Jln Naung'},
+  ];
+
+  const LOC = [
+    ['Tuas',103.64,1.31],['Jurong West',103.702,1.352],['Jurong East',103.742,1.333],['Clementi',103.765,1.315],
+    ['Bukit Timah',103.782,1.348],['Botanic Gardens',103.815,1.315],['Orchard',103.832,1.304],['Marina Bay',103.865,1.281],
+    ['Chinatown / CBD',103.844,1.283],['Kallang',103.868,1.306],['East Coast Park',103.922,1.302],['Bedok',103.930,1.324],
+    ['Tampines',103.945,1.353],['Pasir Ris',103.952,1.375],['Punggol',103.905,1.406],['Sengkang',103.893,1.391],
+    ['Bishan–AMK Park',103.845,1.363],['Toa Payoh',103.847,1.334],['Serangoon',103.873,1.350],['Hougang / Kovan',103.887,1.360],
+    ['Woodlands',103.786,1.437],['Yishun',103.835,1.429],['Sembawang',103.822,1.452],['Choa Chu Kang',103.745,1.385],
+    ['MacRitchie',103.83,1.345],['Upper Thomson',103.833,1.368],['Bukit Batok',103.759,1.349],['Queenstown',103.803,1.294],
+    ['Springleaf',103.818,1.397],
+  ];
+
+  // place-name dictionary for the decoder (letters-only matched)
+  const PLACES = ['Thomson','Bedok','Hougang','Tagore','Punggol','Sengkang','Tampines','Yishun','Bishan','Clementi',
+    'Jurong','Woodlands','Serangoon','Kallang','Geylang','Novena','Newton','Bugis','Orchard','Marina','Sentosa',
+    'Changi','Katong','Queenstown','Redhill','Dover','Commonwealth','Braddell','Kovan','Simei','Somerset','Raffles',
+    'Outram','Chinatown','Farrer','Caldecott','Botanic','Stevens','Rochor','Lavender','Aljunied','Eunos','Macpherson',
+    'Mattar','Marymount','Springleaf','Lentor','Mayflower','Canberra','Sembawang','Admiralty','Marsiling','Kranji',
+    'Gombak','Cashew','Hillview','Beauty','Albert','Havelock','Labrador','Harbourfront','Tuas','Boonlay','Pioneer',
+    'Joo Koon','Gul','Dakota','Mountbatten','Nicoll','Esplanade','Promenade','Bayfront','Tanjong','Pagar','Telok',
+    'Blangah','Pasir','Panjang','Buangkok','Renjong','Fernvale','Layar','Tongkang','Ranggung','Kadaloor','Riviera',
+    'Coral','Meridian','Cove','Sumang','Nibong','Samudera','Punggol','Damai','Oasis','Kupang','Farmway','Kangkar',
+    'Bakau','Compassvale','Rumbia','Bangkit','Petir','Pending','Phoenix','Teck','Whye','Fajar','Segar','Jelapang',
+    'Senja','Keat','Hong','Caldecott','Marymount','Bright','Lorong','Chuan','Ang','Mo','Kio','Yio','Lentor'];
+
+  const weights = {bench:85, park:70, transit:60, coast:35};
+  const rules = {water:true, restricted:true, free:false};
+  const regions = new Set();
+  const clues = [];
+  let mode = 'classic';
+  let showPast = true;
+
+  function pip(lon,lat,poly){
+    let inside=false;
+    for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+      const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];
+      if(((yi>lat)!==(yj>lat)) && (lon < (xj-xi)*(lat-yi)/(yj-yi)+xi)) inside=!inside;
+    }
+    return inside;
+  }
+  const KM=(aLon,aLat,bLon,bLat)=>{
+    const dx=(aLon-bLon)*111.32*Math.cos((aLat+bLat)/2*Math.PI/180), dy=(aLat-bLat)*110.57;
+    return Math.hypot(dx,dy);
+  };
+  function nearestKm(lon,lat,set){ let m=1e9; for(const p of set){ const d=KM(lon,lat,p[1],p[2]); if(d<m)m=d; } return m; }
+  const gauss=(d,s)=>Math.exp(-(d*d)/(2*s*s));
+
+  function regionOf(lon,lat){
+    const r=new Set();
+    if(lat>=1.392) r.add('N');
+    if(lat<=1.302) r.add('S');
+    if(lon>=103.905) r.add('E');
+    if(lon<=103.775) r.add('W');
+    if(lon>103.775 && lon<103.905 && lat>1.302 && lat<1.392) r.add('C');
+    return r;
+  }
+
+  const NX=78, NY=64;
+  let cells=[], topZones=[];
+  const project=(lon,lat,W,H)=>[ (lon-B.lon0)/(B.lon1-B.lon0)*W, (1-(lat-B.lat0)/(B.lat1-B.lat0))*H ];
+
+  function compute(){
+    cells=[]; let maxScore=1e-6;
+    const active=Object.entries(weights).filter(([k,v])=>v>0);
+    const sscale = mode==='live' ? 1.7 : 1;
+    for(let iy=0;iy<NY;iy++) for(let ix=0;ix<NX;ix++){
+      const lon=B.lon0+(ix+0.5)/NX*(B.lon1-B.lon0);
+      const lat=B.lat0+(iy+0.5)/NY*(B.lat1-B.lat0);
+      let state='cand', score=0;
+      if(!pip(lon,lat,ISLAND)) state='water';
+      if(state==='cand'){
+        if(rules.water) for(const z of EXCLUDE.water) if(KM(lon,lat,z.lon,z.lat)<z.r){ state='excl'; break; }
+      }
+      if(state==='cand' && rules.restricted) for(const z of EXCLUDE.restricted) if(KM(lon,lat,z.lon,z.lat)<z.r){ state='excl'; break; }
+      if(state==='cand' && rules.free) for(const z of EXCLUDE.free) if(KM(lon,lat,z.lon,z.lat)<z.r){ state='excl'; break; }
+      if(state==='cand' && regions.size){
+        const rs=regionOf(lon,lat); let ok=false; regions.forEach(r=>{ if(rs.has(r)) ok=true; });
+        if(!ok) state='excl';
+      }
+      if(state==='cand'){
+        let wsum=0;
+        for(const [k,v] of active){
+          const sigma=(k==='transit'?2.6 : k==='coast'?2.2 : k==='bench'?2.2 : 2.4)*sscale;
+          score += (v/100)*gauss(nearestKm(lon,lat,A[k]),sigma); wsum+=(v/100);
+        }
+        score = wsum>0 ? score/wsum : 0;
+        if(score>maxScore) maxScore=score;
+      }
+      cells.push({lon,lat,state,score});
+    }
+    for(const c of cells) if(c.state==='cand') c.norm=c.score/maxScore;
+    rank(); draw();
+  }
+
+  const STOPS=[[0,[120,150,120,.10]],[0.32,[150,175,120,.32]],[0.56,[214,167,46,.62]],[0.78,[217,114,46,.82]],[1,[190,60,50,.92]]];
+  function heat(t){
+    t=Math.max(0,Math.min(1,t));
+    for(let i=1;i<STOPS.length;i++) if(t<=STOPS[i][0]){
+      const a=STOPS[i-1],b=STOPS[i],f=(t-a[0])/(b[0]-a[0]);
+      const c=a[1].map((v,k)=>v+(b[1][k]-v)*f);
+      return `rgba(${c[0]|0},${c[1]|0},${c[2]|0},${c[3]})`;
+    }
+    return 'rgba(190,60,50,.92)';
+  }
+
+  function draw(){
+    const dpr=Math.min(2,window.devicePixelRatio||1), W=cv.clientWidth, H=cv.clientHeight;
+    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    const cs=getComputedStyle(document.documentElement), g=n=>cs.getPropertyValue(n).trim();
+    ctx.clearRect(0,0,W,H); ctx.fillStyle=g('--water'); ctx.fillRect(0,0,W,H);
+
+    const landPath=()=>{ ctx.beginPath(); ISLAND.forEach((p,i)=>{const[x,y]=project(p[0],p[1],W,H); i?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.closePath(); };
+    const cw=W/NX, ch=H/NY;
+
+    landPath(); ctx.save(); ctx.clip();
+    ctx.fillStyle=g('--land'); ctx.fillRect(0,0,W,H);
+    for(const c of cells){ if(c.state!=='cand') continue; const[x,y]=project(c.lon,c.lat,W,H); ctx.fillStyle=heat(c.norm||0); ctx.fillRect(x-cw/2,y-ch/2,cw+0.6,ch+0.6); }
+    ctx.restore();
+
+    landPath(); ctx.save(); ctx.clip();
+    ctx.strokeStyle=g('--danger'); ctx.globalAlpha=.5; ctx.lineWidth=1;
+    for(const c of cells){ if(c.state!=='excl') continue; const[x,y]=project(c.lon,c.lat,W,H); ctx.beginPath(); ctx.moveTo(x-cw/2,y+ch/2); ctx.lineTo(x+cw/2,y-ch/2); ctx.stroke(); }
+    ctx.globalAlpha=1; ctx.restore();
+
+    landPath(); ctx.lineWidth=1.6; ctx.strokeStyle=g('--land-edge'); ctx.stroke();
+
+    // past finds (hollow rings)
+    if(showPast){
+      ctx.font='700 10px ui-monospace,Menlo,monospace';
+      for(const p of PAST){
+        const[x,y]=project(p.lon,p.lat,W,H);
+        ctx.beginPath(); ctx.arc(x,y,6.5,0,7); ctx.lineWidth=2.2; ctx.strokeStyle=g('--gold'); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x,y,1.7,0,7); ctx.fillStyle=g('--gold'); ctx.fill();
+        const tw=ctx.measureText(p.year).width; let lx=x+9; if(lx+tw>W-4) lx=x-9-tw;
+        ctx.fillStyle=g('--gold'); ctx.fillText(p.year,lx,y-6);
+      }
+    }
+
+    // top candidate pins
+    ctx.textAlign='left'; ctx.font='600 11px ui-monospace,Menlo,monospace';
+    topZones.slice(0,3).forEach((z,i)=>{
+      const[x,y]=project(z.lon,z.lat,W,H);
+      ctx.beginPath(); ctx.arc(x,y,i===0?6:4.5,0,7); ctx.fillStyle=i===0?'#e8b93a':'#c88a1f'; ctx.fill();
+      ctx.lineWidth=1.5; ctx.strokeStyle='rgba(0,0,0,.35)'; ctx.stroke();
+      const tw=ctx.measureText(z.name).width; let lx=x+9; if(lx+tw>W-4) lx=x-9-tw;
+      let ly=y+3; if(ly<12) ly=12; if(ly>H-4) ly=H-4;
+      ctx.fillStyle='rgba(0,0,0,.55)'; ctx.fillRect(lx-3,ly-10,tw+6,14);
+      ctx.fillStyle='#fff'; ctx.fillText(z.name,lx,ly);
+    });
+  }
+
+  function rank(){
+    const acc={};
+    for(const c of cells){
+      if(c.state!=='cand'||!(c.norm>0)) continue;
+      let best=null,bd=1e9;
+      for(const L of LOC){ const d=KM(c.lon,c.lat,L[1],L[2]); if(d<bd){bd=d;best=L;} }
+      if(bd>3.5) continue;
+      const k=best[0];
+      if(!acc[k]) acc[k]={name:k,lon:best[1],lat:best[2],sum:0,n:0,peak:0};
+      acc[k].sum+=c.norm; acc[k].n++; acc[k].peak=Math.max(acc[k].peak,c.norm);
+    }
+    topZones=Object.values(acc).map(z=>({...z,val:z.peak*0.65+(z.sum/Math.max(1,z.n))*0.35}))
+      .sort((a,b)=>b.val-a.val).slice(0,6);
+    renderRanks();
+  }
+
+  function whyText(z){
+    const parts=[]; const near=(set,lbl,km)=>{ if(nearestKm(z.lon,z.lat,set)<km) parts.push(lbl); };
+    if(weights.bench>0) near(A.bench,'benches/tree bases',1.8);
+    if(weights.park>0) near(A.park,'green space',1.8);
+    if(weights.transit>0) near(A.transit,'walkable access',1.6);
+    if(weights.coast>0) near(A.coast,'waterfront',1.8);
+    let hist=''; for(const p of PAST) if(KM(z.lon,z.lat,p.lon,p.lat)<2.5){ hist=` · past find nearby (${p.year})`; break; }
+    return (parts.length?'Near '+parts.slice(0,3).join(', '):'Broad heartland match')+hist;
+  }
+
+  function renderRanks(){
+    const el=document.getElementById('ranks');
+    if(!topZones.length){ el.innerHTML='<div class="rank"><span class="r-why">No candidates survive the current filters — loosen a rule or region.</span></div>'; return; }
+    const max=topZones[0].val||1;
+    el.innerHTML=topZones.map((z,i)=>`
+      <div class="rank ${i===0?'top':''}">
+        <div class="r-top"><span class="r-name">${z.name}</span><span class="r-idx">#${i+1}</span></div>
+        <div class="bar"><i style="width:${Math.round(z.val/max*100)}%"></i></div>
+        <div class="r-top"><span class="r-score">likelihood ${(z.val*100).toFixed(0)}</span></div>
+        <div class="r-why">${whyText(z)}</div>
+      </div>`).join('');
+  }
+
+  // ---- decoder ----
+  function decode(){
+    const raw=document.getElementById('decodeInput').value.replace(/\s/g,'');
+    const out=document.getElementById('decodeOut');
+    if(!raw){ out.innerHTML='<span class="none">Type a pattern like <b>...m...</b></span>'; return; }
+    const L=raw.length, fixed=[];
+    for(let i=0;i<L;i++){ const ch=raw[i].toLowerCase(); if(/[a-z]/.test(ch)) fixed.push([i,ch]); }
+    const matches=PLACES.filter(p=>{
+      const s=p.replace(/[^A-Za-z]/g,'').toLowerCase();
+      if(s.length!==L) return false;
+      return fixed.every(([i,c])=>s[i]===c);
+    });
+    if(!matches.length){ out.innerHTML='<span class="none">No place-name of that length &amp; letters. Try more/fewer dots.</span>'; return; }
+    out.innerHTML=matches.slice(0,12).map(m=>`<span class="m" data-name="${m}">${m}</span>`).join('');
+    out.querySelectorAll('.m').forEach(el=>el.addEventListener('click',()=>{
+      const name=el.dataset.name;
+      let best=null,bd=1e9;
+      for(const l of LOC){ if(l[0].toLowerCase().includes(name.toLowerCase())){ best=l; break; } }
+      if(!best) for(const l of LOC){ const d=Math.min(...A.transit.filter(t=>t[0].toLowerCase().includes(name.toLowerCase())).map(t=>KM(l[1],l[2],t[1],t[2]))); if(d<bd){bd=d;best=l;} }
+      clues.push({text:`decoded → ${name}`, tag:best?regTag(best):null});
+      if(best){ const rg=[...regionOf(best[1],best[2])][0]; if(rg){ regions.add(rg); document.querySelector(`#regionChips .chip[data-reg="${rg}"]`)?.setAttribute('aria-pressed','true'); } }
+      renderClues(); compute();
+    }));
+  }
+  function regTag(loc){ return [...regionOf(loc[1],loc[2])][0]||null; }
+
+  // ---- clues ----
+  function renderClues(){
+    const el=document.getElementById('clueList');
+    if(!clues.length){ el.innerHTML='<li class="empty">No clues logged yet</li>'; return; }
+    el.innerHTML=clues.map((c,i)=>`<li>${c.tag?`<span class="tag">${c.tag}</span>`:''}<span>${c.text.replace(/</g,'&lt;')}</span><button class="x" data-i="${i}" aria-label="Remove">×</button></li>`).join('');
+    el.querySelectorAll('.x').forEach(b=>b.addEventListener('click',()=>{ clues.splice(+b.dataset.i,1); renderClues(); }));
+  }
+  function addClue(){
+    const t=document.getElementById('clueText'); const text=t.value.trim(); if(!text) return;
+    clues.push({text,tag:null}); t.value=''; renderClues();
+  }
+
+  // ---- wire ----
+  document.querySelectorAll('.slider').forEach(s=>{
+    const key=s.dataset.w, inp=s.querySelector('input'), val=s.querySelector('.val');
+    const sync=()=>{ inp.style.setProperty('--f',inp.value+'%'); val.textContent=inp.value; };
+    sync(); inp.addEventListener('input',()=>{ weights[key]=+inp.value; sync(); compute(); });
+  });
+  const rmap={r_water:'water',r_restricted:'restricted',r_free:'free'};
+  Object.entries(rmap).forEach(([id,key])=>document.getElementById(id).addEventListener('change',e=>{ rules[key]=e.target.checked; compute(); }));
+
+  function toggleChip(chip){
+    const on=chip.getAttribute('aria-pressed')==='true'; chip.setAttribute('aria-pressed',String(!on));
+    const k=chip.dataset.reg; if(!on) regions.add(k); else regions.delete(k); compute();
+  }
+  document.querySelectorAll('#regionChips .chip').forEach(chip=>{
+    chip.addEventListener('click',()=>toggleChip(chip));
+    chip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleChip(chip);} });
+  });
+
+  document.querySelectorAll('#mode button').forEach(btn=>btn.addEventListener('click',()=>{
+    mode=btn.dataset.mode;
+    document.querySelectorAll('#mode button').forEach(b=>b.setAttribute('aria-selected',String(b===btn)));
+    document.getElementById('stageTitle').textContent = mode==='live'
+      ? 'Coin-density likelihood · 200 coins islandwide' : 'Candidate density · Singapore main island';
+    document.getElementById('rcap').textContent = mode==='live'
+      ? 'Live edition scatters coins near footfall citywide — this shows where accessible public spots concentrate, not one coin.'
+      : 'Where the current rules, weights & clues concentrate a single-coin hide.';
+    updateNote(); compute();
+  }));
+
+  function updateNote(){
+    document.getElementById('mapNote').innerHTML = mode==='live'
+      ? 'Live 200-coin mode: heat widened to reflect coins spread near public amenities across the island. Real per-coin circles live only inside the Sqkii app — feed today’s 6pm hint into the region filter to bias a specific coin.'
+      : 'Single-coin mode: heat concentrates on the historical pattern (ground-level benches & tree bases, heartland NE/E & the central-north fringe). Gold rings mark the three confirmed past finds.';
+  }
+
+  document.getElementById('decodeBtn').addEventListener('click',decode);
+  document.getElementById('decodeInput').addEventListener('keydown',e=>{ if(e.key==='Enter') decode(); });
+  document.getElementById('clueAdd').addEventListener('click',addClue);
+  document.getElementById('clueText').addEventListener('keydown',e=>{ if(e.key==='Enter') addClue(); });
+
+  document.getElementById('pastToggle').addEventListener('click',e=>{
+    showPast=!showPast; e.target.setAttribute('aria-pressed',String(showPast));
+    e.target.textContent='Past finds: '+(showPast?'on':'off'); draw();
+  });
+
+  document.getElementById('reset').addEventListener('click',()=>{
+    Object.assign(weights,{bench:85,park:70,transit:60,coast:35});
+    document.querySelectorAll('.slider').forEach(s=>{ const i=s.querySelector('input'); i.value=weights[s.dataset.w]; i.dispatchEvent(new Event('input')); });
+    regions.clear(); clues.length=0;
+    document.querySelectorAll('#regionChips .chip').forEach(c=>c.setAttribute('aria-pressed','false'));
+    Object.assign(rules,{water:true,restricted:true,free:false});
+    document.getElementById('r_water').checked=true; document.getElementById('r_restricted').checked=true; document.getElementById('r_free').checked=false;
+    renderClues(); compute();
+  });
+
+  let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(draw,120); });
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener?.('change',draw);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  updateNote(); decode(); renderClues(); compute();
+})();
+</script>
