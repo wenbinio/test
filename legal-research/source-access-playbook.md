@@ -72,6 +72,15 @@ different results from the same source, both outcomes are recorded.
   speech is **not** a Hansard-formatted transcript (no column markers, may omit floor
   interjections) — flag it as such rather than presenting it as the official Hansard record.
 
+## r.jina.ai reader proxy (general fallback access route)
+
+- Worth listing as a fallback when a direct `curl`/`WebFetch` is blocked or returns cluttered
+  markup: prefix the target URL with `https://r.jina.ai/` to get a reader-mode text extraction.
+- **Does not help against CAPTCHA/JS-challenge-walled sites** — confirmed to fail against SMU
+  InK (Incapsula-style challenge; see above) exactly like `curl` and `WebFetch` did. It's a
+  clutter-stripping proxy, not a bot-detection bypass — useful for ordinary paywalls or messy
+  HTML, useless against a real JS challenge wall.
+
 ## sprs.parl.gov.sg (Parliament Hansard) and search.pair.gov.sg
 
 - **Inaccessible to every method tried** — JS-rendered pages plus Incapsula/AWS WAF bot
@@ -115,20 +124,48 @@ different results from the same source, both outcomes are recorded.
 
 - **HTTP 403** for at least one agent (Agent 10), blocking a lead article ("Employers of
   Record in Singapore: A Critical Overview"). Another agent's earlier fetch of a different
-  Law Gazette feature also errored. Treat as **unreliable/frequently blocked** — flag any
-  citation to it and prefer corroborating from a source that did load.
+  Law Gazette feature also errored.
+- **Mechanism confirmed by a later wave (16 Jul 2026): the block is a Cloudflare "Just a
+  moment..." JS challenge page**, not a plain access-denied — it blocks both `WebFetch` and
+  `curl` equally (the earlier "403" and the later "JS challenge" observations are the same
+  underlying block, just described differently by different agents). Only search-engine
+  snippet metadata (title/description, no body text) is obtainable.
+- Treat as **unreliable/frequently blocked** — flag any citation to it and prefer corroborating
+  from a source that did load.
 
-## journalsonline.academypublishing.org.sg (SAcLJ / SAL Annual Review)
+## journalsonline.academypublishing.org.sg (SAcLJ / SAL Annual Review / SAL Practitioner)
 
-- **Paywalled** — no agent obtained quotable text directly.
-- **SMU InK** (`ink.library.smu.edu.sg`) sometimes hosts open-access PDFs of the same or
-  related articles (e.g., a SAL Ann Rev Tort chapter URL was located at
-  `ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=...&context=sol_research`), but fetches
-  **returned empty or 403 for some agents** even on InK URLs. Do not assume InK bypasses the
-  paywall — verify per-URL.
-- Net effect: SAcLJ/SAL Ann Rev commentary is a **genuine, recorded gap** in this project, not
-  a source to strain against. Cite the URL as "located, not retrievable" and move on rather
-  than fabricating a pinpoint.
+- **Earlier wave**: recorded as paywalled — no agent obtained quotable text directly.
+- **UPDATE (commentary-research agent, 16 Jul 2026): full-text PDFs ARE retrievable** by direct
+  `curl` **with a browser User-Agent header set**, despite the site's HTML pages appearing
+  paywalled. This resolves the earlier "genuine gap" finding below — the block was a UA check,
+  not a real paywall.
+- **PDF URL pattern**:
+  `https://journalsonline.academypublishing.org.sg/Journals/<journal-path>/ctl/eFirstSALPDFJournalView/mid/<mid>/ArticleId/<id>/Citation/JournalsOnlinePDF`.
+- Run retrieved PDFs through `pdftotext` for exact quotes — same discipline as any other
+  primary-source PDF (see the Ng Huat Seng gotcha above: never cite a pinpoint from a WebFetch
+  AI summary of the raw PDF; extract and read the text yourself).
+- **ArticleId probing technique**: within a single SAL Annual Review volume, ArticleIds run in
+  strict chapter order. Probing sequential ArticleIds lets you enumerate a volume's full
+  chapter list and positively confirm whether a given subject chapter exists for that year —
+  this is how the discontinuation of the SAL Ann Rev "Employment Law" chapter for 2020–2022 was
+  proven (see `singapore-source-map.md` for the verified fact). This turns a chapter-not-found
+  result into a **verified negative** per `verification-protocol.md` rule 3, rather than a weak
+  absence.
+- **Do not use SMU InK as a fallback/mirror for this source any more** — see the dedicated
+  entry below; InK is now confirmed hard-blocked, and journalsonline direct-`curl` is the
+  reliable path for SAL content.
+
+## ink.library.smu.edu.sg (SMU InK)
+
+- **HARD-BLOCKED** (confirmed by a later wave, 16 Jul 2026): an Incapsula/Cloudflare-style JS
+  challenge defeats `curl`, `WebFetch`, **and** the `r.jina.ai` reader-proxy fallback (see
+  below) alike. No Wayback Machine snapshots exist either. This upgrades the earlier
+  "hit-or-miss, verify per-URL" finding (some fetches returned empty or 403) to a confirmed
+  systemic block, not a per-URL flake.
+- **Practical rule: don't burn time on InK.** The same SAL journal content is usually
+  retrievable directly from `journalsonline.academypublishing.org.sg` instead (see above) —
+  check there first rather than treating InK as the fallback.
 
 ## LawNet / Westlaw
 
@@ -149,6 +186,11 @@ different results from the same source, both outcomes are recorded.
   rate" or "$50,000 paid-up capital" claim traced back to an SEO/marketing page with no
   citation and no figure to substantiate it — flagged as likely fabricated rather than
   repeated).
+- **Low-yield for secondment/EAA topics specifically** (confirmed 16 Jul 2026): a full
+  fetch+grep of Drew & Napier's Legal 500 SG Employment 2024 country-guide chapter for
+  "secondment"/"agency work"/"labour supply" terms returned **zero hits**. Treat law-firm-alert
+  hunting as a low-yield strategy for this topic area specifically — don't over-invest agent
+  time there before exhausting primary/journal sources.
 - Aggregator sites (sgpbusiness.com and similar) were used for EA licence-number lookups but
   produced at least one **scraping error**: the same licence number "91C2918" was returned for
   two different firms (Adecco and Kelly Services) — a red flag that the underlying scrape had

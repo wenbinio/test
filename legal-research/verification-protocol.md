@@ -108,3 +108,9 @@ do NOT fabricate."
    upgraded.** If a MEDIUM item is later independently read and confirmed, mark it FULLY
    VERIFIED and note which agent/pass did the confirming read (traceability matters more than
    speed).
+10. **Watch for same-author, different-book edition traps.** A later wave (commentary-research
+    agent, 16 Jul 2026) confirmed Ravi Chandran's *Employment Law in Singapore* treatise
+    remains at its 6th edition (2019) — a "7th edition (Dec 2024)" hit that looks like the same
+    title on first glance is actually a **different** Chandran book, *Introduction to Business
+    Law in Singapore*. Before citing a "new edition" of a named treatise, confirm the full
+    title matches, not just the author name and a plausible-sounding edition/date bump.
