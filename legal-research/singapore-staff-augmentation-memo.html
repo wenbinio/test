@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singapore Personnel Leasing &amp; Staff Augmentation — Legal Memo</title>
+<style>
+  :root{
+    --bg:#f5f4f1;
+    --panel:#ffffff;
+    --ink:#1c2024;
+    --ink-soft:#3f4650;
+    --muted:#6a7280;
+    --rule:#d8d4cc;
+    --rule-soft:#e7e3db;
+    --accent:#7a2e2e;         /* deep legal maroon */
+    --accent-2:#243b53;       /* navy */
+    --answer-bg:#f3f6f4;
+    --answer-border:#2f6d4f;
+    --quote-bg:#f7f5ef;
+    --quote-border:#b9a678;
+    --link:#7a2e2e;
+    --badge-v-bg:#e2f1e6;--badge-v-ink:#1f6b3b;--badge-v-br:#bfe0c9;
+    --badge-m-bg:#e5eefb;--badge-m-ink:#1d4e8f;--badge-m-br:#c4d8f2;
+    --badge-u-bg:#fbefdc;--badge-u-ink:#9a5a10;--badge-u-br:#efd6ab;
+    --badge-c-bg:#f2e6ef;--badge-c-ink:#7a2564;--badge-c-br:#e2c9dc;
+    --th-bg:#efece5;
+    --tr-alt:#faf9f6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#14161a;--panel:#1c2025;--ink:#e7e9ec;--ink-soft:#c4c8ce;--muted:#98a0aa;
+      --rule:#333a42;--rule-soft:#2a3037;--accent:#e39a9a;--accent-2:#8fb4dd;
+      --answer-bg:#182420;--answer-border:#3f8c63;--quote-bg:#20211c;--quote-border:#8a7a52;
+      --link:#e39a9a;
+      --badge-v-bg:#183024;--badge-v-ink:#7fd7a1;--badge-v-br:#2c5a3f;
+      --badge-m-bg:#152740;--badge-m-ink:#8fb8ef;--badge-m-br:#274a75;
+      --badge-u-bg:#33260f;--badge-u-ink:#e6bd79;--badge-u-br:#5c451d;
+      --badge-c-bg:#2c1a29;--badge-c-ink:#e0a6d3;--badge-c-br:#553049;
+      --th-bg:#252a30;--tr-alt:#1f242a;
+    }
+  }
+  :root[data-theme="dark"]{
+      --bg:#14161a;--panel:#1c2025;--ink:#e7e9ec;--ink-soft:#c4c8ce;--muted:#98a0aa;
+      --rule:#333a42;--rule-soft:#2a3037;--accent:#e39a9a;--accent-2:#8fb4dd;
+      --answer-bg:#182420;--answer-border:#3f8c63;--quote-bg:#20211c;--quote-border:#8a7a52;
+      --link:#e39a9a;
+      --badge-v-bg:#183024;--badge-v-ink:#7fd7a1;--badge-v-br:#2c5a3f;
+      --badge-m-bg:#152740;--badge-m-ink:#8fb8ef;--badge-m-br:#274a75;
+      --badge-u-bg:#33260f;--badge-u-ink:#e6bd79;--badge-u-br:#5c451d;
+      --badge-c-bg:#2c1a29;--badge-c-ink:#e0a6d3;--badge-c-br:#553049;
+      --th-bg:#252a30;--tr-alt:#1f242a;
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f4f1;--panel:#ffffff;--ink:#1c2024;--ink-soft:#3f4650;--muted:#6a7280;
+    --rule:#d8d4cc;--rule-soft:#e7e3db;--accent:#7a2e2e;--accent-2:#243b53;
+    --answer-bg:#f3f6f4;--answer-border:#2f6d4f;--quote-bg:#f7f5ef;--quote-border:#b9a678;
+    --link:#7a2e2e;
+    --badge-v-bg:#e2f1e6;--badge-v-ink:#1f6b3b;--badge-v-br:#bfe0c9;
+    --badge-m-bg:#e5eefb;--badge-m-ink:#1d4e8f;--badge-m-br:#c4d8f2;
+    --badge-u-bg:#fbefdc;--badge-u-ink:#9a5a10;--badge-u-br:#efd6ab;
+    --badge-c-bg:#f2e6ef;--badge-c-ink:#7a2564;--badge-c-br:#e2c9dc;
+    --th-bg:#efece5;--tr-alt:#faf9f6;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,Cambria,"Times New Roman",serif;
+    font-size:17px;line-height:1.62;margin:0;padding:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:32px 26px 90px;}
+  .sans{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+
+  /* ---- Header block ---- */
+  header.memo{
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-top:5px solid var(--accent);
+    border-radius:4px;
+    padding:26px 30px 22px;
+    margin-bottom:26px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+  }
+  header.memo .kicker{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;font-weight:700;
+    color:var(--accent);margin:0 0 4px;
+  }
+  header.memo h1{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:25px;line-height:1.25;margin:0 0 16px;font-weight:700;letter-spacing:-.01em;
+  }
+  .fields{
+    display:grid;grid-template-columns:auto 1fr;gap:5px 16px;
+    font-size:14.5px;border-top:1px solid var(--rule-soft);padding-top:14px;
+  }
+  .fields dt{
+    font-family:system-ui,sans-serif;font-weight:700;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;font-size:11.5px;padding-top:2px;
+  }
+  .fields dd{margin:0;color:var(--ink-soft);}
+
+  /* ---- Typography ---- */
+  h2{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:21px;font-weight:700;letter-spacing:-.01em;
+    margin:44px 0 10px;padding-bottom:8px;border-bottom:2px solid var(--rule);
+    scroll-margin-top:14px;
+  }
+  h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;}
+  h3{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16.5px;font-weight:700;margin:26px 0 6px;color:var(--accent-2);
+    scroll-margin-top:14px;
+  }
+  h4{
+    font-family:system-ui,sans-serif;font-size:14px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 4px;
+  }
+  p{margin:0 0 12px;}
+  a{color:var(--link);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--link) 35%,transparent);}
+  a:hover{border-bottom-color:var(--link);}
+  strong{font-weight:700;}
+  em.term{font-style:normal;font-weight:600;color:var(--accent-2);}
+  ul,ol{margin:0 0 12px;padding-left:22px;}
+  li{margin:0 0 6px;}
+  .lead{font-size:18px;color:var(--ink-soft);}
+  .small{font-size:13.5px;color:var(--muted);}
+  code{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.86em;background:var(--quote-bg);padding:1px 5px;border-radius:3px;}
+
+  /* ---- TOC ---- */
+  nav.toc{
+    background:var(--panel);border:1px solid var(--rule);border-radius:4px;
+    padding:18px 22px;margin-bottom:26px;
+  }
+  nav.toc h2{
+    border:0;margin:0 0 8px;padding:0;font-size:13px;text-transform:uppercase;
+    letter-spacing:.12em;color:var(--muted);
+  }
+  nav.toc ol{list-style:none;padding:0;margin:0;columns:2;column-gap:30px;font-family:system-ui,sans-serif;font-size:14px;}
+  nav.toc li{margin:0 0 4px;break-inside:avoid;}
+  nav.toc a{border:0;color:var(--ink-soft);}
+  nav.toc a:hover{color:var(--link);}
+  nav.toc .tag{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:6px;}
+
+  /* ---- Answer callout ---- */
+  .answer{
+    background:var(--answer-bg);
+    border:1px solid var(--rule);
+    border-left:5px solid var(--answer-border);
+    border-radius:4px;padding:16px 20px;margin:14px 0 20px;
+  }
+  .answer .lbl{
+    font-family:system-ui,sans-serif;font-size:11.5px;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--answer-border);margin:0 0 6px;display:block;
+  }
+  .answer p{margin:0 0 8px;font-size:16px;}
+  .answer p:last-child{margin-bottom:0;}
+
+  /* ---- Blockquote (statutory text) ---- */
+  blockquote{
+    background:var(--quote-bg);border-left:4px solid var(--quote-border);
+    margin:12px 0;padding:12px 18px;border-radius:0 4px 4px 0;
+    font-size:15px;color:var(--ink-soft);
+  }
+  blockquote p{margin:0 0 8px;}
+  blockquote p:last-child{margin-bottom:0;}
+  blockquote .src{display:block;font-family:system-ui,sans-serif;font-size:12px;color:var(--muted);margin-top:8px;}
+
+  /* ---- Badges ---- */
+  .badge{
+    display:inline-block;font-family:system-ui,sans-serif;font-size:10.5px;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;padding:1px 7px;border-radius:10px;
+    vertical-align:middle;white-space:nowrap;line-height:1.5;border:1px solid transparent;
+  }
+  .b-v{background:var(--badge-v-bg);color:var(--badge-v-ink);border-color:var(--badge-v-br);}
+  .b-m{background:var(--badge-m-bg);color:var(--badge-m-ink);border-color:var(--badge-m-br);}
+  .b-u{background:var(--badge-u-bg);color:var(--badge-u-ink);border-color:var(--badge-u-br);}
+  .b-c{background:var(--badge-c-bg);color:var(--badge-c-ink);border-color:var(--badge-c-br);}
+
+  /* ---- Tables ---- */
+  .tbl-wrap{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--rule);border-radius:4px;}
+  table{border-collapse:collapse;width:100%;font-size:14px;font-family:system-ui,sans-serif;min-width:520px;}
+  table.auth{min-width:640px;}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule-soft);vertical-align:top;}
+  thead th{background:var(--th-bg);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);position:sticky;top:0;}
+  tbody tr:nth-child(even){background:var(--tr-alt);}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  caption{caption-side:top;text-align:left;font-family:system-ui,sans-serif;font-size:12.5px;color:var(--muted);padding:0 0 8px;font-weight:600;}
+
+  /* ---- Callout note ---- */
+  .note{
+    border:1px dashed var(--rule);border-radius:4px;padding:12px 16px;margin:14px 0;
+    background:var(--panel);font-size:14.5px;
+  }
+  .note .tt{font-family:system-ui,sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px;}
+
+  .divider{height:1px;background:var(--rule);border:0;margin:40px 0;}
+  sup.fn{font-size:.72em;color:var(--accent);font-weight:700;}
+
+  footer.disc{
+    margin-top:46px;border-top:2px solid var(--rule);padding-top:18px;
+    font-size:13px;color:var(--muted);font-family:system-ui,sans-serif;
+  }
+  .toplink{font-family:system-ui,sans-serif;font-size:12px;float:right;color:var(--muted);border:0;}
+
+  @media (max-width:640px){
+    body{font-size:16px;}
+    .wrap{padding:20px 15px 70px;}
+    nav.toc ol{columns:1;}
+    header.memo{padding:20px 18px;}
+    .fields{grid-template-columns:1fr;gap:2px 0;}
+    .fields dt{margin-top:8px;}
+  }
+  @media print{
+    :root{--bg:#fff;--panel:#fff;}
+    body{font-size:11pt;color:#000;}
+    .wrap{max-width:none;padding:0;}
+    nav.toc,.toplink{display:none;}
+    h2,h3{page-break-after:avoid;}
+    blockquote,.answer,.tbl-wrap,table{page-break-inside:avoid;}
+    a{color:#000;border:0;}
+    header.memo{border-top-color:#000;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="memo">
+  <p class="kicker">Privileged &amp; Confidential — Legal Research Memorandum</p>
+  <h1>Personnel Leasing, Staff Augmentation and the Employment Agencies Act — Regulatory Analysis of a Singapore Software / Product-Development Firm's "Embedded Staff" Model</h1>
+  <dl class="fields">
+    <dt>To</dt><dd>The Client (Singapore software engineering / product-development firm)</dd>
+    <dt>From</dt><dd>Legal Research Team</dd>
+    <dt>Date</dt><dd>16 July 2026</dd>
+    <dt>Re</dt><dd>Whether "Model 2" (staff augmentation — the firm's own employees embedded in a client team, client directing day-to-day work, firm retaining employer status) is a regulated "personnel-leasing" activity requiring an employment-agency licence, and related sub-supply, cross-border, cost and risk questions</dd>
+    <dt>Status</dt><dd>Research memorandum — not legal advice (see disclaimer). Verification status is flagged throughout.</dd>
+  </dl>
+</header>
+
+<nav class="toc" aria-label="Table of contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><span class="tag">§1</span><a href="#exec">Executive summary &amp; short answers</a></li>
+    <li><span class="tag">§2</span><a href="#framework">The regulatory framework: there is no "personnel-leasing" statute</a></li>
+    <li><span class="tag">§3</span><a href="#qA">Question A — Scope of "personnel-leasing" law; is the firm an "employment agency"?</a></li>
+    <li><span class="tag">§4</span><a href="#q1">Q1 — What is "personnel leasing" in IT services; is Model 2 caught?</a></li>
+    <li><span class="tag">§5</span><a href="#q2">Q2 — Minimising the risks</a></li>
+    <li><span class="tag">§6</span><a href="#q3">Q3 — Do we need a licence? Requirements, timeline, cost</a></li>
+    <li><span class="tag">§7</span><a href="#q4">Q4 — Associated administrative tasks</a></li>
+    <li><span class="tag">§8</span><a href="#q5">Q5 — Is "sub-subleasing" (onward supply of temp-agency staff) allowed?</a></li>
+    <li><span class="tag">§9</span><a href="#q6">Q6 — Inbound cross-border leasing (offshore affiliate staff)</a></li>
+    <li><span class="tag">§10</span><a href="#recent">Recent-law wave (2022–2026)</a></li>
+    <li><span class="tag">§11</span><a href="#confidence">Confidence &amp; open points</a></li>
+    <li><span class="tag">§12</span><a href="#authorities">Table of authorities</a></li>
+  </ol>
+</nav>
+
+<p class="small"><strong>Badge key:</strong>
+  <span class="badge b-v">Verified</span> confirmed against a primary source (statute / judgment / MOM page) in the verification pass. &nbsp;
+  <span class="badge b-m">MOM guidance</span> rests on MOM administrative guidance, not statute or case law. &nbsp;
+  <span class="badge b-u">Unverified</span> could not be confirmed from primary sources — confirm on LawNet / with the regulator before reliance. &nbsp;
+  <span class="badge b-c">Untested</span> no Singapore court has decided the point on these facts.
+</p>
+
+<!-- =========================== EXECUTIVE SUMMARY =========================== -->
+<h2 id="exec"><span class="num">1.</span> Executive summary &amp; short answers <a href="#exec" class="toplink">▲ top</a></h2>
+
+<p class="lead">Singapore has <strong>no dedicated personnel-leasing, labour-hire or temporary-agency-work statute</strong> — nothing equivalent to Germany's <em class="term">Arbeitnehmerüberlassungsgesetz</em> (AÜG) or the EU Temporary Agency Work Directive (2008/104/EC). The only licensing regime that touches the supply of workers is the <strong>Employment Agencies Act 1958 (2020 Rev Ed)</strong> ("EAA"), administered by the Ministry of Manpower ("MOM"). The whole regulatory question therefore reduces to one issue — <em>does the activity require an employment-agency ("EA") licence?</em> — plus ordinary employer-law compliance (Employment Act, foreign-manpower rules, CPF, tax).</p>
+
+<p>On the facts given, <strong>Model 2 (staff augmentation with the firm remaining the legal employer) is very likely <em>not</em> a licensable EA activity.</strong> The licensable act is <em>brokering an employer–employee relationship between a jobseeker and a third-party (client) employer</em>. In Model 2 the worker never becomes the client's employee — the firm keeps payroll, discipline and performance management — so there is no placement to license. This maps directly onto MOM's published carve-out that "<em>Outsourcing your own staff to your customers' premises or offices</em>" needs no licence, and onto the High Court's holding in <em>Republic Airconditioning</em> that a labour supplier which is <em>itself</em> the employer is not an "employment agency". The principal caveats are (i) <strong>substance over form</strong> — recruiting people req-by-req to supply a named client can flip the analysis into licensable placement; and (ii) a separate <strong>foreign-manpower overlay</strong> that applies only where the embedded staff are foreign work-pass holders.</p>
+
+<div class="tbl-wrap">
+<table>
+  <caption>Short answers to the client's questions</caption>
+  <thead>
+    <tr><th style="width:15%">Question</th><th style="width:52%">Short answer</th><th style="width:33%">Key basis</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>A.</strong> Personnel-leasing law? EA? Is supplying staff regulated?</td>
+      <td>No personnel-leasing statute exists. "Supplying staff" is <em>not</em> a regulated activity <em>as such</em>. Only <em>employment-agency</em> activity — placing jobseekers into employment with third parties — is licensable. On the facts the firm is <strong>not</strong> an employment agency.</td>
+      <td>EAA ss 2, 6 <span class="badge b-v">Verified</span>; <em>Republic Airconditioning</em> <span class="badge b-v">Verified</span>; MOM guidance <span class="badge b-m">MOM guidance</span></td>
+    </tr>
+    <tr>
+      <td><strong>Q1.</strong> Is Model 2 "personnel leasing"?</td>
+      <td>There is no statutory test called "personnel leasing". Applying the EAA's "specified employment agency work" concept and MOM's placement-vs-outsourcing line, Model 2 is <strong>outsourcing of the firm's own staff, not licensable placement</strong> — provided the firm is not sourcing/matching external candidates for the client to employ.</td>
+      <td>EAA s 2 <span class="badge b-v">Verified</span>; <em>Int'l Placements</em> <span class="badge b-v">Verified</span>; <span class="badge b-c">Untested</span> on these facts</td>
+    </tr>
+    <tr>
+      <td><strong>Q2.</strong> Minimise the risks?</td>
+      <td>Keep and document genuine employer status; contract as a service (deliverables/SOW, not headcount); avoid req-by-req sourcing for named clients; for <em>foreign</em> staff satisfy MOM's three-condition deployment test; do EA-directory due diligence on any sub-suppliers; address vicarious-liability and data-protection allocation in contracts.</td>
+      <td>MOM FAQ (8 Apr 2026) <span class="badge b-m">MOM guidance</span>; <em>Munshi</em>/<em>Hwa Aik</em> <span class="badge b-v">Verified</span></td>
+    </tr>
+    <tr>
+      <td><strong>Q3.</strong> Licence/permit needed?</td>
+      <td><strong>Most likely no</strong> for Model 2. <em>If</em> the firm crosses into placement/contract-staffing, a Comprehensive EA licence is required: gov't fees ~S$500, CEI training/exam/registration per person, security bond S$20k–S$60k; realistic ~4–8 weeks. Professional/legal fees are not publicly quoted.</td>
+      <td>EA Rules 2011 <span class="badge b-v">Verified</span>; MOM apply pages <span class="badge b-m">MOM guidance</span>; prof. fees <span class="badge b-u">Unverified</span></td>
+    </tr>
+    <tr>
+      <td><strong>Q4.</strong> Admin tasks?</td>
+      <td>If unlicensed (Model 2): none specific to the EAA — only ordinary employer admin (CPF, work passes, IRAS, PDPA) and EA-directory checks on suppliers. If licensed: KAH/personnel registration, security bond, display/record-keeping, fee-cap and refund rules, event-driven notifications.</td>
+      <td>EAA/EA Rules &amp; Licence Conditions <span class="badge b-v">Verified</span></td>
+    </tr>
+    <tr>
+      <td><strong>Q5.</strong> "Sub-subleasing" (temp-agency in, onward to clients)?</td>
+      <td><strong>Licensable and higher-risk.</strong> Onward-supplying a worker sourced from another agency is EA activity by the middle firm (own-behalf carve-out lost); using an unlicensed sub-agent is a distinct per-worker offence. For <em>foreign</em> work-pass holders the chain is generally prohibited outside construction/process.</td>
+      <td>EAA ss 6, 30 <span class="badge b-v">Verified</span>; EFMA Work Passes Regs <span class="badge b-v">Verified</span></td>
+    </tr>
+    <tr>
+      <td><strong>Q6.</strong> Inbound cross-border (offshore affiliate staff)?</td>
+      <td>Staff working <strong>wholly offshore</strong> for a Singapore client need <strong>no</strong> Singapore work pass and generally sit outside the EAA (no act "in Singapore"). Watch the EAA's territorial reach if the SG firm arranges placements here, business-visitor limits when they fly in, and tax/PDPA flags.</td>
+      <td>EFMA territorial rule <span class="badge b-v">Verified</span>; EAA s 6(2) <span class="badge b-v">Verified</span>; IRAS/PDPA <span class="badge b-v">Verified</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note">
+  <span class="tt">Confidence</span>
+  Our independent second-opinion review put the "no EA licence for Model 2" conclusion at roughly <strong>75–80%</strong>, the residual uncertainty being fact-sensitivity (the substance-over-form line) and the fact that the staff-augmentation pattern has <strong>never been judicially tested</strong> under the EAA. See <a href="#confidence">§11</a>.
+</div>
+
+<!-- =========================== FRAMEWORK =========================== -->
+<h2 id="framework"><span class="num">2.</span> The regulatory framework: there is no "personnel-leasing" statute <a href="#framework" class="toplink">▲ top</a></h2>
+
+<p>The starting point — and it is a favourable one for the client — is that <strong>Singapore does not regulate "personnel leasing" as a distinct activity.</strong> There is no counterpart to the German AÜG, the EU Temporary Agency Work Directive, or the Australian-style labour-hire licensing schemes. <span class="badge b-v">Verified</span> The instruments that regulate the <em>workers</em> — the Employment Act 1968, the Employment of Foreign Manpower Act 1990 ("EFMA"), and the CPF and tax legislation — do not create any "leasing" licence.</p>
+
+<p>The one licensing statute that touches the supply or placement of workers is the <strong>Employment Agencies Act 1958 (2020 Rev Ed)</strong>, whose long title is simply "<em>An Act to provide for the regulation of employment agencies</em>". <span class="badge b-v">Verified</span> By way of structural contrast, when Parliament wants to regulate labour supply <em>as such</em> in a particular sector it legislates a bespoke statute — e.g. the Private Security Industry Act 2007 for the supply of security officers. No analogous statute exists for IT or professional staffing. <span class="badge b-u">Unverified</span> (structural inference; no PSIA text pulled)</p>
+
+<h3>2.1 The two statutory triggers under the EAA</h3>
+<p>The EAA does not use a single phrase such as "the work of an employment agency". Two operative concepts do the work:</p>
+<ol>
+  <li><strong>The status/business definition</strong> (trigger for the entity-level prohibition in s 6(1)). Section 2 defines an "employment agency" as —
+    <blockquote>"any agency or registry carried on or represented as being or intended to be carried on (whether for the purpose of gain or reward or not) for or in connection with the employment of persons in any capacity, <strong>but does not include any registry set up by an employer for the sole purpose of recruiting persons for employment on the employer's own behalf</strong>".
+    <span class="src">Employment Agencies Act 1958 (2020 Rev Ed) s 2 — verbatim <span class="badge b-v">Verified</span>. (The current 2020 Rev Ed reads "the employer's own behalf"; the older 2012 Rev Ed read "his own behalf".)</span></blockquote>
+  </li>
+  <li><strong>The task list — "specified employment agency work"</strong> (trigger for individual-level registration and the s 6(2) individual prohibition). Section 2 lists four concrete tasks —
+    <blockquote>
+      <p>(a) communication with any applicant for employment for the purpose of processing any application by the applicant for employment;</p>
+      <p>(b) collation of the biodata or resume of any applicant for employment <strong>for the purpose of helping the applicant establish an employer-employee relationship</strong>;</p>
+      <p>(c) submission of any application on behalf of any employer or applicant for employment to the Controller of Work Passes … under the Employment of Foreign Manpower Act 1990;</p>
+      <p>(d) <strong>facilitation of the placement of any applicant for employment with an employer</strong>.</p>
+      <span class="src">EAA s 2 — verbatim <span class="badge b-v">Verified</span></span>
+    </blockquote>
+  </li>
+</ol>
+
+<p>Every one of the four limbs is keyed to an <em>"applicant for employment"</em> — a jobseeker — being placed into an <em>employer–employee relationship with an employer</em>. That is the mischief the Act targets. It is also how MOM operationalises the Act (see <a href="#qA">§3</a>) and how the High Court read it in <em>International Placements</em> (see <a href="#q1">§4</a>).</p>
+
+<h3>2.2 The prohibition and the penalty</h3>
+<blockquote>
+  <p><strong>s 6(1)</strong> A person must not carry on an employment agency unless the person is the holder of a licence …</p>
+  <p><strong>s 6(2)</strong> [subject to s 6(3)] a person must not perform any work or activity <strong>in Singapore</strong> — (a) for or in connection with the employment of one or more persons in any capacity, whether or not those persons are to be employed within or outside Singapore; and (b) on the firstmentioned person's own behalf or on behalf of an employment agency which is carried on outside Singapore — unless … licensed.</p>
+  <p><strong>s 6(3)</strong> Subsection (2) does not apply to … (c) any person who performs such work or activity … <strong>for the sole purpose of recruiting persons for employment on that person's own behalf</strong>.</p>
+  <p><strong>s 6(4)</strong> [penalty] a fine not exceeding <strong>$80,000</strong> or imprisonment not exceeding <strong>2 years</strong> or both; on a second or subsequent conviction, up to <strong>$160,000</strong> and/or <strong>4 years</strong>.</p>
+  <span class="src">EAA s 6 — verbatim <span class="badge b-v">Verified</span></span>
+</blockquote>
+
+<p>Two "own-behalf" hooks thus point the same way: the s 2 definitional exclusion of a registry set up to recruit on one's own behalf, and the s 6(3)(c) disapplication of the individual prohibition for own-behalf recruitment. Note, however, that both are phrased around <em>recruiting</em> for one's own business; MOM's guidance separately and more broadly excludes <em>outsourcing</em> existing own staff. They point in the same direction but are not verbatim the same test. <span class="badge b-m">MOM guidance</span></p>
+
+<h3>2.3 The exemptions do not include a "secondment" exemption</h3>
+<p>The statutory exemptions (Employment Agencies (Exemption) Order 2011 (S 175/2011); Order 2014 (S 433/2014)) cover internet-only operation, job bulletin boards, one-off work-pass filers, short-stay (≤30 days/6 months) foreign visitors, recognised universities, Community Development Councils, e2i and the workforce-development agency — <em>not</em> secondment or personnel supply. <span class="badge b-v">Verified</span> The favourable position for the client therefore does <strong>not</strong> rest on an exemption order; it rests on the point that outsourcing your own staff is <em>not EA activity at all</em>, supported by the s 2 / s 6(3)(c) own-behalf language and MOM's published guidance.</p>
+
+<!-- =========================== QUESTION A =========================== -->
+<h2 id="qA"><span class="num">3.</span> Question A — Scope of "personnel-leasing" law; is the firm an "employment agency"? <a href="#qA" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p><strong>(i)</strong> There is no "personnel-leasing law" in Singapore whose scope Model 2 could fall within — the concept does not exist as a regulated category. <strong>(ii)</strong> On the facts, the firm is <strong>not</strong> an "employment agency": it is not carrying on an agency/registry to place jobseekers into employment with third parties; it employs its own people and deploys them to deliver its own services. <strong>(iii)</strong> The provision of staff <em>as such</em> is <strong>not</strong> a regulated activity in Singapore. What is regulated is <em>employment-agency</em> activity — the brokering of jobseekers into employment with an employer. A labour supplier that is itself the employer is not an employment agency: <em>Republic Airconditioning (S) Pte Ltd v Shinsung Eng Co Ltd (Singapore Branch)</em> [2012] SGHC 46 at [32]–[33].</p>
+</div>
+
+<h3>3.1 MOM's operational position — the decisive administrative statement</h3>
+<p>MOM's public page "Who needs to get an employment agency licence" (last updated 2 July 2026) states that a licence is required if a person: communicates with a jobseeker to process an employment-related application; collates a jobseeker's biodata/resume to help establish an employer-employee relationship; submits a work-pass application on behalf of an employer or jobseeker; or "helps place any jobseeker with an employer". <span class="badge b-v">Verified</span> Critically, it then states that a licence is <strong>not</strong> required when:</p>
+<blockquote>
+  <p>"Recruiting persons for the sole purpose of employing them for your own company or business."</p>
+  <p>"<strong>Outsourcing your own staff to your customers' premises or offices.</strong>"</p>
+  <span class="src">MOM, "Who needs to get an employment agency licence" — verbatim <span class="badge b-v">Verified</span> (confirmed by curl, HTTP 200, in the verification pass)</span>
+</blockquote>
+<p>Model 2 maps squarely onto the second carve-out. The firm recruits engineers as its own employees, and deploys one or two of them into a client's team while retaining employer status (payroll, discipline, performance management). It is not "placing a jobseeker with an employer" so as to create an employer-employee relationship between the worker and the client — the worker's employer stays the firm. <span class="badge b-m">MOM guidance</span></p>
+
+<h3>3.2 The one judicial construction of the EAA confirms the placement focus</h3>
+<p>The only reported judicial interpretation of the EAA is <em>International Placements (S) Pte Ltd v Public Prosecutor</em> [2020] SGHC 46 (Hoo Sheau Peng J). <span class="badge b-v">Verified</span> There, an unlicensed operator sourced foreign students, forwarded their biodata, arranged interviews and work-pass applications, and invoiced the host retailer monthly. The Court held:</p>
+<ul>
+  <li>at [51], "employment" bears a broad meaning — "<em>an engagement or use to do something whether or not there is a contract of service</em>" — rejecting a narrow contract-of-service reading;</li>
+  <li>at [52], the biodata collation fell within limb (b) and the placement facilitation within limb (d);</li>
+  <li>at [53], the operator "was an unlicensed employment agency in breach of s 6(1) of the EAA".</li>
+</ul>
+<p>Every limb the Court applied is anchored to an "applicant for employment" — a jobseeker being placed into an employer-employee relationship with a <em>third party</em>. There is <strong>no</strong> judicial discussion anywhere of a firm supplying its <em>own already-employed staff</em> to a client while remaining employer. That fact pattern is <strong>judicially untested</strong>. <span class="badge b-c">Untested</span> <span class="badge b-v">Verified</span> (pinpoints confirmed; note the SLR report [2020] 4 SLR 1195 is <em>unverified</em> — cite by neutral citation).</p>
+
+<h3>3.3 <em>Republic Airconditioning</em> — a labour supplier that is itself the employer is not an EA</h3>
+<p>The closest authority in the client's favour is <em>Republic Airconditioning (S) Pte Ltd v Shinsung Eng Co Ltd (Singapore Branch)</em> [2012] SGHC 46 (Lai Siu Chiu J). <span class="badge b-v">Verified</span> The plaintiff contracted to supply labour to the defendant; when sued for its charges, the defendant argued the contract was illegal because the plaintiff was carrying on an unlicensed employment agency. The Court rejected that defence:</p>
+<blockquote>
+  "It had always been the plaintiff's case that it was not an employment agency <strong>as it was itself the employer of the workers</strong>. The contract itself … revealed that it was the plaintiff itself who was responsible for the welfare of the workers, including the payment of wages, individual taxation and the payment of levies; the defendant was merely charged a daily rate for the workers provided by the plaintiff. <strong>At all times, the plaintiff was and remained the employer of the workers, and thus cannot be said to be an 'employment agency'.</strong> There was accordingly, no basis on which s 6 of the Employment Agencies Act was applicable to the present case."
+  <span class="src"><em>Republic Airconditioning</em> [2012] SGHC 46 at [33] — verbatim <span class="badge b-v">Verified</span></span>
+</blockquote>
+<p>This is directly on point for Model 2: the badge of "employment agency" turns on whether the supplier is itself the employer bearing wages, tax and statutory contributions. Two honesty flags: the decision is a first-instance High Court judgment; the appeal (CA 9 of 2012) produced <strong>no decided judgment</strong> (likely settled or withdrawn), and no later case has revisited or cited it on this point — so the proposition is <strong>untested on appeal and unrevisited</strong>. <span class="badge b-c">Untested</span> <span class="badge b-v">Verified</span> (verified negative in the recency sweep)</p>
+
+<h3>3.4 The purposive reading is supported by the 2011 Hansard</h3>
+<p>Under the Interpretation Act 1965 s 9A, an interpretation promoting the Act's purpose is to be preferred, and extrinsic materials — including a Bill's Second Reading speech — may be considered. <span class="badge b-v">Verified</span> The 2011 Second Reading speech frames EAs throughout as "<em>intermediaries that link job seekers and employers</em>" and describes the reform's object as "an EA industry that is better qualified, more professional and effective in <strong>matching employers and workers</strong>":</p>
+<blockquote>
+  <p>"Clause 5 clarifies that we wish to regulate all EA-related activities conducted in Singapore, regardless of whether they are for job placements in Singapore or outside Singapore … The new provisions are deliberately kept broad to ensure all types of EA-related activities that may give rise to malpractices are covered."</p>
+  <p>"I would like to assure the House that it is not the intention of my Ministry to penalise persons who make casual recommendations to link job seekers to employers."</p>
+  <span class="src">Singapore Parliamentary Debates, Official Report (11 January 2011) vol 87 (Lee Yi Shyan, Minister of State for Trade and Industry and Manpower). <strong>Caveat:</strong> the volume (87) is only moderately corroborated and column numbers could not be located; recovered from MOM's (now-deleted) press version of the speech, not a Hansard transcript. <span class="badge b-u">Unverified</span> (vol/cols)</span>
+</blockquote>
+<p>The speech nowhere uses "temp agency", "contract staffing", "labour supply" as a legal category, or "secondment". Its focus is errant and unlicensed <em>intermediaries</em> who exploit jobseekers. Nothing in it extends the regime to a firm deploying its own employees under a service contract — consistent with the reading that own-staff outsourcing is outside the mischief. <span class="badge b-v">Verified</span> (speech text) A candid counter-point: the Minister also said the provisions were "deliberately kept broad", and referred to "many EAs willing to <em>supply</em> them labour" — so the breadth of the head definition ("for or in connection with the employment of persons in any capacity") remains a live textual argument on the other side (see <a href="#q1">§4.2</a>).</p>
+
+<h3>3.5 Industry corroboration</h3>
+<p>Market practice is consistent, though only weakly probative. Contract-staffing and recruitment-led firms (e.g. Randstad, EA Licence No. 94C3609) prominently hold and display EA licences because their model involves an up-front sourcing/matching step. <span class="badge b-v">Verified</span> (Randstad number confirmed from its own footer) By contrast, an IT group such as NCS appears to ring-fence its licensable <em>placement</em> business in a separately-licensed entity while running its core consultant-deployment business unlicensed — consistent with the "outsourcing own staff" carve-out (single data point, secondary-sourced). <span class="badge b-u">Unverified</span></p>
+
+<!-- =========================== Q1 =========================== -->
+<h2 id="q1"><span class="num">4.</span> Q1 — What is "personnel leasing" in IT services; is Model 2 caught? <a href="#q1" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p>Singapore law has no statutory concept called "personnel leasing", so the analysis proceeds by asking whether the arrangement is licensable <em>employment-agency</em> activity. The dividing line is <strong>not the label</strong> ("secondment" vs "contract staffing") but <strong>whether the firm performs "specified employment agency work" — sourcing/matching external jobseekers, processing their applications, filing work passes, or facilitating their placement into employment with the client.</strong> On the stated facts (own permanent employees, embedded 1–2 at a time, firm retains employer status), Model 2 is <strong>outsourcing of the firm's own staff — not licensable placement.</strong> The result would flip only if, in substance, the firm recruits people req-by-req in order to supply them to a named client.</p>
+</div>
+
+<h3>4.1 The factors that decide the characterisation</h3>
+<p>Drawing the statutory limbs, MOM's guidance, <em>International Placements</em> and <em>Republic Airconditioning</em> together, the following factors determine whether an IT-services arrangement is (unlicensed) own-staff outsourcing or (licensable) placement:</p>
+<div class="tbl-wrap">
+<table>
+  <caption>Placement (licensable) vs own-staff outsourcing (not licensable) — the operative factors</caption>
+  <thead>
+    <tr><th style="width:34%">Factor</th><th style="width:33%">Points to <em>licensable placement</em></th><th style="width:33%">Points to <em>own-staff outsourcing</em> (Model 2)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Who ends up the employer?</td><td>Worker becomes (or is intended to become) the <strong>client's</strong> employee</td><td>Worker <strong>remains the firm's</strong> employee — payroll, CPF, discipline, performance mgmt</td></tr>
+    <tr><td>What is being sold?</td><td>A matching/placement <em>service</em> — finding and placing candidates</td><td>The firm's own <em>services/deliverables</em>, delivered through its people</td></tr>
+    <tr><td>Sourcing step</td><td>Firm sources/matches <strong>external</strong> candidates against client demand (often req-by-req)</td><td>Firm deploys people it already employs for its own service delivery</td></tr>
+    <tr><td>"Specified EA work" performed?</td><td>Yes — biodata collation (limb b), work-pass filing (limb c), placement facilitation (limb d)</td><td>No — none of the four limbs performed as a service to the client</td></tr>
+    <tr><td>Financial incidents of employment</td><td>Client bears wage/tax/levy risk after placement</td><td>Firm bears wages, individual taxation, levies (cf. <em>Republic Aircon</em> [33])</td></tr>
+    <tr><td>Commercial framing</td><td>Fee per placement; candidate CVs sent for selection</td><td>Contract for services / statement of work; firm accountable for output</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>4.2 Both sides of the textual argument (kept honest)</h3>
+<p><strong>Narrow reading (no licence — the better view):</strong> every limb of "specified employment agency work" targets an "applicant for employment" being placed into an employer-employee relationship with an employer. A deployed permanent employee is not an applicant for employment; the client never becomes the employer. The own-behalf registry exclusion signals that acting as principal/employer is outside the mischief. This is reinforced by <em>Republic Airconditioning</em> and MOM's express carve-out.</p>
+<p><strong>Broad reading (licence — the counter-argument):</strong> the head definition is deliberately wide — "<em>for or in connection with the employment of persons in any capacity</em>", gain or not — and s 6(1) keys off that head definition, not solely the four limbs. A business whose <em>real</em> model is supplying manpower is arguably "in connection with the employment of persons" and could be caught notwithstanding payroll-employer status. On this view, payroll status does not by itself defeat licensing where the substance is a sourcing-and-matching business. The tension is genuine on the text alone; it is resolved in practice by MOM's operational gloss and by which side of the "own staff vs broker" line the facts fall.</p>
+
+<h3>4.3 Applying it to Model 2</h3>
+<p>On the facts given, Model 2 sits firmly on the "own staff / not licensable" side: the embedded people are the firm's <em>permanent employees</em>; the firm sells its software/product-development services (managed delivery and augmentation), not a placement service; and the firm retains every incident of employment. The correct conclusion is that Model 2 is <strong>very likely not licensable EA activity</strong>. The residual risk is entirely one of <em>substance</em>: if in practice the firm begins recruiting engineers specifically against a named client's requisitions, screening CVs for the client's selection, or filing work passes on the client's behalf, the arrangement will look like contract staffing/placement and a Comprehensive EA licence would be required — the label "secondment" will not save it. <span class="badge b-c">Untested</span></p>
+
+<!-- =========================== Q2 =========================== -->
+<h2 id="q2"><span class="num">5.</span> Q2 — Minimising the risks <a href="#q2" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p>The risks fall into four buckets: (i) being re-characterised as an unlicensed EA; (ii) for <em>foreign</em> staff, breaching the EFMA prohibition on labour supply; (iii) the client (and the firm) attracting <strong>dual vicarious liability</strong> for the embedded worker's torts; and (iv) the worker being treated as the <em>client's</em> employee. Each can be materially mitigated by structuring and documentation. The measures below are protective, not exhaustive, and several rest on MOM administrative guidance rather than statute.</p>
+</div>
+
+<h3>5.1 Stay clearly outside EA activity (Model 2)</h3>
+<ul>
+  <li><strong>Contract for services, not headcount.</strong> Structure engagements around deliverables / statements of work for which the firm is accountable, rather than "supplying N bodies to sit in the client's team". This tracks the <em>Republic Airconditioning</em> reasoning and the MOM outsourcing carve-out.</li>
+  <li><strong>Recruit for the firm, not the requisition.</strong> Avoid recruiting candidates <em>specifically</em> to be supplied to a named client, forwarding CVs for the client's selection, or filing work passes on the client's behalf — these are the acts that constitute "specified employment agency work" and would flip the analysis.</li>
+  <li><strong>Keep and document genuine employer status</strong> — the firm pays wages, CPF (for citizens/PRs), and taxes; owns discipline, performance management, promotion and termination; provides tools/benefits; and bears the financial risk of the engagement. These are the very factors the multi-factorial employment test weighs (see §5.3).</li>
+  <li><strong>Do EA-directory due diligence</strong> before engaging any third-party supplier of people (relevant to Q5): s 30 EAA makes it an offence to engage an unlicensed EA, with a due-diligence defence available only by verifying the licence via MOM's EA directory (r 17). <span class="badge b-v">Verified</span></li>
+</ul>
+
+<h3>5.2 For foreign work-pass holders — satisfy MOM's three-condition deployment test</h3>
+<p>Where the embedded staff are <em>foreign work-pass holders</em>, a separate EFMA overlay applies. MOM's FAQ "Am I allowed to send my work pass holders to work at my client's place?" (last updated 8 April 2026) permits deployment under a genuine service contract <strong>only if all three conditions are met</strong>:</p>
+<blockquote>
+  <p>"— The work carried out corresponds to the occupation and sector stated in their work passes.</p>
+  <p>— The activity to be performed at your client's premises is the same as your company's declared business activity.</p>
+  <p>— <strong>Your company remains as the employer, and directly supervises the work of the work pass holders and pays their salaries.</strong>"</p>
+  <p>"You are not allowed to deploy your work pass holders to a client's company for the sole purpose of supplementing its workforce. The supply of labour services is only allowed under certain conditions for the construction and process sectors."</p>
+  <span class="src">MOM FAQ (8 Apr 2026) — verbatim <span class="badge b-m">MOM guidance</span>. Operates under the EFMA / work-pass conditions, not the EAA; applies only to foreign work-pass holders (not to citizens/PRs).</span>
+</blockquote>
+<div class="note">
+  <span class="tt">Genuine unresolved tension — flag</span>
+  The third condition requires that "your company … <strong>directly supervises the work</strong>" — which is in real tension with the client's directing day-to-day work in a staff-augmentation model. For <em>foreign</em> staff this is a genuine interpretive risk. MOM's "not allowed" examples are all low-skill / unrelated-occupation body-shopping (cooks, cleaners, factory workers), and no MOM statement says "skilled IT augmentation = prohibited labour supply" — so the risk is an inference from the FAQ's logic, not a direct MOM position. <span class="badge b-m">MOM guidance</span> Mitigations: retain a firm-side technical/reporting line (a firm lead or manager who supervises delivery quality and conduct), keep the work within the declared occupation/sector and the firm's declared business activity, and prefer the managed-services model (Model 1) or citizens/PRs for the most client-directed roles. For citizens/PRs, EFMA does not apply at all.
+</div>
+
+<h3>5.3 Vicarious liability and "who is the employer" — the litigation risk</h3>
+<p>Even with clean EA structuring, embedding a worker in a client's team creates two related common-law exposures.</p>
+
+<h4>(a) Employer identity — the multi-factorial test</h4>
+<p>Whether a worker is an employee (and of whom) is decided by the multi-factorial test authoritatively restated in <em>Public Prosecutor v Jurong Country Club and another appeal</em> [2019] SGHC 150 (See Kee Oon J):</p>
+<blockquote>
+  "The multi-factorial approach under which the court looks at the totality of the parties' working relationship with reference to a non-exhaustive list of factors should continue to apply. This assessment should be done holistically …"
+  <span class="src"><em>PP v Jurong Country Club</em> [2019] SGHC 150 at [49] — verbatim <span class="badge b-v">Verified</span> (neutral citation only; the SLR report "[2019] 2 SLR 316" is unverified and likely wrong). The factor list is enumerated at <em>National University Hospital (Singapore) Pte Ltd v Cicada Cube Pte Ltd</em> [2017] SGHC 53 at [84], referenced at [54]; the headed factor-by-factor analysis is at [58]–[60]; the "qualitative balancing exercise" language is at [53].</span>
+</blockquote>
+<p>Crucially, <strong>no single factor — including control — is decisive</strong>, and control is of "less significance" for skilled workers: an element of control is "generally not … inconsistent with an independent contractor relationship" (<em>BNM v National University of Singapore</em> [2014] SGCA 49; [2014] 4 SLR 931 at [25], applied in <em>Jurong Country Club</em> at [51]). <span class="badge b-v">Verified</span> The court will not hesitate to depart from a contractual label that does not match reality: <em>Jurong Country Club</em> at [47]. <span class="badge b-v">Verified</span> The factors include the parties' intentions, control, personal service, mutuality of obligations, financial risk/investment, provision of tools, remuneration structure, comparative treatment against acknowledged employees, benefits, and duration. This is <em>protective</em> of the firm: because the client's day-to-day direction is only one factor, the firm can hold employer status by retaining payroll, CPF/benefits, discipline, hiring/firing and financial risk. The multi-factorial test has <em>not</em> been re-applied to an agency-supplied / embedded worker by any reported 2020–2026 decision — a genuine silence. <span class="badge b-c">Untested</span></p>
+<p>Older authority confirms that a seconded worker <em>can</em> become the host's employee "if the relevant control test is met", but not automatically: <em>Asplenium Land Pte Ltd v Lam Chye Shing and others</em> [2019] SGHC 41 at [62]. <span class="badge b-v">Verified</span> (name corrected in verification: earlier drafts mis-styled the case) A caution on citation: <em>Awang bin Dollah v Shun Shing Construction &amp; Engineering Co Ltd and other appeals</em> [1997] 2 SLR(R) 746 is often cited in this area, but its dispositive ratio is <strong>occupier's liability</strong>, not employer identity — the Court of Appeal held the plaintiff was <em>not</em> the defendant's employee (per <em>Mohammed Shahid v Lim Keenly Builders Pte Ltd</em> [2010] SGHC 142 at [21]). It may be cited for the right-of-control analysis but <em>not</em> as authority that a lent worker becomes the host's employee. <span class="badge b-v">Verified</span></p>
+
+<h4>(b) Dual vicarious liability — the client (and the firm) can <em>both</em> be liable</h4>
+<p>Singapore now recognises <strong>dual vicarious liability</strong>: both the general (permanent) employer and the temporary "borrower" can be vicariously liable for a single worker's tort. In <em>Munshi Mohammad Faiz v Interpro Construction Pte Ltd and others and another appeal</em> [2021] SGHC 26; [2021] 4 SLR 1371, Dedar Singh Gill J held it "permissible to hold multiple defendants vicariously liable for the negligence of a single tortfeasor" (at [53]) and "accept[ed] that the imposition of dual VL is permissible under Singapore law" (at [67]). <span class="badge b-v">Verified</span> The general employer (who supplied an excavator operator) remained liable despite lending the worker out, because it trained and selected him and profited from hiring him out; the borrower was also liable through its site control. Result: both liable for 100% of the loss (at [86(e)]). The received <em>Mersey Docks</em> "<em>pro hac vice</em>" presumption — that the general employer is prima facie vicariously liable unless it proves a temporary transfer — was applied at [42]–[43], adopting Rix LJ's control-sharing approach in <em>Viasystems (Tyneside) Ltd v Thermal Transfer (Northern) Ltd</em> [2005] EWCA Civ 1151; [2006] QB 510 at [77] (as preferred in <em>Various Claimants v Catholic Child Welfare Society</em> [2012] UKSC 56, "Christian Brothers").</p>
+<p>The Appellate Division refused leave to appeal, endorsing the reasoning: "<em>the absence of direct control by the permanent employer does not mean that the permanent employer is exempt from vicarious liability</em>" (<em>Hwa Aik Engineering Pte Ltd v Munshi Mohammad Faiz</em> [2021] SGHC(A) 1; [2021] 1 SLR 1288 at [22]). <span class="badge b-v">Verified</span> The governing framework is the two-stage test in <em>Ng Huat Seng v Munib Mohammad Madni</em> [2017] SGCA 58; [2017] 2 SLR 1074 at [42] and [44]: (1) a relationship of sufficient closeness; (2) sufficient connection — the relationship created or significantly increased the risk of the tort. <span class="badge b-v">Verified</span></p>
+<p>Two honesty flags on the reach of dual VL. First, <em>Chen Qiangshi v Hong Fei CDY Construction Pte Ltd</em> [2014] SGHC 177 accepted dual VL in principle (obiter, at [200]) and separately found the sub-contractor was the tortfeasor's employer (at [162]). <span class="badge b-v">Verified</span> Second — and importantly — the most proximate later case, decided by the <em>same judge</em>, <em>rejected</em> hirer vicarious liability on its facts: in <em>Nagarajan Murugesan v Grand Rich Electrical &amp; Engineering Pte Ltd</em> [2024] SGHC 36 at [54], Gill J applied <em>Munshi</em> and <em>Ng Huat Seng</em> but held the main contractor not liable because the operator was "merely the employee of an independent subcontractor" and the degree of control was "extremely limited". <span class="badge b-v">Verified</span> (this corrects an earlier dossier claim that <em>Nagarajan</em> ignored <em>Munshi</em> — it applies and distinguishes it.) The upshot: dual VL is real but fact-sensitive; a genuinely arm's-length service arrangement with limited client control over <em>how</em> the work is done reduces exposure.</p>
+
+<h4>(c) Practical mitigations for (a) and (b)</h4>
+<ul>
+  <li><strong>Contractual allocation:</strong> indemnities and cross-indemnities between firm and client for third-party torts; require the client to maintain public-liability insurance covering embedded personnel; the firm to maintain professional-indemnity and employer's-liability/WICA cover.</li>
+  <li><strong>Preserve firm-side control indicia:</strong> a firm lead who owns conduct, method standards, training and discipline; periodic firm reporting lines; firm-issued equipment where practical.</li>
+  <li><strong>Workplace-safety duties can't be fully contracted away:</strong> a client/occupier may owe non-delegable safety duties for hazardous operations regardless of who formally employs the worker (cf. <em>See Toh Siew Kee v Ho Ah Lam Ferrocement (Pte) Ltd</em> [2013] SGCA 29 at [43]) — low salience for desk-based software work, but relevant if staff are placed in physical/industrial environments. <span class="badge b-v">Verified</span></li>
+  <li><strong>Data protection:</strong> where embedded staff handle the client's personal data, put a data-intermediary/processing agreement in place; and see §9.4 on cross-border transfers (PDPA s 26).</li>
+</ul>
+
+<!-- =========================== Q3 =========================== -->
+<h2 id="q3"><span class="num">6.</span> Q3 — Do we need a licence? Requirements, timeline, cost <a href="#q3" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p><strong>For Model 2 as described, most likely no licence is needed</strong> (see §3–§4). The figures below are presented as a <em>contingency</em> — the position <em>if</em> the firm decides to run a placement/contract-staffing line, or takes a conservative view and licenses. The required licence would be a <strong>Comprehensive Licence</strong> (the "Select Licence" only covers workers earning &gt; S$4,500/month, and is more suited to executive search). Realistic end-to-end timeline ~4–8 weeks. Government fees are modest (~S$500 plus per-person training/exam/registration); the security bond (S$20k–S$60k) is the main capital item; professional/legal fees are <strong>not publicly quoted</strong>.</p>
+</div>
+
+<h3>6.1 Which licence, and who is eligible</h3>
+<p>Licence types: <strong>Comprehensive Licence</strong> (All / Local / non-FDW variants) covers any placement work; <strong>Select Licence</strong> covers only workers earning &gt; S$4,500/month and does not cover placing foreigners in training programmes. <span class="badge b-v">Verified</span> Eligibility for the licence (MOM, last updated 12 Feb 2026): the applicant must be a Singapore citizen or PR holding an ACRA-registered position (owner / MD &amp; director / partner); the entity's ACRA principal activity must be SSIC 78103 or 78104; no undischarged bankruptcy, prior debarment, or relevant convictions. <span class="badge b-v">Verified</span> MOM does <em>not</em> state a minimum paid-up capital (the circulating "S$50,000" figure is unverified and traced to SEO content). <span class="badge b-u">Unverified</span></p>
+
+<h3>6.2 Certificate of Employment Intermediaries (CEI)</h3>
+<p>For a Comprehensive Licence, key appointment holders ("KAHs") and EA personnel doing EA work must obtain a CEI (KAH tier or Basic tier) — CEI is not required for a Select Licence. KAHs must be certified before registration; other personnel before registration or within one month. <span class="badge b-v">Verified</span> Course fees vary by provider and module (GST-incl): CEI (KAH) roughly S$534–S$654; CEI (Basic) roughly S$441–S$589; reduced non-FDW / no-EFMA variants are cheaper (down to ~S$250). The exam fee is S$174.40 (incl GST) per attempt (NTUC LearningHub, sole test provider). <span class="badge b-u">Unverified</span> (course fees are provider-published aggregations; confirm current rates)</p>
+
+<h3>6.3 Cost summary (contingency — only if licensable)</h3>
+<div class="tbl-wrap">
+<table>
+  <caption>Indicative costs of a Comprehensive EA licence (Singapore) — confirm current figures before relying</caption>
+  <thead>
+    <tr><th style="width:40%">Item</th><th class="num" style="width:26%">Amount (S$)</th><th style="width:34%">Basis / status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Application fee</td><td class="num">400</td><td>EA Rules 2011 r 3(1) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Licence grant/issuance fee</td><td class="num">100</td><td>EA Rules 2011 r 3(2) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>CEI course, per person</td><td class="num">~250–654</td><td>Provider-published <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>CEI exam, per attempt/person</td><td class="num">174.40</td><td>NTUC LearningHub <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>EA personnel registration, per person</td><td class="num">160</td><td>EA Rules 2011 r 3(4) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Security bond (electronic banker's guarantee)</td><td class="num">20,000–60,000</td><td>New Comprehensive EAs: S$60,000 in year 1 (reviewable after 12 months); EA Rules r 5(1) caps at S$60,000 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Bank fee/collateral to issue the guarantee</td><td class="num">provider-dependent</td><td>Not published <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>Corporate-services provider assistance</td><td class="num">no public rate</td><td>No SG CSP publishes an EA-licence price; incorporation packages ~S$600–2,500+ are a loose proxy <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>Law-firm advisory</td><td class="num">no public rate</td><td>Singapore law firms do not publish EA-licensing fee quotes — bespoke only <span class="badge b-u">Unverified</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="small"><strong>Government fees are therefore small</strong> (~S$500 + per-person training/exam/registration). The <strong>security bond</strong> is the dominant number and is posted as a banker's guarantee (so the cost is the bank's issuance fee/collateral, not S$60,000 cash outright). Note a new Comprehensive EA must post S$60,000 in year one, reducible after 12 months depending on placement volume and demerit points. <span class="badge b-v">Verified</span></p>
+
+<h3>6.4 Timeline and process</h3>
+<p>MOM's stated processing steps and times (via GoBusiness): in-principle approval typically 7 working days; the electronic banker's guarantee with the financial institution can take up to ~3 weeks; payment notice and licence issuance within 1 working day each. <span class="badge b-m">MOM guidance</span> Adding CEI scheduling, a realistic end-to-end estimate is <strong>~4–8 weeks for a Comprehensive Licence</strong> (~3–5 weeks for Select). The frequently-cited "2–3 weeks" is optimistic. The licence is valid for 3 years. <span class="badge b-u">Unverified</span> (secondary time estimates vary; the "8–12 weeks including CEI prep" figure is a conservative outer bound)</p>
+
+<h3>6.5 Penalties for getting it wrong</h3>
+<div class="tbl-wrap">
+<table>
+  <caption>Selected EAA penalties</caption>
+  <thead>
+    <tr><th style="width:20%">Provision</th><th style="width:44%">Conduct</th><th style="width:36%">Maximum penalty</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>s 6(4)(a)</td><td>Carrying on / performing unlicensed EA activity (first offence)</td><td>Fine ≤ S$80,000 and/or ≤ 2 years' imprisonment</td></tr>
+    <tr><td>s 6(4)(b)</td><td>Second or subsequent conviction</td><td>Fine ≤ S$160,000 and/or ≤ 4 years' imprisonment</td></tr>
+    <tr><td>s 30(1)</td><td>Engaging/using an unlicensed EA (client-side)</td><td>Fine ≤ S$5,000 <strong>for each employee</strong> engaged through the unlicensed person (due-diligence defence via EA directory)</td></tr>
+    <tr><td>s 31</td><td>Licensed EA applying for work passes on behalf of an unlicensed person</td><td>Same S$80,000 / 2-year tier</td></tr>
+    <tr><td>s 33(1)</td><td>Overcharging a jobseeker beyond the fee cap</td><td>Fine ≤ S$5,000 (repeat + up to 6 months)</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="small">All penalty figures <span class="badge b-v">Verified</span> against the EAA. Enforcement illustrations: <em>Ng Chai Hock</em> (unlicensed "JOBSINSG.COM", convicted 9 Feb 2021) — 4 weeks' imprisonment plus the <em>maximum</em> S$80,000 fine; <em>International Placements</em> — S$40,000 fine upheld on appeal. Note MOM's enforcement pattern: even when an EA is the wrongdoer, deployment/declaration misconduct involving foreign workers is typically prosecuted under the <em>EFMA</em>, not the EAA (e.g. the <em>Wonderful Agency</em> charges, 28 May 2026), and MOM also uses administrative <em>licence suspensions</em> (e.g. two agencies suspended 1 Nov 2024 for collecting fees before placement). <span class="badge b-v">Verified</span></p>
+
+<!-- =========================== Q4 =========================== -->
+<h2 id="q4"><span class="num">7.</span> Q4 — Associated administrative tasks <a href="#q4" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p><strong>If the firm operates Model 2 unlicensed (the expected position), there are no EAA-specific administrative obligations</strong> — only ordinary employer administration (CPF for citizens/PRs, work passes and their conditions for foreign staff, IRAS filings, PDPA compliance) plus EA-directory due-diligence checks on any people-suppliers it engages. The obligations below arise <em>only if</em> the firm holds an EA licence.</p>
+</div>
+
+<h3>7.1 If unlicensed (Model 2)</h3>
+<ul>
+  <li><strong>Employer administration:</strong> CPF contributions for citizen/PR employees (obligation stays with the contract-of-service employer); work passes and adherence to their conditions for foreign staff; payroll and IRAS obligations; Employment Act compliance (contracts of service, itemised payslips, key employment terms).</li>
+  <li><strong>Supplier due diligence:</strong> before engaging any third party who supplies people, verify their EA licence via MOM's EA directory (the only route to the s 30 due-diligence defence). <span class="badge b-v">Verified</span></li>
+  <li><strong>Foreign-staff deployment file:</strong> keep evidence that the three MOM deployment conditions are met (occupation/sector match; activity = declared business; firm remains employer/supervises/pays) — see §5.2.</li>
+  <li><strong>Data protection:</strong> data-processing/intermediary agreements where staff handle client personal data; transfer-limitation compliance for any offshore element (PDPA s 26).</li>
+</ul>
+
+<h3>7.2 If licensed (contingency)</h3>
+<p>The EA Rules 2011 are short; the detailed obligations live in the <strong>EA Licence Conditions</strong> (issued under the EAA). Principal recurring tasks:</p>
+<div class="tbl-wrap">
+<table>
+  <caption>Ongoing administrative obligations of a licensed EA</caption>
+  <thead>
+    <tr><th style="width:26%">Area</th><th style="width:50%">Obligation</th><th style="width:24%">Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>KAH &amp; personnel</td><td>At least one registered KAH at all times; register each EA-work person (S$160 each); MOM written approval <em>before</em> any KAH change; de-register personnel within 3 working days of cessation</td><td>EA Rules rr 3(4), 15; Licence Conditions <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Security bond</td><td>Maintain the electronic banker's guarantee; top up on demerit points; without it, no new work-pass applications may be submitted</td><td>EAA s 8; EA Rules r 5 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Display / identification</td><td>Full name + licence number on signboards, invoices, receipts, service agreements, employment contracts, correspondence (incl. electronic), and all advertising (website, name cards, social media); personnel name + registration number where referenced</td><td>Licence Condition #4 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Fee caps &amp; receipts</td><td>Worker-side fee cap: ≤ 1 month's salary per year of pass/contract (shorter), pro-rated, max 2 months; written receipt + itemised list; conspicuous scale of fees. (No cap on fees charged to the client/employer.)</td><td>EA Rules r 12; r 12(3) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Refunds</td><td>≥ 50% refund to the fee-payer if the employer fails to employ or terminates within 6 months (stated carve-outs)</td><td>EA Rules r 13 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Record-keeping</td><td>Recruitment-process records ~1 year; work-pass application documents ≥ 3 years; various acknowledgements 1–2 years</td><td>Licence Conditions <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Notifications</td><td>Notify the Commissioner of every place of business within 7 working days; keep ACRA details current</td><td>EA Rules r 11 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Renewal</td><td>Every 3 years; S$400 + S$100; apply ≥ 3 months before expiry; stop EA activity if lapsed</td><td>EAA s 9; MOM pages <span class="badge b-v">Verified</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="small">There is currently <strong>no standing periodic return</strong> — the regime is event-driven notifications plus records on request (the statutory power to require returns exists but is not exercised). <span class="badge b-u">Unverified</span> (best-sourced approximation). A demerit-points system attaches administrative consequences (bond top-ups, suspensions) to infringements. <span class="badge b-u">Unverified</span> (thresholds AI-summarised, not primary-verified)</p>
+
+<!-- =========================== Q5 =========================== -->
+<h2 id="q5"><span class="num">8.</span> Q5 — Is "sub-subleasing" (temp-agency in, onward to clients) allowed? <a href="#q5" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p><strong>This is materially higher-risk than Model 2 and is very likely licensable.</strong> Engaging a worker via a temping agency and supplying that worker onward to the firm's own client is <em>employment-agency activity by the middle firm</em>: the own-behalf carve-out is lost because the worker is being placed for a third party's benefit. Two distinct exposures arise: (i) the firm itself needs a licence (s 6); and (ii) engaging an <em>unlicensed</em> sub-agent is a separate <strong>per-worker</strong> offence (s 30). For <strong>foreign work-pass holders</strong>, the onward-supply chain is <em>prohibited</em> altogether outside the construction and process sectors.</p>
+</div>
+
+<h3>8.1 The EAA analysis — the middle firm does EA work</h3>
+<p>A firm that sources a worker from another agency and then facilitates that worker's placement with its own client is performing "specified employment agency work" — limb (d), "facilitation of the placement of any applicant for employment with an employer". The own-behalf exclusion in s 2 / s 6(3)(c) does <strong>not</strong> apply, because the worker is being on-supplied to a third-party client rather than recruited for the firm's own use. <span class="badge b-v">Verified</span> (statutory analysis) Separately, s 30(1) makes it an offence to "directly or indirectly" engage or use the services of an unlicensed person "in connection with the employment of any person", with a fine of up to S$5,000 <strong>for each employee</strong> so engaged; the only defence is proof of due diligence — verifying the licence "in the prescribed manner" (i.e. via MOM's EA directory, r 17). <span class="badge b-v">Verified</span> Section 31 additionally targets a licensed EA that files work-pass applications on behalf of an unlicensed sub-agent (up to the S$80,000 / 2-year tier). <span class="badge b-v">Verified</span> The 2011 Second Reading speech confirms both were deliberate: the (then) new offences targeted engaging unlicensed EAs and licensed EAs "fronting" for unlicensed ones. <span class="badge b-v">Verified</span></p>
+
+<h3>8.2 The EFMA overlay — foreign work-pass holders cannot be on-supplied (outside construction/process)</h3>
+<p>For foreign work-pass holders, the work-pass conditions themselves prohibit the chain. Under the Employment of Foreign Manpower (Work Passes) Regulations 2012 (S 569/2012), Fourth Schedule Part IV:</p>
+<blockquote>
+  <p>"1. The employer shall control and supervise the foreign employee … the foreign employee shall be under the employer's direct employment.</p>
+  <p>2. The employer <strong>shall not permit the foreign employee to be employed by or contracted to any other person or business</strong> to do work for that person or business.</p>
+  <p>3. The employer shall not employ the foreign employee in either an occupation or a sector … different from that specified in the work permit."</p>
+  <span class="src">EFM (Work Passes) Regs 2012 Fourth Schedule Part IV — verbatim <span class="badge b-v">Verified</span></span>
+</blockquote>
+<p>The <strong>only</strong> sanctioned foreign-labour-supply chain is in the construction sector (and, per MOM guidance, the process sector): Part V para 6 permits an employer, with the worker's consent, to enter a supply-of-labour contract with a Controller-verified "eligible third party engaged in the construction industry". <span class="badge b-v">Verified</span> This statutory recognition was noted by the Court in <em>Republic Airconditioning</em> at [38]–[39]. Outside that exception, on-supplying a foreign work-pass holder is illegal deployment: the client that "uses the service" is "employing" the worker within the extended EFMA s 2 definition and commits an offence under s 5(1) (fine S$5,000–S$30,000 and/or up to 12 months), and the sponsor breaches its work-pass conditions. <span class="badge b-v">Verified</span> Enforcement is active — e.g. the <em>Leong Kwai Tong</em> matter (MOM, 15 Oct 2025: 40 months' imprisonment; shell companies and phantom workers) and the <em>Ang Wee Ling</em> charges (MOM, 4 Jul 2024: illegally deploying 33 foreigners). <span class="badge b-v">Verified</span> (There is, however, no reported eLitigation judgment with paragraph pinpoints on illegal deployment — the record is MOM press releases and largely-unreported State Court sentencing. <span class="badge b-u">Unverified</span>)</p>
+
+<h3>8.3 Local (citizen/PR) workers in a chain</h3>
+<p>EFMA does not apply to citizens/PRs, so there is no work-pass constraint. But the EAA is nationality-neutral: on-supplying local workers is still licensable EA activity (a "Comprehensive Licence (Local)" exists for exactly this), and s 30 applies regardless of nationality. <span class="badge b-v">Verified</span></p>
+
+<div class="note">
+  <span class="tt">Bottom line on Q5</span>
+  Do not run a sub-supply/on-supply line without an EA licence and without EA-directory verification of every sub-supplier; and do not on-supply <em>foreign</em> work-pass holders at all outside construction/process. This is the one part of the firm's contemplated activity that most clearly triggers the licensing regime.
+</div>
+
+<!-- =========================== Q6 =========================== -->
+<h2 id="q6"><span class="num">9.</span> Q6 — Inbound cross-border leasing (offshore affiliate staff) <a href="#q6" class="toplink">▲ top</a></h2>
+
+<div class="answer">
+  <span class="lbl">Answer</span>
+  <p>Staff of the firm's EU/EEA or non-EU affiliate who work <strong>from their normal overseas locations</strong> for a Singapore client need <strong>no Singapore work pass</strong> — the work-pass regime is territorial, triggered by physical work <em>in</em> Singapore. Such wholly-offshore delivery also generally sits <strong>outside the EAA</strong> (no EA act is performed "in Singapore"), though the Singapore firm should note the EAA's reach where <em>it</em> arranges placements here. The main live issues are: business-visitor limits when the staff fly in; and tax/data flags (withholding tax, GST reverse charge, permanent-establishment risk, PDPA transfer limitation).</p>
+</div>
+
+<h3>9.1 Work-pass regime is territorial</h3>
+<p>A work pass "is issued for the foreigner to perform work <em>in</em> Singapore" (MOM). A person who never physically works in Singapore needs no Singapore work pass for purely offshore remote work serving a Singapore client. MOM's remote-work FAQ (last updated 14 March 2024) is explicit: "<em>if you are in Singapore and are working for or providing services to an overseas-based organisation or client, you do not need a work pass</em>" — and conversely a pass <em>is</em> needed when the foreigner is <em>in Singapore</em> working for a Singapore-based entity. <span class="badge b-v">Verified</span> MOM's Employer-of-Record FAQ (clarified 9 July 2024) reinforces the point from the other direction: an EOR that applies for work passes so foreigners can be <em>based in Singapore</em> while working for overseas companies "would be committing an offence". <span class="badge b-v">Verified</span> Directionally, both confirm the affiliate-abroad model needs no Singapore pass while the worker stays offshore.</p>
+
+<h3>9.2 When the offshore staff fly in to Singapore</h3>
+<p>Short visits for genuine business-visitor activities (company meetings, corporate retreats, meetings with business partners; attending workshops/seminars/conferences as a participant) need no pass and no notification — but these activities "should not involve a contract of service or a contract for service with an employer in Singapore", and hands-on project work / on-the-job delivery does <strong>not</strong> qualify. <span class="badge b-v">Verified</span> The Work-Pass-Exempt "specified activities" list is narrow (performers, journalists, speakers at qualifying events, etc.) and <strong>generic IT/consulting fly-in project work does not fit</strong> — it needs a proper work pass or a Miscellaneous Work Pass. <span class="badge b-v">Verified</span> There is a short-stay exemption (≤30 days within 6 months, with registration) for a foreign visitor performing EA-type work, but that is EA-specific and not a general project-work permission. <span class="badge b-v">Verified</span></p>
+
+<h3>9.3 EAA territorial scope</h3>
+<p>The EAA prohibition bites on activity performed "<em>in Singapore</em>" (s 6(2)). A foreign affiliate arranging matters wholly outside Singapore performs no act in Singapore and is not caught; and job location is irrelevant to the licence question ("whether or not those persons are to be employed within or outside Singapore", s 6(2)(a)). <span class="badge b-v">Verified</span> But note s 6(2)(b): a person who performs EA work <em>in Singapore</em> "on behalf of an employment agency which is carried on outside Singapore" needs a licence. So if the <em>Singapore</em> firm facilitates placement of the offshore affiliate's staff into a Singapore client (limb (d)) — especially acting for the offshore affiliate — that could be EA activity in Singapore, with potential s 30 exposure. <span class="badge b-v">Verified</span> A genuine <em>services</em> contract with an offshore delivery team (staff remaining employed and directed by the affiliate) is generally outside EA licensing; the placement of an individual <em>into</em> the Singapore client's organisation looks more like EA activity. This distinction is fact-sensitive and, again, untested. <span class="badge b-c">Untested</span> <span class="badge b-u">Unverified</span> (analytical; no case on point)</p>
+
+<h3>9.4 Tax and data flags</h3>
+<div class="tbl-wrap">
+<table>
+  <caption>Cross-border tax / data considerations (offshore affiliate staff serving a Singapore client)</caption>
+  <thead>
+    <tr><th style="width:24%">Issue</th><th style="width:52%">Position</th><th style="width:24%">Source / status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Withholding tax</td><td>Services rendered <strong>wholly outside</strong> Singapore by a non-resident with no Singapore PE are generally <strong>not</strong> subject to WHT, even if paid by a Singapore company (ITA s 12(7) deems fees Singapore-sourced only to the extent attributable to work done in Singapore)</td><td>IRAS (LU 13 Jun 2025 / 12 Feb 2026) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>GST reverse charge</td><td>A Singapore GST-registered client not entitled to full input-tax credit must self-account GST on imported services (from 1 Jan 2020). The client bears this accounting</td><td>IRAS (LU 27 Jan 2026) <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Permanent establishment</td><td>Staff working wholly offshore create no fixed place in Singapore → low PE risk. Risk rises if personnel work <em>from within</em> Singapore (home-office fixed place / dependent agent). The COVID-era travel-restriction concession has lapsed</td><td>IRAS (LU 7 Aug 2024) <span class="badge b-v">Verified</span> (concession/definition); home-office analysis <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>PDPA cross-border transfer</td><td>Personal data may be transferred offshore only with legally enforceable obligations ensuring comparable protection (PDPA s 26; PDP Regulations 2021 rr 10–11)</td><td>PDPA 2012 s 26 <span class="badge b-v">Verified</span></td></tr>
+    <tr><td>CPF</td><td>A foreign entity's employee working outside Singapore is not an "employee" under the CPF Act → no CPF. A citizen/PR seconded overseas: CPF is voluntary, not mandatory</td><td>CPF Act 1953 s 2; CPF Board guidance (LU 28 Jul 2025) <span class="badge b-v">Verified</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- =========================== RECENT LAW =========================== -->
+<h2 id="recent"><span class="num">10.</span> Recent-law wave (2022–2026) — nothing changes the answer <a href="#recent" class="toplink">▲ top</a></h2>
+<p>We checked the recent legislative and case-law developments. None disturbs the analysis above; several actively support it.</p>
+<ul>
+  <li><strong>No EAA amendment 2022–2026</strong> that affects professional/IT staff supply. The 2020 Revised Edition remains current; the only subsidiary change of note (S 442/2022) inserted FDW-specific fee-refund rules (rr 13A–13B), irrelevant here. There is <em>no</em> caps on fees charged to the client/employer (r 12(3)); only worker-side fees are capped. <span class="badge b-v">Verified</span></li>
+  <li><strong>Platform Workers Act 2024</strong> (Act 30 of 2024, in force 1 Jan 2025) is <em>inapplicable</em>: its First Schedule is a closed list (delivery and ride-hail only) and it expressly excludes contracts of service (s 5(2)). Seconded/embedded employees are under contracts of service. <span class="badge b-v">Verified</span></li>
+  <li><strong>Workplace Fairness Act 2025</strong> (Act 8 of 2025; expected in force ~2027) places anti-discrimination duties on the <em>employer</em> (the party under a contract of service); a contract for services and platform work are excluded (s 4(3)), and the ≥25-employee threshold applies. In a triangular arrangement, WFA duties therefore sit with the <strong>seconding firm</strong>, not the host client — as analysed in Ravi Chandran &amp; Damien Xing, "Workplace Fairness" (2025) 37 SAcLJ 342 at paras 34–37, which notes the definition of "employer" (limb (d)) "can also include discrimination against seconded employees" where the <em>client</em> makes the adverse decision. <span class="badge b-v">Verified</span></li>
+  <li><strong>Employer-of-Record clarifications:</strong> a worker employed by an EOR under a genuine contract of service is an employee with full Employment Act entitlements (Written Answer to PQ No. 5396, 7 Nov 2023); but an EOR that applies for Singapore work passes for foreigners working for overseas principals commits an offence (MOM EOR FAQ, 9 Jul 2024). <span class="badge b-v">Verified</span></li>
+  <li><strong>Vicarious-liability line unchanged:</strong> <em>Munshi</em>'s dual-VL holding has been neither extended nor doubted; the single Court of Appeal citation (<em>Reed v Bellingham</em> [2022] SGCA 60 at [47]) is generic; and the closest later case (<em>Nagarajan</em>, 2024) applied plain control reasoning and rejected hirer VL on its facts. <span class="badge b-v">Verified</span></li>
+  <li><strong>Enforcement tenor:</strong> MOM continues to prosecute unlicensed EA activity (<em>Ng Chai Hock</em>, 2021), to suspend licences administratively (Nov 2024), and to route foreign-worker deployment/declaration misconduct through the EFMA (<em>Wonderful Agency</em>, 2026). <span class="badge b-v">Verified</span></li>
+</ul>
+<p class="note"><span class="tt">Substance-over-form is a live judicial theme</span> Recent cases show Singapore courts looking past labels to the real relationship — e.g. <em>Guy Carpenter &amp; Company Pte Ltd v Choi Okmi</em> [2025] SGHC 241 at [42] and [64] (Mohamed Faizal JC), which found an employment arrangement designed to "<em>mask</em>" who the worker was really working for. That is a restraint-of-trade/conspiracy case, not a staffing-licence case, and is <em>not</em> a multi-factorial-test authority — but it underlines that documentation must match reality. <span class="badge b-v">Verified</span></p>
+
+<!-- =========================== CONFIDENCE =========================== -->
+<h2 id="confidence"><span class="num">11.</span> Confidence &amp; open points <a href="#confidence" class="toplink">▲ top</a></h2>
+<ul>
+  <li><strong>Core conclusion (Model 2 not licensable): ~75–80% confidence.</strong> It is well-supported by statute, MOM guidance and <em>Republic Airconditioning</em>, but is <strong>fact-sensitive</strong> (the substance-over-form line) and <strong>judicially untested</strong> on the staff-augmentation pattern under the EAA. <span class="badge b-c">Untested</span></li>
+  <li><strong>Points resting on MOM administrative guidance, not statute/case law:</strong> the "outsourcing your own staff" carve-out itself; the three-condition foreign-deployment test; the timeline estimates; the demerit-points thresholds. Treat these as regulator practice, not black-letter law. <span class="badge b-m">MOM guidance</span></li>
+  <li><strong>Unverified items to confirm before filing/reliance:</strong> the Hansard volume (87 is only moderately corroborated) and column numbers (not located); the SLR report citations for <em>PP v Jurong Country Club</em> ("[2019] 2 SLR 316" — likely wrong) and <em>International Placements</em> ("[2020] 4 SLR 1195" — plausible, unconfirmed) — cite these by <em>neutral citation</em> only until checked on LawNet; <em>Kureoka</em> and <em>Karuppiah</em> SLR reports (neutral citations confirmed); professional/legal fee figures (Singapore law firms and CSPs do not publish EA-licensing rates); CEI course fees and secondary timeline estimates.</li>
+  <li><strong>Genuine legal grey zone for foreign staff:</strong> the MOM "directly supervises" condition vs the client directing day-to-day work. Manage by structure (firm-side supervision line, managed-services framing, or use of citizens/PRs). <span class="badge b-m">MOM guidance</span></li>
+  <li><strong>Known dossier corrections carried forward:</strong> the case is <em>Asplenium Land Pte Ltd v Lam Chye Shing</em> [2019] SGHC 41 (not the mis-styled variant); <em>Nagarajan</em> [2024] SGHC 36 <em>does</em> cite and apply <em>Munshi</em> (it distinguishes, not ignores); <em>Karuppiah Ravichandran v GDS Engineering</em> [2009] SGHC 119 exists but is a work-injury appeal-threshold case — not authority on employer identity; <em>Awang bin Dollah</em> is an occupier's-liability ratio, usable only for the control analysis; <em>Guy Carpenter</em>'s judge is a Judicial Commissioner.</li>
+  <li><strong>Structural gaps (state plainly):</strong> no Singapore case tests staff augmentation under the EAA; no case construes s 6(3)(c) / own-staff outsourcing; no reported illegal-deployment judgment with pinpoints; no 2020–2026 decision re-applies the multi-factorial test to an embedded/agency worker; no EAA reform initiative announced 2022–2026.</li>
+</ul>
+
+<!-- =========================== AUTHORITIES =========================== -->
+<h2 id="authorities"><span class="num">12.</span> Table of authorities <a href="#authorities" class="toplink">▲ top</a></h2>
+
+<h3>Legislation &amp; subsidiary legislation</h3>
+<div class="tbl-wrap">
+<table class="auth">
+  <thead><tr><th style="width:56%">Instrument</th><th style="width:26%">Key provisions relied on</th><th style="width:18%">Status</th></tr></thead>
+  <tbody>
+    <tr><td>Employment Agencies Act 1958 (2020 Rev Ed)</td><td>ss 2, 4, 6, 8, 9, 15, 30, 31, 33</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Employment Agencies Rules 2011 (S 172/2011)</td><td>rr 3, 5, 11, 12, 13, 15</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Employment Agencies (Exemption) Order 2011 (S 175/2011); Order 2014 (S 433/2014)</td><td>exemption categories</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Employment Agencies (Amendment) Rules 2022 (S 442/2022)</td><td>rr 13A–13B (FDW refund)</td><td><span class="badge b-v">Verified</span> (citation); substance <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>Employment of Foreign Manpower Act 1990 (2020 Rev Ed)</td><td>ss 2, 5</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Employment of Foreign Manpower (Work Passes) Regulations 2012 (S 569/2012)</td><td>Fourth Schedule Parts IV, V, VI</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Interpretation Act 1965</td><td>s 9A (purposive interpretation)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Personal Data Protection Act 2012</td><td>s 26 (transfer limitation)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Platform Workers Act 2024 (Act 30 of 2024)</td><td>ss 3, 5(2), First Schedule</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Workplace Fairness Act 2025 (Act 8 of 2025)</td><td>ss 2, 4(3) ("employer"; excluded arrangements)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>CPF Act 1953</td><td>s 2 ("employee")</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Income Tax Act 1947</td><td>s 12(7) (source of service fees)</td><td><span class="badge b-v">Verified</span> (via IRAS)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Cases</h3>
+<div class="tbl-wrap">
+<table class="auth">
+  <thead><tr><th style="width:52%">Citation</th><th style="width:28%">Cited for</th><th style="width:20%">Status</th></tr></thead>
+  <tbody>
+    <tr><td>International Placements (S) Pte Ltd v Public Prosecutor [2020] SGHC 46 at [51]–[53]</td><td>Only judicial construction of the EAA; placement focus</td><td>Neutral <span class="badge b-v">Verified</span>; SLR <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>Republic Airconditioning (S) Pte Ltd v Shinsung Eng Co Ltd (Singapore Branch) [2012] SGHC 46 at [32]–[33], [38]–[39]</td><td>Labour supplier that is itself the employer is not an EA</td><td><span class="badge b-v">Verified</span>; untested on appeal <span class="badge b-c">Untested</span></td></tr>
+    <tr><td>Munshi Mohammad Faiz v Interpro Construction Pte Ltd and others and another appeal [2021] SGHC 26; [2021] 4 SLR 1371 at [42]–[43], [53], [67], [86(e)]</td><td>Dual vicarious liability; <em>Mersey Docks</em> pro hac vice</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Hwa Aik Engineering Pte Ltd v Munshi Mohammad Faiz [2021] SGHC(A) 1; [2021] 1 SLR 1288 at [18], [22]</td><td>AD endorsement; control not dispositive</td><td>Neutral <span class="badge b-v">Verified</span>; SLR via reliable secondary</td></tr>
+    <tr><td>Ng Huat Seng v Munib Mohammad Madni [2017] SGCA 58; [2017] 2 SLR 1074 at [42], [44], [69]–[70]</td><td>Two-stage vicarious-liability test</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>BNM v National University of Singapore [2014] SGCA 49; [2014] 4 SLR 931 at [25]</td><td>Control less significant for skilled workers</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Chen Qiangshi v Hong Fei CDY Construction Pte Ltd [2014] SGHC 177 at [162], [200]</td><td>Dual VL accepted in principle (obiter); employer finding</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Nagarajan Murugesan v Grand Rich Electrical &amp; Engineering Pte Ltd [2024] SGHC 36 at [54]</td><td><em>Munshi</em> applied &amp; distinguished; hirer VL rejected on facts</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Public Prosecutor v Jurong Country Club and another appeal [2019] SGHC 150 at [47], [49], [53], [54]</td><td>Multi-factorial employment test</td><td>Neutral <span class="badge b-v">Verified</span>; SLR <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>National University Hospital (Singapore) Pte Ltd v Cicada Cube Pte Ltd [2017] SGHC 53 at [84]</td><td>Enumerated factor list; "no single, general test"</td><td><span class="badge b-v">Verified</span> (via JCC)</td></tr>
+    <tr><td>Kureoka Enterprise Pte Ltd v Central Provident Fund Board [1992] SGHC 113</td><td>Control + remuneration + business-on-own-account test</td><td>Neutral <span class="badge b-v">Verified</span>; SLR not located</td></tr>
+    <tr><td>Asplenium Land Pte Ltd v Lam Chye Shing and others [2019] SGHC 41 at [62]</td><td>Seconded worker may become host's employee if control test met</td><td><span class="badge b-v">Verified</span> (name corrected)</td></tr>
+    <tr><td>Awang bin Dollah v Shun Shing Construction &amp; Engineering Co Ltd and other appeals [1997] 2 SLR(R) 746</td><td>Occupier's-liability ratio; control-test data point <strong>only</strong> — not employer-identity authority</td><td><span class="badge b-v">Verified</span> (caveat)</td></tr>
+    <tr><td>Guy Carpenter &amp; Company Pte Ltd v Choi Okmi [2025] SGHC 241 at [42], [64]</td><td>Substance over form ("mask") — not a multi-factorial authority</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>See Toh Siew Kee v Ho Ah Lam Ferrocement (Pte) Ltd [2013] SGCA 29 at [43]</td><td>Non-delegable safety duty for hazardous operations</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Mersey Docks &amp; Harbour Board v Coggins &amp; Griffith (Liverpool) Ltd [1947] AC 1</td><td>Pro hac vice presumption (general employer prima facie liable)</td><td><span class="badge b-v">Verified</span> (via Munshi)</td></tr>
+    <tr><td>Viasystems (Tyneside) Ltd v Thermal Transfer (Northern) Ltd [2005] EWCA Civ 1151; [2006] QB 510 at [77]</td><td>Dual responsibility; Rix LJ's control-sharing approach</td><td><span class="badge b-v">Verified</span> (via Munshi)</td></tr>
+    <tr><td>Various Claimants v Catholic Child Welfare Society [2012] UKSC 56 ("Christian Brothers")</td><td>Prefers Rix LJ approach</td><td><span class="badge b-v">Verified</span> (via Munshi)</td></tr>
+    <tr><td>Reed, Michael v Bellingham, Alex [2022] SGCA 60 at [47]</td><td>Generic VL citation (confirms Munshi SLR report)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Ng Chai Hock (State Courts, convicted 9 Feb 2021); Leong Kwai Tong; Ang Wee Ling; Wonderful Agency (MOM enforcement)</td><td>EAA/EFMA enforcement illustrations</td><td><span class="badge b-v">Verified</span> (MOM press); no GD pinpoints <span class="badge b-u">Unverified</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Secondary materials &amp; official guidance</h3>
+<div class="tbl-wrap">
+<table class="auth">
+  <thead><tr><th style="width:70%">Source</th><th style="width:30%">Status</th></tr></thead>
+  <tbody>
+    <tr><td>MOM, "Who needs to get an employment agency licence" (LU 2 Jul 2026)</td><td><span class="badge b-v">Verified</span> <span class="badge b-m">MOM guidance</span></td></tr>
+    <tr><td>MOM FAQ, "Am I allowed to send my work pass holders to work at my client's place?" (LU 8 Apr 2026)</td><td><span class="badge b-v">Verified</span> <span class="badge b-m">MOM guidance</span></td></tr>
+    <tr><td>MOM remote-work FAQ (LU 14 Mar 2024); EOR FAQ (LU 9 Jul 2024); Written Answer to PQ No. 5396 (7 Nov 2023)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>MOM apply/eligibility/CEI/security-bond pages; EA Licence Conditions PDF</td><td><span class="badge b-v">Verified</span> / partly <span class="badge b-m">MOM guidance</span></td></tr>
+    <tr><td>Singapore Parliamentary Debates, Official Report (11 January 2011) vol 87 (Lee Yi Shyan, MOS Trade &amp; Industry and Manpower)</td><td>Speech text <span class="badge b-v">Verified</span>; vol/cols <span class="badge b-u">Unverified</span></td></tr>
+    <tr><td>Ravi Chandran &amp; Damien Xing, "Workplace Fairness" (2025) 37 SAcLJ 342 at paras 34–37</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>Kumaralingam Amirthalingam &amp; Gary Chan Kok Yew, "Tort Law" (2021) 22 SAL Ann Rev 771 at paras 28.28–28.31</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>IRAS pages — withholding tax (LU 13 Jun 2025 / 12 Feb 2026); GST reverse charge (LU 27 Jan 2026); residence/PE (LU 7 Aug 2024)</td><td><span class="badge b-v">Verified</span></td></tr>
+    <tr><td>CPF Board, "Who do you need to pay CPF for?" (LU 28 Jul 2025)</td><td><span class="badge b-v">Verified</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<footer class="disc">
+  <p><strong>Disclaimer.</strong> This document is legal <em>research</em> prepared to inform the client's decision-making. It is <strong>not legal advice</strong>, does not create a solicitor–client relationship, and should not be relied upon or filed without independent confirmation by qualified Singapore counsel. The analysis is fact-sensitive and, on the central question, addresses a pattern that has <strong>not been judicially tested</strong> under the Employment Agencies Act. Several propositions rest on MOM administrative guidance rather than statute or case law, and certain citations, pinpoints and figures are flagged as unverified. <strong>Key pinpoints and report citations should be confirmed on LawNet</strong>, and current fees/timelines confirmed with MOM and the relevant providers, before any filing or reliance. Verification status is indicated by the badges throughout; where a badge marks an item <span class="badge b-u">Unverified</span> or <span class="badge b-c">Untested</span>, additional confirmation is required.</p>
+  <p>Prepared 16 July 2026. &copy; Client — privileged and confidential.</p>
+</footer>
+
+</div>
+<script>
+/* Respect an explicit theme toggle if the host stamps data-theme; otherwise follow the OS. No external calls. */
+(function(){try{var r=document.documentElement;if(!r.getAttribute('data-theme')){/* leave to prefers-color-scheme */}}catch(e){}})();
+</script>
+</body>
+</html>
