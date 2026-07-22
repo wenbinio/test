@@ -1,1 +1,2 @@
+function Tree($p,$i=""){ "$i$(Split-Path $p -Leaf)"; Get-ChildItem $p -File | ForEach-Object { "$i`t$($_.Name)" }; Get-ChildItem $p -Directory | ForEach-Object { Tree $_.FullName "$i`t" } }; Get-ChildItem -Directory | ForEach-Object { Tree $_.FullName } | Set-Clipboard
 # test
