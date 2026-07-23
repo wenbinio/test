@@ -251,6 +251,14 @@
 
   h3 .ptitle { font-weight: 700; }
 
+  h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.5rem 0 0.5rem;
+    scroll-margin-top: 1rem;
+  }
+
   p { margin: 0 0 1rem; }
 
   strong { font-weight: 700; color: var(--heading); }
@@ -556,6 +564,16 @@
         <li>Both then impose the same self-assessment expectation for all existing arrangements, with an identical footnote 2 extending this to arrangements inherited through acquisition of another institution's business.</li>
       </ul>
       <p class="delta-sub"><strong>Changes:</strong> (i) different addressees; (ii) the Bank perimeter is built on the statutory/Notice concept of "ongoing outsourced relevant services", the FI perimeter on the Guidelines' own defined term "outsourcing arrangement"; (iii) the exemption list lives in the Notices (Annex D) for banks but inside the instrument (Annex 1) for FIs.</p>
+
+      <h4>Are the two "outsourcing arrangement" concepts the same thing?</h4>
+      <p>Intentionally yes, technically no — verified against Notice 658 ¶2.1 itself. Both descend from the single 2016/2018 Guidelines definition and occupy the same functional slot (both are even labelled "outsourcing arrangement"), and Notice 658's Annexes A–C are recognisably the old Guidelines' example lists recast in binding form. But the Notice re-engineered the test:</p>
+      <ul>
+        <li><strong>Conjunctive vs disjunctive.</strong> FI: a service that "may currently or potentially be performed by the institution itself" <strong>and</strong> ongoing dependence <strong>and</strong> (integral to a financial service <em>or</em> provided to the market in the institution's name). Notice 658: an "outsourced relevant service" is a relevant service (other than the Annex B exclusions) that <strong>(a) is performed, or was at any time previously performed, by the bank itself</strong>, <em>or</em> <strong>(b) is integral to any business the bank may carry on under s 30(1) Banking Act</strong> (including the Annex A list), <em>or</em> <strong>(c) is deemed included by Annex C</strong> — public cloud (SaaS/PaaS/IaaS), information-systems hosting/management, IT helpdesks, data centre operations, archival/storage/destruction of confidential or customer data, manpower management incl. payroll, corporate secretariat, e-signature facilitation, ATM maintenance.</li>
+        <li><strong>"Ongoing".</strong> FI: qualitative — "dependent on the service on an ongoing basis". Bank: bright-line — an ORS obtained or received (or intended) for <strong>more than 12 months</strong>, including where renewals or intended renewals take the cumulative duration past 12 months.</li>
+        <li><strong>Self-performability.</strong> FI: hypothetical capability is a threshold requirement for everything. Bank: actual/historical performance is one optional limb only.</li>
+        <li><strong>"In the name of" limb.</strong> FI has it as a general test; the Notice has no general limb, capturing specific instances through Annex A (white-labelling; marketing in the bank's name).</li>
+      </ul>
+      <p>Practical consequences: a ≤12-month non-renewing arrangement can never be an ongoing ORS for a bank regardless of dependence, while the FI test has no duration threshold; a 13-month arrangement is "ongoing" for a bank regardless of dependence; public cloud is automatically in scope for banks (Annex C) but must pass the two-limb test for an FI; and a service the bank could never perform itself can still be caught via the "integral" limb, whereas the FI chapeau requires self-performability.</p>
     </section>
 
     <div class="callout fi-only" id="fi1-3">
