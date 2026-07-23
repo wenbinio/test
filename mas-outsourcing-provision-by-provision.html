@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAS Outsourcing Guidelines — Provision-by-Provision Breakdown</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --panel: #ffffff;
+    --text: #1f1c17;
+    --muted: #5c574d;
+    --heading: #14100a;
+    --rule: #d9d3c6;
+    --rule-strong: #b8b0a0;
+    --accent: #6b4f2a;
+    --table-head-bg: #ece7dc;
+    --table-stripe: #f4f1ea;
+    --link: #7a4d1f;
+    --toc-bg: #f0ece2;
+    --bank-accent: #b0813c;
+    --bank-bg: #f5eddd;
+    --fi-accent: #4f7f7a;
+    --fi-bg: #e7efed;
+    --delta-sub-bg: #f2ece0;
+    --shadow: 0 1px 3px rgba(30, 25, 15, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140f;
+      --panel: #201d16;
+      --text: #e4ded1;
+      --muted: #a49d8d;
+      --heading: #f2ecdd;
+      --rule: #38342a;
+      --rule-strong: #4c4638;
+      --accent: #c9a36a;
+      --table-head-bg: #2a2619;
+      --table-stripe: #241f18;
+      --link: #d3a86a;
+      --toc-bg: #262219;
+      --bank-accent: #c99a55;
+      --bank-bg: #2a2315;
+      --fi-accent: #6fa39d;
+      --fi-bg: #1c2725;
+      --delta-sub-bg: #282216;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f7f5f0;
+    --panel: #ffffff;
+    --text: #1f1c17;
+    --muted: #5c574d;
+    --heading: #14100a;
+    --rule: #d9d3c6;
+    --rule-strong: #b8b0a0;
+    --accent: #6b4f2a;
+    --table-head-bg: #ece7dc;
+    --table-stripe: #f4f1ea;
+    --link: #7a4d1f;
+    --toc-bg: #f0ece2;
+    --bank-accent: #b0813c;
+    --bank-bg: #f5eddd;
+    --fi-accent: #4f7f7a;
+    --fi-bg: #e7efed;
+    --delta-sub-bg: #f2ece0;
+    --shadow: 0 1px 3px rgba(30, 25, 15, 0.08);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #16140f;
+    --panel: #201d16;
+    --text: #e4ded1;
+    --muted: #a49d8d;
+    --heading: #f2ecdd;
+    --rule: #38342a;
+    --rule-strong: #4c4638;
+    --accent: #c9a36a;
+    --table-head-bg: #2a2619;
+    --table-stripe: #241f18;
+    --link: #d3a86a;
+    --toc-bg: #262219;
+    --bank-accent: #c99a55;
+    --bank-bg: #2a2315;
+    --fi-accent: #6fa39d;
+    --fi-bg: #1c2725;
+    --delta-sub-bg: #282216;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    font-size: 17.5px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .doc-header {
+    border-bottom: 3px double var(--rule-strong);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: var(--heading);
+    margin: 0 0 1rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .doc-header p { margin: 0.35rem 0; font-size: 0.97rem; }
+
+  a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  a:hover { border-bottom-color: var(--link); }
+
+  /* Table of contents */
+  nav.toc {
+    background: var(--toc-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1rem 1.4rem 1.1rem;
+    margin: 0 0 2rem;
+    box-shadow: var(--shadow);
+  }
+
+  nav.toc > h2 {
+    margin: 0 0 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: none;
+    padding: 0;
+  }
+
+  nav.toc ol { margin: 0; padding-left: 1.4rem; font-size: 0.95rem; }
+
+  nav.toc > ol > li { margin: 0.3rem 0; }
+
+  nav.toc details { margin: 0.15rem 0 0.2rem; }
+
+  nav.toc summary {
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  nav.toc details ul {
+    list-style: none;
+    margin: 0.3rem 0 0.5rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--rule);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  nav.toc details ul li { margin: 0.22rem 0; }
+
+  nav.toc .cite-link {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.82em;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    align-items: center;
+    font-size: 0.87rem;
+    color: var(--muted);
+    margin: 0 0 2rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--panel);
+  }
+
+  .legend .chip {
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    vertical-align: -0.08rem;
+  }
+
+  .legend .chip.bank { background: var(--bank-accent); }
+  .legend .chip.fi { background: var(--fi-accent); }
+  .legend .none-sample { color: var(--muted); font-style: italic; }
+  .legend .sub-sample { font-weight: 700; color: var(--heading); }
+
+  /* Headings */
+  h2 {
+    font-size: 1.28rem;
+    color: var(--heading);
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 3rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--rule-strong);
+    scroll-margin-top: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  h3 {
+    font-size: 1.02rem;
+    margin: 2.25rem 0 0.7rem;
+    line-height: 1.45;
+    scroll-margin-top: 1rem;
+    color: var(--heading);
+  }
+
+  h3 .cite {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.86em;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--toc-bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.1rem 0.45rem;
+    white-space: nowrap;
+  }
+
+  h3 .ptitle { font-weight: 700; }
+
+  p { margin: 0 0 1rem; }
+
+  strong { font-weight: 700; color: var(--heading); }
+
+  em { font-style: italic; }
+
+  ol, ul { margin: 0 0 1.2rem; padding-left: 1.6rem; }
+
+  li { margin: 0.45rem 0; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.75rem 0;
+  }
+
+  /* Callout panels */
+  .callout {
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.2rem 0.4rem;
+    margin: 2.25rem 0 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .callout h3 { margin-top: 0; }
+
+  .callout.bank-only {
+    background: var(--bank-bg);
+    border-left: 4px solid var(--bank-accent);
+  }
+
+  .callout.fi-only {
+    background: var(--fi-bg);
+    border-left: 4px solid var(--fi-accent);
+  }
+
+  .callout.bank-only h3 .cite { color: var(--bank-accent); background: transparent; border-color: var(--bank-accent); }
+  .callout.fi-only h3 .cite { color: var(--fi-accent); background: transparent; border-color: var(--fi-accent); }
+
+  .callout .tag {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 0.08rem 0.45rem;
+    margin-right: 0.5rem;
+    vertical-align: 0.1rem;
+    color: var(--bg);
+  }
+
+  .callout.bank-only .tag { background: var(--bank-accent); }
+  .callout.fi-only .tag { background: var(--fi-accent); }
+
+  /* Change closers */
+  p.delta-none {
+    color: var(--muted);
+    font-size: 0.93rem;
+    border-left: 3px solid var(--rule);
+    padding-left: 0.85rem;
+    margin: 0.9rem 0 1rem;
+  }
+
+  p.delta-none strong { color: var(--muted); }
+
+  p.delta-sub, div.delta-sub {
+    background: var(--delta-sub-bg);
+    border-left: 3px solid var(--accent);
+    padding: 0.6rem 0.9rem;
+    border-radius: 0 4px 4px 0;
+    margin: 0.9rem 0 1rem;
+  }
+
+  div.delta-sub p:last-child { margin-bottom: 0; }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.25rem 0 1.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    background: var(--panel);
+  }
+
+  thead th {
+    background: var(--table-head-bg);
+    color: var(--heading);
+    text-align: left;
+    font-weight: 700;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 2px solid var(--rule-strong);
+    vertical-align: bottom;
+  }
+
+  tbody td {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  tbody tr:nth-child(even) { background: var(--table-stripe); }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  .map-table { min-width: 38rem; }
+
+  .agreement-table { min-width: 42rem; }
+  .agreement-table td:nth-child(2), .agreement-table td:nth-child(3) { min-width: 9rem; }
+
+  .closing-note em { display: block; }
+
+  .doc-footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="doc-header">
+    <h1>MAS Outsourcing Guidelines — Provision-by-Provision Breakdown</h1>
+    <p><strong>Bank Guidelines</strong> = Guidelines on Outsourcing (Banks), 11 December 2023, effective 11 December 2024.<br>
+    <strong>FI Guidelines</strong> = Guidelines on Outsourcing (Financial Institutions other than Banks), effective 11 December 2024, last revised 24 January 2025.</p>
+  </header>
+
+  <p>This walkthrough proceeds in the order of the <strong>Bank Guidelines</strong> (¶1.1 → Annex 3), pairing each provision with its FI counterpart. FI-only provisions are inserted at the point where they fall in the FI sequence, in boxes marked <strong>[FI-only]</strong>. "Identical" means word-for-word apart from mechanical substitutions ("Bank"→"institution", "bank-wide"→"institution-wide", "MOORS"→"material outsourcing arrangement", renumbered cross-references and footnotes).</p>
+
+  <p><strong>Numbering map at a glance:</strong></p>
+
+  <div class="table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr>
+          <th>Bank Guidelines</th>
+          <th>FI Guidelines</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>§1 Introduction (1.1–1.6)</td>
+          <td>§1 Introduction (1.1–1.4) + §2 Application (2.1–2.4)</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td>§3 Definitions <em>(no Bank counterpart)</em></td>
+        </tr>
+        <tr>
+          <td>§2 Engagement with MAS (2.1–2.2)</td>
+          <td>§4 Engagement with MAS (4.1–4.2)</td>
+        </tr>
+        <tr>
+          <td>§3 Risk Management Practices (3.1–3.12)</td>
+          <td>§5 Risk Management Practices (5.1–5.12) — offset: Bank 3.1→FI 5.2, 3.2→5.3, 3.3→5.4, 3.4→5.5, <strong>3.5→folded into 5.5.2(j)</strong>, 3.6→5.6, 3.7→5.7, 3.8→5.8, 3.9→5.9, 3.10→5.10, 3.11→5.11, 3.12→5.12</td>
+        </tr>
+        <tr>
+          <td>Annex 1 Material Outsourcing</td>
+          <td>Annex 3</td>
+        </tr>
+        <tr>
+          <td>Annex 2 Cloud Computing</td>
+          <td>Annex 5</td>
+        </tr>
+        <tr>
+          <td>Annex 3 Applicability chart <em>(Bank-only)</em></td>
+          <td>Annexes 1 (Exempted Services), 2 (Examples), 4 (Register) <em>(FI-only)</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#part-one">Part One — Introduction</a>
+        <details>
+          <summary>Provisions</summary>
+          <ul>
+            <li><a class="cite-link" href="#b1-1">Bank ¶1.1 ↔ FI ¶1.1</a> — Purpose and risk rationale</li>
+            <li><a class="cite-link" href="#b1-2">Bank ¶1.2 ↔ FI ¶1.2</a> — Addressees, perimeter, self-assessment</li>
+            <li><a class="cite-link" href="#fi1-3">[FI-only] FI ¶1.3</a> — Cross-reference to the Bank Guidelines</li>
+            <li><a class="cite-link" href="#b1-3">Bank ¶1.3 ↔ FI ¶2.1</a> — Proportionality</li>
+            <li><a class="cite-link" href="#b1-4">Bank ¶1.4 ↔ FI ¶2.2</a> — Perimeter guidance and annex roadmap</li>
+            <li><a class="cite-link" href="#fi2-3">[FI-only] FI ¶2.3</a> — Group-wide observance</li>
+            <li><a class="cite-link" href="#b1-5">Bank ¶1.5 ↔ FI ¶2.4</a> — Not exhaustive; no override; no standard of care</li>
+            <li><a class="cite-link" href="#b1-6">Bank ¶1.6 ↔ FI ¶1.4</a> — Effective date</li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="#part-two">Part Two — [FI-only] Section 3: Definitions</a></li>
+      <li><a href="#part-three">Part Three — Engagement with MAS</a>
+        <details>
+          <summary>Provisions</summary>
+          <ul>
+            <li><a class="cite-link" href="#b2-1">Bank ¶2.1 ↔ FI ¶¶4.1.1–4.1.2</a> — Demonstrating observance; non-observance</li>
+            <li><a class="cite-link" href="#fi4-1-3">[FI-only] FI ¶4.1.3</a> — MAS may require modification or re-integration</li>
+            <li><a class="cite-link" href="#b2-2">Bank ¶2.2 ↔ FI ¶4.2.1</a> — Notification of adverse developments</li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="#part-four">Part Four — Risk Management Practices</a>
+        <details>
+          <summary>Provisions</summary>
+          <ul>
+            <li><a class="cite-link" href="#fi5-1-1">[FI-only] FI ¶5.1.1</a> — Overview</li>
+            <li><a class="cite-link" href="#b3-1-1">Bank ¶3.1.1 ↔ FI ¶5.2.1</a> — Board and senior management: overall responsibility</li>
+            <li><a class="cite-link" href="#b3-1-2">Bank ¶3.1.2 ↔ FI ¶5.2.2</a> — Board responsibilities</li>
+            <li><a class="cite-link" href="#b3-1-3">Bank ¶3.1.3 ↔ FI ¶5.2.3</a> — Senior management responsibilities</li>
+            <li><a class="cite-link" href="#b3-1-4">Bank ¶3.1.4 ↔ FI ¶5.2.4</a> — Delegation to a board committee</li>
+            <li><a class="cite-link" href="#b3-1-5">Bank ¶3.1.5 ↔ FI ¶5.2.5</a> — Foreign-incorporated institutions</li>
+            <li><a class="cite-link" href="#b3-2-1">Bank ¶3.2.1 ↔ FI ¶5.3.1</a> — Risk evaluation framework</li>
+            <li><a class="cite-link" href="#b3-2-2">Bank ¶3.2.2 ↔ FI ¶5.3.2</a> — When evaluations occur</li>
+            <li><a class="cite-link" href="#bk3-2-3">[Bank-only] Bank ¶3.2.3</a> — Legal advice on overseas disclosure</li>
+            <li><a class="cite-link" href="#b3-3-1">Bank ¶3.3.1 ↔ FI ¶5.4.1</a> — Due diligence trigger</li>
+            <li><a class="cite-link" href="#b3-3-2">Bank ¶3.3.2 ↔ FI ¶5.4.2</a> — Due diligence content</li>
+            <li><a class="cite-link" href="#b3-3-3">Bank ¶3.3.3 ↔ FI ¶5.4.3</a> — Due diligence information set</li>
+            <li><a class="cite-link" href="#b3-3-4">Bank ¶3.3.4 ↔ FI ¶5.4.4</a> — Screening the provider's employees</li>
+            <li><a class="cite-link" href="#b3-3-5">Bank ¶3.3.5 ↔ FI ¶5.4.5</a> — Documentation and re-performance</li>
+            <li><a class="cite-link" href="#bk3-3-6">[Bank-only] Bank ¶3.3.6</a> — Frequency-of-checks policies</li>
+            <li><a class="cite-link" href="#b3-4-1">Bank ¶3.4.1 ↔ FI ¶5.5.1</a> — Written agreements, legally vetted</li>
+            <li><a class="cite-link" href="#b3-4-2">Bank ¶3.4.2 ↔ FI ¶5.5.2</a> — Minimum contents of the outsourcing agreement</li>
+            <li><a class="cite-link" href="#b3-4-3">Bank ¶3.4.3 ↔ FI ¶5.5.2(i)</a> — Termination triggers</li>
+            <li><a class="cite-link" href="#b3-4-4">Bank ¶3.4.4 ↔ FI ¶5.5.2(i) (closing text)</a> — Termination mechanics</li>
+            <li><a class="cite-link" href="#bk3-4-5">[Bank-only] Bank ¶¶3.4.5–3.4.6</a> — MAS-directed termination</li>
+            <li><a class="cite-link" href="#bk3-4-7">[Bank-only] Bank ¶3.4.7</a> — Deletion of information on termination, extended</li>
+            <li><a class="cite-link" href="#b3-4-8">Bank ¶3.4.8 ↔ FI ¶5.5.3</a> — Country-risk tailoring</li>
+            <li><a class="cite-link" href="#b3-5-1">Bank ¶3.5.1 ↔ FI ¶5.5.2(j)</a> — Sub-contracting: core controls</li>
+            <li><a class="cite-link" href="#bk3-5-2">[Bank-only] Bank ¶3.5.2</a> — Customer consent before sub-contracting</li>
+            <li><a class="cite-link" href="#bk3-5-3">[Bank-only] Bank ¶3.5.3</a> — Prescribed content of the sub-contract</li>
+            <li><a class="cite-link" href="#bk3-5-4">[Bank-only] Bank ¶3.5.4</a> — 30-day notification of sub-contractor engagement</li>
+            <li><a class="cite-link" href="#b3-6-1">Bank ¶3.6.1 ↔ FI ¶5.6.1</a> — Confidentiality: principle</li>
+            <li><a class="cite-link" href="#b3-6-2">Bank ¶3.6.2 ↔ FI ¶5.6.2</a> — Confidentiality: required steps</li>
+            <li><a class="cite-link" href="#b3-7">Bank ¶¶3.7.1–3.7.4 ↔ FI ¶¶5.7.1–5.7.4</a> — Business continuity management</li>
+            <li><a class="cite-link" href="#b3-8-1">Bank ¶3.8.1 ↔ FI ¶5.8.1</a> — Monitoring and control: structure</li>
+            <li><a class="cite-link" href="#b3-8-2">Bank ¶3.8.2 ↔ FI ¶5.8.2</a> — Monitoring and control: required measures</li>
+            <li><a class="cite-link" href="#b3-9-1">Bank ¶3.9.1 ↔ FI ¶5.9.1</a> — Audit and inspection: principle</li>
+            <li><a class="cite-link" href="#b3-9-2">Bank ¶3.9.2 ↔ FI ¶¶5.9.2–5.9.3</a> — Audit and MAS-access clauses</li>
+            <li><a class="cite-link" href="#b3-9-3">Bank ¶3.9.3 ↔ FI ¶5.9.4</a> — Sub-contractor coverage; notice of MAS inspections</li>
+            <li><a class="cite-link" href="#b3-9-4">Bank ¶3.9.4 ↔ FI ¶5.9.5</a> — Independent audits and expert assessments</li>
+            <li><a class="cite-link" href="#b3-9-5">Bank ¶3.9.5 ↔ FI ¶5.9.6</a> — Who audits; remediation</li>
+            <li><a class="cite-link" href="#b3-9-6">Bank ¶3.9.6 ↔ FI ¶5.9.7</a> — Escalation</li>
+            <li><a class="cite-link" href="#b3-9-7">Bank ¶3.9.7 ↔ FI ¶5.9.8</a> — Reports to MAS</li>
+            <li><a class="cite-link" href="#bk3-9-8">[Bank-only] Bank ¶3.9.8</a> — Certifications, pooled audits, third-party certification</li>
+            <li><a class="cite-link" href="#b3-10-1">Bank ¶3.10.1 ↔ FI ¶5.10.1</a> — Outside Singapore: country risk</li>
+            <li><a class="cite-link" href="#b3-10-2">Bank ¶3.10.2 ↔ FI ¶5.10.2</a> — Outside Singapore: preserving MAS supervision</li>
+            <li><a class="cite-link" href="#b3-11">Bank ¶¶3.11.1–3.11.2 ↔ FI ¶¶5.11.1–5.11.2</a> — Outsourcing within a group</li>
+            <li><a class="cite-link" href="#b3-12">Bank ¶¶3.12.1–3.12.3 ↔ FI ¶¶5.12.1–5.12.3</a> — Outsourcing internal audit to external auditors</li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="#part-five">Part Five — Annexes</a>
+        <details>
+          <summary>Provisions</summary>
+          <ul>
+            <li><a class="cite-link" href="#ann-1">Bank Annex 1 ↔ FI Annex 3</a> — Material Outsourcing</li>
+            <li><a class="cite-link" href="#ann-2">Bank Annex 2 ↔ FI Annex 5</a> — Cloud Computing</li>
+            <li><a class="cite-link" href="#ann-3">[Bank-only] Bank Annex 3</a> — Applicability of Notices and Guidelines</li>
+            <li><a class="cite-link" href="#fi-ann-1">[FI-only] FI Annex 1</a> — Exempted Outsourced Services</li>
+            <li><a class="cite-link" href="#fi-ann-2">[FI-only] FI Annex 2</a> — Examples of Outsourcing Arrangements</li>
+            <li><a class="cite-link" href="#fi-ann-4">[FI-only] FI Annex 4</a> — Register of Outsourcing Arrangements</li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="#closing-note">Closing Note</a></li>
+    </ol>
+  </nav>
+
+  <div class="legend" aria-label="Legend">
+    <span><span class="chip bank"></span><strong>[Bank-only]</strong> provision — no FI counterpart</span>
+    <span><span class="chip fi"></span><strong>[FI-only]</strong> provision — no Bank counterpart</span>
+    <span><span class="none-sample">Change: none</span> closers are muted; <span class="sub-sample">substantive-change</span> closers are highlighted</span>
+  </div>
+
+  <section id="part-one">
+    <h2>PART ONE — INTRODUCTION</h2>
+
+    <section id="b1-1">
+      <h3><span class="cite">Bank ¶1.1 ↔ FI ¶1.1</span> <span class="ptitle">— Purpose and risk rationale</span></h3>
+      <p>Both open identically: outsourcing can bring cost and other benefits but may increase an institution's risk profile (reputation, compliance and operational risks from service-provider failure, security breaches, or inability to comply with Singapore legal and regulatory requirements); country risk arises where the provider is overseas and concentration risk where multiple functions go to one provider; outsourcing "does not diminish the obligations of an institution, and those of its board and senior management", so a sound and responsive risk management framework is needed.</p>
+      <p class="delta-none"><strong>Change: none.</strong> The paragraphs are verbatim identical — both even use the word "institution".</p>
+    </section>
+
+    <section id="b1-2">
+      <h3><span class="cite">Bank ¶1.2 ↔ FI ¶1.2</span> <span class="ptitle">— Addressees, perimeter, self-assessment</span></h3>
+      <ul>
+        <li><strong>Bank:</strong> addresses "a bank or merchant bank (hereafter collectively referred to as 'Bank')" that has entered into or plans "an arrangement for ongoing outsourced relevant services ('outsourcing arrangement')", <strong>excluding exempted Outsourced Relevant Services in Annex D of MAS Notices 658 and 1121</strong> ("Notices"). Footnote 1 confirms the Guidelines cover both material and non-material <em>ongoing</em> arrangements.</li>
+        <li><strong>FI:</strong> addresses "a financial institution (other than a bank or merchant bank)" that has entered into any outsourcing arrangement or plans to outsource its <strong>business activities</strong> (fn 1: business and operational functions and processes) to a service provider, <strong>excluding exempted outsourced services in Annex 1 of the Guidelines themselves</strong>.</li>
+        <li>Both then impose the same self-assessment expectation for all existing arrangements, with an identical footnote 2 extending this to arrangements inherited through acquisition of another institution's business.</li>
+      </ul>
+      <p class="delta-sub"><strong>Changes:</strong> (i) different addressees; (ii) the Bank perimeter is built on the statutory/Notice concept of "ongoing outsourced relevant services", the FI perimeter on the Guidelines' own defined term "outsourcing arrangement"; (iii) the exemption list lives in the Notices (Annex D) for banks but inside the instrument (Annex 1) for FIs.</p>
+    </section>
+
+    <div class="callout fi-only" id="fi1-3">
+      <h3><span class="tag">FI-only</span><span class="cite">FI ¶1.3</span> <span class="ptitle">— Cross-reference to the Bank Guidelines</span></h3>
+      <p>The FI Guidelines state that expectations for banks and merchant banks are in a separate set of guidelines, because that set "makes reference to definitions in MAS Notices 658 and 1121 that apply only to banks and merchant banks" (fn 3 links to the Bank Guidelines). <strong>No Bank counterpart</strong> (the Bank Guidelines do not reciprocally cite the FI Guidelines).</p>
+    </div>
+
+    <section id="b1-3">
+      <h3><span class="cite">Bank ¶1.3 ↔ FI ¶2.1</span> <span class="ptitle">— Proportionality</span></h3>
+      <p>Identical: implementation should be commensurate with the nature of risks in, and materiality of, the arrangement — expressly including arrangements involving an MAS-regulated entity — and outsourced services (whether provided by the service provider or its sub-contractor) must continue to be managed "as if the services were still managed by" the institution.</p>
+      <p class="delta-none"><strong>Change: none of substance</strong> (located in the Introduction for banks, in the separate "Application of Guidelines" section for FIs).</p>
+    </section>
+
+    <section id="b1-4">
+      <h3><span class="cite">Bank ¶1.4 ↔ FI ¶2.2</span> <span class="ptitle">— Perimeter guidance and annex roadmap</span></h3>
+      <ul>
+        <li><strong>Bank:</strong> Banks "are expected to refer to the Notices in determining which relevant services are outsourcing arrangements"; arrangements outside the definition should still be subject to adequate risk management and sound internal controls; roadmap to Annex 1 (materiality guidance), Annex 2 (cloud), Annex 3 (applicability of Notices/Guidelines to service categories); "Please refer to the Notices for the definition of terms used in these Guidelines."</li>
+        <li><strong>FI:</strong> roadmap to Annex 1 (exempted services), Annex 2 (non-exhaustive examples of what is and is not an outsourcing arrangement), Annex 3 (materiality guidance), Annex 4 (register template, "to be submitted to MAS, at least annually or upon request"), Annex 5 (cloud); the same warning that non-outsourcing arrangements still need adequate risk management and sound internal controls.</li>
+      </ul>
+      <p class="delta-sub"><strong>Changes:</strong> (i) scoping authority — the Notices for banks vs the Guidelines' own definitions and Annexes 1–2 for FIs; (ii) the FI roadmap already announces the <strong>annual register submission</strong> obligation, which has no stated counterpart frequency anywhere in the Bank Guidelines; (iii) the Bank version outsources all definitions to the Notices, the FI version to its §3.</p>
+    </section>
+
+    <div class="callout fi-only" id="fi2-3">
+      <h3><span class="tag">FI-only</span><span class="cite">FI ¶2.3</span> <span class="ptitle">— Group-wide observance</span></h3>
+      <p>A Singapore-incorporated institution should consider the impact of outsourcing by its branches and any corporation under its control (including overseas) on its consolidated operations, and should <strong>ensure these Guidelines are observed by branches and controlled corporations</strong> through a group-wide outsourcing risk management framework that complies with the Guidelines.</p>
+      <p><strong>No direct Bank counterpart.</strong> The Bank Guidelines reach group arrangements through ¶3.11.1 (application to intra-group outsourcing, including subsidiaries of Singapore-incorporated banks) and Annex 1 ¶4 (group-level materiality), but contain no affirmative "ensure observance by branches and subsidiaries" instruction.</p>
+    </div>
+
+    <section id="b1-5">
+      <h3><span class="cite">Bank ¶1.5 ↔ FI ¶2.4</span> <span class="ptitle">— Not exhaustive; no override; no standard of care</span></h3>
+      <p>Identical: the Guidelines are not exhaustive, do not override legislation, must be read with the relevant legislation, subsidiary legislation, written directions, notices, codes and other guidelines, and are not a statement of the standard of care owed to customers.</p>
+      <p class="delta-sub"><strong>One difference:</strong> the Bank version hangs footnote 3 off "other guidelines", pointing to the <strong>MAS Information Paper on "Operational Risk Management – Third-Party Arrangements"</strong> as good practice MAS expects to see in banks. The FI version has no such reference.</p>
+    </section>
+
+    <section id="b1-6">
+      <h3><span class="cite">Bank ¶1.6 ↔ FI ¶1.4</span> <span class="ptitle">— Effective date</span></h3>
+      <ul>
+        <li><strong>Bank:</strong> "These Guidelines take effect on 11 December 2024."</li>
+        <li><strong>FI:</strong> "These Guidelines take effect on 11 December 2024 and last revised on 24 January 2025."</li>
+      </ul>
+      <p class="delta-sub"><strong>Change:</strong> same effective date; only the FI Guidelines have been revised since (the 24 January 2025 revision amended the "financial adviser" definition in §3 — it is the only provision carrying an amendment tag).</p>
+    </section>
+  </section>
+
+  <hr>
+
+  <section id="part-two">
+    <h2>PART TWO — [FI-only] SECTION 3: DEFINITIONS</h2>
+
+    <p>The Bank Guidelines have <strong>no definitions section</strong> at all — ¶1.4 defers wholesale to the Notices, and only three terms are pinned down in footnotes ("bridge-institution" at fn 14, "multi-tenancy" at fn 20, and the scope of "customer information" at fn 4). The FI Guidelines, by contrast, carry a complete glossary at §3, because there is no Notice to lean on. Its contents:</p>
+
+    <ul>
+      <li><strong>"benchmark administrator"</strong> — authorised under s 123F SFA or exempt under s 123K SFA.</li>
+      <li><strong>"board"</strong> — for Singapore-incorporated institutions, the board of directors; for foreign-incorporated institutions, <strong>a management committee or body beyond local management</strong> charged with oversight of the Singapore operations. <em>(This tailored definition is what makes FI ¶5.2.5's regional-committee mechanism work; the Bank Guidelines have no equivalent.)</em></li>
+      <li><strong>"bridge-institution"</strong> — same definition as Bank fn 14 (resolution vehicle).</li>
+      <li><strong>"business relations"</strong> — sector-by-sector definitions for insurers, CMIs, financial advisers, credit/charge card licensees and benchmark administrators.</li>
+      <li><strong>"CMI"</strong> — capital markets services licensees, registered fund management companies and certain exempt persons.</li>
+      <li><strong>"customer"</strong> — ten sector-specific limbs, covering: CIS trustees (managers and participants); approved exchanges, market operators, trade repositories, clearing houses and the central depository (participants in their services); licensed trust companies (the trust, settlor and beneficiaries); insurers (including master-policy owners for group policies); insurance intermediaries; financial advisers; CMIs (including investors in managed investment vehicles); card licensees; money-changers and remitters (including cash payees of inward remittances); benchmark administrators (information providers and benchmark recipients).</li>
+      <li><strong>"customer information"</strong> — "user information" (SFA) for exchanges/market operators/clearing houses; "user information" and "transaction information" for trade repositories; otherwise customers' accounts, particulars, transaction details and dealings — excluding information that is public, anonymised, or securely encrypted so identities cannot readily be inferred. <em>(Compare Bank fn 4: same anonymisation/encryption carve-out, but with the express rider that customer information which had previously been made public <strong>remains</strong> customer information — a nuance the FI definition does not carry, since it simply excludes "public" information.)</em></li>
+      <li><strong>"financial adviser"</strong> — licensed under the FAA or exempt under s 20(1)(g) FAA read with reg 27(1)(d) FAR. <strong>[Amended on 24 January 2025.]</strong></li>
+      <li><strong>"institution"</strong> — any FSMA s 2 financial institution other than a licensed bank or merchant bank.</li>
+      <li><strong>"material outsourcing arrangement"</strong> — an arrangement which (a) on service failure or security breach, could materially impact the institution's business operations, reputation or profitability, or its ability to manage risk and comply with applicable laws; <strong>or</strong> (b) involves customer information which, on unauthorised access, disclosure, loss or theft, may materially impact customers. <em>(The Bank analogue "MOORS" is defined in the Notices, not the Guidelines.)</em></li>
+      <li><strong>"legal arrangement" / "legal person"</strong> — standard AML-style definitions.</li>
+      <li><strong>"outsourcing agreement"</strong> — the written agreement setting out the contractual terms governing the arrangement.</li>
+      <li><strong>"outsourcing arrangement"</strong> — a service that may currently or potentially be performed by the institution itself, where (a) the institution depends on it on an ongoing basis and (b) it is integral to the institution's provision of a financial service, or is provided to the market in the institution's name.</li>
+      <li><strong>"relevant business transaction"</strong> — thresholds for money-changers (≥S$5,000 or inward remittance) and remitters.</li>
+      <li><strong>"service provider"</strong> — any party providing a service to the institution, <strong>including any entity within the institution's group</strong> (fn 4 defines "group": head office/parent, subsidiaries, affiliates, and controlled/controlling entities including SPEs), located in Singapore or elsewhere.</li>
+      <li><strong>"sub-contracting"</strong> — where a service provider further outsources services covered by the outsourcing arrangement to another service provider.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section id="part-three">
+    <h2>PART THREE — ENGAGEMENT WITH MAS</h2>
+
+    <section id="b2-1">
+      <h3><span class="cite">Bank ¶2.1 ↔ FI ¶¶4.1.1–4.1.2</span> <span class="ptitle">— Demonstrating observance; consequences of non-observance</span></h3>
+      <p>Both require the institution to be able to demonstrate observance of the Guidelines to MAS. Where MAS is not satisfied, it may require additional measures, "which could include pre-notification of new" material arrangements (Bank: "material ongoing outsourced relevant services (MOORS)"; FI: "material outsourcing arrangements"). Both state MAS may take non-observance into account in its assessment (impact of the arrangement on the institution and the financial system; severity of deficiencies; internal-controls/risk-management track record; circumstances of the case) and that MAS may communicate directly with home or host regulators of the institution and its service provider on their ability and willingness to cooperate.</p>
+      <p class="delta-sub"><strong>One substantive addition on the FI side:</strong> FI ¶4.1.1 states that demonstrating observance "should include <strong>submission of its outsourcing register</strong> in the template set out in Annex 4 <strong>at least annually or upon request</strong>." The Bank Guidelines contain no submission-frequency provision — the closest text is fn 21 to ¶3.8.2(a) ("Banks should submit their registers according to the template set out at this link"), which states no frequency (register requirements for banks sit in the Notices).</p>
+    </section>
+
+    <div class="callout fi-only" id="fi4-1-3">
+      <h3><span class="tag">FI-only</span><span class="cite">FI ¶4.1.3</span> <span class="ptitle">— MAS may require modification or re-integration</span></h3>
+      <p>MAS may require an institution to <strong>modify, make alternative arrangements or re-integrate</strong> an outsourced service where: (a) the institution fails to demonstrate a satisfactory understanding of the risks; (b) it fails to implement adequate risk measures satisfactorily and timeously; (c) adverse developments arise that could impact it; (d) <strong>MAS's supervisory powers or functions are hindered</strong>; or (e) <strong>the security and confidentiality of customer information is lowered due to changes in the service provider's control environment</strong>.</p>
+      <p><strong>Bank counterpart is structurally different and appears later</strong> (Bank ¶¶3.4.5–3.4.6, discussed below): for banks, MAS's intervention takes the form of a <strong>direction to terminate</strong> the contract or stop receiving the MOORS under Notices ¶7.1(g) — a last-resort mechanism with more grounds, including audit obstruction. Grounds (d) and (e) of the FI list have no Bank-Guidelines equivalent; conversely the Bank list's audit-obstruction grounds have no FI equivalent.</p>
+    </div>
+
+    <section id="b2-2">
+      <h3><span class="cite">Bank ¶2.2 ↔ FI ¶4.2.1</span> <span class="ptitle">— Notification of adverse developments</span></h3>
+      <p>Identical: notify MAS <strong>as soon as possible</strong> of any adverse development arising from outsourcing that could impact the institution — including events that could lead to prolonged service failure or disruption, and any breach of security or confidentiality of customer information — and also of such adverse developments <strong>within the institution's group</strong>.</p>
+      <p class="delta-sub"><strong>One drafting difference:</strong> the Bank version carries fn 4 delimiting "customer information" (see Part Two above); the FI version needs no footnote because its §3 definition does that work.</p>
+    </section>
+  </section>
+
+  <hr>
+
+  <section id="part-four">
+    <h2>PART FOUR — RISK MANAGEMENT PRACTICES</h2>
+
+    <div class="callout fi-only" id="fi5-1-1">
+      <h3><span class="tag">FI-only</span><span class="cite">FI ¶5.1.1</span> <span class="ptitle">— Overview</span></h3>
+      <p>In supervising an institution, MAS will review its implementation of the Guidelines and the quality of board and senior management oversight and governance, internal controls and risk management regarding outsourcing risks. <strong>No Bank counterpart</strong> as a standalone provision (the idea is folded into Bank ¶2.1).</p>
+    </div>
+
+    <section id="b3-1-1">
+      <h3><span class="cite">Bank ¶3.1.1 ↔ FI ¶5.2.1</span> <span class="ptitle">— Board and senior management: overall responsibility</span></h3>
+      <p>Identical: day-to-day duties may be delegated to the service provider, but responsibility for oversight, governance, risk management and the outsourcing risk management framework stays with the institution, its board and senior management; adequate processes must give a comprehensive institution-wide view of outsourcing risk exposures, fed into the framework.</p>
+      <p class="delta-none"><strong>Change: none</strong> ("bank-wide" vs "institution-wide" only).</p>
+    </section>
+
+    <section id="b3-1-2">
+      <h3><span class="cite">Bank ¶3.1.2 ↔ FI ¶5.2.2</span> <span class="ptitle">— Board responsibilities</span></h3>
+      <p>Identical six items: (a) approve the risk/materiality evaluation framework and applicable policies; (b) set risk appetite; (c) lay down approval authorities; (d) assess management competencies; (e) ensure senior management establishes governance structures and processes (e.g. a management body reviewing controls for consistency with the institution-wide view of risk); (f) undertake regular reviews of outsourcing strategies and arrangements for continued relevance, safety and soundness.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-1-3">
+      <h3><span class="cite">Bank ¶3.1.3 ↔ FI ¶5.2.3</span> <span class="ptitle">— Senior management responsibilities</span></h3>
+      <p>Identical eight items: (a) evaluate materiality and risks under the board-approved framework; (b) develop and implement sound policies and procedures; (c) review and adjust them regularly; (d) monitor and control all risks from material arrangements institution-wide; (e) ensure tested contingency plans based on realistic disruptive scenarios; (f) ensure independent review and audit of compliance; (g) ensure timely remediation of audit findings; (h) communicate risk information to the board in a timely manner.</p>
+      <p class="delta-sub"><strong>Only change:</strong> items (d) and (h) refer to "its MOORS" in the Bank version and "its material outsourcing arrangements" in the FI version.</p>
+    </section>
+
+    <section id="b3-1-4">
+      <h3><span class="cite">Bank ¶3.1.4 ↔ FI ¶5.2.4</span> <span class="ptitle">— Delegation to a board committee</span></h3>
+      <p>Identical: communication procedures between board and committee; regular reporting; senior management held responsible for implementation; the board remains responsible for the committee's performance.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-1-5">
+      <h3><span class="cite">Bank ¶3.1.5 ↔ FI ¶5.2.5</span> <span class="ptitle">— Foreign-incorporated institutions</span></h3>
+      <ul>
+        <li><strong>Bank:</strong> the senior-management functions in ¶3.1.3 lie with <strong>local management</strong>; local management of a foreign-incorporated Bank must take steps to comply with Singapore laws and the Guidelines and "cannot abrogate its governance responsibilities".</li>
+        <li><strong>FI:</strong> the same local-management text, <strong>preceded by an additional sentence</strong>: for a foreign-incorporated institution, the <strong>board functions in ¶5.2.2 may be delegated to and performed by a management committee or body beyond local management</strong> charged with functionally overseeing the local office — e.g. a regional risk management committee (dovetailing with the §3 "board" definition).</li>
+      </ul>
+      <p class="delta-sub"><strong>Change:</strong> the FI version expressly solves the "who is the board of a Singapore branch?" problem; the Bank version addresses only the senior-management/local-management limb.</p>
+    </section>
+
+    <section id="b3-2-1">
+      <h3><span class="cite">Bank ¶3.2.1 ↔ FI ¶5.3.1</span> <span class="ptitle">— Risk evaluation framework</span></h3>
+      <p>Identical six-step framework: (a) identify outsourcing's role in overall strategy; (b) comprehensive due diligence on nature/scope/complexity to identify and mitigate key risks; (c) assess the service provider's ability to employ a high standard of care and meet regulatory standards <strong>as if the service were performed by the institution itself</strong>; (d) analyse impact on overall risk profile and adequacy of internal expertise/resources; (e) analyse entity <strong>and group</strong> aggregate exposure to manage concentration risk; (f) weigh benefits against risks (from temporary disruption through security breach to unexpected termination), including whether, for strategic and internal-control reasons, the arrangement should not be entered into at all.</p>
+      <p class="delta-none"><strong>Change: none of substance.</strong></p>
+    </section>
+
+    <section id="b3-2-2">
+      <h3><span class="cite">Bank ¶3.2.2 ↔ FI ¶5.3.2</span> <span class="ptitle">— When evaluations occur</span></h3>
+      <p>Identical: before entering an arrangement with an existing or new provider, and re-performed periodically on existing arrangements as part of approval, strategic planning, risk management or internal control reviews.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <div class="callout bank-only" id="bk3-2-3">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.2.3</span> <span class="ptitle">— Legal advice on overseas disclosure of customer information</span></h3>
+      <p>When assessing risks of a MOORS that involves <strong>disclosing customer information to an overseas service provider</strong>, a Bank should assess whether <strong>independent legal advice</strong> is necessary or whether internal counsel's advice suffices; the decision on obtaining advice, and its frequency, must be approved by the <strong>board or its delegated committee</strong>, and revisited "whenever there are significant changes in the relevant law(s) overseas."</p>
+      <p><strong>No FI counterpart anywhere.</strong> This is a banking-secrecy-driven provision.</p>
+    </div>
+
+    <section id="b3-3-1">
+      <h3><span class="cite">Bank ¶3.3.1 ↔ FI ¶5.4.1</span> <span class="ptitle">— Due diligence trigger</span></h3>
+      <p>Identical: due diligence on the service provider when <strong>considering, renegotiating or renewing</strong> an arrangement.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-3-2">
+      <h3><span class="cite">Bank ¶3.3.2 ↔ FI ¶5.4.2</span> <span class="ptitle">— Due diligence content</span></h3>
+      <p>Identical: assess all relevant aspects, including capability to employ a high standard of care as if in-house; physical and IT security controls; business reputation and financial strength; ethical and professional standards; ability to meet obligations. Onsite visits (by persons with requisite knowledge and skills) plus, where possible, independent reviews and market feedback.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-3-3">
+      <h3><span class="cite">Bank ¶3.3.3 ↔ FI ¶5.4.3</span> <span class="ptitle">— Due diligence information set</span></h3>
+      <p>Identical ten heads (a)–(j): experience and capability over the contract period; financial strength and resources (credit-assessment-like: business strategy and goals, audited financials, equity-sponsor commitment, resilience under adverse conditions); corporate governance, reputation, culture, compliance, pending/potential litigation; security and internal controls, audit coverage, reporting and monitoring; risk management framework and capabilities including <strong>technology risk management</strong> (fn: standards commensurate with MAS Technology Risk Management Guidelines) and <strong>BCM</strong> (fn: standards commensurate with MAS BCM Guidelines); disaster recovery arrangements and track record; reliance on and success with sub-contractors; insurance coverage; external (political, economic, social, legal) environment of the provider's jurisdiction; ability and track record of compliance with applicable laws.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-3-4">
+      <h3><span class="cite">Bank ¶3.3.4 ↔ FI ¶5.4.4</span> <span class="ptitle">— Screening the provider's employees</span></h3>
+      <p>Identical: employees undertaking any part of the arrangement assessed against the institution's own hiring policies — disciplinary or criminal proceedings; convictions (particularly fraud, misrepresentation, dishonesty); accepted civil liability for fraud/misrepresentation; financial soundness — with adverse findings weighed for relevance and impact.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-3-5">
+      <h3><span class="cite">Bank ¶3.3.5 ↔ FI ¶5.4.5</span> <span class="ptitle">— Documentation and re-performance</span></h3>
+      <p>Identical: document due diligence; re-perform periodically on a risk-based frequency (including intragroup arrangements; reduced due diligence may suffice intra-group); keep the information current; use due diligence findings to set audit frequency and scope.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <div class="callout bank-only" id="bk3-3-6">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.3.6</span> <span class="ptitle">— Frequency-of-checks policies</span></h3>
+      <p>For <strong>Notices ¶5.2(b)</strong> (policies on frequencies of checks on service providers), a Bank need not set a policy per individual MOORS; policies may be set for <strong>groups or types of MOORS</strong> provided the review frequency is commensurate with the risks. <strong>No FI counterpart</strong> — this interprets a Notice obligation that does not exist for FIs. (The FI analogue in spirit is the annual review at FI ¶5.8.2(d), below.)</p>
+    </div>
+
+    <section id="b3-4-1">
+      <h3><span class="cite">Bank ¶3.4.1 ↔ FI ¶5.5.1</span> <span class="ptitle">— Written agreements, legally vetted</span></h3>
+      <p>Identical: contractual terms carefully and properly defined in written agreements, vetted by a competent authority (e.g. legal counsel) for legality and enforceability.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-4-2">
+      <h3><span class="cite">Bank ¶3.4.2 ↔ FI ¶5.5.2</span> <span class="ptitle">— Minimum contents of the outsourcing agreement</span></h3>
+      <p>Both: every agreement must address the risks identified at the risk-evaluation and due-diligence stages, allow timely renegotiation and renewal preserving control and the right to intervene, and at the very least cover:</p>
+
+      <div class="table-wrap">
+        <table class="agreement-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Bank ¶3.4.2</th>
+              <th>FI ¶5.5.2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Scope</td>
+              <td>(a)</td>
+              <td>(a)</td>
+            </tr>
+            <tr>
+              <td>Performance, operational, internal control and risk management standards</td>
+              <td>(b)</td>
+              <td>(b)</td>
+            </tr>
+            <tr>
+              <td>Confidentiality and security</td>
+              <td>(c) — <strong>fn 9: for a MOORS, must include the requirements of Notices ¶7.1(a)–(c)</strong></td>
+              <td>(c)</td>
+            </tr>
+            <tr>
+              <td>Business continuity management</td>
+              <td>(d)</td>
+              <td>(d)</td>
+            </tr>
+            <tr>
+              <td>Monitoring and control</td>
+              <td>(e)</td>
+              <td>(e)</td>
+            </tr>
+            <tr>
+              <td>Audit and inspection</td>
+              <td>(f) — <strong>fn 12: for a MOORS, must include Notices ¶7.1(d)</strong></td>
+              <td>(f)</td>
+            </tr>
+            <tr>
+              <td>Notification of adverse developments (events and circumstances the provider must report so the institution can mitigate and notify MAS)</td>
+              <td>(g)</td>
+              <td>(g)</td>
+            </tr>
+            <tr>
+              <td>Dispute resolution (resolution process, events of default, indemnities, remedies, recourse; enforceable contractual rights on breach)</td>
+              <td>(h)</td>
+              <td>(h)</td>
+            </tr>
+            <tr>
+              <td>Default termination and early exit</td>
+              <td>(i) — bare item, elaborated in ¶¶3.4.3–3.4.8</td>
+              <td>(i) — <strong>expanded inline</strong> (see next entry)</td>
+            </tr>
+            <tr>
+              <td>Sub-contracting</td>
+              <td><em>not in this list</em> — dealt with in a dedicated §3.5</td>
+              <td><strong>(j) — included as an agreement item</strong></td>
+            </tr>
+            <tr>
+              <td>Applicable laws (choice of law, covenants, jurisdiction)</td>
+              <td>(j)</td>
+              <td>(k)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="delta-sub"><strong>Changes:</strong> (i) the FI list has eleven items to the Bank's ten, because sub-contracting is folded in as item (j); (ii) the Bank version layers binding Notice ¶7.1 requirements on top for MOORS via footnotes; (iii) both elaborate termination — but differently (next entry).</p>
+    </section>
+
+    <section id="b3-4-3">
+      <h3><span class="cite">Bank ¶3.4.3 ↔ FI ¶5.5.2(i)</span> <span class="ptitle">— Termination triggers</span></h3>
+      <p>Both give the institution the right to terminate <strong>in the event of default</strong>, plus:</p>
+      <ul>
+        <li><strong>Bank (¶3.4.3):</strong> (a) by giving reasonable notice; (b) if the service provider <strong>or a sub-contractor</strong> failed to safeguard the confidentiality <strong>or integrity of customer information</strong>; (c) demonstrable deterioration in the ability of the provider or sub-contractor <strong>to safeguard the confidentiality of customer information</strong>.</li>
+        <li><strong>FI (¶5.5.2(i)):</strong> where the provider (i) undergoes a <strong>change in ownership</strong>; (ii) becomes <strong>insolvent or goes into liquidation</strong>; (iii) goes into <strong>receivership or judicial management</strong> (in Singapore or elsewhere); (iv) there has been a <strong>breach of security or confidentiality</strong>; or (v) there is demonstrable deterioration in the ability of the provider <strong>to perform the contracted service</strong>.</li>
+      </ul>
+      <div class="delta-sub"><p><strong>This is the sharpest single drafting divergence in the two documents.</strong> The FI list keeps the traditional corporate-event triggers and a service-performance trigger; the Bank list is confidentiality-centred (and extends expressly to sub-contractor failures) and adds a no-fault reasonable-notice termination right. The Bank Guidelines nowhere recite corporate-event triggers — banks' binding contract requirements are prescribed by Notices ¶7.1, whose full content the Guidelines do not reproduce. On the face of the two Guidelines, the FI trigger list is the broader one.</p></div>
+    </section>
+
+    <section id="b3-4-4">
+      <h3><span class="cite">Bank ¶3.4.4 ↔ FI ¶5.5.2(i) (closing text)</span> <span class="ptitle">— Termination mechanics</span></h3>
+      <p>Identical: the minimum period to execute a termination provision must be specified in the agreement; provisions to ensure smooth transition on termination or amendment; such provisions may facilitate transferability of the services to a <strong>bridge-institution</strong> (identically defined: Bank fn 14 / FI fn 13) or a third party; where an intra-group entity provides the service, the agreement must be legally enforceable against it.</p>
+      <p class="delta-none"><strong>Change: none</strong> (placement differs — standalone paragraph vs closing text of the termination limb).</p>
+    </section>
+
+    <div class="callout bank-only" id="bk3-4-5">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶¶3.4.5–3.4.6</span> <span class="ptitle">— MAS-directed termination</span></h3>
+      <p>For <strong>Notices ¶7.1(g)</strong>, MAS will consider directing a Bank to terminate the contract or stop obtaining/receiving the MOORS when: (a) circumstances in Notices ¶10.3 arise and the provider is unwilling or unable to remediate; (b) the provider won't/can't remediate and the Bank did not itself terminate; (c) the Bank cannot demonstrate satisfactory understanding of the risk; (d) the Bank cannot implement adequate risk measures satisfactorily and timeously; (e) adverse developments arise that could impact the Bank; (f) MAS or an MAS-appointed auditor is <strong>prevented by the service provider from auditing</strong> its books, systems and premises for the purposes in <strong>s 47A(10) Banking Act 1970</strong>; (g)–(h) where the sub-contract so provides, the sub-contractor prevents audit or withholds records/documents/reports/information. Fn 15: termination directions are a <strong>last resort</strong>; Banks need not exercise termination rights if they can remediate with the provider. ¶3.4.6: MAS will endeavour to give <strong>reasonable notice</strong> of an intended direction.</p>
+      <p><strong>FI counterpart:</strong> none in this form — the FI analogue is the modify/re-integrate power at FI ¶4.1.3 (see Part Three), with a shorter, partly different list of grounds, no last-resort framing and no notice commitment.</p>
+    </div>
+
+    <div class="callout bank-only" id="bk3-4-7">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.4.7</span> <span class="ptitle">— Deletion of information on termination, extended</span></h3>
+      <p>For <strong>Notices ¶7.1(f)</strong> (deleting, destroying or rendering information unusable on termination), a Bank should endeavour to go <strong>beyond the minimally required customer information to include non-customer information</strong> given to the provider, unless the Bank assesses the provider has legitimate reasons to retain it; and should ensure the minimum termination-execution period is specified.</p>
+      <p><strong>FI counterpart:</strong> none as an agreement-content expectation. The only FI deletion provision is the shared BCM one (FI ¶5.7.2(c) = Bank ¶3.7.2(c)): on adverse conditions or termination, all documents, transaction records and information previously given to the provider should be promptly removed from its possession, or deleted, destroyed or rendered unusable.</p>
+    </div>
+
+    <section id="b3-4-8">
+      <h3><span class="cite">Bank ¶3.4.8 ↔ FI ¶5.5.3</span> <span class="ptitle">— Country-risk tailoring</span></h3>
+      <p>Identical: each agreement tailored to address country-risk issues and potential obstacles to oversight and management where the provider is outside Singapore (cross-referring the outside-Singapore section, ¶3.10 / ¶5.10).</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-5-1">
+      <h3><span class="cite">Bank ¶3.5.1 ↔ FI ¶5.5.2(j)</span> <span class="ptitle">— Sub-contracting: core controls</span></h3>
+      <p>Substantively identical: retain the ability to monitor and control the arrangement when the provider sub-contracts; agreement clauses setting rules and limitations on sub-contracting; clauses making the service provider <strong>contractually liable</strong> for the sub-contractor's performance, risk management practices and compliance with the provider-level agreement, including the Guidelines' prudent practices; sub-contracting of any part of a material arrangement subject to the institution's <strong>prior approval</strong>.</p>
+      <p class="delta-sub"><strong>Change:</strong> location and framing only — a dedicated section for Banks vs one item in the FI agreement checklist. (Minor wording: Bank "monitor and control <strong>the risks arising from</strong> its outsourcing arrangements" vs FI "monitor and control its outsourcing arrangements".)</p>
+    </section>
+
+    <div class="callout bank-only" id="bk3-5-2">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.5.2</span> <span class="ptitle">— Customer consent before sub-contracting</span></h3>
+      <p>Before a Bank allows a MOORS involving disclosure of customer information to be sub-contracted, it <strong>must obtain the customer's written consent</strong> to disclosure of customer information to the sub-contractor. The consent need not name the service providers, but the scope and purpose of disclosure must be made known (fn 17: consent may be obtained via onboarding terms and conditions, with reasonable steps to ensure customers know they are granting it).</p>
+      <p><strong>No FI counterpart</strong> — the word "consent" does not appear in the FI Guidelines. Banking-secrecy-driven.</p>
+    </div>
+
+    <div class="callout bank-only" id="bk3-5-3">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.5.3</span> <span class="ptitle">— Prescribed content of the sub-contract</span></h3>
+      <p>For MOORS, on a risk-proportionate, best-effort basis, the Bank should ensure sub-contractors are held to similar standards as service providers, endeavouring to ensure:</p>
+      <ul>
+        <li><strong>(a) where the sub-contracting involves disclosure of customer information to the sub-contractor:</strong> (i) the sub-contractor is notified in writing of the Bank's confidentiality obligations under the Banking Act and common law; (ii) customer information is disclosed to / accessed / collected / copied / modified / used / stored / processed by the sub-contractor only to the extent necessary to perform its duties; (iii) the sub-contractor and its employees do not disclose customer information to any third party unless compelled by law — and then must notify the Bank (directly or through the provider) as soon as practicable to the extent permitted by law;</li>
+        <li><strong>(b) that the sub-contract itself provides:</strong> (i) protection of confidentiality and integrity of <strong>all</strong> Bank information in the sub-contractor's custody; (ii) need-to-know access limits on the sub-contractor and its employees; (iii) the same no-third-party-disclosure/notification obligation; (iv) that <strong>MAS, or an MAS-appointed auditor, may audit the sub-contractor</strong> — to determine proper provision of the sub-contracted MOORS and assess the sub-contractor's ability to ensure service continuity, safeguard information, and manage legal, reputational, technological and operational risks, plus its compliance with written laws; (v) that the sub-contractor will provide any record, document, report or information on request to the Bank or MAS (or their appointees); (vi) that on cessation of the sub-contracted MOORS, <strong>customer information given to the sub-contractor is deleted, destroyed or rendered unusable as soon as possible</strong>, except where prohibited by written law or foreign law (for overseas arrangements), or where a branch/office stores it in a Bank system accessible only by the Bank after termination (fn 18: flexibility permitted for non-customer information).</li>
+      </ul>
+      <p><strong>No FI counterpart at this level.</strong> The FI Guidelines reach sub-contractors only through the provider-liability clause (¶5.5.2(j)) and the audit/access clauses (¶¶5.9.2–5.9.4), and never prescribe the contents of the sub-contract itself.</p>
+    </div>
+
+    <div class="callout bank-only" id="bk3-5-4">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.5.4</span> <span class="ptitle">— 30-day notification of sub-contractor engagement</span></h3>
+      <p>For <strong>Notices ¶6.3(a)</strong>, the service provider's notification to the Bank of its engagement of a sub-contractor should take place <strong>no later than 30 days</strong>; where later, the Bank should assess whether the provider had good reasons and work with it to secure prompter notifications in future. <strong>No FI counterpart</strong> (no 30-day or equivalent period appears anywhere in the FI Guidelines).</p>
+    </div>
+
+    <section id="b3-6-1">
+      <h3><span class="cite">Bank ¶3.6.1 ↔ FI ¶5.6.1</span> <span class="ptitle">— Confidentiality: principle</span></h3>
+      <p>Identical: public confidence in financial institutions being a cornerstone of the industry's stability and reputation, the institution must satisfy itself that the provider's security policies, procedures and controls enable protection of the confidentiality and security of customer information.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-6-2">
+      <h3><span class="cite">Bank ¶3.6.2 ↔ FI ¶5.6.2</span> <span class="ptitle">— Confidentiality: required steps</span></h3>
+      <p>Identical four steps: (a) state the parties' responsibilities in the agreement for adequacy and effectiveness of security policies and practices, including when each party may change security requirements; the agreement also addressing (i) which party bears losses on a breach and the provider's obligation to inform, and (ii) access to and disclosure of customer information — used by the provider and its staff <strong>strictly for the contracted purpose</strong>; (b) disclose customer information only on a <strong>need-to-know basis</strong>; (c) ensure the provider can protect the confidentiality of customer information, documents, records and assets, particularly in <strong>multi-tenancy</strong> settings (identically defined in a footnote); (d) review and monitor the provider's security practices regularly, including commissioning audits or periodic expert reports on confidentiality, security adequacy and compliance, and requiring the provider to disclose breaches of confidentiality of customer information.</p>
+      <p class="delta-none"><strong>Change: none</strong> (the Bank version's fn 9, noted above, ties the MOORS agreement provisions to Notices ¶7.1(a)–(c)).</p>
+    </section>
+
+    <section id="b3-7">
+      <h3><span class="cite">Bank ¶¶3.7.1–3.7.4 ↔ FI ¶¶5.7.1–5.7.4</span> <span class="ptitle">— Business continuity management</span></h3>
+      <p>Identical throughout: (¶.1) business continuity not to be compromised — critical business services and functions per the MAS BCM Guidelines and critical systems per the MAS Notice on Technology Risk Management; adopt BCM Guidelines practices. (¶.2) Mitigate interdependency risk so the institution can meet obligations on service disruption/failure, unexpected termination or provider liquidation, by: (a) contractual BCP requirements and verification that provider BCPs are satisfactory and commensurate; (b) proactive assurance on BCP preparedness — regular provider testing against recovery objectives, notification of test findings affecting performance, of substantial BCP changes, and of adverse developments substantially impacting the service; (c) plans and procedures for adverse conditions or termination, including continuation of business and prompt removal/deletion/destruction of documents, transaction records and information held by the provider. (¶.3) Involve providers in the institution's BCP validation and testing; optionally join the provider's BC/DR tests. (¶.4) Worst-case scenarios (unexpected termination, provider liquidation, wide-area disruption with collateral impact); higher preparedness where the institution is highly interdependent in the financial system; identify viable, non-prohibitive alternatives.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-8-1">
+      <h3><span class="cite">Bank ¶3.8.1 ↔ FI ¶5.8.1</span> <span class="ptitle">— Monitoring and control: structure</span></h3>
+      <p>Identical: a management/control structure varying with the nature and extent of risks; more rigorous approach as materiality and complexity grow; proactive relationship with the provider (e.g. frequent meetings); agreements to contain monitoring-and-control clauses.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-8-2">
+      <h3><span class="cite">Bank ¶3.8.2 ↔ FI ¶5.8.2</span> <span class="ptitle">— Monitoring and control: required measures</span></h3>
+      <p>Bank lists <strong>five</strong> measures for any MOORS; FI lists <strong>six</strong> for any material outsourcing arrangement:</p>
+      <ul>
+        <li><strong>(a) Register of outsourcing arrangements</strong> — both: readily accessible to board and senior management, promptly updated, part of governance reviews. <em>Difference:</em> the Bank version's fn 21 says registers should be submitted per the template at a stated link (no frequency); the FI version requires the register to contain the Annex 4 information, with submission at least annually or on request imposed by ¶4.1.1.</li>
+        <li><strong>(b) Multi-disciplinary outsourcing management groups</strong> (legal, compliance, finance; sufficient time and skilled manpower to plan and oversee the entire outsourcing lifecycle) — identical.</li>
+        <li><strong>(c) Outsourcing management control groups</strong> for ongoing monitoring of service delivery and confidentiality/security against agreed service levels, validated through provider auditors' reports or commissioned audits — identical.</li>
+        <li><strong>(d) [FI-only] Periodic reviews, at least annually, of all material outsourcing arrangements</strong> — to ensure the institution's outsourcing risk policies and procedures and the Guidelines are effectively implemented, ascertain adequacy of internal risk management and management information systems (e.g. effectiveness of processes and metrics evaluating provider performance and security), and highlight control deficiencies. <strong>No Bank-Guidelines counterpart</strong> (banks' periodic-review obligations arise under the Notices — cf. ¶3.3.6).</li>
+        <li><strong>(e)/(d) Reporting policies and procedures</strong> — identical: senior-management review; reports to the board for information; monitoring metrics and performance data <strong>not aggregated</strong> with other customers' data; adverse developments escalated to senior management of institution and provider (or the board where warranted) on a timely basis; prompt review of the relationship for modification or termination when adverse developments occur.</li>
+        <li><strong>(f)/(e) Pre- and post-implementation reviews</strong> of new or amended arrangements; fresh comprehensive due diligence on material amendment — identical.</li>
+      </ul>
+    </section>
+
+    <section id="b3-9-1">
+      <h3><span class="cite">Bank ¶3.9.1 ↔ FI ¶5.9.1</span> <span class="ptitle">— Audit and inspection: principle</span></h3>
+      <p>Identical: outsourcing must not interfere with the institution's ability to manage its business or <strong>impede MAS in carrying out its supervisory functions</strong>.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-9-2">
+      <h3><span class="cite">Bank ¶3.9.2 ↔ FI ¶¶5.9.2–5.9.3</span> <span class="ptitle">— Audit and MAS-access clauses</span></h3>
+      <ul>
+        <li><strong>Bank ¶3.9.2:</strong> all MOORS agreements to include clauses allowing the <strong>Bank</strong> to audit the provider and its sub-contractors (internal or external auditors, or Bank-appointed agents); the Bank should also obtain copies of any report or finding on the provider and sub-contractors (by their internal or external auditors or appointed agents) relating to the arrangement.</li>
+        <li><strong>FI ¶5.9.2:</strong> the same institution-audit and report-access clauses <strong>(a)</strong>, plus <strong>(b)</strong> clauses allowing <strong>MAS, or any agent appointed by MAS, where necessary or expedient, to exercise the institution's contractual rights</strong> to (i) access and inspect the provider and its sub-contractors and obtain records, documents, transactions and information given to, stored at or processed by them, and (ii) access any report and finding made on them.</li>
+        <li><strong>FI ¶5.9.3:</strong> material outsourcing agreements should also include clauses requiring the provider to <strong>comply as soon as possible with any request from MAS or the institution</strong> to submit reports on the security and control environment of the provider and its sub-contractors to MAS.</li>
+      </ul>
+      <p class="delta-sub"><strong>Changes:</strong> two FI-only contractual mechanisms — the MAS step-in access clause and the provider-reports-to-MAS clause. The Bank Guidelines need neither because MAS holds <strong>statutory</strong> inspection powers over banks' service providers (s 47A(10) Banking Act, recited at Bank ¶3.4.5(f)) and the Notices (¶7.1(d)) prescribe the binding audit-clause requirements.</p>
+    </section>
+
+    <section id="b3-9-3">
+      <h3><span class="cite">Bank ¶3.9.3 ↔ FI ¶5.9.4</span> <span class="ptitle">— Sub-contractor coverage; notice of MAS inspections</span></h3>
+      <p>Both extend the audit expectations to any sub-contractor the provider engages — expressly including <strong>disaster recovery and backup service providers</strong> — and both state MAS will endeavour to give reasonable notice of exercising its inspection rights and to share findings where appropriate.</p>
+      <p class="delta-sub"><strong>Two differences:</strong> (i) the operative verb — the Bank should "<strong>endeavour</strong> to subject" sub-contractors to the audit requirements, whereas the FI institution should "<strong>ensure</strong> that these expectations are met"; (ii) FI ¶5.9.4's "these expectations" reaches back over both ¶5.9.2 <strong>and</strong> ¶5.9.3, so the FI ensure-obligation covers the MAS-access and reporting clauses too, while the Bank provision is audit-only.</p>
+    </section>
+
+    <section id="b3-9-4">
+      <h3><span class="cite">Bank ¶3.9.4 ↔ FI ¶5.9.5</span> <span class="ptitle">— Independent audits and expert assessments</span></h3>
+      <p>Identical: ensure independent audits and/or expert assessments (FI: "of <strong>all</strong> its outsourcing arrangements"); frequency set by nature and extent of risk and impact; scope to include the provider's and sub-contractors' security (physical and IT, per identical footnotes) and control environment, incident management for material breaches/disruptions/issues, and the institution's own observance of the Guidelines for the arrangement.</p>
+      <p class="delta-sub"><strong>Change:</strong> the word "all" (FI) — otherwise none.</p>
+    </section>
+
+    <section id="b3-9-5">
+      <h3><span class="cite">Bank ¶3.9.5 ↔ FI ¶5.9.6</span> <span class="ptitle">— Who audits; remediation</span></h3>
+      <p>Both: audits may be performed by the institution's internal or external auditors, the provider's external auditors, or agents appointed by the institution; auditors must have requisite knowledge and skills and be independent of the function performing the arrangement; senior management ensures timely remediation; adequate processes to complete remediation; provider fixes validated by the institution before closure; skilled persons involved to validate security measures where necessary.</p>
+      <p class="delta-sub"><strong>Two differences:</strong> (i) the Bank version adds the express example "<strong>e.g. audits commissioned by multiple Banks using the same service provider</strong>" (pooled audits); (ii) the Bank footnote (fn 24) opens with the concession "<strong>While audits need not be procured by banks</strong>, a bank should conduct its own audits to supplement the audits performed by the service provider's auditors, where necessary" — the FI footnote (fn 18) omits the concession and keeps only the supplement expectation.</p>
+    </section>
+
+    <section id="b3-9-6">
+      <h3><span class="cite">Bank ¶3.9.6 ↔ FI ¶5.9.7</span> <span class="ptitle">— Escalation</span></h3>
+      <p>Identical: significant issues and concerns escalated to senior management of institution and provider (or the board where warranted) on a timely basis; review the arrangement if the risk is no longer within risk tolerance.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-9-7">
+      <h3><span class="cite">Bank ¶3.9.7 ↔ FI ¶5.9.8</span> <span class="ptitle">— Reports to MAS</span></h3>
+      <ul>
+        <li><strong>Bank:</strong> copies of audit reports submitted to MAS <strong>upon request</strong>; other reports or information on the Bank and provider related to the arrangement also upon request.</li>
+        <li><strong>FI:</strong> "Copies of audit reports should be submitted by the institution to MAS." — <strong>no "upon request" qualifier</strong> on the audit-report limb; other reports/information upon request.</li>
+      </ul>
+      <p class="delta-sub"><strong>Change:</strong> the missing qualifier. On its face the FI expectation to submit audit reports is unconditional.</p>
+    </section>
+
+    <div class="callout bank-only" id="bk3-9-8">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank ¶3.9.8</span> <span class="ptitle">— Certifications, pooled audits, third-party certification</span></h3>
+      <p>Audits/expert assessments performed as part of a <strong>certification process</strong> (but <strong>not self-attestations</strong>) may be relied on, provided the auditors are independent and competent; the Bank must satisfy itself that scope and methodology allow it to assess the provider's ability to perform (design, implementation, effectiveness of controls) and the adequacy of its risk management; <strong>audit reports must fulfil the requirements set out in the Notices</strong>; Banks may also rely on <strong>pooled audits or third-party certification</strong> performed by independent parties.</p>
+      <p><strong>No FI counterpart.</strong> The FI Guidelines are silent on certification-based reliance.</p>
+    </div>
+
+    <section id="b3-10-1">
+      <h3><span class="cite">Bank ¶3.10.1 ↔ FI ¶5.10.1</span> <span class="ptitle">— Outsourcing outside Singapore: country risk</span></h3>
+      <p>Identical: country risk from foreign engagement or foreign performance; continuous due diligence on (a) government policies, (b) political/social/economic conditions, (c) legal and regulatory developments, (d) ability to monitor the provider and execute BCM plans and exit strategy; awareness of the provider's disaster recovery arrangements and locations; risks of physical or electronic transport of information to foreign primary/backup sites.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <section id="b3-10-2">
+      <h3><span class="cite">Bank ¶3.10.2 ↔ FI ¶5.10.2</span> <span class="ptitle">— Outside Singapore: preserving MAS supervision</span></h3>
+      <p>Both, for material arrangements with providers outside Singapore: (a) in principle contract only with providers in jurisdictions that generally uphold confidentiality clauses and agreements; (b) do not contract into jurisdictions where prompt access to information by MAS (or its agents) at the provider may be impeded by legal or administrative restrictions — with a minimum commitment to retrieve information readily from the provider on MAS request.</p>
+      <p class="delta-sub"><strong>Two FI-only additions:</strong> in (b), the institution "should <strong>confirm in writing to MAS</strong>" that its outsourcing agreements provide MAS the rights of inspecting the provider and of access to the institution's and provider's information, reports and findings per ¶5.9; and <strong>(c)</strong> the institution should <strong>notify MAS if any overseas authority seeks access to its customer information</strong>, or if the ¶5.9 access rights of the institution and MAS "have been restricted or denied." Neither appears in the Bank Guidelines.</p>
+    </section>
+
+    <section id="b3-11">
+      <h3><span class="cite">Bank ¶¶3.11.1–3.11.2 ↔ FI ¶¶5.11.1–5.11.2</span> <span class="ptitle">— Outsourcing within a group</span></h3>
+      <p>Substantively identical: the Guidelines apply to intra-group arrangements (the Bank version adds "including subsidiaries of Singapore-incorporated banks"); expectations may be met within group-wide policies and procedures; on request, the institution provides information demonstrating group-wide board/senior-management oversight structures and processes; each version cross-refers its own foreign-incorporation paragraph (¶3.1.5 / ¶5.2.5). Intra-group due diligence may take a qualitative form — the provider's ability to address institution-specific risks, particularly BCM, monitoring and control, audit and inspection, <strong>including confirmation of MAS's right of access</strong> to preserve effective supervision, and compliance with local regulatory standards; respective roles and responsibilities documented in an SLA or equivalent.</p>
+      <p class="delta-none"><strong>Change: none of substance.</strong> (Recall also FI ¶2.3's group-observance duty and the FI "service provider"/"group" definitions.)</p>
+    </section>
+
+    <section id="b3-12">
+      <h3><span class="cite">Bank ¶¶3.12.1–3.12.3 ↔ FI ¶¶5.12.1–5.12.3</span> <span class="ptitle">— Outsourcing internal audit to external auditors</span></h3>
+      <p>Identical bodies: independence concerns where one provider handles multiple engagements (internal audit plus external audit or consulting — it will not criticise its own work); ensure providers have expertise for complex, high-volume operations; as sound practice, do <strong>not</strong> outsource internal audit to the institution's own external audit firm; satisfy the auditor-independence standards of the Singapore accounting profession before outsourcing; periodic assessments of the provider's continuing ability (e.g. in line with the Quality Assurance and Improvement Program under the IIA International Standards).</p>
+      <p class="delta-sub"><strong>One footnote difference:</strong> on departures from the no-own-external-auditor practice — Bank fn 26: "Any departure from this best practice should remain within the bounds of the applicable ethical standards for the statutory or external auditor." FI fn 20: any departure "should be <strong>limited to small institutions</strong> and should remain within the bounds of the applicable ethical standards…". On its face the Bank formulation permits any bank to depart (within ethical bounds), while the FI formulation confines departures to small institutions — the stricter version.</p>
+    </section>
+  </section>
+
+  <hr>
+
+  <section id="part-five">
+    <h2>PART FIVE — ANNEXES</h2>
+
+    <section id="ann-1">
+      <h3><span class="cite">Bank Annex 1 ↔ FI Annex 3</span> <span class="ptitle">— Material Outsourcing</span></h3>
+      <p>Identical in all four paragraphs: (1) nine qualitative materiality factors — importance of the outsourced activity (contribution to income/profit); impact on earnings, solvency, liquidity, funding, capital and risk profile; impact on reputation, brand and business objectives on provider failure or breach; impact on customers; impact on counterparties and the Singapore financial market; cost as a proportion of total operating costs; cost of failure (in-housing or substitution) as a proportion of operating costs; aggregate exposure to a single provider; ability to maintain internal controls and meet regulatory requirements if the provider has operational problems. (2) Outsourcing all or substantially all risk management or internal control functions — compliance, internal audit, financial accounting, actuarial (other than certification activities) — is <strong>deemed material</strong>. (3) Periodic reviews to catch newly material arrangements (incremental services, volume increases, changed nature, sub-contracting changes). (4) Materiality assessed at entity <strong>and</strong> group level (with branches and controlled corporations).</p>
+      <p class="delta-none"><strong>Change: none</strong> — only the annex number and Bank/institution wording. (Note the different legal function: for FIs this guidance supplements the §3 binding-style definition of "material outsourcing arrangement"; for banks it is guidance toward the Notices' MOORS definition.)</p>
+    </section>
+
+    <section id="ann-2">
+      <h3><span class="cite">Bank Annex 2 ↔ FI Annex 5</span> <span class="ptitle">— Cloud Computing</span></h3>
+      <p>Identical in all eight paragraphs: definition of cloud services (SaaS/PaaS/IaaS); advantages (economies of scale, cost savings, quality administration, uniform security standards, scalability, resilience through distribution); private/public/hybrid models with distinct trade-offs; maturing provider security (strong authentication, access controls, tokenisation, encryption); <strong>MAS treats cloud services operated by service providers as a form of outsourcing</strong>; cloud risks are not distinct from other outsourcing — apply the Guidelines' due diligence and governance; be alert to multi-tenancy, data commingling and multi-location processing — address data access, confidentiality, integrity, <strong>sovereignty</strong>, recoverability, regulatory compliance and auditing; ensure the provider can clearly identify and segregate customer data with strong physical or logical controls, with robust access controls that <strong>survive the tenure of the contract</strong>; ultimate responsibility and accountability stay with the institution; risk-based oversight commensurate with materiality.</p>
+      <p class="delta-none"><strong>Change: none.</strong></p>
+    </section>
+
+    <div class="callout bank-only" id="ann-3">
+      <h3><span class="tag">Bank-only</span><span class="cite">Bank Annex 3</span> <span class="ptitle">— Applicability of Notices and Guidelines to Categories of Services</span></h3>
+      <p>A decision tree over "relevant services" as defined in <strong>s 47A(12) Banking Act 1970</strong> (any service obtained or received by the bank other than from an employee in the course of employment or a director/officer in the course of appointment, excluding services specified by MAS by written notice):</p>
+      <ol>
+        <li><strong>Non-Outsourced Relevant Services</strong> — not subject to Notices or Guidelines; still require adequate risk management and sound internal controls.</li>
+        <li><strong>Non-Ongoing Outsourced Relevant Services</strong> — not subject to Notices/Guidelines, <strong>except</strong> where the service involves disclosure of customer information, in which case Section C of the Notices and the Notices' outsourcing-register requirement apply; still require adequate risk management.</li>
+        <li><strong>Non-material Ongoing ORS</strong> — subject to the Notices' register requirement (plus Section C where customer information is disclosed); Guidelines applied to a degree commensurate with risk.</li>
+        <li><strong>MOORS</strong> — fully subject to the Notices and the Guidelines.</li>
+      </ol>
+      <p><strong>No FI counterpart</strong> — the taxonomy only exists because of the Notices. The FI regime's scope filter is instead its §3 definitions plus Annexes 1–2.</p>
+    </div>
+
+    <div class="callout fi-only" id="fi-ann-1">
+      <h3><span class="tag">FI-only</span><span class="cite">FI Annex 1</span> <span class="ptitle">— Exempted Outsourced Services</span></h3>
+      <p>Two exemptions: (1) services <strong>wholly provided by GovTech</strong> or agents appointed by GovTech (full list at the Singpass API products page); (2) services <strong>not for the conduct of any financial business</strong> where the provider does not receive, handle or have access to the institution's confidential information or customer information — e.g. cleaning, gardening, pantry services including vending-machine maintenance. <strong>Bank counterpart:</strong> exemptions exist but are housed in Annex D of the Notices (not reproduced in the Bank Guidelines).</p>
+    </div>
+
+    <div class="callout fi-only" id="fi-ann-2">
+      <h3><span class="tag">FI-only</span><span class="cite">FI Annex 2</span> <span class="ptitle">— Examples of Outsourcing Arrangements</span></h3>
+      <p><strong>Included examples (non-exhaustive), (a)–(o):</strong> application processing (loan origination, credit cards); white-labelling (trading and hedging facilities); middle and back office operations (EFT, payroll, custody operations, quality control, purchasing, CIS participant registers and reports, order processing, trade settlement, risk management); business continuity and disaster recovery; claims administration (loan negotiations/processing, collateral management, bad-loan collection); document processing (cheques, card and bill payments, statements, corporate payments, statement printing); information systems hosting (SaaS/PaaS/IaaS); information systems management and maintenance (data entry/processing, data centres and facilities management, end-user support, LAN management, help desks, IT security operations); investment management (discretionary portfolio and cash management); management of policy issuance and claims by managing agents; manpower management (benefits/compensation administration, staff appointment, training and development); marketing and research (product development, data warehousing/mining, media relations, call centres, telemarketing); professional services related to the business (accounting, internal audit, actuarial, compliance); archival, storage and destruction of data and records; calculation of financial benchmarks.</p>
+      <p><strong>Generally NOT outsourcing:</strong> (a) industry-characteristic third-party services — custody with specified custodians under SF(LCB)R reg 27; telecommunications and public utilities (electricity, SMS gateways); postal services; market information services (Bloomberg, Moody's, S&amp;P); common network infrastructure (Visa, MasterCard, MEPS+); clearing and settlement arrangements between clearing houses/settlement institutions and members; regulator-overseen global financial messaging (SWIFT); correspondent banking; (b) introducer and principal-agent arrangements — insurance agents and ancillary sales services, underwriting agents, introducers with no contractual customer relationship; (c) arrangements the institution cannot legally or administratively provide itself — statutory audit and independent audit assessments; discrete advisory (legal opinions, independent appraisals, trustees in bankruptcy, loss adjusters); independent consulting where in-house expertise is absent.</p>
+      <p><strong>No Bank counterpart</strong> — banks classify services through the Notices' categories and Annex 3's chart.</p>
+    </div>
+
+    <div class="callout fi-only" id="fi-ann-4">
+      <h3><span class="tag">FI-only</span><span class="cite">FI Annex 4</span> <span class="ptitle">— Register of Outsourcing Arrangements</span></h3>
+      <p>An institution should maintain an updated register of <strong>all existing outsourcing arrangements</strong> in the format of the template on the MAS website (submission at least annually or upon request per ¶4.1.1). <strong>Bank counterpart:</strong> the template link at fn 21 to ¶3.8.2(a), with register content and submission requirements otherwise governed by the Notices.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="closing-note" class="closing-note">
+    <h2>CLOSING NOTE</h2>
+
+    <p>Reading the two instruments sequentially, the pattern is consistent: the <strong>shared core</strong> (board/senior management, risk evaluation, due diligence, confidentiality, BCM, monitoring structure, audit mechanics, overseas and intra-group outsourcing, internal audit, cloud, materiality factors) is carried over essentially verbatim from the pre-2023 single Guidelines into both instruments. Every divergence traces to one root cause: <strong>banks have a binding Notice layer and s 47A Banking Act statutory powers behind their Guidelines; non-bank FIs do not.</strong> So the Bank Guidelines add Notice-interpreting and banking-secrecy provisions (¶¶3.2.3, 3.3.6, 3.4.5–3.4.7, 3.5.2–3.5.4, 3.9.8, Annex 3) and strip out anything the Notices now do (definitions, register frequency, exemption list, corporate-event termination triggers, MAS access rights), while the FI Guidelines retain and extend the self-contained 2016/2018 apparatus (definitions, annual register, contractual MAS access and reporting clauses, written confirmations and notifications for offshore arrangements, annual reviews, and the exemptions and examples annexes).</p>
+
+    <p><em>This breakdown is based on a full reading of both official PDFs; the substance of every paired comparison was verified by three independent adversarial review passes against the source texts, with regime context separately verified against MAS Circular ID 19/23, MAS's consultation response, and practitioner analyses.</em></p>
+  </section>
+
+  <footer class="doc-footer">
+    <p>MAS Outsourcing Guidelines — Provision-by-Provision Breakdown</p>
+  </footer>
+
+</main>
+</body>
+</html>
