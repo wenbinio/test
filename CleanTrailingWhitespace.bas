@@ -1,13 +1,41 @@
 Option Explicit
 
+' =====================================================================
+'  CleanTrailingWhitespace
+'
+'  Removes trailing whitespace ahead of every kind of break in the
+'  main text story:
+'    - paragraph marks
+'    - manual line breaks (Shift+Enter)
+'    - manual page breaks (Ctrl+Enter)
+'    - column breaks
+'    - section breaks
+'    - end-of-cell markers in tables
+'  and left-aligns visually blank paragraphs that are safe to
+'  reformat.
+'
+'  Whitespace policy: space, tab, no-break space (U+00A0), the
+'  Unicode typographic spaces U+2000..U+200A (en, em, thin, hair
+'  etc.), narrow no-break space (U+202F) and ideographic space
+'  (U+3000).
+'
+'  Break characters are located with plain, non-wildcard Find codes
+'  and whitespace runs are measured in VBA, so none of the wildcard
+'  engine's quirks (notably the unreliable "@" repeat operator, which
+'  can match a single character of a run and leave the rest behind)
+'  are involved.
+'
+'  The paired module TestCleanTrailingWhitespace contains an
+'  automated edge-case suite: run RunCleanTrailingWhitespaceTests.
+' =====================================================================
+
+' Set to True to also clean headers, footers, footnotes, endnotes,
+' comments and text frames. Default is the main body only.
+Private Const CLEAN_ALL_STORIES As Boolean = False
+
 Public Sub CleanTrailingWhitespaceAndLeftAlignBlankParagraphs()
     Const UNDO_NAME As String = _
         "Clean trailing whitespace and blank paragraphs"
-
-    Dim doc As Document
-    Dim body As Range
-    Dim para As Paragraph
-    Dim paraRange As Range
 
     Dim previousScreenUpdating As Boolean
     Dim undoStarted As Boolean
@@ -20,34 +48,10 @@ Public Sub CleanTrailingWhitespaceAndLeftAlignBlankParagraphs()
     previousScreenUpdating = Application.ScreenUpdating
     Application.ScreenUpdating = False
 
-    Set doc = ActiveDocument
-    Set body = doc.StoryRanges(wdMainTextStory)
-
     Application.UndoRecord.StartCustomRecord UNDO_NAME
     undoStarted = True
 
-    ' Delete trailing whitespace without replacing the break itself.
-    DeleteWhitespaceBeforeBreak body, "^13"  ' Paragraph mark
-    DeleteWhitespaceBeforeBreak body, "^11"  ' Manual line break
-
-    ' Nothing in this loop deletes or splits paragraphs, so the
-    ' collection is stable and For Each is safe. Indexed access
-    ' (body.Paragraphs(i)) walks the story from the start on every
-    ' call, which is quadratic on large documents.
-    For Each para In body.Paragraphs
-        Set paraRange = para.Range
-
-        If ShouldNormaliseBlankParagraph(paraRange) Then
-            DeleteWhitespaceOnly paraRange
-
-            ' Put the blank paragraph at the left margin.
-            With para.Format
-                .LeftIndent = 0
-                .FirstLineIndent = 0
-                .Alignment = wdAlignParagraphLeft
-            End With
-        End If
-    Next para
+    CleanDocumentTrailingWhitespace ActiveDocument
 
 Cleanup:
     On Error Resume Next
@@ -80,13 +84,72 @@ Failed:
     Resume Cleanup
 End Sub
 
+' Testable core: no undo record, no message boxes and no reliance on
+' the active document or the selection.
+Public Sub CleanDocumentTrailingWhitespace(ByVal doc As Document)
+    Dim story As Range
+    Dim linked As Range
+
+    If CLEAN_ALL_STORIES Then
+        For Each story In doc.StoryRanges
+            Set linked = story
+            Do
+                CleanStoryRange linked
+                Set linked = linked.NextStoryRange
+            Loop Until linked Is Nothing
+        Next story
+    Else
+        CleanStoryRange doc.StoryRanges(wdMainTextStory)
+    End If
+End Sub
+
+Private Sub CleanStoryRange(ByVal body As Range)
+    Dim para As Paragraph
+    Dim paraRange As Range
+    Dim paragraphText As String
+
+    ' Whitespace ahead of mid-paragraph breaks. Section breaks always
+    ' terminate a paragraph, so the tail pass below covers them.
+    DeleteWhitespaceBeforeBreak body, "^l"   ' Manual line break
+    DeleteWhitespaceBeforeBreak body, "^m"   ' Manual page break
+    DeleteWhitespaceBeforeBreak body, "^n"   ' Column break
+
+    ' Nothing in this loop deletes or splits paragraphs, so the
+    ' collection is stable and For Each is safe (indexed access walks
+    ' the story from the start on every call, which is quadratic).
+    For Each para In body.Paragraphs
+        Set paraRange = para.Range
+
+        ' Captured before the deletion below, which only removes
+        ' whitespace. That changes neither whether the paragraph is
+        ' visually blank nor whether it holds a Chr(12), so the
+        ' cached text stays valid for both guards and costs one
+        ' COM round-trip instead of two.
+        paragraphText = paraRange.Text
+
+        DeleteParagraphTailWhitespace paraRange
+
+        If ShouldNormaliseBlankParagraph(paraRange, paragraphText) Then
+            With para.Format
+                .LeftIndent = 0
+                .FirstLineIndent = 0
+                .Alignment = wdAlignParagraphLeft
+            End With
+        End If
+    Next para
+End Sub
+
+' Locates break characters with a plain (non-wildcard) Find, then
+' measures the preceding whitespace run in code and deletes it,
+' without ever rewriting the break character itself.
 Private Sub DeleteWhitespaceBeforeBreak( _
     ByVal sourceRange As Range, _
     ByVal breakCode As String)
 
     Dim scan As Range
-    Dim whitespace As Range
-    Dim resumePosition As Long
+    Dim probe As Range
+    Dim breakStart As Long
+    Dim runStart As Long
     Dim wasFound As Boolean
 
     Set scan = sourceRange.Duplicate
@@ -94,58 +157,102 @@ Private Sub DeleteWhitespaceBeforeBreak( _
     Do
         With scan.Find
             .ClearFormatting
-            .Replacement.ClearFormatting
-
-            ' Policy: ordinary spaces, tabs and trailing NBSPs
-            ' are all treated as removable whitespace.
-            .Text = WhitespaceRunPattern() & breakCode
-
+            .Text = breakCode
             .Forward = True
             .Wrap = wdFindStop
             .Format = False
-
             .MatchCase = False
             .MatchWholeWord = False
             .MatchSoundsLike = False
             .MatchAllWordForms = False
-            .MatchWildcards = True
-
+            .MatchWildcards = False
             wasFound = .Execute
         End With
 
         If Not wasFound Then Exit Do
 
-        ' Find has redefined scan as the matched range.
-        ' Save the location of the retained break.
-        resumePosition = scan.Start
+        ' Find has redefined scan as the matched break character.
+        breakStart = scan.Start
+        runStart = breakStart
 
-        Set whitespace = scan.Duplicate
+        ' Walk backwards over the whitespace run preceding the break.
+        Set probe = scan.Duplicate
+        Do While runStart > sourceRange.Start
+            probe.SetRange Start:=runStart - 1, End:=runStart
+            If Not IsWhitespaceCode( _
+                UnicodeCharacterCode(probe.Text)) Then Exit Do
+            runStart = runStart - 1
+        Loop
 
-        ' Exclude the final ^13 or ^11 from the deletion.
-        whitespace.End = whitespace.End - 1
-        whitespace.Delete
+        If runStart < breakStart Then
+            probe.SetRange Start:=runStart, End:=breakStart
+            probe.Delete
 
-        ' The break now occupies the old start position.
-        ' Resume immediately after that retained break.
-        resumePosition = resumePosition + 1
+            ' The break now occupies the old run start position.
+            breakStart = runStart
+        End If
 
-        If resumePosition >= sourceRange.End Then Exit Do
+        ' Resume immediately after the retained break.
+        If breakStart + 1 >= sourceRange.End Then Exit Do
 
-        scan.SetRange _
-            Start:=resumePosition, _
-            End:=sourceRange.End
+        scan.SetRange Start:=breakStart + 1, End:=sourceRange.End
+    Loop
+End Sub
+
+' Deletes every whitespace run that sits between the last visible text
+' and the end of the paragraph, however the paragraph terminates:
+' paragraph mark, section break, end-of-cell marker, or break
+' characters immediately ahead of one of those.
+'
+' Walks live document positions rather than indices into a cached
+' text string: a paragraph tail can hold more than one whitespace run
+' (for example "text  <line break>  <paragraph mark>"), and each
+' deletion would invalidate string-index arithmetic. Positions to the
+' left of a deletion never move, so backwards walking stays valid.
+Private Sub DeleteParagraphTailWhitespace(ByVal paraRange As Range)
+    Dim probe As Range
+    Dim lowerBound As Long
+    Dim pos As Long
+    Dim runEnd As Long
+    Dim code As Long
+
+    lowerBound = paraRange.Start
+    pos = paraRange.End
+    Set probe = paraRange.Duplicate
+
+    Do While pos > lowerBound
+        probe.SetRange Start:=pos - 1, End:=pos
+        code = UnicodeCharacterCode(probe.Text)
+
+        If IsStructuralBreakCode(code) Then
+            pos = pos - 1
+
+        ElseIf IsWhitespaceCode(code) Then
+            runEnd = pos
+
+            Do While pos > lowerBound
+                probe.SetRange Start:=pos - 1, End:=pos
+                If Not IsWhitespaceCode( _
+                    UnicodeCharacterCode(probe.Text)) Then Exit Do
+                pos = pos - 1
+            Loop
+
+            probe.SetRange Start:=pos, End:=runEnd
+            probe.Delete
+
+        Else
+            Exit Do
+        End If
     Loop
 End Sub
 
 Private Function ShouldNormaliseBlankParagraph( _
-    ByVal paraRange As Range) As Boolean
-
-    Dim paragraphText As String
-    paragraphText = paraRange.Text
+    ByVal paraRange As Range, _
+    ByVal paragraphText As String) As Boolean
 
     ' Cheapest test first: almost every paragraph in a real document
-    ' fails it, so the structural guards below - each a COM round-trip
-    ' - only ever run on visually blank paragraphs.
+    ' fails it, so the structural guards below - each a COM
+    ' round-trip - only ever run on visually blank paragraphs.
     If Not IsVisuallyBlankParagraph(paragraphText) Then Exit Function
 
     ' Do not alter paragraph formatting inside table cells.
@@ -172,75 +279,50 @@ Private Function IsVisuallyBlankParagraph( _
     ByVal paragraphText As String) As Boolean
 
     Dim i As Long
-    Dim characterCode As Long
+    Dim code As Long
 
     For i = 1 To Len(paragraphText)
-        characterCode = UnicodeCharacterCode( _
-            Mid$(paragraphText, i, 1))
+        code = UnicodeCharacterCode(Mid$(paragraphText, i, 1))
 
-        Select Case characterCode
-            Case 7
-                ' End-of-cell marker.
-                ' Tables are excluded later, but retain this defensively.
-
-            Case 9
-                ' Tab.
-
-            Case 11
-                ' Manual line break.
-
-            Case 12
-                ' Manual page break.
-                ' Section breaks are excluded separately.
-
-            Case 13
-                ' Paragraph mark.
-
-            Case 32
-                ' Ordinary space.
-
-            Case 160
-                ' Non-breaking space.
-
-            Case Else
-                IsVisuallyBlankParagraph = False
-                Exit Function
-        End Select
+        If Not (IsStructuralBreakCode(code) Or _
+                IsWhitespaceCode(code)) Then
+            Exit Function
+        End If
     Next i
 
     IsVisuallyBlankParagraph = True
 End Function
 
-Private Sub DeleteWhitespaceOnly(ByVal sourceRange As Range)
-    Dim target As Range
-    Set target = sourceRange.Duplicate
+' Single source of truth for what counts as removable whitespace.
+Private Function IsWhitespaceCode(ByVal code As Long) As Boolean
+    Select Case code
+        Case 32                  ' Ordinary space
+        Case 9                   ' Tab
+        Case 160                 ' No-break space
+        Case 8192 To 8202        ' Typographic spaces (en, em, thin...)
+        Case 8239                ' Narrow no-break space
+        Case 12288               ' Ideographic space
+        Case Else
+            Exit Function
+    End Select
 
-    With target.Find
-        .ClearFormatting
-        .Replacement.ClearFormatting
+    IsWhitespaceCode = True
+End Function
 
-        .Text = WhitespaceRunPattern()
-        .Replacement.Text = vbNullString
+' Characters that terminate or structure a paragraph without being
+' visible text.
+Private Function IsStructuralBreakCode(ByVal code As Long) As Boolean
+    Select Case code
+        Case 7                   ' End-of-cell / end-of-row marker
+        Case 11                  ' Manual line break
+        Case 12                  ' Manual page break or section break
+        Case 13                  ' Paragraph mark
+        Case 14                  ' Column break
+        Case Else
+            Exit Function
+    End Select
 
-        .Forward = True
-        .Wrap = wdFindStop
-        .Format = False
-
-        .MatchCase = False
-        .MatchWholeWord = False
-        .MatchSoundsLike = False
-        .MatchAllWordForms = False
-        .MatchWildcards = True
-
-        .Execute Replace:=wdReplaceAll
-    End With
-End Sub
-
-Private Function WhitespaceRunPattern() As String
-    ' Word has inconsistent support for special-character codes
-    ' inside wildcard character classes, so insert the NBSP literally.
-    WhitespaceRunPattern = _
-        "[ ^t" & ChrW(160) & "]@"
+    IsStructuralBreakCode = True
 End Function
 
 Private Function ContainsSectionBreak( _
