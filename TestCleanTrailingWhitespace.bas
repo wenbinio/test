@@ -63,6 +63,16 @@ Public Sub RunCleanTrailingWhitespaceTests()
     TestIdempotence
     TestManyParagraphs
 
+    ' --- Single-pass completeness -----------------------------------
+    ' These are the tests that catch a paragraph enumerator skipping
+    ' content mid-edit: the symptom is whitespace surviving one pass
+    ' and disappearing on the next.
+    TestSinglePassLeavesNoResidual
+    TestSecondPassFindsNothingNew
+    TestEveryParagraphCleanedNoneSkipped
+    TestAlternatingParagraphsAllCleaned
+    TestBlankParagraphsInterleavedAllCleaned
+
     Application.ScreenUpdating = previousScreenUpdating
     ReportResults
     Exit Sub
@@ -373,8 +383,163 @@ Private Sub TestManyParagraphs()
 End Sub
 
 ' ---------------------------------------------------------------------
+'  Single-pass completeness
+' ---------------------------------------------------------------------
+
+Private Sub TestSinglePassLeavesNoResidual()
+    Dim doc As Document
+    Dim builder As String
+    Dim i As Long
+
+    ' Mixed shapes so a skipped paragraph cannot hide behind a
+    ' neighbour that happened to need no cleaning.
+    For i = 1 To 60
+        Select Case i Mod 4
+            Case 0: builder = builder & "Para " & i & "   " & vbCr
+            Case 1: builder = builder & "Para " & i & vbTab & vbCr
+            Case 2: builder = builder & "Para " & i & " " & ChrW(160) & vbCr
+            Case 3: builder = builder & "Para " & i & "     " & vbCr
+        End Select
+    Next i
+
+    Set doc = NewScratchDocument(builder)
+    CleanDocumentTrailingWhitespace doc
+
+    AssertTrue "single pass leaves zero residual whitespace", _
+        CountResidualTrailingWhitespace(doc) = 0
+    Discard doc
+End Sub
+
+Private Sub TestSecondPassFindsNothingNew()
+    Dim doc As Document
+    Dim builder As String
+    Dim afterFirst As Long
+    Dim afterSecond As Long
+    Dim i As Long
+
+    For i = 1 To 60
+        builder = builder & "Line " & i & "   " & vbCr
+    Next i
+
+    Set doc = NewScratchDocument(builder)
+
+    CleanDocumentTrailingWhitespace doc
+    afterFirst = CountResidualTrailingWhitespace(doc)
+
+    CleanDocumentTrailingWhitespace doc
+    afterSecond = CountResidualTrailingWhitespace(doc)
+
+    ' If a second pass improves on the first, the first pass skipped
+    ' paragraphs. Both must be zero.
+    AssertTrue "first pass already complete", afterFirst = 0
+    AssertTrue "second pass finds nothing new", _
+        afterSecond = afterFirst
+    Discard doc
+End Sub
+
+Private Sub TestEveryParagraphCleanedNoneSkipped()
+    Dim doc As Document
+    Dim builder As String
+    Dim skipped As Long
+    Dim text As String
+    Dim i As Long
+
+    For i = 1 To 40
+        builder = builder & "Row " & i & "  " & vbCr
+    Next i
+
+    Set doc = NewScratchDocument(builder)
+    CleanDocumentTrailingWhitespace doc
+
+    ' Count paragraphs whose text still ends in whitespace.
+    For i = 1 To doc.Paragraphs.Count
+        text = doc.Paragraphs(i).Range.Text
+        text = StripTrailingParagraphMark(text)
+        If Len(text) > 0 Then
+            If EndsWithWhitespace(text) Then skipped = skipped + 1
+        End If
+    Next i
+
+    AssertTrue "no paragraph skipped by the cleaning pass", _
+        skipped = 0
+    Discard doc
+End Sub
+
+Private Sub TestAlternatingParagraphsAllCleaned()
+    Dim doc As Document
+    Dim builder As String
+    Dim i As Long
+
+    ' Alternating dirty/clean is the pattern a skipping enumerator
+    ' leaves behind, so seed the inverse and require a clean result.
+    For i = 1 To 40
+        If i Mod 2 = 0 Then
+            builder = builder & "Even " & i & vbCr
+        Else
+            builder = builder & "Odd " & i & "   " & vbCr
+        End If
+    Next i
+
+    Set doc = NewScratchDocument(builder)
+    CleanDocumentTrailingWhitespace doc
+
+    AssertTrue "alternating dirty paragraphs all cleaned", _
+        CountResidualTrailingWhitespace(doc) = 0
+    Discard doc
+End Sub
+
+Private Sub TestBlankParagraphsInterleavedAllCleaned()
+    Dim doc As Document
+    Dim builder As String
+    Dim i As Long
+
+    ' Blank paragraphs interleaved with text: the blank ones are where
+    ' both a deletion and a formatting change happen, the heaviest
+    ' mid-enumeration edit in the macro.
+    For i = 1 To 30
+        builder = builder & "Text " & i & "  " & vbCr & "   " & vbCr
+    Next i
+
+    Set doc = NewScratchDocument(builder)
+    CleanDocumentTrailingWhitespace doc
+
+    AssertTrue "interleaved blank paragraphs all cleaned", _
+        CountResidualTrailingWhitespace(doc) = 0
+    Discard doc
+End Sub
+
+' ---------------------------------------------------------------------
 '  Harness
 ' ---------------------------------------------------------------------
+
+Private Function StripTrailingParagraphMark( _
+    ByVal text As String) As String
+
+    Do While Len(text) > 0
+        Select Case AscW(Right$(text, 1))
+            Case 13, 7, 12
+                text = Left$(text, Len(text) - 1)
+            Case Else
+                Exit Do
+        End Select
+    Loop
+
+    StripTrailingParagraphMark = text
+End Function
+
+Private Function EndsWithWhitespace(ByVal text As String) As Boolean
+    Dim code As Long
+
+    If Len(text) = 0 Then Exit Function
+
+    code = AscW(Right$(text, 1))
+    If code < 0 Then code = code + 65536
+
+    Select Case code
+        Case 32, 9, 160, 8192 To 8202, 8239, 12288
+            EndsWithWhitespace = True
+    End Select
+End Function
 
 Private Function NewScratchDocument( _
     ByVal initialText As String) As Document

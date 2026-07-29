@@ -103,10 +103,50 @@ Public Sub CleanDocumentTrailingWhitespace(ByVal doc As Document)
     End If
 End Sub
 
+' Verifier: counts whitespace runs that sit immediately before a
+' structural break or at the very end of the story. Returns 0 for a
+' fully clean document.
+'
+' A correct single pass must leave 0. If running the cleaner twice
+' lowers this number, the first pass skipped content and that is a
+' bug, not an expected top-up.
+Public Function CountResidualTrailingWhitespace( _
+    ByVal doc As Document) As Long
+
+    Dim text As String
+    Dim i As Long
+    Dim code As Long
+    Dim previousCode As Long
+    Dim total As Long
+    Dim inRun As Boolean
+
+    text = doc.StoryRanges(wdMainTextStory).Text
+
+    For i = 1 To Len(text)
+        code = UnicodeCharacterCode(Mid$(text, i, 1))
+
+        If IsWhitespaceCode(code) Then
+            inRun = True
+        Else
+            If inRun And IsStructuralBreakCode(code) Then
+                total = total + 1
+            End If
+            inRun = False
+        End If
+    Next i
+
+    ' A run still open at the end of the story is trailing whitespace.
+    If inRun Then total = total + 1
+
+    CountResidualTrailingWhitespace = total
+End Function
+
 Private Sub CleanStoryRange(ByVal body As Range)
     Dim para As Paragraph
-    Dim paraRange As Range
-    Dim paragraphText As String
+    Dim paraRanges() As Range
+    Dim paraTexts() As String
+    Dim paragraphCount As Long
+    Dim i As Long
 
     ' Whitespace ahead of mid-paragraph breaks. Section breaks always
     ' terminate a paragraph, so the tail pass below covers them.
@@ -114,29 +154,54 @@ Private Sub CleanStoryRange(ByVal body As Range)
     DeleteWhitespaceBeforeBreak body, "^m"   ' Manual page break
     DeleteWhitespaceBeforeBreak body, "^n"   ' Column break
 
-    ' Nothing in this loop deletes or splits paragraphs, so the
-    ' collection is stable and For Each is safe (indexed access walks
-    ' the story from the start on every call, which is quadratic).
+    ' Two phases, deliberately.
+    '
+    ' Phase 1 enumerates without modifying anything. Word's Paragraphs
+    ' enumerator can lose sync when content is edited mid-enumeration,
+    ' silently skipping paragraphs - which leaves trailing whitespace
+    ' behind and makes a second run of the macro appear to find more.
+    ' Indexed access (body.Paragraphs(i)) avoids that but re-walks the
+    ' story on every call, which is quadratic.
+    '
+    ' Snapshotting Range objects gets both: enumeration is read-only
+    ' and therefore safe, and Word Ranges auto-adjust their positions
+    ' as text is deleted, so they stay valid throughout phase 2.
+    paragraphCount = body.Paragraphs.Count
+    If paragraphCount = 0 Then Exit Sub
+
+    ReDim paraRanges(1 To paragraphCount)
+    ReDim paraTexts(1 To paragraphCount)
+
+    i = 0
     For Each para In body.Paragraphs
-        Set paraRange = para.Range
+        i = i + 1
+        If i > paragraphCount Then Exit For
 
-        ' Captured before the deletion below, which only removes
-        ' whitespace. That changes neither whether the paragraph is
-        ' visually blank nor whether it holds a Chr(12), so the
-        ' cached text stays valid for both guards and costs one
-        ' COM round-trip instead of two.
-        paragraphText = paraRange.Text
+        Set paraRanges(i) = para.Range
 
-        DeleteParagraphTailWhitespace paraRange
-
-        If ShouldNormaliseBlankParagraph(paraRange, paragraphText) Then
-            With para.Format
-                .LeftIndent = 0
-                .FirstLineIndent = 0
-                .Alignment = wdAlignParagraphLeft
-            End With
-        End If
+        ' Captured now because phase 2 only removes whitespace, which
+        ' changes neither whether a paragraph is visually blank nor
+        ' whether it holds a Chr(12). The cached text stays valid for
+        ' both guards and costs one COM round-trip instead of two.
+        paraTexts(i) = para.Range.Text
     Next para
+
+    ' Phase 2 mutates, with no enumerator in flight.
+    For i = 1 To paragraphCount
+        If Not paraRanges(i) Is Nothing Then
+            DeleteParagraphTailWhitespace paraRanges(i)
+
+            If ShouldNormaliseBlankParagraph( _
+                paraRanges(i), paraTexts(i)) Then
+
+                With paraRanges(i).ParagraphFormat
+                    .LeftIndent = 0
+                    .FirstLineIndent = 0
+                    .Alignment = wdAlignParagraphLeft
+                End With
+            End If
+        End If
+    Next i
 End Sub
 
 ' Locates break characters with a plain (non-wildcard) Find, then
