@@ -2,29 +2,18 @@
 
 <style>
   :root {
-    --paper:      #F2F4F7;
-    --surface:    #FFFFFF;
-    --surface-2:  #E9EDF2;
-    --ink:        #121922;
-    --ink-soft:   #3C4959;
-    --muted:      #6A7684;
-    --line:       #D7DEE6;
-    --line-soft:  #E8ECF1;
-    --brass:      #8B6015;
-    --brass-bg:   #F4EAD6;
-    --indigo:     #24406E;
-    --ok:         #12634A;
-    --ok-bg:      #DAEEE6;
-    --warn:       #85500F;
-    --warn-bg:    #F6E7D3;
-    --closed:     #64707D;
-    --closed-bg:  #E3E8ED;
-
-    --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --paper:#F2F4F7; --surface:#FFFFFF; --surface-2:#E9EDF2;
+    --ink:#121922; --ink-soft:#3C4959; --muted:#6A7684;
+    --line:#D7DEE6; --line-soft:#E8ECF1;
+    --brass:#8B6015; --brass-bg:#F4EAD6;
+    --indigo:#24406E;
+    --ok:#12634A; --ok-bg:#DAEEE6;
+    --warn:#85500F; --warn-bg:#F6E7D3;
+    --closed:#64707D; --closed-bg:#E3E8ED;
+    --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
       --paper:#0C1218; --surface:#141C24; --surface-2:#1C2530;
@@ -41,252 +30,186 @@
     --paper:#0C1218; --surface:#141C24; --surface-2:#1C2530;
     --ink:#E6ECF3; --ink-soft:#B0BCCA; --muted:#7C8896;
     --line:#242E38; --line-soft:#1C2530;
-    --brass:#D6A650; --brass-bg:#2A2216;
-    --indigo:#98B2DE;
-    --ok:#53C196; --ok-bg:#132820;
-    --warn:#DDA55C; --warn-bg:#291F14;
+    --brass:#D6A650; --brass-bg:#2A2216; --indigo:#98B2DE;
+    --ok:#53C196; --ok-bg:#132820; --warn:#DDA55C; --warn-bg:#291F14;
     --closed:#76828E; --closed-bg:#1C242C;
   }
   :root[data-theme="light"] {
     --paper:#F2F4F7; --surface:#FFFFFF; --surface-2:#E9EDF2;
     --ink:#121922; --ink-soft:#3C4959; --muted:#6A7684;
     --line:#D7DEE6; --line-soft:#E8ECF1;
-    --brass:#8B6015; --brass-bg:#F4EAD6;
-    --indigo:#24406E;
-    --ok:#12634A; --ok-bg:#DAEEE6;
-    --warn:#85500F; --warn-bg:#F6E7D3;
+    --brass:#8B6015; --brass-bg:#F4EAD6; --indigo:#24406E;
+    --ok:#12634A; --ok-bg:#DAEEE6; --warn:#85500F; --warn-bg:#F6E7D3;
     --closed:#64707D; --closed-bg:#E3E8ED;
   }
 
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 18px 64px; }
-
-  a { color: var(--indigo); text-underline-offset: 2px; }
-  a:hover { color: var(--brass); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans);
+         font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:880px; margin:0 auto; padding:0 18px 64px; }
+  a { color:var(--indigo); text-underline-offset:2px; }
+  a:hover { color:var(--brass); }
   a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
-    outline: 2px solid var(--brass); outline-offset: 2px; border-radius: 3px;
-  }
+    outline:2px solid var(--brass); outline-offset:2px; border-radius:3px; }
 
-  /* ---- header ---- */
-  header.top { padding: 28px 0 0; }
-  h1 {
-    font-family: var(--display);
-    font-size: clamp(1.5rem, 3.6vw, 1.95rem);
-    font-weight: 600; line-height: 1.15; letter-spacing: -.012em;
-    margin: 0 0 6px;
-  }
-  .sub { color: var(--ink-soft); font-size: .93rem; margin: 0 0 14px; max-width: 62ch; }
-  .stamp {
-    font-family: var(--mono); font-size: 11px; color: var(--muted);
-    display: flex; flex-wrap: wrap; gap: 6px 14px;
-    border-top: 1px solid var(--line); padding-top: 10px;
-  }
-  .stamp b { color: var(--ink-soft); font-weight: 600; }
+  header.top { padding:28px 0 0; }
+  h1 { font-family:var(--display); font-size:clamp(1.5rem,3.6vw,1.95rem); font-weight:600;
+       line-height:1.15; letter-spacing:-.012em; margin:0 0 6px; }
+  .sub { color:var(--ink-soft); font-size:.93rem; margin:0 0 14px; max-width:62ch; }
+  .stamp { font-family:var(--mono); font-size:11px; color:var(--muted); display:flex;
+           flex-wrap:wrap; gap:6px 14px; border-top:1px solid var(--line); padding-top:10px; }
+  .stamp b { color:var(--ink-soft); font-weight:600; }
 
-  /* ---- pipeline strip ---- */
-  .pipeline {
-    display: flex; flex-wrap: wrap; align-items: stretch; gap: 4px;
-    margin: 18px 0 6px;
-  }
-  .stage {
-    flex: 1 1 96px; min-width: 96px;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 4px; padding: 8px 10px;
-  }
-  .stage.here { border-color: var(--brass); background: var(--brass-bg); }
-  .stage .n {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px;
-  }
-  .stage.here .n { color: var(--brass); }
-  .stage .l { font-size: .84rem; font-weight: 600; line-height: 1.25; display: block; }
-  .stage .d { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-  .pipe-note { font-size: .82rem; color: var(--muted); margin: 0 0 22px; }
+  .pipeline { display:flex; flex-wrap:wrap; gap:4px; margin:18px 0 6px; }
+  .stage { flex:1 1 92px; min-width:92px; background:var(--surface); border:1px solid var(--line);
+           border-radius:4px; padding:8px 10px; }
+  .stage.here { border-color:var(--brass); background:var(--brass-bg); }
+  .stage .n { font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+              color:var(--muted); display:block; margin-bottom:2px; }
+  .stage.here .n { color:var(--brass); }
+  .stage .l { font-size:.84rem; font-weight:600; line-height:1.25; display:block; }
+  .stage .d { font-family:var(--mono); font-size:10px; color:var(--muted); }
+  .pipe-note { font-size:.82rem; color:var(--muted); margin:0 0 22px; }
 
-  /* ---- sticky controls ---- */
-  .controls {
-    position: sticky; top: 0; z-index: 20;
-    background: var(--paper); padding: 10px 0;
-    border-bottom: 1px solid var(--line); margin-bottom: 14px;
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  }
-  #search {
-    flex: 1 1 200px; min-width: 0; font: inherit; font-size: .88rem;
-    padding: 7px 11px; border: 1px solid var(--line); border-radius: 4px;
-    background: var(--surface); color: var(--ink);
-  }
-  #search::placeholder { color: var(--muted); }
-  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
-  .chip {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em;
-    text-transform: uppercase; padding: 6px 10px;
-    border: 1px solid var(--line); border-radius: 999px;
-    background: var(--surface); color: var(--ink-soft); cursor: pointer;
-    transition: background .12s, color .12s, border-color .12s;
-  }
-  .chip:hover { border-color: var(--brass); color: var(--brass); }
-  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .count {
-    font-family: var(--mono); font-size: 11px; color: var(--muted);
-    margin-left: auto; font-variant-numeric: tabular-nums;
-  }
+  nav.jump { display:flex; flex-wrap:wrap; gap:5px; margin:0 0 20px; }
+  nav.jump a { font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+    padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:var(--surface);
+    color:var(--ink-soft); text-decoration:none; }
+  nav.jump a:hover { border-color:var(--brass); color:var(--brass); }
 
-  /* ---- rows ---- */
-  .band {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
-    text-transform: uppercase; color: var(--muted);
-    margin: 20px 0 6px; display: flex; align-items: center; gap: 10px;
-  }
-  .band:first-of-type { margin-top: 0; }
-  .band::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  h2 { font-family:var(--display); font-size:1.25rem; font-weight:600; margin:34px 0 4px;
+       letter-spacing:-.008em; scroll-margin-top:12px; }
+  .h2note { color:var(--muted); font-size:.85rem; margin:0 0 12px; max-width:68ch; }
 
-  .rows { display: flex; flex-direction: column; gap: 5px; }
+  .controls { position:sticky; top:0; z-index:20; background:var(--paper); padding:10px 0;
+    border-bottom:1px solid var(--line); margin-bottom:14px; display:flex; flex-wrap:wrap;
+    gap:8px; align-items:center; }
+  input[type=search] { flex:1 1 190px; min-width:0; font:inherit; font-size:.88rem; padding:7px 11px;
+    border:1px solid var(--line); border-radius:4px; background:var(--surface); color:var(--ink); }
+  input[type=search]::placeholder { color:var(--muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:4px; }
+  .chip { font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+    padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:var(--surface);
+    color:var(--ink-soft); cursor:pointer; transition:background .12s,color .12s,border-color .12s; }
+  .chip:hover { border-color:var(--brass); color:var(--brass); }
+  .chip[aria-pressed="true"] { background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  .count { font-family:var(--mono); font-size:11px; color:var(--muted); margin-left:auto;
+           font-variant-numeric:tabular-nums; }
 
-  details.row {
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 4px; overflow: hidden;
-  }
-  details.row[open] { border-color: var(--brass); }
+  .band { font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--muted); margin:20px 0 6px; display:flex; align-items:center; gap:10px; }
+  .band:first-of-type { margin-top:0; }
+  .band::after { content:""; flex:1; height:1px; background:var(--line); }
 
-  summary {
-    list-style: none; cursor: pointer; padding: 10px 12px;
-    display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px;
-    align-items: center;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary:hover { background: var(--surface-2); }
+  .rows { display:flex; flex-direction:column; gap:5px; }
+  details.row { background:var(--surface); border:1px solid var(--line); border-radius:4px; overflow:hidden; }
+  details.row[open] { border-color:var(--brass); }
+  summary { list-style:none; cursor:pointer; padding:10px 12px; display:grid;
+    grid-template-columns:auto 1fr auto auto; gap:10px; align-items:center; }
+  summary::-webkit-details-marker { display:none; }
+  summary:hover { background:var(--surface-2); }
+  .dot { width:7px; height:7px; border-radius:50%; flex:none; }
+  .dot.open{background:var(--ok);} .dot.rolling{background:var(--indigo);}
+  .dot.soon{background:var(--warn);} .dot.closed{background:var(--closed);}
+  .rname { font-weight:600; font-size:.93rem; line-height:1.3; min-width:0; }
+  .rname i { font-style:normal; font-weight:400; color:var(--muted); font-size:.82rem; }
+  .rwhen { font-family:var(--mono); font-size:10.5px; letter-spacing:.03em; padding:3px 7px;
+    border-radius:3px; white-space:nowrap; font-weight:600; }
+  .rwhen.open{background:var(--ok-bg);color:var(--ok);}
+  .rwhen.rolling{background:var(--surface-2);color:var(--ink-soft);}
+  .rwhen.soon{background:var(--warn-bg);color:var(--warn);}
+  .rwhen.closed{background:var(--closed-bg);color:var(--closed);}
+  .caret { color:var(--muted); font-size:11px; transition:transform .15s; }
+  details[open] .caret { transform:rotate(90deg); }
+  .body { padding:0 12px 14px; border-top:1px solid var(--line-soft); }
+  .lbl { font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+         color:var(--muted); margin:12px 0 5px; }
+  .links { display:flex; flex-wrap:wrap; gap:5px; }
+  .btn { font-family:var(--mono); font-size:10.5px; letter-spacing:.03em; padding:6px 10px;
+    border:1px solid var(--line); border-radius:4px; background:var(--surface-2); color:var(--indigo);
+    text-decoration:none; white-space:nowrap; max-width:100%; overflow:hidden; text-overflow:ellipsis; }
+  .btn:hover { border-color:var(--brass); color:var(--brass); }
+  .btn.primary { background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  .btn.primary:hover { background:var(--brass); border-color:var(--brass); color:#fff; }
+  ol.path { margin:0; padding:0; list-style:none; counter-reset:s; }
+  ol.path li { counter-increment:s; position:relative; padding:0 0 0 26px; margin-bottom:5px;
+    font-size:.87rem; color:var(--ink-soft); line-height:1.45; }
+  ol.path li::before { content:counter(s); position:absolute; left:0; top:1px; font-family:var(--mono);
+    font-size:9.5px; color:var(--brass); background:var(--brass-bg); border-radius:3px; width:18px;
+    text-align:center; padding:2px 0; }
+  ol.path li:last-child { margin-bottom:0; }
+  ol.path b, .watch b { color:var(--ink); font-weight:600; }
+  ol.path code, .watch code { font-family:var(--mono); font-size:.82em; background:var(--surface-2);
+    padding:1px 4px; border-radius:3px; }
+  .watch { font-size:.85rem; color:var(--ink-soft); line-height:1.5; margin:12px 0 0; padding:9px 11px;
+    background:var(--brass-bg); border-left:2px solid var(--brass); border-radius:0 3px 3px 0; }
+  .empty { text-align:center; padding:36px 16px; color:var(--muted); font-family:var(--display); font-size:1rem; }
 
-  .dot {
-    width: 7px; height: 7px; border-radius: 50%; flex: none;
-  }
-  .dot.open { background: var(--ok); }
-  .dot.rolling { background: var(--indigo); }
-  .dot.soon { background: var(--warn); }
-  .dot.closed { background: var(--closed); }
+  /* address book */
+  .abtools { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:0 0 10px; }
+  .tool { font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; padding:7px 11px;
+    border:1px solid var(--line); border-radius:4px; background:var(--surface); color:var(--ink-soft);
+    cursor:pointer; }
+  .tool:hover { border-color:var(--brass); color:var(--brass); }
+  .tool.solid { background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  .tool.solid:hover { background:var(--brass); border-color:var(--brass); color:#fff; }
+  .toolnote { font-family:var(--mono); font-size:10.5px; color:var(--ok); }
 
-  .rname { font-weight: 600; font-size: .93rem; line-height: 1.3; min-width: 0; }
-  .rname i { font-style: normal; font-weight: 400; color: var(--muted); font-size: .82rem; }
+  .tscroll { overflow-x:auto; border:1px solid var(--line); border-radius:4px; background:var(--surface); }
+  table { border-collapse:collapse; width:100%; min-width:560px; font-size:.85rem; }
+  th, td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th { font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; background:var(--surface-2); border-bottom:1px solid var(--line);
+    position:sticky; top:0; }
+  tbody tr:last-child td { border-bottom:0; }
+  tbody tr:hover { background:var(--surface-2); }
+  td.firm { font-weight:600; }
+  td.firm em { font-style:normal; font-weight:400; color:var(--muted); font-size:.9em; display:block; }
+  td.addr { font-family:var(--mono); font-size:.78rem; overflow-wrap:anywhere; }
+  td.addr a { text-decoration:none; }
+  td.addr .alt { color:var(--muted); display:block; font-size:.94em; }
+  .copy { font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px; margin-left:6px;
+    border:1px solid var(--line); border-radius:3px; background:var(--surface-2); color:var(--muted);
+    cursor:pointer; vertical-align:middle; }
+  .copy:hover { border-color:var(--brass); color:var(--brass); }
+  .copy.done { border-color:var(--ok); color:var(--ok); }
+  td.route { color:var(--ink-soft); font-size:.82rem; }
+  .src { font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px;
+         white-space:nowrap; }
+  .src.own { background:var(--ok-bg); color:var(--ok); }
+  .src.sec { background:var(--warn-bg); color:var(--warn); }
+  .src.none { background:var(--closed-bg); color:var(--closed); }
 
-  .rwhen {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .03em;
-    padding: 3px 7px; border-radius: 3px; white-space: nowrap; font-weight: 600;
-  }
-  .rwhen.open { background: var(--ok-bg); color: var(--ok); }
-  .rwhen.rolling { background: var(--surface-2); color: var(--ink-soft); }
-  .rwhen.soon { background: var(--warn-bg); color: var(--warn); }
-  .rwhen.closed { background: var(--closed-bg); color: var(--closed); }
+  /* template */
+  .tmpl { background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:14px 16px; }
+  .tmpl pre { margin:0; font-family:var(--mono); font-size:.79rem; line-height:1.65; color:var(--ink-soft);
+    white-space:pre-wrap; overflow-wrap:anywhere; }
+  .tmpl .fill { background:var(--brass-bg); color:var(--brass); padding:0 3px; border-radius:2px; }
 
-  .caret { color: var(--muted); font-size: 11px; transition: transform .15s; }
-  details[open] .caret { transform: rotate(90deg); }
+  .gate { background:var(--warn-bg); border:1px solid var(--brass); border-radius:4px;
+          padding:12px 15px; margin:0 0 16px; }
+  .gate-h { font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+            color:var(--brass); margin-bottom:7px; font-weight:600; }
+  .gate p { margin:0 0 8px; font-size:.87rem; line-height:1.55; color:var(--ink-soft); }
+  .gate p:last-child { margin-bottom:0; }
+  .gate b { color:var(--ink); font-weight:600; }
 
-  .body { padding: 0 12px 14px; border-top: 1px solid var(--line-soft); }
+  ul.rules { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
+  ul.rules li { font-size:.87rem; color:var(--ink-soft); line-height:1.5; padding-left:16px; position:relative; }
+  ul.rules li::before { content:""; position:absolute; left:0; top:.55em; width:5px; height:5px;
+    border-radius:50%; background:var(--brass); }
+  ul.rules b { color:var(--ink); font-weight:600; }
 
-  .lbl {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--muted);
-    margin: 12px 0 5px;
-  }
+  footer { margin-top:34px; border-top:1px solid var(--line); padding-top:16px; color:var(--muted);
+    font-size:.8rem; max-width:70ch; }
 
-  .links { display: flex; flex-wrap: wrap; gap: 5px; }
-  .btn {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .03em;
-    padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px;
-    background: var(--surface-2); color: var(--indigo); text-decoration: none;
-    white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+  @media (max-width:560px) {
+    summary { grid-template-columns:auto 1fr auto; row-gap:6px; }
+    .rwhen { grid-column:2/4; justify-self:start; }
+    .controls { position:static; }
+    .count { margin-left:0; }
   }
-  .btn:hover { border-color: var(--brass); color: var(--brass); }
-  .btn.primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .btn.primary:hover { background: var(--brass); border-color: var(--brass); color: #fff; }
-
-  ol.path { margin: 0; padding: 0; list-style: none; counter-reset: s; }
-  ol.path li {
-    counter-increment: s; position: relative;
-    padding: 0 0 0 26px; margin-bottom: 5px;
-    font-size: .87rem; color: var(--ink-soft); line-height: 1.45;
-  }
-  ol.path li::before {
-    content: counter(s); position: absolute; left: 0; top: 1px;
-    font-family: var(--mono); font-size: 9.5px; color: var(--brass);
-    background: var(--brass-bg); border-radius: 3px;
-    width: 18px; text-align: center; padding: 2px 0;
-  }
-  ol.path li:last-child { margin-bottom: 0; }
-  ol.path b, .watch b { color: var(--ink); font-weight: 600; }
-  ol.path code, .watch code {
-    font-family: var(--mono); font-size: .82em;
-    background: var(--surface-2); padding: 1px 4px; border-radius: 3px;
-  }
-
-  .watch {
-    font-size: .85rem; color: var(--ink-soft); line-height: 1.5;
-    margin: 12px 0 0; padding: 9px 11px;
-    background: var(--brass-bg); border-left: 2px solid var(--brass);
-    border-radius: 0 3px 3px 0;
-  }
-
-  .empty {
-    text-align: center; padding: 36px 16px; color: var(--muted);
-    font-family: var(--display); font-size: 1rem;
-  }
-
-  /* ---- compact table ---- */
-  h2 {
-    font-family: var(--display); font-size: 1.2rem; font-weight: 600;
-    margin: 34px 0 4px; letter-spacing: -.008em;
-  }
-  .h2note { color: var(--muted); font-size: .85rem; margin: 0 0 12px; max-width: 66ch; }
-
-  .tscroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
-  table { border-collapse: collapse; width: 100%; min-width: 500px; font-size: .85rem; }
-  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line-soft); }
-  th {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--muted); font-weight: 600;
-    background: var(--surface-2); border-bottom: 1px solid var(--line);
-  }
-  tbody tr:last-child td { border-bottom: 0; }
-  td.yr { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--muted); }
-  .flag {
-    font-family: var(--mono); font-size: 9px; letter-spacing: .06em;
-    background: var(--ok-bg); color: var(--ok);
-    padding: 1px 5px; border-radius: 3px; margin-left: 5px; white-space: nowrap;
-  }
-
-  /* ---- rules ---- */
-  ul.rules { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  ul.rules li {
-    font-size: .87rem; color: var(--ink-soft); line-height: 1.5;
-    padding-left: 16px; position: relative;
-  }
-  ul.rules li::before {
-    content: ""; position: absolute; left: 0; top: .55em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--brass);
-  }
-  ul.rules b { color: var(--ink); font-weight: 600; }
-
-  footer {
-    margin-top: 34px; border-top: 1px solid var(--line); padding-top: 16px;
-    color: var(--muted); font-size: .8rem; max-width: 70ch;
-  }
-
-  @media (max-width: 560px) {
-    summary { grid-template-columns: auto 1fr auto; row-gap: 6px; }
-    .rwhen { grid-column: 2 / 4; justify-self: start; }
-    .controls { position: static; }
-    .count { margin-left: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
 </style>
 
 <div class="wrap">
@@ -294,34 +217,41 @@
   <header class="top">
     <h1>Where to send an RLT application</h1>
     <p class="sub">
-      Singapore Relevant Legal Training — the six months an overseas Scheduled University graduate
-      serves before becoming a qualified person. Every entry gives the exact link or inbox, what goes
-      in the pack, and the steps in order.
+      Singapore Relevant Legal Training — the six months an overseas Scheduled University graduate serves
+      before becoming a qualified person. Documented application paths for the firms that publish one, and
+      a contact address for every practice that trains.
     </p>
     <p class="stamp">
       <span><b>Checked</b> 31 Jul 2026</span>
       <span><b>Live</b> RLT 2027 · PTC 2028</span>
+      <span><b>Practices</b> 100+</span>
+      <span><b>Addresses</b> 90+ verified</span>
       <span><b>Regulator</b> SILE</span>
     </p>
   </header>
 
   <div class="pipeline">
-    <div class="stage here">
-      <span class="n">You are here</span>
-      <span class="l">RLT</span><span class="d">6 months</span>
-    </div>
+    <div class="stage here"><span class="n">You are here</span><span class="l">RLT</span><span class="d">6 months</span></div>
     <div class="stage"><span class="n">then</span><span class="l">Part A</span><span class="d">exam</span></div>
     <div class="stage"><span class="n">then</span><span class="l">Part B</span><span class="d">course</span></div>
     <div class="stage"><span class="n">then</span><span class="l">PTP</span><span class="d">12 months</span></div>
     <div class="stage"><span class="n">then</span><span class="l">Called</span><span class="d">admission</span></div>
   </div>
-  <p class="pipe-note">
-    RLT and the practice training contract are different applications. Many firms run two separate
-    listings — apply to the RLT one.
-  </p>
+  <p class="pipe-note">RLT and the practice training contract are different applications. Many firms run two separate listings — apply to the RLT one.</p>
+
+  <nav class="jump">
+    <a href="#paths">Application paths</a>
+    <a href="#book">Address book</a>
+    <a href="#register">All 46 seats</a>
+    <a href="#template">Email template</a>
+    <a href="#rules">Rules</a>
+  </nav>
+
+  <h2 id="paths">Firms with a documented path</h2>
+  <p class="h2note">These publish enough to apply without asking first. Expand for the destination and the steps in order.</p>
 
   <div class="controls">
-    <input id="search" type="search" placeholder="Search firm or keyword…" aria-label="Search">
+    <input id="search" type="search" placeholder="Search firm or keyword…" aria-label="Search paths">
     <div class="chips" role="group" aria-label="Filter">
       <button class="chip" data-f="status" data-v="open" aria-pressed="false">Open</button>
       <button class="chip" data-f="status" data-v="rolling" aria-pressed="false">Rolling</button>
@@ -330,49 +260,161 @@
     </div>
     <span class="count" id="count"></span>
   </div>
-
   <div id="results"></div>
 
-  <h2>Smaller practices advertising now</h2>
+  <h2 id="book">The address book — every practice that trains</h2>
   <p class="h2note">
-    From the Law Society Careers Portal. Least contested seats in the market; each listing carries that
-    practice's own inbox and requirements.
-    <a href="https://lawsocietycareers.com.sg/practice-training-contract/" target="_blank" rel="noopener">All listings →</a>
+    A six-month RLT seat is cheaper for a firm to say yes to than a training contract, so speculative
+    emails work here in a way they do not in the UK. Filter, then copy one address or the whole visible set.
+    <b>Green</b> = taken from the firm's own site. <b>Amber</b> = from its careers listing or a secondary
+    source, worth a sanity check. <b>Grey</b> = no published inbox, use the portal or listing instead.
   </p>
+  <div class="gate" style="margin-bottom:14px">
+    <div class="gate-h">Thirteen firms are excluded from the default view</div>
+    <p>Several global names run a Singapore office but offer <b>no Singapore practice training contract</b> —
+    their "Singapore" trainee route is an England &amp; Wales training contract with Singapore as a seat or a
+    post-qualification posting. A&amp;O Shearman says so outright: it does not offer direct training contracts
+    in Singapore. Jones Day is equally blunt. Applying to these for RLT is wasted effort, so they sit behind
+    the <b>No Singapore route</b> filter — listed, with contacts, so you can strike them off deliberately
+    rather than wonder.</p>
+  </div>
+
+  <div class="abtools">
+    <input id="absearch" type="search" placeholder="Filter by firm or type…" aria-label="Filter address book" style="flex:1 1 180px">
+    <button class="tool" data-ab="all" aria-pressed="true">All</button>
+    <button class="tool" data-ab="local">Singapore firms</button>
+    <button class="tool" data-ab="intl">International</button>
+    <button class="tool" data-ab="hasmail">Has an inbox</button>
+    <button class="tool" data-ab="nosg">No Singapore route</button>
+    <button class="tool solid" id="copyall">Copy all shown</button>
+    <span class="toolnote" id="copynote"></span>
+  </div>
+
   <div class="tscroll">
     <table>
-      <thead><tr><th>Practice</th><th>Advertised as</th><th>Intake</th><th>Listing</th></tr></thead>
-      <tbody id="small"></tbody>
+      <thead><tr><th>Practice</th><th>Send to</th><th>Route / note</th><th>Src</th></tr></thead>
+      <tbody id="abbody"></tbody>
     </table>
   </div>
 
-  <h2>Rules that decide whether your six months counts</h2>
-  <p class="h2note">Get these wrong and the period is disregarded. SILE is the only authority.</p>
-  <ul class="rules">
-    <li><b>6 months inside a continuous 8-month window</b>, counted in full or half days. Weekends and public holidays count toward the period but cannot be your start or end date.</li>
-    <li><b>Finish before Part B begins</b> — all six months must be complete by the last working day before the course starts. Leave must be made up at the end, which pushes your finish date, so leave a buffer.</li>
-    <li><b>Paralegal or internship work does not count</b> unless formalised as a supervised training arrangement and certified by the practice. Get it in writing at the start, never retroactively.</li>
-    <li><b>No SILE registration needed beforehand</b> — but you must submit a certification of completion from the training organisation, on SILE's template, at the end. Confirm the firm knows it will sign one.</li>
-    <li><b>You can stitch periods together</b> across more than one organisation, so long as the total hits six months inside the eight-month window.</li>
-    <li><b>The 1 July moratorium applies to practice training contracts, not RLT.</b> Lee &amp; Lee says so on its own careers page. If a firm tells you to wait, ask which one they mean.</li>
-    <li><b>In-house is limited.</b> SILE's guidance indicates the employer must be listed on an official securities exchange — a private limited company generally will not qualify. Confirm your specific employer with SILE in writing before committing.</li>
-    <li><b>Pay is unregulated.</b> No mandated minimum; Guidance Note 3.9.1 asks only that basic transport and meal costs be covered. Lee &amp; Lee's published $3,000/month is a fair large-firm benchmark. The term of art is <i>honorarium</i>.</li>
-  </ul>
+  <h2 id="register">The Law Society register — all 46 live seats</h2>
+  <p class="h2note">
+    Every live listing on the Law Society training-contract register plus one on its job board, read from
+    the listing text rather than summarised. <b>Apply to</b> is the address written in the listing body
+    where the firm gave one — for 16 listings that differs from the portal's contact field, and the in-text
+    address is the one that reaches a human. Honorarium is monthly SGD as published.
+  </p>
+  <div class="abtools">
+    <input id="rsearch" type="search" placeholder="Filter by practice or practice area…" aria-label="Filter register" style="flex:1 1 180px">
+    <button class="tool" data-rf="rlt">RLT only</button>
+    <button class="tool" data-rf="late">2027 &amp; 2028 starts</button>
+    <button class="tool" data-rf="paid">Honorarium published</button>
+    <button class="tool solid" data-rf="all" aria-pressed="true">All</button>
+    <button class="tool" id="copyreg">Copy shown addresses</button>
+    <span class="toolnote" id="regnote"></span>
+  </div>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Practice</th><th>Advertised as</th><th>Start</th><th>Apply to</th><th>Honorarium</th><th>Seats</th></tr></thead>
+      <tbody id="regbody"></tbody>
+    </table>
+  </div>
+  <p class="h2note" style="margin-top:10px">
+    <b>Reading this table.</b> Only <b>16</b> listings say Relevant Legal Training in terms; the rest advertise
+    a practice training contract, which is a different thing — though a small firm advertising a PTC will
+    often take an RLT trainee if asked, since it is half the commitment. Only <b>two</b> RLT-explicit listings
+    reach the 2027 cycle: <b>Angeline Suparto</b> and <b>Genesis Law</b>. Note also that Angeline Suparto
+    publishes RLT at $2,000 against $2,800 for a practice trainee — the clearest evidence in the register
+    that RLT is paid below PTC rates for the same desk.
+  </p>
 
-  <h2>If nothing here fits</h2>
-  <p class="h2note">Three routes that are not a Singapore law firm, and where to look for seats this page misses.</p>
+  <h2 id="template">A speculative RLT email that works</h2>
+  <p class="h2note">
+    For the firms with no advertised round. Keep it under 200 words — partners read these on a phone.
+    Replace the highlighted parts, attach one PDF, and send it to the practice manager or the named inbox.
+  </p>
+  <div class="abtools">
+    <button class="tool solid" id="copytmpl">Copy template</button>
+    <span class="toolnote" id="tmplnote"></span>
+  </div>
+  <div class="tmpl">
+<pre id="tmpltext">Subject: Relevant Legal Training <span class="fill">2027</span> — <span class="fill">Your Name</span>, <span class="fill">University</span> LLB
+
+Dear <span class="fill">Sir/Madam or named partner</span>,
+
+I am a final-year LLB student at <span class="fill">University</span>, graduating in <span class="fill">June 2027</span>. As an
+overseas Scheduled University graduate I need to complete six months of
+Relevant Legal Training before I can become a qualified person, and I am
+writing to ask whether <span class="fill">Firm</span> would consider hosting me from <span class="fill">August 2027</span>.
+
+I am drawn to your <span class="fill">disputes / corporate / shipping</span> practice because <span class="fill">one specific,
+verifiable reason — a reported case, a deal, a practitioner's writing</span>. <span class="fill">One line
+on relevant experience: an internship, a mooting result, a language, prior work</span>.
+
+I am on course for a <span class="fill">2:1 / first</span>. My CV, transcripts and a short writing sample
+are attached as a single PDF. I am available for interview at any time, including
+outside Singapore hours, and can be flexible on the start date within the
+August–October window.
+
+Thank you for considering this.
+
+<span class="fill">Your name</span>
+<span class="fill">Phone</span> · <span class="fill">Email</span></pre>
+  </div>
+  <p class="h2note" style="margin-top:10px">
+    Three things make the difference: name the <b>exact months</b> you are free, say <b>RLT</b> explicitly so
+    nobody reads it as a training contract application, and give <b>one concrete reason</b> for that firm.
+    Generic rounds get deleted; a specific six-month ask with a clear start date frequently gets a reply.
+  </p>
+
+  <h2 id="rules">Rules that decide whether your six months counts</h2>
+  <p class="h2note">Verified against the Legal Profession (Qualified Persons) Rules, SILE's RLT FAQs and the Practice Training Period Guidelines. Get these wrong and the period is disregarded. SILE is the only authority.</p>
+
+  <div class="gate">
+    <div class="gate-h">Check these two before you send anything</div>
+    <p><b>You must be a Singapore citizen or permanent resident.</b> Rule 8(1)(a) of the Qualified Persons Rules makes this a condition of the overseas-graduate route, alongside the degree and the six months of training. No amount of RLT substitutes for it. If you are not a citizen or PR, resolve that question first — it governs whether this pathway is open to you at all.</p>
+    <p><b>Check which Schedule your university sits on.</b> The Second Schedule limb now requires the degree to have been conferred <b>before 1 January 2025</b>, which closes that route for later graduates. The First Schedule list is unaffected. Confirm your own university's position in the Rules before planning around it.</p>
+  </div>
+
   <ul class="rules">
-    <li><b>Pupillage in England, Wales or Scotland</b> — as a pupil of, or reading in the chambers of, a barrister or Scottish advocate of 7+ years' standing.</li>
-    <li><b>A foreign law practice</b> — supervised training in foreign law under a formal training arrangement. A UK or Australian training contract can do double duty, but it must be documented and certifiable.</li>
-    <li><b>Public service</b> — as a Judicial or Legal Service Officer, or under a Qualifying Relevant Legal Officer of 5+ years' standing.</li>
-    <li><b>Speculative approaches work.</b> A six-month RLT seat is cheaper for a firm to say yes to than a training contract. Firms that train but publish no trainee page: RHTLaw Asia, Oon &amp; Bazul, Tan Kok Quan Partnership, Wee Swee Teow, PDLegal, Providence Law Asia, Setia Law, Duane Morris &amp; Selvam, Morgan Lewis Stamford, Pinsent Masons MPillay, Ashurst ADTLaw, CMS Holborn Asia, Clyde &amp; Co Clasis, HFW, Watson Farley &amp; Williams, Reed Smith / Resource Law.</li>
-    <li><b>Sources:</b> <a href="https://lawsocietycareers.com.sg/search-jobs/" target="_blank" rel="noopener">Law Society job search</a> (search "relevant legal training" — some practices post outside the training-contract section) · <a href="https://www.sile.edu.sg/the-singapore-bar-admission/relevant-legal-training/" target="_blank" rel="noopener">SILE RLT page</a> · <a href="https://www.sile.edu.sg/faqs-relevant-legal-training" target="_blank" rel="noopener">SILE RLT FAQs</a> · <a href="https://www.lawsociety.org.sg/our-community/training-contracts/" target="_blank" rel="noopener">Law Society framework guide</a></li>
+    <li><b>6 months inside a continuous 8-month window</b>, counted in full or half days only. Serve more than eight months and the excess is not banked — you simply declare an eight-month period.</li>
+    <li><b>Weekends and public holidays count toward the period</b> but cannot be your start or end date. One exception: where you owe make-up days, the calculated last day may fall on a weekend or holiday immediately before the make-up period — it is the <i>official</i> end date, inclusive of make-up, that must be a working day.</li>
+    <li><b>There is no free leave allowance.</b> Every non-working day is added to the end. This differs from the practice training period, which allows 18 days of absence without make-up. Three hours off costs you <b>half a day</b> — that is the minimum granularity.</li>
+    <li><b>Firm closure days earn you nothing</b>, even if you worked through them. They must be made up regardless.</li>
+    <li><b>Finish before Part B begins</b> — by the last working day before the course starts, after all make-up. Build in a buffer rather than finishing to the day.</li>
+    <li><b>RLT need not be served in Singapore.</b> Unlike the practice training period, there is no Singapore-residence requirement, and SILE's own worked illustrations use UK firms with the calculation run on the UK calendar. A genuine asymmetry, and a useful one.</li>
+    <li><b>Paralegal or internship work does not count</b> on its own. But the certification can be given retrospectively: if the practice will certify in writing that you were under a formal training arrangement receiving supervised training, it is recognised. It need not have been labelled a training contract at the outset — though getting it agreed up front is far safer than hoping.</li>
+    <li><b>No SILE registration beforehand</b> — but at the end you submit a certification letter on SILE's template. There are <b>nine</b> templates, one per category; pick the right one. There is <b>no template for the UK pupillage limb</b>, so contact SILE directly if that is your route rather than forcing the foreign-law-practice form.</li>
+    <li><b>You can stitch periods together</b> across organisations, so long as the total hits six months inside the eight-month window. Two three-month seats at small firms is a valid plan B.</li>
+    <li><b>The moratorium does not apply to RLT at all.</b> It governs practice training contracts only. And there is no standing "1 July rule" — 1 July 2026 is simply what the formula yields for one cohort. The rule: if you are not yet a qualified or eligible person, you may apply for a PTC no earlier than one year before the first day of the month of the earliest Part B session you could take in ordinary progression. It binds only those eligible for Part B in July 2027 or later. Exempt: qualified and eligible persons (any time), anyone eligible for Part B before July 2027, those who secured a contract before 1 October 2024 for a January 2028 start, and anyone whose progression was disrupted.</li>
+    <li><b>The in-house restriction is narrower than it sounds — and it is not a limit on RLT.</b> The securities-exchange test governs <i>relevant legal work</i>, a separate limb. Where it applies, the rule is strict: the <b>equity</b> securities of the employing entity itself must be listed, so a debt-only listing fails, and a private subsidiary of a listed parent fails. No waiver or discretion exists. Failing it does not block you from the RLT route through a law practice.</li>
+    <li><b>Pay is unregulated, and RLT pays below trainee rates.</b> There is no mandated minimum — the Minister for Law has said imposing one would be prescriptive and could reduce training places at smaller firms. Guidance Note 3.9.1 asks only that a practice cover basic transport and meal costs. <b>Budget against $1,000–3,000/month for RLT specifically.</b> Only two firms publish an explicit RLT figure: Lee &amp; Lee at $3,000 and HOH Law at $1,000–2,500. The widely quoted S$40–55k annual band is for <i>practice trainees</i>, who sit post-Part B — do not plan around it for your six months. The register bears this out: Angeline Suparto pays $2,000 for RLT against $2,800 for a practice trainee at the same desk. The term of art is <i>honorarium</i>; the Guidance Note asks practices to avoid "allowance" or "remuneration" and to keep employee-indicative clauses out of the agreement.</li>
+    <li><b>Do not sign with two practices to keep your options open.</b> Guidance Note 3.9.1 says it is neither advisable nor appropriate to enter agreements with more than one practice in order to pick and choose later.</li>
+    <li><b>Routes that are not a Singapore firm:</b> pupillage with, or reading in the chambers of, a UK barrister or Scottish advocate of <b>more than</b> 7 years' standing; supervised training at a foreign law practice under a formal arrangement (a UK or Australian training contract can do double duty); or work as a Judicial or Legal Service Officer, or under a qualifying relevant legal officer of <b>not less than</b> 5 years' standing. Those thresholds attach to your supervisor, not to you — and "more than 7" excludes a supervisor at exactly 7 years, while "not less than 5" includes one at exactly 5.</li>
+    <li><b>The public-sector supervisor route covers seven bodies, not the whole civil service.</b> A qualifying relevant legal officer must first be a <i>relevant legal officer</i>, which means a Judicial or Legal Service Officer or a legal officer of a body prescribed by rules. The prescribed list is exactly: <b>IRAS, IPOS, Singapore Land Authority, the Maritime and Port Authority, the National Environment Agency, PUB, and the Public Defender's Office</b>. MAS, CPF Board, LTA, HDB, JTC, EDB and IMDA are <b>not</b> on it, so their in-house lawyers cannot supervise RLT under this limb. Do not spend effort there.</li>
+    <li><b>The Legal Service Officer route is largely circular for you.</b> The Legal Service Commission requires applicants to already be a qualified person — which for an overseas graduate means Part A plus completed RLT. It therefore sits <i>downstream</i> of RLT rather than being a way to serve it. The exception is the conditional appointment pathway for undergraduates past their second year.</li>
+    <li><b>Government legal internships do not count.</b> The Legal Service Commission runs a biannual programme across 17 agencies, but these are internships for undergraduates and JD students, and SILE is explicit that intern work is not RLT. Treat them as relationship-building.</li>
+    <li><b>You may not need RLT at all — there is an alternative limb.</b> Becoming a qualified person requires relevant legal training <i>or</i> <b>relevant legal practice or work</b>: active practice as a legal practitioner in a jurisdiction other than Singapore or as a foreign lawyer in Singapore, or work as legal counsel at an entity whose <b>equity securities are listed</b> on an exchange anywhere. Same six-month duration. If you are already qualified elsewhere, this is often the cleaner route.</li>
+    <li><b>Recent changes worth knowing:</b> a mandatory Ethics and Professional Responsibility online module applies to Part A candidates from 2026 Session 2; practice training contract registration has been online-only since May 2025; and the public-service training framework applies to trainees starting from 1 January 2026.</li>
   </ul>
+  <p class="h2note" style="margin-top:12px">
+    Sources: <a href="https://www.sile.edu.sg/the-singapore-bar-admission/relevant-legal-training/" target="_blank" rel="noopener">SILE RLT</a> ·
+    <a href="https://www.sile.edu.sg/faqs-relevant-legal-training" target="_blank" rel="noopener">SILE RLT FAQs</a> ·
+    <a href="https://lawsocietycareers.com.sg/practice-training-contract/" target="_blank" rel="noopener">Law Society training listings</a> ·
+    <a href="https://lawsocietycareers.com.sg/search-jobs/" target="_blank" rel="noopener">Law Society job search</a> ·
+    <a href="https://www.lawsociety.org.sg/our-community/training-contracts/" target="_blank" rel="noopener">Law Society framework guide</a> ·
+    <a href="https://sso.agc.gov.sg/SL/LPA1966-R15" target="_blank" rel="noopener">Qualified Persons Rules</a> ·
+    <a href="https://sso.agc.gov.sg/SL/LPA1966-R22" target="_blank" rel="noopener">Prescribed Statutory Bodies Rules</a> ·
+    <a href="https://ukslss.com/guidetopartaandrlt" target="_blank" rel="noopener">UKSLSS Guide to Part A and RLT</a> ·
+    <a href="https://law.nus.edu.sg/cfglaw/wp-content/uploads/sites/16/2026/01/LCF-2026-Student-Guide_FINAL.pdf" target="_blank" rel="noopener">NUS Law Careers Fair 2026 guide (66 employers)</a> ·
+    <a href="mailto:lawgraduates@lawsoc.org.sg">lawgraduates@lawsoc.org.sg</a> — the Law Society's graduate support line, if you cannot place yourself
+  </p>
 
   <footer>
-    Links and methods taken from each organisation's own page on 31 July 2026. Windows move and listings
-    get pulled without notice — confirm against the source link before relying on a date. Not advice on
-    your admission; SILE decides whether a given period counts.
+    Addresses and links were pulled from each organisation's own site or listing on 31 July 2026 and are
+    reproduced as published. Windows move and listings get pulled without notice — confirm before relying
+    on a date. Amber-marked addresses came from a secondary source; check them against the firm's own
+    contact page before sending. Not advice on your admission; SILE decides whether a given period counts.
   </footer>
 
 </div>
@@ -380,337 +422,488 @@
 <script>
 (function () {
   var E = [
-    {
-      n: "Rajah & Tann Singapore", k: "Big Four", s: "open", w: "RLT 2027 open", t: ["rlt"],
-      links: [
-        ["Apply — RLT 2027", "https://apply.workable.com/rajah-tann/j/68C9ACA637", 1],
-        ["Apply — TC 2028", "https://apply.workable.com/rajah-tann/j/B869B8D493/apply/", 0],
-        ["trainingcontracts@rajahtann.com", "mailto:trainingcontracts@rajahtann.com", 0]
-      ],
-      path: [
-        "Open the <b>RLT 2027</b> listing — it is separate from the 2028 training contract listing.",
-        "Build <b>one PDF, max 12MB</b>: cover letter (1 page) + CV (3 pages) + law school transcripts including the term immediately before applying.",
-        "In the cover letter name your preferred practice areas and why the firm; in the CV give your <b>current GPA/CAP</b> and predicted class.",
-        "Pick <b>up to two</b> preferred major seats from the listed practice groups.",
-        "Submit. Shortlisting comes by email <i>and</i> SMS with a link to self-schedule your own interview."
-      ],
-      watch: "The clearest RLT route among the Big Four — a genuinely separate listing, so you can apply for RLT without entering the TC round. The 12MB cap is enforced; compress scans before merging."
-    },
-    {
-      n: "Lee & Lee", k: "Large SG firm", s: "open", w: "RLT 2027 open", t: ["rlt", "email"],
-      links: [
-        ["juliantay@leenlee.com.sg", "mailto:juliantay@leenlee.com.sg", 1],
-        ["matthewsaw@leenlee.com.sg", "mailto:matthewsaw@leenlee.com.sg", 0],
-        ["Careers page", "https://www.leenlee.com.sg/careers/", 0]
-      ],
-      path: [
-        "Email <b>both</b> named partners directly — there is no portal.",
-        "Attach a covering letter, CV, examination transcripts, and state your preferred department(s).",
-        "Say <code>Relevant Legal Training 2027</code> in the subject line so it is not read as a TC application."
-      ],
-      watch: "The most transparent firm on this. Publishes <b>$3,000/month</b> for RLT and states in writing that no moratorium applies to RLT. TC intakes run separately: Jan 2027 is Real Estate only, Jan 2028 covers IP, Litigation or Real Estate, Jan 2029 opens after 1 July 2027."
-    },
-    {
-      n: "Drew & Napier", k: "Big Four", s: "open", w: "RLT 2027 open", t: ["rlt"],
-      links: [
-        ["TC / RLT form", "https://www.drewnapier.com/TC-RLT-Form", 1],
-        ["Traineeship programme", "https://www.drewnapier.com/Careers/Traineeship-Programme", 0],
-        ["hrrecruit@drewnapier.com", "mailto:hrrecruit@drewnapier.com", 0]
-      ],
-      path: [
-        "Use the single online form — it covers both routes. <b>Tick RLT 2027</b>, not the 2028 TC.",
-        "Prepare a CV that includes personal details, <b>nationality and a photograph</b>, which this firm specifically asks for.",
-        "Attach <b>O-level, A-level and law school transcripts</b> — all three, not just the latest.",
-        "List awards, prizes and scholarships, extracurriculars, your elective subject choices, and your preferred practice area."
-      ],
-      watch: "2027 RLT opened <b>20 July 2026</b>, a fortnight after the TC round — easy to miss if you checked the site on 1 July and moved on. Generous honorarium, and Part B fees are reimbursed if you join as an associate."
-    },
-    {
-      n: "Kennedys", k: "International · insurance & disputes", s: "open", w: "RLT listing live", t: ["rlt"],
-      links: [
-        ["Apply — RLT 2026", "https://careers.kennedyslaw.com/jobs/vacancy/relevant-legal-training---2026-1403-singapore/1421/description/", 1],
-        ["Apply — PTC 2027", "https://careers.kennedyslaw.com/jobs/vacancy/practice-training-contract---2027-0740-singapore/758/description", 0],
-        ["SingaporeHR@KennedysLaw.com", "mailto:SingaporeHR@KennedysLaw.com", 0]
-      ],
-      path: [
-        "Open the <b>Relevant Legal Training</b> vacancy — it has its own reference number, separate from the PTC listings.",
-        "Hit Apply and upload <b>CV, cover letter, latest transcripts</b>.",
-        "Expect a written assessment, then an interview with <b>two partners</b>."
-      ],
-      watch: "Needs a <b>2:1 or on course for one</b>. RLT runs six months from around August. The wider process opens each September, so if the listing looks stale in mid-year check again after 1 September."
-    },
-    {
-      n: "Bird & Bird ATMD", k: "International · tech & IP", s: "open", w: "Closes 30 Sep", t: ["rlt"],
-      links: [["PTC & RLT — 2028", "https://www.twobirds.com/en/careers/singapore/early-careers/practice-training-contracts-and-internships", 1]],
-      path: [
-        "Apply through the firm's early careers page for the <b>2028</b> year — PTC and RLT are advertised together.",
-        "Submit inside the window: <b>1 July – 30 September 2026</b>.",
-        "Indicate your chosen practice area; you sit with a named Supervising Solicitor rather than rotating broadly."
-      ],
-      watch: "One of the very few firms publishing a <b>hard closing date</b> instead of rolling review. Diarise 30 September — there is no second look."
-    },
-    {
-      n: "Virtus Law LLP", k: "Stephenson Harwood alliance", s: "rolling", w: "Year-round", t: ["rlt", "email"],
-      links: [
-        ["careers.virtus@stephensonharwood.com", "mailto:careers.virtus@stephensonharwood.com", 1],
-        ["Training contracts page", "https://www.virtus-law.com/training-contracts/", 0]
-      ],
-      path: [
-        "Email, with a subject line carrying your <b>full name, target department, and intended year of Bar admission</b> — the format is specified.",
-        "Attach a cover letter setting out your practice interests, and a CV with work and internship experience.",
-        "Include <b>grades from secondary school onwards</b>, awards, scholarships, prizes and extracurriculars.",
-        "Attach a <b>recent essay, article or paper</b> — a writing sample is expected here, unusually.",
-        "Overseas graduates: apply once you have second-year exam results."
-      ],
-      watch: "Documents the overseas sequence explicitly — RLT for six months <b>from August</b>, then Part A and Part B. Accepts applications all year, so no reason to wait for a window."
-    },
-    {
-      n: "Sabara Law LLC", k: "Deloitte Legal network", s: "rolling", w: "Rolling", t: ["rlt"],
-      links: [["Apply via Deloitte", "https://jobs.sea.deloitte.com/job/Singapore-T&L-Practice-Trainee-Sabara-Law-LLC-Sing/1062105266/", 1]],
-      path: [
-        "Apply on the <b>Deloitte SEA careers board</b>, not a law firm site — this is why it gets missed.",
-        "The listing covers both RLT and practice training contracts; state which you want.",
-        "Standard pack: CV, transcripts, cover letter."
-      ],
-      watch: "A boutique Singapore practice inside the Deloitte Legal network. Work spans corporate, commercial, employment, IP, technology, tax and private client. Trainees attach to senior lawyers rather than rotating."
-    },
-    {
-      n: "Baker McKenzie Wong & Leow", k: "International · JLV", s: "open", w: "2028 open", t: [],
-      links: [["Apply — 2028 PTC", "https://careers.bakermckenzie.com/en_US/opportunities/JobDetail/Singapore-2028-Practice-Training-Contract/3332", 1]],
-      path: [
-        "Apply to the <b>2028 Practice Training Contract</b> — there is no separate RLT listing because the RLT is bundled in.",
-        "Cover letter must set out your interest in the firm <b>and reasons for your preferred practice area</b>.",
-        "Add CV and latest academic transcripts."
-      ],
-      watch: "States plainly that for overseas graduates it provides <b>the additional six months of RLT</b> required for admission. One application covers both. Opened 1 July 2026."
-    },
-    {
-      n: "Allen & Gledhill", k: "Big Four", s: "open", w: "2028 open", t: ["email"],
-      links: [
-        ["Online application form", "https://www.allenandgledhill.com/sg/pathways/positions/4800/application", 1],
-        ["trainingcontracts@agasia.law", "mailto:trainingcontracts@agasia.law", 0]
-      ],
-      path: [
-        "Submit the online form for the <b>2028</b> training contract.",
-        "<b>Rank all six departments</b> in order of preference: Corporate &amp; Commercial, M&amp;A, Real Estate, Financial Services, IP &amp; Technology, Litigation &amp; Dispute Resolution.",
-        "Separately, email the recruitment inbox to ask how they handle the six months of RLT for overseas graduates — this is not published."
-      ],
-      watch: "No advertised RLT listing, but they do take overseas graduates. 2026 and 2027 contracts are still being considered in selected practices, so ask rather than assuming those years are shut."
-    },
-    {
-      n: "WongPartnership", k: "Big Four", s: "open", w: "2028 open", t: [],
-      links: [
-        ["Application portal", "https://wongpartnership.applyourjobs.com/", 1],
-        ["Opportunities page", "https://www.wongpartnership.com/careers/opportunitiesDetail/students", 0]
-      ],
-      path: [
-        "Download the <b>trainee recruitment brochure</b> from the opportunities page first — it carries detail the web page omits.",
-        "Apply through the portal for the <b>2028</b> one-year contract (qualifying 2029).",
-        "Raise RLT directly with recruitment; there is no public RLT listing."
-      ],
-      watch: "One-year contract with rotations giving exposure to two or more practice areas. Opened 1 July 2026."
-    },
-    {
-      n: "Shook Lin & Bok", k: "Large SG firm", s: "rolling", w: "Rolling", t: ["email"],
-      links: [
-        ["trainee@shooklin.com", "mailto:trainee@shooklin.com", 1],
-        ["Practice trainees page", "https://www.shooklin.com/en/join-us/practice-trainees", 0]
-      ],
-      path: [
-        "Email the dedicated trainee inbox — <b>there is no portal</b>, and the general recruitment address is the wrong one.",
-        "Include: cover letter, CV, academic transcripts, <b>the subjects you took with grades</b>, expected degree classification, available start date, and <b>two preferred practice areas</b>.",
-        "Interns use a different address: intern@shooklin.com."
-      ],
-      watch: "Twelve-month contract. The firm takes trainees with the stated intention of retaining them as associates on admission."
-    },
-    {
-      n: "Dentons Rodyk", k: "Global · oldest SG practice", s: "rolling", w: "Rolling", t: [],
-      links: [
-        ["Practice training scheme", "https://dentons.rodyk.com/en/careers/practice-training-scheme", 1],
-        ["Application form (download)", "https://dentons.rodyk.com/en/careers/-/media/316d862a50094c23acc389c581de82d7.ashx", 0]
-      ],
-      path: [
-        "<b>Download the application form</b> — this firm uses a document, not a web application.",
-        "Complete it and return it by the route given on the careers page.",
-        "Contact the careers team to confirm which intake years are live and whether RLT is offered separately — neither is published."
-      ],
-      watch: "Trainees rotate across practice groups. Publishes noticeably less than its peers about intake years, so a direct email is worth more here than watching the site."
-    },
-    {
-      n: "TSMP Law Corporation", k: "Independent SG firm", s: "rolling", w: "Rolling", t: ["email"],
-      links: [
-        ["Practice training listing", "https://tsmplaw.com/now-hiring/practice-training", 1],
-        ["tsmp@tsmplaw.com", "mailto:tsmp@tsmplaw.com", 0]
-      ],
-      path: [
-        "Check the hiring page for a live practice training listing.",
-        "If nothing is posted, email the general inbox asking whether they will host a six-month RLT.",
-        "Intake years, deadlines and document requirements are not published — ask for all three."
-      ],
-      watch: "Well-regarded independent with a small intake, so the listing appears and disappears. Worth checking monthly rather than once."
-    },
-    {
-      n: "Singapore Legal Service", k: "Public service · AGC and Legal Service", s: "open", w: "Closes 7 Sep", t: ["email"],
-      links: [
-        ["Undergraduates & JD students", "https://www.lsc.gov.sg/careers/who-are-we-looking-for/undergraduates", 1],
-        ["AGC internships", "https://www.agc.gov.sg/careers/internship-opportunities/", 0],
-        ["lsc_sec@lsc.gov.sg", "mailto:lsc_sec@lsc.gov.sg", 0]
-      ],
-      path: [
-        "Check eligibility: at least <b>second year completed</b> at NUS, SMU, SUSS or a Scheduled University.",
-        "Submit the LSC online form with certificates, transcripts and legal internship details, by <b>7 September 2026</b>.",
-        "Add a <b>one-page personal statement</b> and a <b>one-page write-up</b> on why you want to join the Legal Service.",
-        "Arrange <b>two professor references</b> sent separately to lsc_sec@lsc.gov.sg by <b>20 September 2026</b> — miss this and the application is incomplete.",
-        "Interviews are held in November; shortlisted candidates may do a two-week minimum attachment at AGC."
-      ],
-      watch: "Work as a Judicial or Legal Service Officer counts as RLT in its own right. Appointment is conditional, confirmed on completing your degree, then three consecutive two-year contracts before consideration for the permanent establishment."
-    },
-    {
-      n: "Withers KhattarWong", k: "International · private client", s: "closed", w: "2028 closed", t: [],
-      links: [
-        ["Careers portal — Singapore", "https://www.witherscareers.com/?keywords=&sector=&role=&group=&location=Singapore&type=", 1],
-        ["fay.welch@witherskhattarwong.com", "mailto:fay.welch@witherskhattarwong.com", 0]
-      ],
-      path: [
-        "The 2028 round has closed. Watch the portal for <b>2029</b>, expected around 1 July 2027.",
-        "Meanwhile, email the talent manager to ask whether RLT is handled off-cycle.",
-        "When it opens: upper second or higher, and <b>2 As and 1 B at A-level</b> or equivalent. Non-law degrees welcome."
-      ],
-      watch: "Opened 1 July 2026 and closed again fast — a useful warning about pace. Process is application → 30-minute interview with two partners → written English exercise → deductive, inductive and numerical online assessments."
-    },
-    {
-      n: "Clifford Chance / Cavenagh Law", k: "Magic Circle · FLA", s: "soon", w: "Opens 1 Jul 2027", t: ["email"],
-      links: [
-        ["Practice training contract", "https://cavenaghlaw.com.sg/content/cavenagh-law/graduate-recruitment/practice-training-contract.html", 1],
-        ["recruitment.singapore@cliffordchance.com", "mailto:recruitment.singapore@cliffordchance.com", 0]
-      ],
-      path: [
-        "Nothing to submit — the <b>2029</b> round opens 1 July 2027 and 2028 is closed.",
-        "Email graduate recruitment now to ask whether RLT can be hosted independently of the TC cycle."
-      ],
-      watch: "The Singapore practice sits in a formal law alliance with Cavenagh Law, so RLT may be arrangeable outside the advertised cycle. Worth the email."
-    },
-    {
-      n: "HSF Kramer / Prolegis", k: "International · dual qualification", s: "soon", w: "Via vacation scheme", t: [],
-      links: [["Singapore training contract", "https://careers.hsfkramer.com/global/en/singapore-early-careers/training-contract", 1]],
-      path: [
-        "The realistic entry point is the <b>vacation scheme</b>, not a direct application.",
-        "Vacation scheme students get an exit interview that feeds straight into selection for the training programme.",
-        "Direct applications may open only after vacation scheme candidates have been considered."
-      ],
-      watch: "Two-year programme qualifying you in <b>both Singapore and England &amp; Wales</b> — 12-month practice training at alliance partner Prolegis LLC, then SQE qualifying work experience. An alternative two-year contract exists for those not eligible for the Singapore Bar, leading to England &amp; Wales only."
-    },
-    {
-      n: "In-house legal department", k: "Route · under a QRLO", s: "rolling", w: "Check first", t: [],
-      links: [
-        ["SILE — RLT categories", "https://www.sile.edu.sg/the-singapore-bar-admission/relevant-legal-training/", 1],
-        ["SILE — RLT FAQs", "https://www.sile.edu.sg/faqs-relevant-legal-training", 0],
-        ["Contact SILE", "https://www.sile.edu.sg/contact-us/", 0]
-      ],
-      path: [
-        "<b>Before anything else</b>, check the employer is listed on an official securities exchange — SILE's guidance indicates a private limited company will not qualify.",
-        "Check your proposed supervisor is a Qualifying Relevant Legal Officer: an advocate and solicitor of <b>5+ years' standing</b>.",
-        "Get <b>written confirmation from SILE</b> for your specific employer and supervisor before you commit six months.",
-        "Approach the legal team directly — there is no central listing for these."
-      ],
-      watch: "Public-sector trainees supervised by a QRLO additionally need a <b>three-month attachment at AGC or a Singapore law practice</b>, plus SILE approval of the manner of service <b>at least 14 days before starting</b>. Period served without that approval may be disregarded."
-    }
+    { n:"Rajah & Tann Singapore", k:"Big Four", s:"open", w:"RLT 2027 open", t:["rlt"],
+      links:[["Apply — RLT 2027","https://apply.workable.com/rajah-tann/j/68C9ACA637",1],
+             ["Apply — TC 2028","https://apply.workable.com/rajah-tann/j/B869B8D493/apply/",0],
+             ["trainingcontracts@rajahtann.com","mailto:trainingcontracts@rajahtann.com",0]],
+      path:["Open the <b>RLT 2027</b> listing — separate from the 2028 training contract listing.",
+            "Build <b>one PDF, max 12MB</b>: cover letter (1 page) + CV (3 pages) + transcripts including the term immediately before applying.",
+            "Give your <b>current GPA/CAP</b> and predicted class; name preferred practice areas in the letter.",
+            "Pick <b>up to two</b> preferred major seats from the listed practice groups.",
+            "Submit. Shortlisting comes by email <i>and</i> SMS with a link to self-schedule your interview."],
+      watch:"The clearest RLT route among the Big Four — a genuinely separate listing, so you can apply for RLT without entering the TC round. The 12MB cap is enforced; compress scans before merging." },
+    { n:"Lee & Lee", k:"Large SG firm", s:"open", w:"RLT 2027 open", t:["rlt","email"],
+      links:[["juliantay@leenlee.com.sg","mailto:juliantay@leenlee.com.sg",1],
+             ["matthewsaw@leenlee.com.sg","mailto:matthewsaw@leenlee.com.sg",0],
+             ["Careers page","https://www.leenlee.com.sg/careers/",0]],
+      path:["Email <b>both</b> named partners directly — there is no portal.",
+            "Attach a covering letter, CV, examination transcripts, and state your preferred department(s).",
+            "Put <code>Relevant Legal Training 2027</code> in the subject so it is not read as a TC application."],
+      watch:"The most transparent firm on this. Publishes <b>$3,000/month</b> for RLT and states in writing that no moratorium applies to RLT. TC intakes run separately: Jan 2027 Real Estate only, Jan 2028 IP/Litigation/Real Estate, Jan 2029 opens after 1 July 2027." },
+    { n:"Drew & Napier", k:"Big Four", s:"open", w:"RLT 2027 open", t:["rlt"],
+      links:[["TC / RLT form","https://www.drewnapier.com/TC-RLT-Form",1],
+             ["Traineeship programme","https://www.drewnapier.com/Careers/Traineeship-Programme",0],
+             ["hrrecruit@drewnapier.com","mailto:hrrecruit@drewnapier.com",0]],
+      path:["Use the single online form — it covers both routes. <b>Tick RLT 2027</b>, not the 2028 TC.",
+            "CV must include personal details, <b>nationality and a photograph</b>, which this firm specifically asks for.",
+            "Attach <b>O-level, A-level and law school transcripts</b> — all three, not just the latest.",
+            "List awards and scholarships, extracurriculars, your elective choices, and preferred practice area."],
+      watch:"2027 RLT opened <b>20 July 2026</b>, a fortnight after the TC round — easy to miss if you checked on 1 July and moved on. Generous honorarium, and Part B fees reimbursed if you join as an associate." },
+    { n:"HOH Law Corporation", k:"Independent SG firm", s:"rolling", w:"Rolling", t:["rlt","email"],
+      links:[["law@hoh.com.sg","mailto:law@hoh.com.sg",1],
+             ["Traineeships page","https://hoh.com.sg/careers/careers-traineeships.html",0]],
+      path:["Email the firm inbox saying explicitly that you want the <b>six-month Relevant Legal Training</b>, not the practice training contract.",
+            "This is one of the few firms that sets out the overseas-graduate route on its own site, so you do not have to explain the framework to them.",
+            "Standard pack: cover letter, CV, transcripts."],
+      watch:"Publishes its RLT honorarium as <b>$1,000-2,500/month</b> - the only firm besides Lee &amp; Lee to put an explicit RLT figure in public. That is below the practice-trainee market, which is the honest going rate for RLT at a smaller firm. Runs both the 6-month RLT and the 12-month practice training period, so the same firm can carry you through both stages." },
+    { n:"Pinsent Masons MPillay", k:"International · JLV", s:"open", w:"Closes 31 Aug", t:[],
+      links:[["Apply — Jan 2028 intake","https://ehpy.fa.em5.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1004/jobs/preview/3506",1],
+             ["Singapore training contracts","https://www.pinsentmasons.com/careers/graduate/training-contracts/singapore",0]],
+      path:["Apply through the Oracle portal for the <b>January 2028</b> intake — the training contract sits with <b>MPillay</b>, the local practice, not Pinsent Masons.",
+            "Window is <b>1 July – 31 August 2026</b>. Interviews run July to September.",
+            "Check the hard academic floor first: <b>AAB or better across your three best A-levels</b> (or equivalent) <i>and</i> a 2:1 achieved or predicted.",
+            "If you have mitigating circumstances, say so — the firm considers them on request."],
+      watch:"A genuine hard deadline and a genuinely small intake — around <b>two trainees a year</b>. Pay is published: S$500/month during Part B, then S$3,000/month rising to S$5,000. The firm's recruitment address is masked on its own page, so the portal is the only clean route." },
+    { n:"CMS Holborn Asia", k:"International · FLA", s:"open", w:"2027 & 2028 open", t:["email"],
+      links:[["Apply — CMS emerging talent","https://cmscmno.grad.allhires.com/app/",1],
+             ["Singapore programme","https://cmsemergingtalent.com/programmes/international/singapore/",0],
+             ["emergingtalent@cms-cmno.com","mailto:emergingtalent@cms-cmno.com",0]],
+      path:["Apply through the CMS graduate portal — <b>both the 2027 and 2028 intakes are open at once</b>, which is rare.",
+            "Applications close <b>September 2026</b>, but review is rolling and the firm may close early. Do not wait.",
+            "Year one gives you two six-month rotations plus <b>funded Bar preparation</b> to Singapore admission.",
+            "Year two adds two more rotations and an <b>optional SQE</b> for England &amp; Wales cross-qualification."],
+      watch:"Two open intake years simultaneously is the widest window on this page — if your timing is awkward, this is the firm most likely to fit it. The practice training sits with <b>Holborn Law LLC</b>. Winter internships open 3 August." },
+    { n:"Kennedys", k:"International · insurance & disputes", s:"closed", w:"2026 & 2027 closed", t:["rlt"],
+      links:[["Apply — RLT 2026","https://careers.kennedyslaw.com/jobs/vacancy/relevant-legal-training---2026-1403-singapore/1421/description/",1],
+             ["Apply — PTC 2027","https://careers.kennedyslaw.com/jobs/vacancy/practice-training-contract---2027-0740-singapore/758/description",0],
+             ["SingaporeHR@KennedysLaw.com","mailto:SingaporeHR@KennedysLaw.com",0]],
+      path:["<b>The 2026 and 2027 rounds have both closed.</b> The RLT vacancy and both PTC listings are down.",
+            "Set a reminder for <b>September 2026</b> — the process opens each September, and the 2028 cycle is the next one.",
+            "When it reopens, look for the <b>Relevant Legal Training</b> vacancy: it carries its own reference number, separate from the PTC listings.",
+            "Email Singapore HR now to ask to be told when the 2028 round opens.",
+            "Pack when live: CV, cover letter, latest transcripts. Then a written assessment and an interview with <b>two partners</b>."],
+      watch:"Worth watching despite being shut, because Kennedys is one of only <b>four firms anywhere</b> that advertises RLT as a distinct vacancy rather than burying it in a training contract. Needs a <b>2:1 or on course</b>, relevant internship experience, and the right to work in Singapore. RLT runs six months from around August; the PTC is 12 months in three seats of 3/6/3." },
+    { n:"Bird & Bird ATMD", k:"International · tech & IP", s:"open", w:"Closes 30 Sep", t:["rlt"],
+      links:[["PTC & RLT — 2028","https://www.twobirds.com/en/careers/singapore/early-careers/practice-training-contracts-and-internships",1]],
+      path:["Apply through the early careers page for the <b>2028</b> year — PTC and RLT are advertised together.",
+            "Submit inside the window: <b>1 July – 30 September 2026</b>.",
+            "Indicate your chosen practice area; you sit with a named Supervising Solicitor rather than rotating broadly."],
+      watch:"One of the very few firms publishing a <b>hard closing date</b> instead of rolling review. Diarise 30 September — there is no second look." },
+    { n:"TSMP Law Corporation", k:"Independent SG firm", s:"rolling", w:"Rolling", t:["rlt","email"],
+      links:[["practicetraining@tsmplaw.com","mailto:practicetraining@tsmplaw.com",1],
+             ["Practice training page","https://tsmplaw.com/now-hiring/practice-training",0]],
+      path:["Email the <b>dedicated practice training inbox</b> — not the general firm address.",
+            "Overseas applicants are expected to provide at minimum their <b>second year examination results</b>.",
+            "Standard pack: cover letter, CV, transcripts."],
+      watch:"Runs a purpose-built inbox for training applications, which most firms this size do not — a good sign that applications are actually read. Small intake, so apply early." },
+    { n:"Virtus Law LLP", k:"Stephenson Harwood alliance", s:"rolling", w:"Year-round", t:["rlt","email"],
+      links:[["careers.virtus@stephensonharwood.com","mailto:careers.virtus@stephensonharwood.com",1],
+             ["Training contracts page","https://www.virtus-law.com/training-contracts/",0]],
+      path:["Email with a subject line carrying your <b>full name, target department, and intended year of Bar admission</b> — the format is specified.",
+            "Attach a cover letter setting out your practice interests, and a CV with work and internship experience.",
+            "Include <b>grades from secondary school onwards</b>, awards, scholarships and extracurriculars.",
+            "Attach a <b>recent essay, article or paper</b> — a writing sample is expected here, unusually.",
+            "Overseas graduates: apply once you have second-year exam results."],
+      watch:"Documents the overseas sequence explicitly — RLT for six months <b>from August</b>, then Part A and Part B. Accepts applications all year, so no reason to wait for a window." },
+    { n:"Oon & Bazul", k:"Independent SG firm · shipping & disputes", s:"rolling", w:"Standing listing", t:["rlt","email"],
+      links:[["PTC / RLT listing","https://oonbazul.com/jobs/practice-training-contract-relevant-legal-training/",1],
+             ["enquiry@oonbazul.com","mailto:enquiry@oonbazul.com",0]],
+      path:["Send a <b>cover letter of no more than 1 page</b>: preferred practice areas, and why you are a unique proposition for this firm.",
+            "Add a <b>CV of no more than 3 pages</b>: contact details, academic record including predicted class, extracurriculars, prior work experience.",
+            "Attach education transcripts, certificates and any testimonials."],
+      watch:"Keeps a standing <b>Practice Training Contract / Relevant Legal Training</b> listing rather than a seasonal round, and pays a competitive monthly honorarium. Trainees rotate among partners rather than sitting in one seat." },
+    { n:"Sabara Law LLC", k:"Deloitte Legal network", s:"rolling", w:"Rolling", t:["rlt"],
+      links:[["Apply via Deloitte","https://jobs.sea.deloitte.com/job/Singapore-T&L-Practice-Trainee-Sabara-Law-LLC-Sing/1062105266/",1],
+             ["joayap@sabaralaw.com.sg","mailto:joayap@sabaralaw.com.sg",0]],
+      path:["Apply on the <b>Deloitte SEA careers board</b>, not a law firm site — this is why it gets missed.",
+            "The listing covers both RLT and practice training contracts; state which you want.",
+            "Standard pack: CV, transcripts, cover letter."],
+      watch:"A boutique Singapore practice inside the Deloitte Legal network. Work spans corporate, commercial, employment, IP, technology, tax and private client. Trainees attach to senior lawyers rather than rotating." },
+    { n:"Harry Elias Partnership", k:"Independent SG firm", s:"rolling", w:"Rolling", t:["email"],
+      links:[["recruitment@harryelias.com","mailto:recruitment@harryelias.com",1],
+             ["Practice training contracts","https://www.harryelias.com/practice-training-contracts/",0]],
+      path:["Send your CV to the recruitment inbox.",
+            "<b>Say which practice areas interest you</b> — the firm assigns a mentor in your preferred field, so this directly shapes your seat.",
+            "Choose between <b>Advocate Seats and Solicitor Seats</b>, offered across civil and criminal litigation, arbitration, family, construction, corporate and real estate."],
+      watch:"Unusual in offering an explicit advocate track, which matters if you want court time rather than transactional work. Reverted to its own name after the Eversheds tie-up ended, so ignore older Eversheds Harry Elias contact details." },
+    { n:"Baker McKenzie Wong & Leow", k:"International · JLV", s:"open", w:"2028 open", t:[],
+      links:[["Apply — 2028 PTC","https://careers.bakermckenzie.com/en_US/opportunities/JobDetail/Singapore-2028-Practice-Training-Contract/3332",1]],
+      path:["Apply to the <b>2028 Practice Training Contract</b> — there is no separate RLT listing because the RLT is bundled in.",
+            "Cover letter must set out your interest in the firm <b>and reasons for your preferred practice area</b>.",
+            "Add CV and latest academic transcripts."],
+      watch:"States plainly that for overseas graduates it provides <b>the additional six months of RLT</b> required for admission. One application covers both. Opened 1 July 2026." },
+    { n:"Allen & Gledhill", k:"Big Four", s:"open", w:"2028 open", t:["email"],
+      links:[["Online application form","https://www.allenandgledhill.com/sg/pathways/positions/4800/application",1],
+             ["trainingcontracts@agasia.law","mailto:trainingcontracts@agasia.law",0]],
+      path:["Submit the online form for the <b>2028</b> training contract.",
+            "<b>Rank all six departments</b>: Corporate &amp; Commercial, M&amp;A, Real Estate, Financial Services, IP &amp; Technology, Litigation &amp; Dispute Resolution.",
+            "Separately, email the recruitment inbox to ask how they handle the six months of RLT for overseas graduates — this is not published."],
+      watch:"No advertised RLT listing, but they do take overseas graduates. 2026 and 2027 contracts are still being considered in selected practices, so ask rather than assuming those years are shut." },
+    { n:"WongPartnership", k:"Big Four", s:"open", w:"2028 open", t:[],
+      links:[["Application portal","https://wongpartnership.applyourjobs.com/",1],
+             ["Opportunities page","https://www.wongpartnership.com/careers/opportunitiesDetail/students",0]],
+      path:["Download the <b>trainee recruitment brochure</b> from the opportunities page first — it carries detail the web page omits.",
+            "Apply through the portal for the <b>2028</b> one-year contract (qualifying 2029).",
+            "Raise RLT directly with recruitment through the portal; no public inbox is published."],
+      watch:"One-year contract with rotations giving exposure to two or more practice areas. Opened 1 July 2026. The only Big Four firm with no reachable recruitment email — the portal is the sole route." },
+    { n:"Shook Lin & Bok", k:"Large SG firm", s:"rolling", w:"Rolling", t:["email"],
+      links:[["trainee@shooklin.com","mailto:trainee@shooklin.com",1],
+             ["Practice trainees page","https://www.shooklin.com/en/join-us/practice-trainees",0]],
+      path:["Email the dedicated trainee inbox — <b>there is no portal</b>, and the general recruitment address is the wrong one.",
+            "Include: cover letter, CV, transcripts, <b>the subjects you took with grades</b>, expected classification, available start date, and <b>two preferred practice areas</b>.",
+            "Interns use a different address: intern@shooklin.com."],
+      watch:"Twelve-month contract. The firm takes trainees with the stated intention of retaining them as associates on admission." },
+    { n:"Dentons Rodyk", k:"Global · oldest SG practice", s:"rolling", w:"Rolling", t:["email"],
+      links:[["sg.careers@dentons.com","mailto:sg.careers@dentons.com",1],
+             ["Practice training scheme","https://dentons.rodyk.com/en/careers/practice-training-scheme",0],
+             ["Application form (download)","https://dentons.rodyk.com/en/careers/-/media/316d862a50094c23acc389c581de82d7.ashx",0]],
+      path:["<b>Download the application form</b> — this firm uses a document, not a web application.",
+            "Complete it and return it to the Singapore careers inbox.",
+            "Ask in the same email which intake years are live and whether RLT is offered separately — neither is published."],
+      watch:"Trainees rotate across practice groups. Publishes noticeably less than its peers about intake years, so the email is worth more here than watching the site." },
+    { n:"Singapore Legal Service", k:"Public service · AGC and Legal Service", s:"open", w:"Closes 7 Sep", t:["email"],
+      links:[["Undergraduates & JD students","https://www.lsc.gov.sg/careers/who-are-we-looking-for/undergraduates",1],
+             ["AGC internships","https://www.agc.gov.sg/careers/internship-opportunities/",0],
+             ["lsc_sec@lsc.gov.sg","mailto:lsc_sec@lsc.gov.sg",0]],
+      path:["Check eligibility: at least <b>second year completed</b> at NUS, SMU, SUSS or a Scheduled University.",
+            "Submit the LSC online form with certificates, transcripts and legal internship details by <b>7 September 2026</b>.",
+            "Add a <b>one-page personal statement</b> and a <b>one-page write-up</b> on why you want to join the Legal Service.",
+            "Arrange <b>two professor references</b> sent separately to lsc_sec@lsc.gov.sg by <b>20 September 2026</b> — miss this and the application is incomplete.",
+            "Interviews in November; shortlisted candidates may do a two-week minimum attachment at AGC."],
+      watch:"Work as a Judicial or Legal Service Officer counts as RLT in its own right. Appointment is conditional, confirmed on completing your degree, then three consecutive two-year contracts before consideration for the permanent establishment." },
+    { n:"Withers KhattarWong", k:"International · private client", s:"closed", w:"2028 closed", t:["email"],
+      links:[["Careers portal — Singapore","https://www.witherscareers.com/?keywords=&sector=&role=&group=&location=Singapore&type=",1],
+             ["fay.welch@witherskhattarwong.com","mailto:fay.welch@witherskhattarwong.com",0]],
+      path:["The 2028 round has closed. Watch the portal for <b>2029</b>, expected around 1 July 2027.",
+            "Meanwhile email the talent manager to ask whether RLT is handled off-cycle.",
+            "When it opens: upper second or higher, and <b>2 As and 1 B at A-level</b> or equivalent. Non-law degrees welcome."],
+      watch:"Opened 1 July 2026 and closed again fast — a useful warning about pace. Process is application → 30-minute interview with two partners → written English exercise → deductive, inductive and numerical online assessments." },
+    { n:"Clifford Chance / Cavenagh Law", k:"Magic Circle · FLA", s:"soon", w:"Opens 1 Jul 2027", t:["email"],
+      links:[["recruitment.singapore@cliffordchance.com","mailto:recruitment.singapore@cliffordchance.com",1],
+             ["Practice training contract","https://cavenaghlaw.com.sg/content/cavenagh-law/graduate-recruitment/practice-training-contract.html",0]],
+      path:["Nothing to submit — the <b>2029</b> round opens 1 July 2027 and 2028 is closed.",
+            "Email graduate recruitment now to ask whether RLT can be hosted independently of the TC cycle."],
+      watch:"The Singapore practice sits in a formal law alliance with Cavenagh Law, so RLT may be arrangeable outside the advertised cycle. Worth the email." },
+    { n:"HSF Kramer / Prolegis", k:"International · dual qualification", s:"soon", w:"Via vacation scheme", t:[],
+      links:[["Singapore training contract","https://careers.hsfkramer.com/global/en/singapore-early-careers/training-contract",1]],
+      path:["The realistic entry point is the <b>vacation scheme</b>, not a direct application.",
+            "Vacation scheme students get an exit interview that feeds straight into selection.",
+            "Direct applications may open only after vacation scheme candidates have been considered."],
+      watch:"Two-year programme qualifying you in <b>both Singapore and England &amp; Wales</b> — 12-month practice training at alliance partner Prolegis LLC, then SQE qualifying work experience. An alternative two-year contract exists for those not eligible for the Singapore Bar." },
+    { n:"In-house legal department", k:"Route · under a QRLO", s:"rolling", w:"Check first", t:[],
+      links:[["SILE — RLT categories","https://www.sile.edu.sg/the-singapore-bar-admission/relevant-legal-training/",1],
+             ["SILE — RLT FAQs","https://www.sile.edu.sg/faqs-relevant-legal-training",0]],
+      path:["<b>Before anything else</b>, check the employer is listed on an official securities exchange — SILE's guidance indicates a private limited company will not qualify.",
+            "Check your proposed supervisor is a Qualifying Relevant Legal Officer: an advocate and solicitor of <b>5+ years' standing</b>.",
+            "Get <b>written confirmation from SILE</b> for your specific employer and supervisor before committing six months.",
+            "Approach the legal team directly — there is no central listing."],
+      watch:"Public-sector trainees supervised by a QRLO additionally need a <b>three-month attachment at AGC or a Singapore law practice</b>, plus SILE approval of the manner of service <b>at least 14 days before starting</b>. Period served without that approval may be disregarded." }
   ];
 
-  var SMALL = [
-    ["A.W. Law LLC", "Trainee — RLT or TC", "2026", "43", 1],
-    ["A Alagappan Law Corporation", "Trainee — RLT or TC", "2026", "41", 1],
-    ["Farallon Law Corporation", "Practice / Relevant Legal Trainee", "2026", "47", 1],
-    ["Skandan Law LLC", "Practice / Relevant Legal Trainee", "2026", "28", 1],
-    ["Niroze Idroos LLC", "Practice / Relevant Legal Trainee", "2026", "27", 1],
-    ["GT Law LLC", "Practice Trainee", "2028", "48", 0],
-    ["Resource Law LLC", "Practice Trainee", "2028", "40", 0],
-    ["JurisAsia LLC", "Practice Trainee", "2027", "45", 0],
-    ["Dan Tan Law", "Practice Trainee", "2026 / 2027", "33", 0],
-    ["Braddell Brothers LLP", "Practice Trainee", "2026 / 2028", "36", 0],
-    ["Flint & Battery LLC", "Practice Trainee", "2026", "44", 0],
-    ["Adsan Law LLC", "Practice Trainee", "2026", "39", 0],
-    ["Nanyang Law LLC", "Trainee", "2026", "38", 0],
-    ["Jay Law Corporation", "Practice Trainee", "2026", "37", 0],
-    ["PKWA Law Practice LLC", "Practice Trainee", "2026", "35", 0],
-    ["Genesis Law Corporation", "Legal Trainee", "2026", "34", 0],
-    ["Focus Law Asia LLC", "Practice Trainee", "2026", "32", 0]
+  // name, kind, [emails], route note, source: own|sec|none, group: local|intl|public
+  var AB = [
+    ["Allen & Gledhill","Big Four",["trainingcontracts@agasia.law"],"Dedicated training contract inbox; online form is the primary route.","own","local"],
+    ["Rajah & Tann Singapore","Big Four",["trainingcontracts@rajahtann.com"],"Separate RLT and TC listings on Workable; email for queries.","sec","local"],
+    ["Drew & Napier","Big Four",["hrrecruit@drewnapier.com"],"Online TC/RLT form is primary; HR inbox for queries.","own","local"],
+    ["WongPartnership","Big Four",[],"No published inbox — portal only.","none","local"],
+    ["Dentons Rodyk","Global · oldest SG practice",["sg.careers@dentons.com"],"Head of HR. Return the downloadable form here; it asks your expected Part B session.","own","local"],
+    ["Shook Lin & Bok","Large SG firm",["trainee@shooklin.com","intern@shooklin.com"],"Trainee-only inbox. Email is the sole route.","own","local"],
+    ["Lee & Lee","Large SG firm · Hogan Lovells JLV",["juliantay@leenlee.com.sg","matthewsaw@leenlee.com.sg","hr@leenlee.com.sg"],"RLT 2027 open, no moratorium. Also hosts the Hogan Lovells Lee & Lee practice training.","own","local"],
+    ["TSMP Law Corporation","Independent SG firm",["practicetraining@tsmplaw.com"],"Purpose-built practice training inbox. Overseas applicants: include second-year results.","own","local"],
+    ["Harry Elias Partnership","Independent SG firm",["recruitment@harryelias.com"],"Advocate and solicitor seats incl. criminal and family. Name your preferred areas.","sec","local"],
+    ["RHTLaw Asia","Regional SG firm",["enquiries@rhtlawasia.com"],"General enquiries inbox routes to HR; no trainee-specific address.","own","local"],
+    ["Tan Kok Quan Partnership","Litigation boutique",["recruit@tkqp.com.sg","internships@tkqp.com.sg"],"Recruit inbox explicitly covers trainees. Send CV and latest transcript.","own","local"],
+    ["Oon & Bazul","Shipping & disputes",["enquiry@oonbazul.com"],"Standing PTC/RLT listing; 1-page letter, 3-page CV, transcripts.","own","local"],
+    ["PDLegal","Mid-size SG firm",["careers@pdlegal.com.sg","enquiry@pdlegal.com.sg"],"Careers inbox covers practice trainees and internships.","own","local"],
+    ["Providence Law Asia","Disputes boutique",["info@providencelawasia.com"],"Single general inbox; address it to the practice manager.","own","local"],
+    ["Setia Law","Disputes & crisis boutique",["recruitment@setialaw.com"],"Asks for CV, transcripts and cover letter.","own","local"],
+    ["Colin Ng & Partners","Mid-size SG firm",["hr@cnplaw.com","contact@cnplaw.com"],"HR inbox published on the careers page.","own","local"],
+    ["Tan Rajah & Cheah","Established SG firm",["trc@trc.com.sg","admin@trc.com.sg"],"General inbox; has a careers page.","own","local"],
+    ["Bih Li & Lee","Disputes boutique",["gen@bihlilee.com.sg"],"Single general inbox.","own","local"],
+    ["Yuen Law","Boutique · private client",["recruit@yuenlaw.com.sg","intern@yuenlaw.com.sg"],"Separate recruit and intern inboxes.","own","local"],
+    ["Covenant Chambers","Boutique",["hr@covenantchambers.com"],"HR inbox published.","own","local"],
+    ["IRB Law","Volume practice",["hello@irblaw.com.sg"],"Large intake relative to size; general inbox.","own","local"],
+    ["Sabara Law LLC","Deloitte Legal network",["joayap@sabaralaw.com.sg"],"Primary route is the Deloitte SEA careers board.","own","local"],
+    ["HOH Law Corporation","Independent SG firm",["law@hoh.com.sg"],"Runs both the 6-month RLT and the 12-month practice training, and sets out the overseas-graduate route in terms. Publishes $1,000-2,500/mo for RLT.","own","local"],
+    ["Amica Law LLC","IP & technology",["marcus.liu@amicalaw.com"],"Offers places for Relevant Legal Training and training contracts, subject to availability.","own","local"],
+    ["Davinder Singh Chambers","Disputes · silk-led",["careers@davindersinghchambers.com"],"Dedicated training contracts and internships page.","own","local"],
+    ["Helmsman LLC","Shipping & disputes",["careers@helmsmanlaw.com"],"Accepts internships and traineeships; programme launched 2020.","own","local"],
+    ["AEI Legal LLC","Corporate & M&A",["hr@aeilegal.com"],"Training contracts open for 2027 onwards. Live page says market-competitive honorarium with no figures.","own","local"],
+    ["Rubicon Law LLC","Corporate",["contactus@rubicon-law.com"],"Internships for 2026, traineeship for 2028.","own","local"],
+    ["CHP Law LLC","Mid-size SG firm",["hr@chp.law"],"Rotational training pathway; five seats advertised on the Law Society register.","own","local"],
+    ["Chancery Law Corporation","Independent SG firm",[],"Welcomes applications for both relevant legal training and practice training contracts, and maps the foreign-graduate Part A then RLT path. No email published.","none","local"],
+    ["Joseph Tan Jude Benny LLP","Shipping & corporate",[],"Advertises internship or traineeship programmes. No email published - use the recruitment page.","none","local"],
+    ["Wee Swee Teow","Established SG firm",["recruit@wst.com.sg","kris.song@wst.com.sg"],"Recruitment address rendered in a live Law Society advert. Site is wst.com.sg.","own","local"],
+    ["Quahe Woo & Palmer","Boutique",["admin@qwp.sg","enquiry@qwp.sg"],"Careers page carries a training contract PDF. No fixed number of places and no retention quota.","own","local"],
+    ["Peter Low Chambers","Disputes boutique",["recruitment@peterlowllc.com","info@peterlowllc.com"],"Takes applicants year-round regardless of stage of study. Mail domain is .com, the site is .com.sg.","own","local"],
+    ["Tito Isaac & Co","Mid-size SG firm",["Sonia.Ow@titoisaaclaw.com"],"Takes PTCs from Singapore AND approved foreign universities. Stipend S$1,500-3,000. Rotates you through practice groups.","sec","local"],
+    ["Engelin Teh Practice","Disputes boutique",["legal@etplaw.com"],"Dedicated practice trainee programme page. Send cover letter, CV and transcripts.","own","local"],
+    ["LONGBOW Law Corporation","Corporate boutique",["david.teo@longbowlawcorp.com","info@longbowlawcorp.com"],"Welcomes RLT in terms. The Managing Director is the Supervising Solicitor.","own","local"],
+    ["Farallon Law Corporation","Boutique",["info@fl.sg","nicolas.tang@fl.sg"],"Welcomes RLT applications on its own careers page, not just via the register.","own","local"],
+    ["Skandan Law LLC","Boutique",["bhaskaran.sivasamy@skandanlaw.com"],"Say whether you want RLT or a practice training contract. They train to retain.","own","local"],
+    ["Niroze Idroos LLC","Boutique",["help@nirozelaw.com.sg","fauziah@nirozelaw.com.sg"],"Careers page lists Practice Trainees - Relevant Legal Training and Training Contract.","own","local"],
+    ["A Alagappan Law Corporation","Boutique",["hr@alagappanlawcorp.sg"],"Family, civil, criminal, probate and conveyancing, with advocacy and client-management exposure.","own","local"],
+    ["Flint & Battery LLC","Corporate boutique",["admin@flintbattery.com"],"Jobs page advertises Trainee (RLT/TC) explicitly.","own","local"],
+    ["GT Law LLC","Boutique",["admin@gtlaw-llc.com"],"Cross-border work. No email on its own site - this one comes from the Law Society advert.","own","local"],
+    ["PKWA Law Practice","Family & volume practice",["mail@pkwalaw.com","charlesphua@pkwalaw.com"],"Runs three separate listings. Trainees attend client consultations and court.","own","local"],
+    ["Chan Neo LLP","Boutique",["admin@channeo.sg"],"Says grades are not the determining factor and trainees do real work, not filler. Retention generally good.","own","local"],
+    ["Legal Clinic LLC","Boutique",["recruitment@legalclinic.com.sg","mail@legalclinic.com.sg"],"Small intake; juniors work under direct senior mentorship. Avoids the word trainee.","own","local"],
+    ["Gurbani & Co LLC","Admiralty & shipping",["mail@gurbaniandco.com"],"No careers page - speculative approach only.","own","local"],
+    ["Eugene Thuraisingam Asia LLC","Criminal & arbitration boutique",["eugene@thuraisingam.com"],"Renamed from Eugene Thuraisingam LLP with effect from 1 January 2026. Address is second-hand - verify.","sec","local"],
+    ["REV Law LLC","Boutique",[],"Careers page says it takes all trainees with a view to retention, but the address is obfuscated. Use the contact form.","none","local"],
+    ["Donaldson & Burkinshaw","Oldest SG partnership",[],"No published address - contact form only, at donburk.asia (not donburk.com.sg).","none","local"],
+    ["Sim Mong Teck & Partners","Private client & real estate",[],"Addresses obfuscated, no careers page. Phone is the only reliable route.","none","local"],
+    ["Fervent Chambers","Boutique",[],"Could not verify any address - use the contact form on the firm's site.","none","local"],
+    ["Prolegis LLC","HSF Kramer alliance",[],"Hosts the first 12 months of HSF Kramer's Singapore practice training. Apply via HSF Kramer, not Prolegis.","none","local"],
+    ["K&L Gates Straits Law","International · JLV",["si-mail@klgates.com"],"Straits Law Practice merged in here in 2019. K&L Gates announced a split effective January 2027 - post-split naming unknown.","own","intl"],
+    ["Law Society of Singapore","Graduate support",["lawgraduates@lawsoc.org.sg"],"Graduate support line — counselling and referrals if you cannot place yourself.","sec","public"],
+    ["Singapore Legal Service","Public service",["lsc_sec@lsc.gov.sg"],"References go here separately; applications via the LSC form.","own","public"],
+    ["Virtus Law / Stephenson Harwood","International alliance",["careers.virtus@stephensonharwood.com","careers@shlegalworld.com"],"The clearest published RLT statement of any firm. Prescribed subject line; year-round.","own","intl"],
+    ["Kennedys / Legal Solutions LLC","International · insurance",["SingaporeHR@KennedysLaw.com"],"Advertises RLT as its own vacancy. 2026 and 2027 rounds now closed — watch 2028.","own","intl"],
+    ["Clifford Chance / Cavenagh Law","Magic Circle · FLA",["recruitment.singapore@cliffordchance.com"],"2029 opens 1 July 2027. S$115k trainee, S$133k trainee associate; Part B + SQE funded.","own","intl"],
+    ["Pinsent Masons MPillay","International · JLV",[],"Jan 2028 intake, 1 Jul – 31 Aug 2026. Recruitment email is masked on the page — use the portal.","none","intl"],
+    ["CMS Holborn Asia","International · FLA",["emergingtalent@cms-cmno.com"],"2027 and 2028 both open now, close September 2026, rolling review.","own","intl"],
+    ["Norton Rose Fulbright / Ascendant Legal","International · FLA",["SingaporeHR@nortonrosefulbright.com","ascendant_enquiries@nortonrosefulbright.com"],"12-month PTC via Ascendant Legal. An archived listing suggested Singaporeans/PRs only — verify.","own","intl"],
+    ["Morgan Lewis Stamford","International · JLV",["singaporerecruitment@morganlewis.com"],"Wants a recent photo plus O-level and A-level certificates. S$2,000/mo.","own","intl"],
+    ["Duane Morris & Selvam","International · JLV",["info@duanemorrisselvam.com"],"Apply one year before your intended training period. Transcripts from all levels.","own","intl"],
+    ["Simmons & Simmons JWS","International · JLV",["graduate.recruitmentasia@simmons-simmons.com"],"Two-year dual qualification. Vacation scheme is the main route; biggest disclosure gap — ask directly.","own","intl"],
+    ["Ashurst ADTLaw","International · FLA",[],"12-month PTC with ADTLaw, rolling for 2026 and 2027. One application per window only.","none","intl"],
+    ["Bird & Bird ATMD","International · tech & IP",[],"Advertises PTC and RLT jointly for 2028; window 1 Jul – 30 Sep 2026. Portal only.","none","intl"],
+    ["Baker McKenzie Wong & Leow","International · JLV",[],"Portal only. RLT explicitly bundled into the 2028 PTC.","none","intl"],
+    ["HSF Kramer / Prolegis","International · dual qualification",[],"Portal only; vacation scheme is the funnel. Reimburses Part A and Part B fees.","none","intl"],
+    ["Withers KhattarWong","International · private client",["fay.welch@witherskhattarwong.com"],"Talent acquisition manager, APAC. 2028 round closed; 2:1 plus 2 As and 1 B at A-level.","own","intl"],
+    ["Eversheds Sutherland","International",["recruitment@harryelias.com"],"Singapore practice operates with Harry Elias; advocate and solicitor seats. Verify the address.","sec","intl"],
+    ["Resource Law LLC","Reed Smith formal law alliance",["contact@resourcelawasia.com"],"2028 seats, S$4,000/mo — four vacancies, the best-paid in the register.","own","intl"],
+    ["Clyde & Co Clasis","International · JLV",[],"Publishes internships only, but practice trainees exist in the market. Worth a direct approach.","none","intl"],
+    ["Mayer Brown PK Wong & Nair","International · JLV",[],"Has trainees but publishes nothing. No working careers URL found. Direct approach required.","none","intl"],
+    ["A&O Shearman","International",["SN_recruitment@aoshearman.com"],"States it does NOT offer Singapore training contracts. Vacation scheme leads to E&W qualification.","own","nosg"],
+    ["Linklaters","Magic Circle",[],"Singapore–London training contract, E&W qualification. Must be at a UK university.","none","nosg"],
+    ["Latham & Watkins","International",["associategraduaterecruiting.asia@lw.com"],"No Singapore-law or RLT detail published. Subject line: Singapore Programs Inquiry.","own","nosg"],
+    ["Sidley Austin","International",["asiagraduaterecruitment@sidley.com"],"Joint Singapore/London programme, E&W qualification. Internship is the only funnel.","own","nosg"],
+    ["White & Case","International",["earlycareers.apac@whitecase.com","singapore.hr@whitecase.com"],"Singapore is a seat within the London training contract. Internship route strongly advised.","own","nosg"],
+    ["Freshfields","Magic Circle",[],"No Singapore PTC. The London–Asia trainee programme lands in Hong Kong, not Singapore.","none","nosg"],
+    ["Skadden","International",["rajeev.duggal@skadden.com"],"No Singapore trainee programme. Hiring partner only — no graduate recruitment address.","own","nosg"],
+    ["HFW","International · shipping",["singaporeearlycareers@hfw.com"],"Singapore internships only, no PTC. London TC uses Singapore as a secondment seat.","own","nosg"],
+    ["Watson Farley & Williams","International · shipping",[],"Singapore appears only as a four-month secondment within the UK training contract.","none","nosg"],
+    ["Squire Patton Boggs","International",[],"No Singapore JLV or trainee route identified. All trainee material is UK.","none","nosg"],
+    ["Gibson Dunn","International",[],"No Singapore trainee page. Hong Kong takes one to two trainees a year.","none","nosg"],
+    ["Milbank","International",[],"No Singapore trainee page. Only published contact is US-based legal recruiting.","none","nosg"],
+    ["Jones Day","International",["srecruitment@jonesday.com"],"Explicit no: the Singapore office does not hire summer associates or articling clerks.","own","nosg"]
   ];
 
-  var BANDS = [
-    ["open", "Open now — submit today"],
-    ["rolling", "Rolling — no window, apply whenever"],
-    ["soon", "Opens later — diarise, or email to ask"],
-    ["closed", "Closed this cycle"]
-  ];
+  var BANDS = [["open","Open now — submit today"],["rolling","Rolling — no window, apply whenever"],
+               ["soon","Opens later — diarise, or email to ask"],["closed","Closed this cycle"]];
 
-  var st = { q: "", status: new Set(), tag: new Set() };
-  var results = document.getElementById("results");
-  var countEl = document.getElementById("count");
+  var st = { q:"", status:new Set(), tag:new Set() };
+  var results = document.getElementById("results"), countEl = document.getElementById("count");
 
-  function esc(s) { return String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
-  function hay(e) {
-    return (e.n + " " + e.k + " " + e.w + " " + e.path.join(" ") + " " + e.watch)
-      .replace(/<[^>]+>/g, " ").toLowerCase();
-  }
-  function ok(e) {
+  function esc(s){ return String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function hay(e){ return (e.n+" "+e.k+" "+e.w+" "+e.path.join(" ")+" "+e.watch).replace(/<[^>]+>/g," ").toLowerCase(); }
+  function ok(e){
     if (st.status.size && !st.status.has(e.s)) return false;
-    if (st.tag.size) { var h = false; st.tag.forEach(function (t) { if (e.t.indexOf(t) !== -1) h = true; }); if (!h) return false; }
-    if (st.q && hay(e).indexOf(st.q) === -1) return false;
+    if (st.tag.size){ var h=false; st.tag.forEach(function(t){ if(e.t.indexOf(t)!==-1) h=true; }); if(!h) return false; }
+    if (st.q && hay(e).indexOf(st.q)===-1) return false;
     return true;
   }
-
-  function row(e) {
-    return '<details class="row">' +
-      '<summary>' +
-        '<span class="dot ' + e.s + '"></span>' +
-        '<span class="rname">' + esc(e.n) + ' <i>' + esc(e.k) + '</i></span>' +
-        '<span class="rwhen ' + e.s + '">' + esc(e.w) + '</span>' +
-        '<span class="caret">&#9656;</span>' +
-      '</summary>' +
-      '<div class="body">' +
-        '<div class="lbl">Send it here</div>' +
-        '<div class="links">' + e.links.map(function (l) {
-          return '<a class="btn' + (l[2] ? " primary" : "") + '" href="' + l[1] + '" target="_blank" rel="noopener">' + esc(l[0]) + '</a>';
-        }).join("") + '</div>' +
-        '<div class="lbl">The path</div>' +
-        '<ol class="path">' + e.path.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ol>' +
-        '<p class="watch">' + e.watch + '</p>' +
-      '</div>' +
-    '</details>';
+  function row(e){
+    return '<details class="row"><summary><span class="dot '+e.s+'"></span>'+
+      '<span class="rname">'+esc(e.n)+' <i>'+esc(e.k)+'</i></span>'+
+      '<span class="rwhen '+e.s+'">'+esc(e.w)+'</span><span class="caret">&#9656;</span></summary>'+
+      '<div class="body"><div class="lbl">Send it here</div><div class="links">'+
+      e.links.map(function(l){ return '<a class="btn'+(l[2]?" primary":"")+'" href="'+l[1]+'" target="_blank" rel="noopener">'+esc(l[0])+'</a>'; }).join("")+
+      '</div><div class="lbl">The path</div><ol class="path">'+
+      e.path.map(function(p){ return "<li>"+p+"</li>"; }).join("")+
+      '</ol><p class="watch">'+e.watch+'</p></div></details>';
   }
-
-  function render() {
-    var shown = 0, html = "";
-    BANDS.forEach(function (b) {
-      var list = E.filter(function (e) { return e.s === b[0] && ok(e); });
-      if (!list.length) return;
-      shown += list.length;
-      html += '<div class="band">' + b[1] + '</div><div class="rows">' + list.map(row).join("") + '</div>';
+  function render(){
+    var shown=0, html="";
+    BANDS.forEach(function(b){
+      var list=E.filter(function(e){ return e.s===b[0] && ok(e); });
+      if(!list.length) return;
+      shown+=list.length;
+      html+='<div class="band">'+b[1]+'</div><div class="rows">'+list.map(row).join("")+'</div>';
     });
     results.innerHTML = shown ? html : '<p class="empty">Nothing matches. Try clearing a filter.</p>';
-    countEl.textContent = shown + "/" + E.length;
+    countEl.textContent = shown+"/"+E.length;
   }
-
-  document.querySelectorAll(".chip").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var set = st[b.dataset.f], v = b.dataset.v;
-      if (set.has(v)) { set.delete(v); b.setAttribute("aria-pressed", "false"); }
-      else { set.add(v); b.setAttribute("aria-pressed", "true"); }
+  document.querySelectorAll(".chip").forEach(function(b){
+    b.addEventListener("click",function(){
+      var set=st[b.dataset.f], v=b.dataset.v;
+      if(set.has(v)){ set.delete(v); b.setAttribute("aria-pressed","false"); }
+      else { set.add(v); b.setAttribute("aria-pressed","true"); }
       render();
     });
   });
-  document.getElementById("search").addEventListener("input", function () {
-    st.q = this.value.trim().toLowerCase(); render();
-  });
-
-  document.getElementById("small").innerHTML = SMALL.map(function (r) {
-    return "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) +
-      (r[4] ? '<span class="flag">RLT</span>' : "") + '</td><td class="yr">' + esc(r[2]) +
-      '</td><td><a href="https://lawsocietycareers.com.sg/practice-training-contract/' + r[3] +
-      '/" target="_blank" rel="noopener">View →</a></td></tr>';
-  }).join("");
-
+  document.getElementById("search").addEventListener("input",function(){ st.q=this.value.trim().toLowerCase(); render(); });
   render();
+
+  /* ---------- address book ---------- */
+  var abFilter="all", abQ="";
+  var abBody=document.getElementById("abbody"), copyNote=document.getElementById("copynote");
+
+  function abVisible(){
+    return AB.filter(function(r){
+      if(abFilter==="local" && r[5]!=="local") return false;
+      if(abFilter==="intl" && r[5]!=="intl") return false;
+      if(abFilter==="nosg" && r[5]!=="nosg") return false;
+      if(abFilter==="hasmail" && !r[2].length) return false;
+      if(abFilter==="all" && r[5]==="nosg") return false;
+      if(abQ && (r[0]+" "+r[1]+" "+r[3]+" "+r[2].join(" ")).toLowerCase().indexOf(abQ)===-1) return false;
+      return true;
+    });
+  }
+  function abRender(){
+    var rows=abVisible();
+    abBody.innerHTML = rows.length ? rows.map(function(r){
+      var mails = r[2].length
+        ? r[2].map(function(m,i){
+            return '<a href="mailto:'+m+'">'+esc(m)+'</a>'+
+                   (i===0?'<button class="copy" data-m="'+m+'">Copy</button>':'');
+          }).join('<span class="alt"></span>')
+        : '<span style="color:var(--muted)">—</span>';
+      var srcTxt = r[4]==="own" ? "Own site" : (r[4]==="sec" ? "Listing" : "None");
+      return '<tr><td class="firm">'+esc(r[0])+'<em>'+esc(r[1])+'</em></td>'+
+             '<td class="addr">'+mails+'</td>'+
+             '<td class="route">'+esc(r[3])+'</td>'+
+             '<td><span class="src '+r[4]+'">'+srcTxt+'</span></td></tr>';
+    }).join("") : '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px">No match.</td></tr>';
+  }
+  document.querySelectorAll("[data-ab]").forEach(function(b){
+    b.addEventListener("click",function(){
+      abFilter=b.dataset.ab;
+      document.querySelectorAll("[data-ab]").forEach(function(x){ x.classList.remove("solid"); x.setAttribute("aria-pressed", x===b?"true":"false"); });
+      b.classList.add("solid");
+      abRender();
+    });
+  });
+  document.getElementById("absearch").addEventListener("input",function(){ abQ=this.value.trim().toLowerCase(); abRender(); });
+
+  function flash(el,msg){ el.textContent=msg; setTimeout(function(){ el.textContent=""; },2200); }
+  function copy(text,cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(cb,function(){ fallback(text,cb); });
+    } else fallback(text,cb);
+  }
+  function fallback(text,cb){
+    var ta=document.createElement("textarea");
+    ta.value=text; ta.setAttribute("readonly",""); ta.style.position="absolute"; ta.style.left="-9999px";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); cb(); } catch(e){}
+    document.body.removeChild(ta);
+  }
+  abBody.addEventListener("click",function(ev){
+    var b=ev.target.closest(".copy"); if(!b) return;
+    copy(b.dataset.m,function(){ b.textContent="Copied"; b.classList.add("done");
+      setTimeout(function(){ b.textContent="Copy"; b.classList.remove("done"); },1800); });
+  });
+  document.getElementById("copyall").addEventListener("click",function(){
+    var list=[]; abVisible().forEach(function(r){ r[2].forEach(function(m){ if(list.indexOf(m)===-1) list.push(m); }); });
+    if(!list.length){ flash(copyNote,"No addresses in view"); return; }
+    copy(list.join(", "),function(){ flash(copyNote,list.length+" addresses copied"); });
+  });
+  document.getElementById("copytmpl").addEventListener("click",function(){
+    var t=document.getElementById("tmpltext").innerText;
+    copy(t,function(){ flash(document.getElementById("tmplnote"),"Template copied"); });
+  });
+  abRender();
+
+  /* ---------- Law Society register ---------- */
+  // practice, advertised-as (verbatim), rlt, start, [emails], honorarium, seats, listing id, areas
+  var REG = [
+    ["Angeline Suparto Law Corp","Practice Trainees and Legal Executives",1,"2026 or 2027",["accounts@asuparto.com.sg"],"$2,000 RLT / $2,800 PTC","2",14,"Cross-border corporate — Indonesia, Singapore, China, Hong Kong"],
+    ["Genesis Law Corporation","Legal Trainee candidates … pursue their Relevant Legal Training with us in 2026/2027",1,"2026/2027",["wendy.loey@genesislawcorp.com"],"$2,500–3,000","1",34,"Corporate"],
+    ["A.W. Law LLC","Trainees looking to do Relevant Legal Training (RLT) / Training Contracts (TC)",1,"2026",["minah@awlaw.com.sg","wahab@awlaw.com.sg"],"TBC","5",43,"Civil, matrimonial, criminal, wills & estates, commercial, accident, conveyancing"],
+    ["LONGBOW Law Corporation","Practice Training Contracts (including Relevant Legal Training)",1,"2026",["david.teo@longbowlawcorp.com"],"TBD","1",25,"M&A, funds, employment, tax and trust"],
+    ["Skandan Law LLC","Practice trainee or relevant legal trainee",1,"2026",["bhaskaran.sivasamy@skandanlaw.com"],"$2,500–3,000","1",28,"Civil litigation & arbitration, medical negligence, corporate, IP, private client, criminal, family"],
+    ["Farallon Law Corporation","Relevant Legal Training or Practice Training Contracts",1,"2026",["info@fl.sg"],"TBD","2",47,"Civil litigation, arbitration, mediation, criminal, employment, corporate"],
+    ["A Alagappan Law Corporation","Relevant Legal Training or Practice Training Contract",1,"2026",["hr@alagappanlawcorp.sg"],"TBA","2",41,"Family, civil, criminal, probate, conveyancing"],
+    ["DMO Law Corporation","One (1) Relevant Legal Training / Training Contract (RLT/TC) position",1,"2026",["desmond@dmolaw.com.sg"],"$2,000–2,500","1",6,"Probate, divorce, civil litigation, mental capacity"],
+    ["PKWA Law Practice","Relevant Legal Trainee or Practice Trainee",1,"2026",["charlesphua@pkwalaw.com"],"$2,000","1",13,"Insurance litigation"],
+    ["Tan Lee & Choo","Both RLT and PTC applicants are welcome",1,"2026",["jpl@tanleeandchoo.com.sg"],"TBA","1",15,"General solicitors' practice, family, civil litigation"],
+    ["Flint & Battery LLC","Corporate Trainee (RLT/TC) for retention",1,"2026",["winstonwong@flintbattery.com"],"$2,500","1",7,"Corporate transactions"],
+    ["Dhillon & Panoo LLC","Legal Associate / Relevant Legal Training / Practice Training Contract",1,"not stated",["anne@dpllc.com.sg"],"not stated","—",0,"Criminal & commercial litigation, family, probate, personal injury, insurance, IP, employment — deadline 4 Aug 2026"],
+    ["Resource Law LLC","Practice training contracts for the Year 2028",0,"2028",["contact@resourcelawasia.com"],"$4,000","4",40,"Corporate & disputes — alliance with Reed Smith. Highest honorarium in the register"],
+    ["GT Law LLC","Legal practice training",0,"2028",["admin@gtlaw-llc.com"],"$3,500","1",48,"Corporate & commercial, dispute resolution"],
+    ["Meritus Law LLC","Practice Trainees in 2027 and 2028",0,"2027 & 2028",["contact@merituslawllc.com"],"$2,500","2",5,"Civil litigation, disputes, corporate"],
+    ["JurisAsia LLC","Practice Trainee",0,"2027",["vincent.tan@jurisasiallc.com"],"TBD","1",45,"Corporate M&A — associated with Gowling WLG"],
+    ["David Lim & Partners","Join us in 2027",0,"2027",["gk@dlplaw.com.sg"],"TBC","2",8,"Corporate and litigation"],
+    ["David Lim & Partners","Join us in 2027",0,"2027",["gk@dlplaw.com.sg"],"TBC","2",9,"Dispute resolution, construction & engineering"],
+    ["WNLEX LLC","Practice trainee",0,"2027",["ngliyong@wnlex.com.sg"],"$300 (as published)","1",20,"Corporate"],
+    ["Braddell Brothers LLP","Practice Trainee for 2026 … also accepting applications for PTCs commencing 2028",0,"2026 & 2028",["admin@braddellbrothers.com"],"$2,500","1",36,"Dispute resolution"],
+    ["Dan Tan Law","Practice Training Contract (PTC)",0,"2026 & 2027",["deborah@dantanlaw.com"],"TBD","2",33,"International arbitration — rolling basis, early applications encouraged"],
+    ["Loo & Partners LLP","Practice Trainees",0,"2026",["ccloo@loopartners.com.sg"],"$3,600","2",3,"Banking, corporate/IPO/M&A, fintech, funds — subject line: Application For Practice Trainees"],
+    ["CHP Law LLC","Rotational trainee programme",0,"2026",["hr@chp.law"],"$2,500–3,500","5",21,"Litigation, corporate/commercial, family"],
+    ["Nanyang Law LLC","Trainee",0,"2026",["hrm@nanyangasia.com"],"$2,500–3,500","2",38,"Litigation, corporate, IP"],
+    ["Adsan Law LLC","Practice Trainee",0,"2026",["adrianpeh@adsanlaw.com"],"$2,500–3,500","2",39,"Banking, corporate, family, litigation — subject: Application for Practice Trainee – [Name]"],
+    ["WNLEX LLC","Practice trainee",0,"2026",["ngliyong@wnlex.com.sg"],"$3,000","1",19,"Corporate"],
+    ["GT Law LLC","Legal practice training",0,"2026",["admin@gtlaw-llc.com"],"$3,500","1",17,"Corporate"],
+    ["Flint & Battery LLC","International Transactions Team addition",0,"2026",["admin@flintbattery.com"],"$2,688","1",44,"M&A, investments, joint ventures, funds"],
+    ["Malcus Poh Law Corporation","Private client trainee",0,"2026",["malcus@malcuspohlaw.com"],"$2,500","1",12,"Private client & family — China–Singapore cross-border"],
+    ["Gloria James-Civetta & Co","Practice training contracts",0,"2026",["consult@gjclaw.com.sg"],"$2,500 incremental","2",11,"Family law"],
+    ["PKWA Law Practice","Practice Training in Year 2026",0,"2026",["angie@pkwalaw.com"],"$2,500","2",16,"Family law & general litigation"],
+    ["PKWA Law Practice","Practice Training in Year 2026",0,"2026",["mail@pkwalaw.com"],"$2,500","1",35,"Family law & general litigation"],
+    ["Braddell Brothers LLP","Practice Trainee for 2026",0,"2026",["admin@braddellbrothers.com"],"$2,500","1",46,"Dispute resolution"],
+    ["Focus Law Asia LLC","Practice Trainee",0,"2026",["office@focuslawasia.com"],"$2,500","1",32,"Family law with commercial litigation exposure"],
+    ["Niroze Idroos LLC","Practice Trainee (careers page says RLT and TC)",1,"2026",["fauziah@nirozelaw.com.sg","help@nirozelaw.com.sg"],"TBA","1",27,"Civil & criminal litigation, family (civil & Syariah), probate, mental capacity"],
+    ["Forte Law LLC","Trainee(s) … training contract",0,"2026",["info@fortelaw.com"],"$2,000","2",23,"General corporate, M&A, civil & criminal litigation"],
+    ["LIMN Law Corporation","Practice Trainees",0,"2026",["peggyneo@limnlaw.com"],"tbc","1",18,"Litigation/dispute resolution, construction niche — include a passport photo and state your year"],
+    ["Malcus Poh Law Corporation","Private client trainee",0,"2026",["malcus@malcuspohlaw.com"],"$2,000","1",2,"Private client & family"],
+    ["Malcus Poh Law Corporation","Private client trainee",0,"2026",["malcus@malcuspohlaw.com"],"$2,000","1",22,"Private client & family"],
+    ["LONGBOW Law Corporation","Practice Training Contracts (including Relevant Legal Training)",1,"2026",["david.teo@longbowlawcorp.com"],"TBD","1",4,"M&A, funds, employment, tax and trust"],
+    ["LONGBOW Law Corporation","Practice Training Contracts (including Relevant Legal Training)",1,"2026",["david.teo@longbowlawcorp.com"],"TBD","1",10,"M&A, funds, employment, tax and trust"],
+    ["A.W. Law LLC","Relevant Legal Training (RLT) / Training Contracts (TC)",1,"2026",["minah@awlaw.com.sg","wahab@awlaw.com.sg"],"TBC","2",26,"Civil, matrimonial, criminal, wills & estates, commercial, conveyancing"],
+    ["A.W. Law LLC","Relevant Legal Training (RLT) / Training Contracts (TC)",1,"2026",["minah@awlaw.com.sg","wahab@awlaw.com.sg"],"TBC","2",29,"Civil, matrimonial, criminal, wills & estates, commercial, conveyancing"],
+    ["LYTAG Law LLP","Trainees under training contract",0,"2026",["accounts@lytag.com.sg"],"$1,200–2,500","1",24,"Litigation, conveyancing"],
+    ["Jay Law Corporation","Practice Trainee (all-rounder)",0,"2026",["jeneen@jaylawcorp.com"],"$800–1,000","1",37,"Criminal, family, civil — asks for a writing sample"],
+    ["BR Law Corporation","Trainee … Training Contract",0,"2026",["tcrecruit@brlawcorp.com"],"TBD","1",1,"Dispute resolution, family & matrimonial"]
+  ];
+
+  var rFilter="all", rQ="";
+  var regBody=document.getElementById("regbody"), regNote=document.getElementById("regnote");
+  function regVisible(){
+    return REG.filter(function(r){
+      if(rFilter==="rlt" && !r[2]) return false;
+      if(rFilter==="late" && !/202[78]/.test(r[3])) return false;
+      if(rFilter==="paid" && /TBD|TBA|TBC|tbc|not stated/.test(r[5])) return false;
+      if(rQ && (r[0]+" "+r[1]+" "+r[8]+" "+r[3]).toLowerCase().indexOf(rQ)===-1) return false;
+      return true;
+    });
+  }
+  function regRender(){
+    var rows=regVisible();
+    regBody.innerHTML = rows.length ? rows.map(function(r){
+      var url = r[7] ? "https://lawsocietycareers.com.sg/practice-training-contract/"+r[7]+"/"
+                     : "https://lawsocietycareers.com.sg/job/dhillon-panoo-llc-legal-associate-relevant-legal-training-practice-training-contract-90";
+      var mails = r[4].map(function(m,i){
+        return '<a href="mailto:'+m+'">'+esc(m)+'</a>'+(i===0?'<button class="copy" data-m="'+m+'">Copy</button>':'');
+      }).join('<span class="alt"></span>');
+      return '<tr><td class="firm"><a href="'+url+'" target="_blank" rel="noopener">'+esc(r[0])+'</a>'+
+        '<em>'+esc(r[8])+'</em></td>'+
+        '<td class="route">'+esc(r[1])+(r[2]?' <span class="src own">RLT</span>':'')+'</td>'+
+        '<td class="yr">'+esc(r[3])+'</td>'+
+        '<td class="addr">'+mails+'</td>'+
+        '<td class="yr">'+esc(r[5])+'</td>'+
+        '<td class="yr">'+esc(r[6])+'</td></tr>';
+    }).join("") : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">No match.</td></tr>';
+  }
+  document.querySelectorAll("[data-rf]").forEach(function(b){
+    b.addEventListener("click",function(){
+      rFilter=b.dataset.rf;
+      document.querySelectorAll("[data-rf]").forEach(function(x){ x.classList.remove("solid"); x.setAttribute("aria-pressed", x===b?"true":"false"); });
+      b.classList.add("solid"); regRender();
+    });
+  });
+  document.getElementById("rsearch").addEventListener("input",function(){ rQ=this.value.trim().toLowerCase(); regRender(); });
+  regBody.addEventListener("click",function(ev){
+    var b=ev.target.closest(".copy"); if(!b) return;
+    copy(b.dataset.m,function(){ b.textContent="Copied"; b.classList.add("done");
+      setTimeout(function(){ b.textContent="Copy"; b.classList.remove("done"); },1800); });
+  });
+  document.getElementById("copyreg").addEventListener("click",function(){
+    var list=[]; regVisible().forEach(function(r){ r[4].forEach(function(m){ if(list.indexOf(m)===-1) list.push(m); }); });
+    if(!list.length){ flash(regNote,"No addresses in view"); return; }
+    copy(list.join(", "),function(){ flash(regNote,list.length+" addresses copied"); });
+  });
+  regRender();
 })();
 </script>
