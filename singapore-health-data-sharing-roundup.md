@@ -8,14 +8,100 @@ This roundup catalogues every legislative instrument and the principal normative
 
 ---
 
-## Headline findings
+# The regime in brief
 
-1. **"Entrust" is real — and it is two things.** **TRUST** (Trusted Research and Real world-data Utilisation and Sharing Tech, trustplatform.sg) is Singapore's national trusted research environment for health and health-related data; its **Data Access Committee** is the body that governs research access to national health and genomic data. **enTRUST** ("enabling Trusted Research and real-world data Utilisation and Sharing Tech", entrust.gov.sg) is GovTech's cross-sector generalisation of the TRUST infrastructure and now serves as TRUST's members' portal. Neither has an enabling statute; both are contractual/administrative regimes. See Part III.
-2. **The new anchor statute is the Health Information Act 2026 (No. 1 of 2026)** — passed 12 January 2026, assented 3 February 2026, gazetted 12 February 2026 — and it is **wholly uncommenced** as at 24 August 2026, with **no subsidiary legislation** yet made. MOH's stated intention is effect from early 2027, with batched compliance deadlines running from September 2027 to March 2030 (administrative, not statutory).
-3. **Singapore has no special statutory category for health data.** The PDPA treats health data as ordinary personal data; heightened treatment arrives through sectoral statutes (HIA, HBRA, NRDA, IDA, MLSA), through PDPC guidance treating health information as a sensitive "target attribute", and through the deemed-significant-harm classes in the data breach notification regime.
-4. **The architecture is shifting from consent to statutory authorisation.** HIA ss 11 and 50, IDA s 10(4) and MLSA s 29(3) each displace consent (and in several cases contractual and professional confidentiality) with purpose-limited statutory gateways; the HIA then expressly neutralises PDPA consent as an alternative gateway in seven provisions (HIA ss 16(2), 30(6), 38(7), 39(3), 40(7), 43(6), 57(2)).
-5. **Re-identification is being criminalised layer by layer**: IDA s 59A(7)(b) (national public health research), PDPA s 48F, PSGA s 8, and (once commenced) HIA ss 41(2)(c) and 42(2).
-6. **Research access to identifiable data runs through four different gates depending on the source**: the PDPA Second Schedule research exceptions (private sector), the HBRA Fifth Schedule IRB waiver (human biomedical research), NRDA s 12 (disease registries, with a statutory anonymisation-first test), and the TRUST/PRECISE data access committees (national platforms, contractual).
+*This Part is a self-contained summary. Every claim in it is developed, pinpointed and sourced in Parts I–IV below.*
+
+## The shape of the system
+
+Singapore has **no single health-data law in force today**. Health data sharing is governed by a stack of four layers:
+
+1. **A general data protection statute** — the PDPA — which treats health data like any other personal data and supplies the default rules on consent, research use and breach notification for the private sector (which, unusually, includes the public hospital clusters: SingHealth, NHG and NUHS are companies, not government agencies).
+2. **Sector statutes that override it for specific flows** — research (HBRA), infectious disease control (IDA), disease registries (NRDA), national insurance (MediShield Life Scheme Act), government-internal sharing (PSGA), system security (Cybersecurity Act).
+3. **A thick layer of official guidance** — PDPC advisory guidelines, BAC research ethics, the SMC's professional code, MOH codes and circulars. None of it is binding law, but in practice it is what providers and IRBs apply day to day.
+4. **A committee-run platform layer for research access** — TRUST and PRECISE — which decides who gets national health and genomic data, by contract and committee rather than by statute.
+
+A fifth layer is arriving: the **Health Information Act 2026** was passed in January 2026 but is **not yet in force** (target: early 2027). Once commenced, it makes contribution to the National Electronic Health Record compulsory, confines access to patient care, and replaces consent with statutory sharing channels.
+
+## The answer to the "Entrust" question
+
+**Both spellings are real.** **TRUST** (trustplatform.sg) is the national trusted research environment for health data: its **Data Access Committee** — chaired by an MOH Deputy Secretary — is the gate through which researchers get national health and, increasingly, genomic data, under Five Safes controls (no downloads, vetted outputs, IRB approval first, industry needs a second approval from MOH's RIDES subcommittee). **enTRUST** (entrust.gov.sg) is GovTech's cross-sector generalisation of the same infrastructure, and is now TRUST's login portal. TRUST is the gate; enTRUST is the pipes. Neither is created by any statute — a key governance finding: Singapore's national research-data access regime rests on contracts and committees, policed only by the general statutes.
+
+## Who is bound by what
+
+- **Government (MOH, HPB, HSA, CDA)** — outside the PDPA entirely. Governed by the Public Sector (Governance) Act's ministerial data-sharing directions, criminal offences for errant officials, and unpublished internal manuals (IM8; the HealthTech Instruction Manual).
+- **Public clusters and private providers** — the PDPA, plus HCSA licensing rules that dictate what a patient record must contain and how it must be secured and handed over.
+- **Doctors personally** — the SMC's ethical code (guideline C7): no access to records of patients not under their care, no disclosure without consent or good cause, on pain of professional discipline.
+- **Researchers** — the HBRA: IRB approval, written consent covering future use, or an IRB waiver; criminal offences for disclosure and re-identification.
+- **Insurers** — the MOH–LIA Moratorium: genetic test results are off-limits for underwriting (research results absolutely and forever), soon to be replaced by legislation.
+
+## Which rule applies when
+
+- **Treating a patient and sharing within the care team** → deemed consent under the PDPA (registering for care covers the episode, case conferences and shared clinical databases); record-keeping and security duties under the HCSA General Regulations.
+- **Emergencies and contacting family** → PDPA First Schedule exceptions (emergency threatening life, health or safety; contacting next-of-kin of an injured, ill or deceased person).
+- **A patient changes provider** → the old provider must consult the patient and transfer the record or a detailed report (HCSA General Regulations reg 39) — currently the only portability rule in force.
+- **Research on existing medical records without fresh consent** → an IRB waiver under the HBRA Fifth Schedule (disproportionate effort + minimal risk + greater public good), and for the PDPA, the research exceptions — use needs four conditions; *disclosure* additionally requires that seeking consent be impracticable, strictly construed.
+- **Access to national health or genomic data** → the TRUST Data Access Committee (plus RIDES for any industry partner; plus the PRECISE committee stack for the SG100K genomic cohort, which lives on TRUST in pseudonymised form).
+- **Cancer, kidney failure and heart attack registries** → the NRDA: reporting in is compulsory; identifiable data out requires consent *and* proof the purpose cannot be met with anonymised data — the strictest gate in the landscape.
+- **An outbreak** → the IDA: the Director-General of Health can compel patient information "despite any written law, rule of law, rule of professional conduct or contract", and route it to anyone who needs it to stop transmission.
+- **Insurance underwriting** → the Moratorium (and, once the HIA commences, a statutory bar on NEHR access for insurance or employment). A Genetic Information Protection Bill is in public consultation now, expected in Parliament in 2027.
+- **A data breach** → the PDPA: notify the Commission within 3 calendar days of assessing a breach notifiable; notify patients where stigmatising categories (HIV/STIs, psychiatric and addiction diagnoses, abortion, suicide) are involved, at any scale. The HIA will add a parallel MOH-facing regime with penalties up to $1 million.
+- **Sending data overseas** → PDPA transfer rules (comparable protection by contract, law or certification). Tissue export needs donor consent; there is **no statutory export gate for health information as such** — a genuine gap.
+
+## Five structural findings
+
+1. **Health data is not a special category in Singapore law.** Sensitivity is delivered indirectly: sector statutes, PDPC guidance treating health information as a sensitive "target attribute", and the breach-notification rules that single out stigmatising diagnoses.
+2. **Consent is being displaced by statutory authorisation plus minimisation.** The HIA, IDA and MLSA all override consent (and often confidentiality) within purpose-limited channels; the HIA even bars PDPA consent as an alternative gateway in seven separate provisions.
+3. **Anonymisation is the load-bearing wall — and it is guidance, not statute.** The legal test ("serious possibility of re-identification"), the k-anonymity thresholds and the motivated-intruder analysis all live in PDPC advisory guidelines, while statutes increasingly criminalise re-identification instead of defining anonymisation.
+4. **Research access is gate-dependent, not uniform.** Four different doors — PDPA exceptions, HBRA waiver, NRDA s 12, TRUST/PRECISE committees — with materially different tests, depending on where the data sits.
+5. **Everything converges on TRUST.** NEHR research access has no published route; registry linkage and SG100K genomics both end at the TRUST DAC; broad genomic access via TRUST is slated for 2027. One committee is becoming the chokepoint of Singapore health-data research.
+
+## What changes next
+
+| When | What |
+|---|---|
+| 4 September 2026 | Genetic Information Protection Bill consultation closes |
+| 31 December 2026 | Deadline to stop using NRIC numbers for authentication (bites hard on clinic systems) |
+| Early 2027 (target) | Health Information Act 2026 commences; first regulations expected |
+| 2027 | Genetic Information Protection Bill expected in Parliament; NEHR access restrictions via HealthHub; broad SG100K access via TRUST |
+| September 2027 | HIA Batch 1 deadline: GPs, hospitals, laboratories, nuclear medicine contribute to NEHR and meet cyber/data security requirements |
+| September 2028 | Batch 2: specialists, nursing homes, dialysis; security-only licensees comply |
+| March 2030 | Batch 3: dental, ambulatory surgery, assisted reproduction, retail pharmacy |
+
+## The instruments at a glance
+
+| # | Instrument | Type | Status | Role in one line |
+|---|---|---|---|---|
+| 1 | Health Information Act 2026 | Statute | Passed, **not in force** (≈2027) | Mandatory NEHR contribution; care-only access; statutory sharing channels that displace consent |
+| 2 | Personal Data Protection Act 2012 | Statute | In force | Baseline consent/exception rules, the research exceptions, breach notification, re-identification offence |
+| 3 | Healthcare Services Act 2020 + General Regs | Statute | In force (s 28 excepted) | Licensing law: what a patient record contains, how it is secured, transferred and destroyed |
+| 4 | Human Biomedical Research Act 2015 + regs | Statute | In force | Research on identifiable data/tissue: IRB approval, consent, waivers, disclosure and re-identification offences |
+| 5 | Infectious Diseases Act 1976 | Statute | In force | Outbreak law: compulsory notification; disclosure powers overriding all confidentiality |
+| 6 | National Registry of Diseases Act 2007 | Statute | In force | Compulsory disease registries with the strictest release gates (consent + anonymisation-first) |
+| 7 | Public Sector (Governance) Act 2018 | Statute | In force (2026 amendment pending) | Intra-government sharing by ministerial direction; offences for officials |
+| 8 | Cybersecurity Act 2018 (as amended 2024) | Statute | In force (Parts 3C/3D pending) | Protects designated hospital and surveillance systems, including cloud-hosted ones |
+| 9 | MediShield Life Scheme Act 2015, Part 5 | Statute | In force | Scheme access to clinical/means data "despite any other written law", with opt-outs and hard minimisation |
+| 10 | Human Organ Transplant Act 1987 | Statute | In force | Transplant identity protection, with a research carve-out |
+| 11 | Communicable Diseases Agency Act 2025 | Statute | In force | The agency running disease surveillance and the immunisation registry |
+| 12 | Clinical trials regulations (2016) | Subsidiary | In force | Trial data regime (outside the HBRA): records, GCP confidentiality, 30-year traceability |
+| 13 | Private Hospitals and Medical Clinics Act | Statute | **Repealed** (2023) | Legacy; its genetic-testing code still applied administratively |
+| 14 | PDPC Healthcare Sector Guidelines (2023) | Advisory | Current | How the PDPA works in clinics: deemed consent for care, research exception mechanics |
+| 15 | PDPC Key Concepts (2026) + Selected Topics (2024) | Advisory | Current | The doctrine: "impracticable" strictly construed; anonymisation test; k=5/k=3 thresholds |
+| 16 | PDPC anonymisation & PET guides | Advisory | Current | The how-to: basic anonymisation, synthetic data (2024), federated learning (2026) |
+| 17 | BAC Ethics Guidelines (2021) | Ethics | Current | National research-ethics baseline: broad consent, incidental-findings duty, genomic candour |
+| 18 | BAC Big Data & AI report (2025) | Ethics | Current | Data-sharing ethics for big data/AI: custodianship, Five Safes, ethical data-localisation |
+| 19 | SMC Ethical Code and Guidelines (2016) | Professional code | Current | Doctors' confidentiality (C7): anti-snooping, disclosure gates, IRB conditions enforceable |
+| 20 | Genetic testing Code of Practice (2018/2020) | Code | Transitional | Clinical genomic data: no disclosure to anyone — family included — without consent |
+| 21 | MOH–LIA Moratorium (2021/2025) | Policy agreement | In effect | Insurers barred from genetic test results; research results shielded absolutely |
+| 22 | MOH HIA implementation suite (2026) | Guidance | Current | The pre-commencement rulebook: security essentials, NEHR access guidelines, portability code |
+| 23 | AIHGle 2.0 (2026) + model AI frameworks | Guidance | Current | Healthcare AI guardrails; which PDPA bases permit training on patient data |
+| 24 | Trusted Data Sharing Framework (2019) | Voluntary | Dated | Template data sharing agreements — Singapore's closest thing to model clauses |
+| 25 | IM8 / HealthTech Instruction Manual / PSDSRC | Internal | Unpublished | The government's own (uncitable) data rules; the post-SingHealth settlement |
+| 26 | NMEC guidance + telemedicine guidelines | Historical | Superseded/adjacent | Early confidentiality norms; the duty-to-warn question; telemedicine standards |
+| 27 | TRUST | Platform + committees | Operating | The research-access gate for national health data (DAC, RIDES, Five Safes) |
+| 28 | enTRUST | Platform | Operating | GovTech's cross-sector data-sharing infrastructure; TRUST's portal |
+| 29 | PRECISE / National Precision Medicine | Programme | Operating | The genomic cohorts (SG10K → SG100K → SG-INSIGHT) and their committee-run access |
+| 30 | NEHR / Synapxe / Healthier SG | Infrastructure | Operating | The national record and its operator; care-only access until the HIA changes the law |
 
 ---
 
