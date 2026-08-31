@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Hash routing + relative base means the built site works from a plain static
-// host, a sub-path, or even file:// with no server rewrite rules.
+// host or a sub-path with no server rewrite rules. It does NOT work from
+// file:// -- the build emits an ES module, which browsers refuse to load over
+// that scheme on CORS grounds. Serve it over http(s).
 export default defineConfig({
   base: './',
   plugins: [react()],

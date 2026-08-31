@@ -341,7 +341,7 @@ export function deriveFindings(entries: Entry[], stats: Stats): Finding[] {
 
   const diarrhoeaDays = days.filter((d) => d.looseCount >= 3)
   if (diarrhoeaDays.length > 0) {
-    const chronic = stats.spanDays >= 28 && diarrhoeaDays.length >= stats.spanDays / 2
+    const chronic = stats.spanDays >= 30 && diarrhoeaDays.length >= stats.spanDays / 2
     findings.push({
       id: 'diarrhoea',
       severity: chronic ? 'urgent' : 'watch',
@@ -350,7 +350,7 @@ export function deriveFindings(entries: Entry[], stats: Stats): Finding[] {
         diarrhoeaDays.length +
         (diarrhoeaDays.length === 1 ? ' day' : ' days'),
       detail:
-        'Diarrhoea is three or more loose or liquid stools (Bristol 6–7) in 24 hours. Acute is under 14 days, persistent is 14–29 days, chronic is four weeks or more.' +
+        'Diarrhoea is three or more loose or liquid stools (Bristol 6–7) in 24 hours. Acute is under 14 days, persistent is 14–29 days, chronic is 30 days or more.' +
         (chronic
           ? ' Your log spans four weeks or more with loose stool on most days, which puts this in the chronic bracket.'
           : ''),

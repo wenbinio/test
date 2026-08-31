@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a note for your appointment | OUTPUT</title>
+<meta name="description" content="A guided walkthrough that screens for emergencies first, then turns your answers and a short daily log into a printable summary you can hand to a clinician.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231F1D18'/%3E%3Ccircle cx='8' cy='8' r='5.2' fill='none' stroke='%23E9B04A' stroke-width='1.6'/%3E%3Cpath d='M8 5v5M5.6 7.8L8 10.2l2.4-2.4' fill='none' stroke='%23E9B04A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="index.html"><svg class="brand__mark" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"></circle><path d="M8 4v6M5.2 7.4L8 10.2l2.8-2.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>OUTPUT</a>
+    <p class="masthead__tag">A field guide to what your body puts out</p>
+    <div class="masthead__tools">
+      <button type="button" class="themebtn" id="themebtn" hidden>Theme: auto</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <ul>
+      <li><a href="index.html">Start</a></li>
+      <li><a href="pee.html">Peeing</a></li>
+      <li><a href="poo.html">Pooing</a></li>
+      <li><a href="warning-signs.html">Warning signs</a></li>
+      <li><a href="note.html">Build a note</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="wrap wrap--narrow">
+    <div class="pagehead">
+      <p class="kicker">The interactive bit</p>
+      <h1>Build a note for your appointment</h1>
+      <p class="lede">Ten minutes is not long to reconstruct six weeks from memory. This walkthrough asks the questions a clinician would ask, in the order they would ask them — <strong>screening for emergencies first</strong> — and turns your answers into a plain summary you can print or read out.</p>
+    </div>
+
+    <p class="storenotice" id="storenotice" hidden>Your browser is not letting this page save anything — private browsing usually does this. Everything below still works, but it will be lost when you close the tab. Print or copy the summary before you leave.</p>
+
+    <p class="js-off-note note"><strong>JavaScript is switched off, so the walkthrough below is showing every question at once.</strong> That is fine: print this page and fill it in by hand. It asks for exactly the same things. The one part that will not work is the automatic summary at the end.</p>
+
+    <form class="tool" id="noteform" novalidate>
+      <div class="tool__head">
+        <h2>The walkthrough</h2>
+        <p>Nothing leaves your browser. This page makes no network requests of any kind — there is nowhere for your answers to go.</p>
+      </div>
+
+      <div class="tool__body">
+        <div class="progress" id="progress" aria-hidden="true"></div>
+        <p class="vh" id="stepstatus" role="status" aria-live="polite"></p>
+
+        <!-- 1 ................................................................ -->
+        <fieldset class="step" id="step-emergency">
+          <legend>Step 1 of 6 &middot; Emergency screen</legend>
+          <h3 class="step__q" tabindex="-1">Is any of this happening right now?</h3>
+          <p class="step__hint">Tick everything that applies. If nothing does, leave them all blank and carry on.</p>
+          <ul class="opts">
+            <li><label class="opt"><input type="checkbox" name="emg" value="I cannot pass urine at all and my bladder feels painfully full"><span>I cannot pass urine at all and my bladder feels painfully full<em>Acute urinary retention. It does not resolve on its own.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="No urine at all for 12 hours or more"><span>I have passed no urine at all for 12 hours or more<em>Whether or not it is painful.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Black, tarry, sticky, foul-smelling stool"><span>Black, tarry, sticky, strongly foul-smelling poo<em>Digested blood from the upper gut. Iron tablets and bismuth blacken stool but do not make it tarry or sticky.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Vomiting blood or coffee-ground material"><span>I am vomiting blood, or something that looks like coffee grounds</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Heavy or continuous rectal bleeding, or bleeding with faintness"><span>Heavy or continuous rectal bleeding, or any rectal bleeding with dizziness, fainting, breathlessness or a racing heart</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Numbness around the genitals, buttocks or inner thighs with new bladder or bowel control problems"><span>Numbness around my genitals, buttocks, inner thighs or anus, together with new trouble controlling my bladder or bowels<em>Possible cauda equina syndrome. This is a surgical emergency measured in hours.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="New leg weakness or new severe back pain with bladder or bowel changes"><span>New weakness or numbness in a leg, or new severe back pain, alongside bladder or bowel changes</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Severe abdominal pain with a rigid or exquisitely tender abdomen"><span>Severe abdominal pain with a rigid, board-like or exquisitely tender abdomen</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="No stool and no wind at all, with vomiting and a swollen abdomen"><span>No poo <strong>and no wind at all</strong>, with vomiting and a swollen abdomen<em>This pattern suggests bowel obstruction.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Fever with shaking chills and flank or back pain"><span>Fever with shaking chills or rigors, plus pain in my flank or lower back</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="Sudden testicular pain"><span>Sudden testicular pain<em>Torsion is time-critical.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="emg" value="New confusion or drowsiness in an older adult with urinary symptoms"><span>New confusion, drowsiness or a sudden behaviour change in an older adult who also has urinary symptoms</span></label></li>
+          </ul>
+        </fieldset>
+
+        <!-- 2 ................................................................ -->
+        <fieldset class="step" id="step-scope">
+          <legend>Step 2 of 6 &middot; What has changed</legend>
+          <h3 class="step__q" tabindex="-1">What is this about?</h3>
+          <ul class="opts">
+            <li><label class="opt"><input type="checkbox" name="scope" value="peeing"><span>Peeing</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="scope" value="pooing"><span>Pooing</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="scope" value="both, and they seem related"><span>Both, and they seem related</span></label></li>
+          </ul>
+
+          <h3 class="step__q">How long has it been going on?</h3>
+          <p class="step__hint">Duration is the single most useful thing you can bring to an appointment.</p>
+          <ul class="opts">
+            <li><label class="opt"><input type="radio" name="duration" value="less than a week"><span>Less than a week</span></label></li>
+            <li><label class="opt"><input type="radio" name="duration" value="one to two weeks"><span>One to two weeks</span></label></li>
+            <li><label class="opt"><input type="radio" name="duration" value="three weeks or more"><span>Three weeks or more<em>Three weeks is the standard threshold for investigating a change in bowel habit.</em></span></label></li>
+            <li><label class="opt"><input type="radio" name="duration" value="more than three months"><span>More than three months</span></label></li>
+            <li><label class="opt"><input type="radio" name="duration" value="on and off for months, with no clear start"><span>On and off for months, with no clear start</span></label></li>
+          </ul>
+        </fieldset>
+
+        <!-- 3 ................................................................ -->
+        <fieldset class="step" id="step-blood">
+          <legend>Step 3 of 6 &middot; Blood</legend>
+          <h3 class="step__q" tabindex="-1">Have you seen blood?</h3>
+          <p class="step__hint">Including once, briefly, painlessly, or a while ago. Bleeding from a significant cause is very often intermittent, which is exactly why it gets missed.</p>
+          <ul class="opts">
+            <li><label class="opt"><input type="radio" name="blood" value="none seen"><span>No blood at all</span></label></li>
+            <li><label class="opt"><input type="radio" name="blood" value="blood in urine"><span>Blood in my pee — pink, red or cola-coloured</span></label></li>
+            <li><label class="opt"><input type="radio" name="blood" value="bright red blood on the paper or on the surface of the stool"><span>Bright red blood on the paper, or on the surface of the poo</span></label></li>
+            <li><label class="opt"><input type="radio" name="blood" value="blood mixed through the stool"><span>Blood mixed through the poo, or dark red</span></label></li>
+            <li><label class="opt"><input type="radio" name="blood" value="blood in both urine and stool"><span>Both — in pee and in poo</span></label></li>
+            <li><label class="opt"><input type="radio" name="blood" value="not sure — possibly beetroot or food colouring"><span>Not sure. It might have been beetroot, rhubarb or food colouring<em>Worth reporting anyway. Never assume it was the beetroot.</em></span></label></li>
+          </ul>
+          <div class="field">
+            <label for="d-bloodwhen">If you saw blood, when — and how much?</label>
+            <input type="text" id="d-bloodwhen" name="d-bloodwhen" placeholder="e.g. twice in the last fortnight, streaks on the paper">
+          </div>
+        </fieldset>
+
+        <!-- 4 ................................................................ -->
+        <fieldset class="step" id="step-flags">
+          <legend>Step 4 of 6 &middot; The other things that raise urgency</legend>
+          <h3 class="step__q" tabindex="-1">Does any of this apply?</h3>
+          <p class="step__hint">Tick everything true. Leave them all blank if none apply.</p>
+          <ul class="opts">
+            <li><label class="opt"><input type="checkbox" name="flag" value="Unintentional weight loss"><span>I have lost weight without trying</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Symptoms wake me from sleep"><span>The symptoms wake me from sleep<em>Diarrhoea or pain that gets you out of bed points away from IBS.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="New symptoms and aged over 50"><span>These are new symptoms and I am over 50</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Family history of bowel cancer, polyps or inflammatory bowel disease"><span>A close relative has had bowel cancer, polyps, or inflammatory bowel disease</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Known or suspected iron-deficiency anaemia"><span>I have been told I am anaemic or low in iron</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Persistent bloating, feeling full quickly, or pelvic pain"><span>Persistent bloating, feeling full quickly, or pelvic pain<em>Persistent rather than fluctuating bloating is an ovarian cancer red flag in women.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="New or worsening incontinence"><span>New or worsening leaking of urine or stool</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Persistent pencil-thin or ribbon-like stool"><span>My poo has been persistently pencil-thin or ribbon-like</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Large volumes of urine with extreme thirst"><span>Large volumes of pee with relentless thirst</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Pregnant"><span>I am pregnant<em>Thresholds are lower in pregnancy — contact a midwife or GP the same day for urinary symptoms.</em></span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Immunosuppressed, on chemotherapy, or has a long-term condition affecting this"><span>I am immunosuppressed, on chemotherapy, or have a long-term condition that affects this</span></label></li>
+            <li><label class="opt"><input type="checkbox" name="flag" value="Recent antibiotics, hospital stay or foreign travel"><span>Recent antibiotics, a hospital stay, or foreign travel</span></label></li>
+          </ul>
+        </fieldset>
+
+        <!-- 5 ................................................................ -->
+        <fieldset class="step" id="step-detail">
+          <legend>Step 5 of 6 &middot; The detail</legend>
+          <h3 class="step__q" tabindex="-1">Now the specifics</h3>
+          <p class="step__hint">Everything here is optional. Anything you fill in goes into the summary; anything you skip is simply left out.</p>
+
+          <div class="field">
+            <label for="d-start">Roughly when did it start?</label>
+            <input type="date" id="d-start" name="d-start" placeholder="YYYY-MM-DD">
+          </div>
+
+          <p class="lbl" id="bristol-lbl">Which Bristol type describes your poo most of the time?</p>
+          <ul class="picker" role="group" aria-labelledby="bristol-lbl">
+            <li><label id="lbl-b1"><input type="radio" name="bristol" value="1" aria-describedby="bd1"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="24" cy="32" r="8"></circle><circle cx="46" cy="25" r="7"></circle><circle cx="65" cy="35" r="8"></circle><circle cx="86" cy="26" r="6.5"></circle><circle cx="102" cy="36" r="5.5"></circle></g></svg><span class="n">Type 1</span><span class="d" id="bd1">Separate hard lumps</span></span></label></li>
+            <li><label id="lbl-b2"><input type="radio" name="bristol" value="2" aria-describedby="bd2"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><g fill="currentColor"><rect x="14" y="21" width="92" height="19" rx="9.5"></rect><circle cx="34" cy="24" r="7.5"></circle><circle cx="57" cy="25" r="8"></circle><circle cx="79" cy="24" r="7.5"></circle><circle cx="96" cy="27" r="6"></circle></g></svg><span class="n">Type 2</span><span class="d" id="bd2">Sausage-shaped but lumpy</span></span></label></li>
+            <li><label id="lbl-b3"><input type="radio" name="bristol" value="3" aria-describedby="bd3"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><rect x="10" y="21" width="100" height="18" rx="9" fill="currentColor"></rect><g stroke="var(--card)" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M34 22v16"></path><path d="M55 21v18"></path><path d="M76 23v15"></path><path d="M95 24v13"></path></g></svg><span class="n">Type 3</span><span class="d" id="bd3">Sausage with cracks</span></span></label></li>
+            <li><label id="lbl-b4"><input type="radio" name="bristol" value="4" aria-describedby="bd4"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><path d="M14 40c14-22 30 16 44-2s28 12 48-6" fill="none" stroke="currentColor" stroke-width="17" stroke-linecap="round"></path></svg><span class="n">Type 4</span><span class="d" id="bd4">Smooth and soft</span></span></label></li>
+            <li><label id="lbl-b5"><input type="radio" name="bristol" value="5" aria-describedby="bd5"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><g fill="currentColor"><ellipse cx="29" cy="33" rx="14" ry="10"></ellipse><ellipse cx="61" cy="27" rx="12.5" ry="9"></ellipse><ellipse cx="91" cy="34" rx="13" ry="9.5"></ellipse></g></svg><span class="n">Type 5</span><span class="d" id="bd5">Soft blobs, clear edges</span></span></label></li>
+            <li><label id="lbl-b6"><input type="radio" name="bristol" value="6" aria-describedby="bd6"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M20 38c-6-6 0-13 7-11 0-9 13-11 17-3 7-7 18-3 17 5 8 0 11 9 3 12-9 3-38 3-44-3z"></path><path d="M76 40c-5-4-1-10 5-9 1-6 10-7 13-1 6-3 12 2 9 7-1 4-6 6-12 6-6 0-12-1-15-3z"></path><circle cx="103" cy="24" r="4"></circle></g></svg><span class="n">Type 6</span><span class="d" id="bd6">Fluffy, ragged, mushy</span></span></label></li>
+            <li><label id="lbl-b7"><input type="radio" name="bristol" value="7" aria-describedby="bd7"><span><svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><ellipse cx="60" cy="35" rx="47" ry="12" fill="currentColor"></ellipse><g stroke="var(--card)" stroke-width="2.2" fill="none" stroke-linecap="round"><path d="M30 33h13"></path><path d="M52 39h18"></path><path d="M78 32h11"></path></g></svg><span class="n">Type 7</span><span class="d" id="bd7">Entirely liquid</span></span></label></li>
+          </ul>
+
+          <p class="lbl" id="ucol-lbl">What colour is your pee, most of the day?</p>
+          <ul class="cpick" role="group" aria-labelledby="ucol-lbl">
+            <li><label id="lbl-c1"><input type="radio" name="ucolour" value="pale straw"><span><i style="background:#F6EFC0" aria-hidden="true"></i></span><span>Pale straw &mdash; the target</span></label></li>
+            <li><label id="lbl-c2"><input type="radio" name="ucolour" value="bright fluorescent yellow"><span><i style="background:#E4EC1F" aria-hidden="true"></i></span><span>Bright fluorescent yellow</span></label></li>
+            <li><label id="lbl-c3"><input type="radio" name="ucolour" value="dark yellow or amber"><span><i style="background:#E0A800" aria-hidden="true"></i></span><span>Dark yellow or amber</span></label></li>
+            <li><label id="lbl-c4"><input type="radio" name="ucolour" value="honey or brown-tea"><span><i style="background:#A96A15" aria-hidden="true"></i></span><span>Honey or brown-tea</span></label></li>
+            <li><label id="lbl-c5"><input type="radio" name="ucolour" value="orange"><span><i style="background:#E07414" aria-hidden="true"></i></span><span>Orange</span></label></li>
+            <li><label id="lbl-c6"><input type="radio" name="ucolour" value="pink or red"><span><i style="background:#C63A4E" aria-hidden="true"></i></span><span>Pink or red</span></label></li>
+            <li><label id="lbl-c7"><input type="radio" name="ucolour" value="cola or dark brown"><span><i style="background:#5A2E14" aria-hidden="true"></i></span><span>Cola or dark brown</span></label></li>
+            <li><label id="lbl-c8"><input type="radio" name="ucolour" value="cloudy or milky"><span><i style="background:#E9E6DA" aria-hidden="true"></i></span><span>Cloudy or milky</span></label></li>
+            <li><label id="lbl-c9"><input type="radio" name="ucolour" value="almost colourless"><span><i style="background:#FBFBF4" aria-hidden="true"></i></span><span>Almost colourless</span></label></li>
+          </ul>
+
+          <div class="field">
+            <label for="d-freqnow">How often are you going now?</label>
+            <input type="text" id="d-freqnow" name="d-freqnow" placeholder="e.g. peeing 12 times a day, pooing 4 times a day">
+          </div>
+          <div class="field">
+            <label for="d-freqnormal">And what is normal for you?</label>
+            <input type="text" id="d-freqnormal" name="d-freqnormal" placeholder="e.g. peeing 6 times, pooing once every other day">
+          </div>
+          <div class="field">
+            <label for="d-night">How many times a night do you wake to pee?</label>
+            <input type="number" id="d-night" name="d-night" min="0" max="20" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="d-weight">Weight change, if any &mdash; how much, over how long?</label>
+            <input type="text" id="d-weight" name="d-weight" placeholder="e.g. 4 kg over three months, not trying">
+          </div>
+          <div class="field">
+            <label for="d-meds">Everything you take</label>
+            <textarea id="d-meds" name="d-meds" placeholder="Prescriptions, over-the-counter medicines, supplements, iron, laxatives, herbal remedies, protein powders. Photograph the boxes and bring them too."></textarea>
+          </div>
+          <div class="field">
+            <label for="d-other">Anything else worth saying</label>
+            <textarea id="d-other" name="d-other" placeholder="Pain and where it is, fevers you measured, travel and dates, what makes it better or worse, what you are most worried about."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 6 ................................................................ -->
+        <fieldset class="step" id="step-log">
+          <legend>Step 6 of 6 &middot; The log</legend>
+          <h3 class="step__q" tabindex="-1">A few days of records beats a month of impressions</h3>
+          <p class="step__hint">Optional, but this is the part clinicians actually want. Three days is enough for bladder questions; a fortnight is better for bowel ones. Add an entry each evening and it will be folded into your summary.</p>
+
+          <div class="field">
+            <label for="log-date">Date</label>
+            <input type="date" id="log-date" name="log-date" placeholder="YYYY-MM-DD">
+          </div>
+          <div class="field">
+            <label for="log-pees">Number of pees</label>
+            <input type="number" id="log-pees" name="log-pees" min="0" max="60" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="log-poos">Number of poos</label>
+            <input type="number" id="log-poos" name="log-poos" min="0" max="40" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="log-bristol">Bristol type, if you pooed</label>
+            <select id="log-bristol" name="log-bristol">
+              <option value="">Not recorded</option>
+              <option value="1">1 &mdash; separate hard lumps</option>
+              <option value="2">2 &mdash; sausage-shaped but lumpy</option>
+              <option value="3">3 &mdash; sausage with cracks</option>
+              <option value="4">4 &mdash; smooth and soft</option>
+              <option value="5">5 &mdash; soft blobs, clear edges</option>
+              <option value="6">6 &mdash; fluffy, ragged, mushy</option>
+              <option value="7">7 &mdash; entirely liquid</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="log-colour">Urine colour</label>
+            <select id="log-colour" name="log-colour">
+              <option value="">Not recorded</option>
+              <option value="pale straw">Pale straw</option>
+              <option value="bright yellow">Bright fluorescent yellow</option>
+              <option value="dark yellow or amber">Dark yellow or amber</option>
+              <option value="honey or brown-tea">Honey or brown-tea</option>
+              <option value="orange">Orange</option>
+              <option value="pink or red">Pink or red</option>
+              <option value="cola or dark brown">Cola or dark brown</option>
+              <option value="cloudy or milky">Cloudy or milky</option>
+              <option value="almost colourless">Almost colourless</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="log-blood">Any blood?</label>
+            <select id="log-blood" name="log-blood">
+              <option value="">Not recorded</option>
+              <option value="none">None</option>
+              <option value="in urine">In urine</option>
+              <option value="in or on stool">In or on stool</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="log-note">Note for the day</label>
+            <input type="text" id="log-note" name="log-note" placeholder="e.g. urgent twice after coffee, no pain">
+          </div>
+          <p><button type="button" class="btn btn--small" id="log-add">Add this day to the log</button></p>
+          <p class="livemsg" id="log-status" role="status" aria-live="polite"></p>
+
+          <p class="logempty" id="log-empty">No days logged yet.</p>
+          <div class="tablewrap" id="log-wrap" hidden>
+            <table class="log">
+              <caption>Your log. Entries are stored in this browser only and are never sent anywhere.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th><th scope="col">Pees</th><th scope="col">Poos</th>
+                  <th scope="col">Bristol</th><th scope="col">Urine colour</th><th scope="col">Blood</th>
+                  <th scope="col">Note</th><th scope="col"><span class="vh">Remove entry</span></th>
+                </tr>
+              </thead>
+              <tbody id="log-body"></tbody>
+            </table>
+          </div>
+        </fieldset>
+
+        <!-- result .......................................................... -->
+        <div class="step" id="step-result">
+          <h3 class="step__q" tabindex="-1">Your note</h3>
+          <div id="verdict" role="status" aria-live="polite"></div>
+          <div class="btnrow">
+            <button type="button" class="btn" id="printbtn">Print this note</button>
+            <button type="button" class="btn btn--ghost" id="copybtn">Copy the text</button>
+            <button type="button" class="btn btn--ghost" id="clearbtn">Clear everything</button>
+          </div>
+          <p class="livemsg" id="copystatus" role="status" aria-live="polite"></p>
+          <h4 id="summary-h">The summary, as plain text</h4>
+          <div class="summary" id="summaryout" tabindex="0" role="region" aria-labelledby="summary-h"></div>
+        </div>
+
+        <div class="btnrow" id="navrow">
+          <button type="button" class="btn btn--ghost" id="backbtn">Back</button>
+          <button type="button" class="btn" id="nextbtn">Continue</button>
+        </div>
+      </div>
+    </form>
+
+    <section class="sec" id="what" aria-labelledby="what-h">
+      <span class="sec__num">A</span>
+      <h2 id="what-h">What the three answers mean</h2>
+      <p>The walkthrough sorts you into one of three groups. They are the same three the <a href="warning-signs.html">warning signs</a> page uses, and the logic is deliberately cautious: where it is uncertain, it tells you to be seen.</p>
+      <ul>
+        <li><span class="tag tag--now">Go now</span> Something you ticked in the emergency screen. Do not wait to see whether it settles, do not wait for a GP appointment, and do not drive yourself if you feel faint or are bleeding heavily.</li>
+        <li><span class="tag tag--see">Book within days</span> Visible blood, symptoms lasting three weeks or more, or one of the other patterns that changes how quickly you should be assessed. You do not need to know what it is. Ask for the earliest appointment and name the symptom.</li>
+        <li><span class="tag tag--ok">Probably nothing, but keep the note</span> Short-lived symptoms with no blood and no other flags. Most of these settle. Keep logging, and come back to this page if anything on the first two lists appears.</li>
+      </ul>
+      <p>The note builder cannot diagnose you and does not try to. It sorts by urgency and writes down what you said, which is a genuinely useful thing and a strictly limited one.</p>
+    </section>
+
+    <section class="sec" id="privacy" aria-labelledby="privacy-h">
+      <span class="sec__num">B</span>
+      <h2 id="privacy-h">Where your answers go</h2>
+      <p>Nowhere. This page has no server, no analytics and no network requests of any kind — open your browser's network tab and watch it stay empty. Your answers are held in your browser's own local storage so that closing the tab does not lose the log, and the <strong>Clear everything</strong> button deletes them.</p>
+      <p>If you are in private browsing, your browser will refuse to store anything at all. The page detects that, tells you at the top, and keeps working for the current session only.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="disclaimer">
+        <h2>This is information, not medical advice</h2>
+        <p>OUTPUT cannot examine you, does not know your history and is no substitute for a clinician who can. Anything described here as urgent should be treated as urgent. If something feels badly wrong to you and this site does not mention it, that is a reason to be seen, not a reason to wait. Nothing here is treatment advice and no page gives drug doses.</p>
+        <p>Figures are drawn from mainstream clinical sources and given as ranges. In the UK, NHS 111 will triage by phone or online at any hour; elsewhere, use your local urgent-care line. Nobody is annoyed with you for turning up and being fine.</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="index.html">Start</a></li>
+          <li><a href="pee.html">Peeing</a></li>
+          <li><a href="poo.html">Pooing</a></li>
+          <li><a href="warning-signs.html">Warning signs</a></li>
+          <li><a href="note.html">Build a note</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__meta">OUTPUT &middot; general health information &middot; works offline &middot; no tracking, no requests, no accounts</p>
+  </div>
+</footer>
+
+<script src="assets/note.js"></script>
+</body>
+</html>

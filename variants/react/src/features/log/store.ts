@@ -169,6 +169,7 @@ export function buildSample(): Entry[] {
     pee(2, 15, 40, 'small', 'amber', { urgency: true }),
     pee(2, 19, 10, 'medium', 'pale-straw'),
     pee(2, 22, 40, 'small', 'pale-straw'),
+    poo(2, 20, 45, 2, 'brown', { strained: true, incomplete: true }),
 
     // Yesterday
     pee(1, 7, 0, 'large', 'amber'),

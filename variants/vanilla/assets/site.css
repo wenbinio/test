@@ -116,6 +116,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+[hidden] { display: none !important; }   /* .btn sets display, so the attribute needs teeth */
 img, svg { max-width: 100%; }
 svg { display: block; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.15; margin: 0; }
@@ -345,6 +346,12 @@ h4 {
   padding: .22rem .5rem; border-radius: 2px; border: 1px solid transparent;
   vertical-align: .06em;
 }
+/* Most tags are two or three words and read better on one line, but the long
+   verdict tags overflow a 320px screen. Let those wrap on the narrowest phones. */
+@media (max-width: 24rem) {
+  .tag { white-space: normal; }
+}
+
 .tag--ok    { background: var(--teal-bg);   color: var(--teal);      border-color: var(--teal); }
 .tag--watch { background: var(--amber-bg);  color: var(--amber-ink); border-color: var(--amber-ink); }
 .tag--see   { background: var(--danger-bg); color: var(--danger-ink);border-color: var(--danger-ink); }
@@ -505,7 +512,7 @@ td .num, .num { font-family: var(--mono); font-size: .88rem; }
 .picker .n { font-family: var(--mono); font-size: .72rem; font-weight: 700; color: var(--ink); display: block; }
 .picker .d { font-family: var(--sans); font-size: .68rem; line-height: 1.3; color: var(--muted); display: block; }
 .picker input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.picker input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.picker label:focus-within, .cpick label:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
 .picker .sel { border-color: var(--accent); border-width: 2px; background: var(--amber-bg); }
 
 /* colour picker */
@@ -552,10 +559,16 @@ td .num, .num { font-family: var(--mono); font-size: .88rem; }
   padding: .5rem .7rem; margin: 0 0 1rem;
 }
 
-/* stepper: JS-off shows everything; JS-on hides inactive steps */
+/* stepper: JS-off shows every question at once; JS-on hides inactive steps */
 .js-off-note { display: block; }
 .js .js-off-note { display: none; }
 .js .step--hidden { display: none; }
+#navrow, #progress { display: none; }
+#step-result { display: none; }
+.js #navrow { display: flex; }
+.js #progress { display: flex; }
+.js #step-result { display: block; }
+.js #step-result.step--hidden { display: none; }
 
 /* ---------- footer ---------- */
 .footer { border-top: 2px solid var(--ink); background: var(--sunk); padding: 2.5rem 0 3rem; margin-top: 3rem; }
@@ -608,9 +621,8 @@ td .num, .num { font-family: var(--mono); font-size: .88rem; }
   .tag { border: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
   .tablewrap { overflow: visible; border: 1px solid #000; }
   table { min-width: 0; }
-  .summary { max-height: none; overflow: visible; border: 1px solid #000; }
+  .summary { max-height: none; overflow: visible; border: 1px solid #000; font-size: 8.5pt; line-height: 1.45; }
   .cards .card, .tool, .note { box-shadow: none; border: 1px solid #999; }
-  .step--hidden { display: block !important; }
   a { text-decoration: underline; }
   h1, h2, h3 { page-break-after: avoid; }
   .sec, .tablewrap, .note, .alarm { page-break-inside: avoid; }

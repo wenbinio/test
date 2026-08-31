@@ -12,7 +12,7 @@ export const peeFigures: Figure[] = [
 export const pooFigures: Figure[] = [
   { value: '3×/day – 3×/week', label: 'the accepted normal range — about 95% of people' },
   { value: '100–150', unit: 'g', label: 'typical daily stool weight on a Western diet' },
-  { value: '10–73', unit: 'h', label: 'whole-gut transit time, median around 30–40 h' },
+  { value: '10–73', unit: 'h', label: 'whole-gut transit time, median around 30 h' },
   { value: '~30', unit: 'g', label: 'recommended daily fibre; typical UK intake is 15–20 g' },
 ]
 
@@ -29,7 +29,7 @@ export const urinaryTerms: ClinicalTerm[] = [
 ]
 
 export const bowelTerms: ClinicalTerm[] = [
-  { term: 'Diarrhoea', system: 'bowel', meaning: 'Loose or liquid stool, more often than normal for you.', threshold: 'Three or more loose or liquid stools in 24 hours. Acute is under 14 days, persistent 14–29 days, chronic four weeks or more. Loose form matters more than the count — frequent formed stool is frequency, not diarrhoea.' },
+  { term: 'Diarrhoea', system: 'bowel', meaning: 'Loose or liquid stool, more often than normal for you.', threshold: 'Three or more loose or liquid stools in 24 hours. Acute is under 14 days, persistent 14–29 days, chronic 30 days or more. Loose form matters more than the count — frequent formed stool is frequency, not diarrhoea.' },
   { term: 'Constipation (Rome IV)', system: 'bowel', meaning: 'A symptom cluster, not a stool count.', threshold: 'At least two of: straining; lumpy or hard stools (Bristol 1–2); a sense of incomplete evacuation; a sense of blockage; needing manual help; fewer than three spontaneous bowel movements a week. Each present in more than a quarter of movements, for at least three months, with symptoms starting at least six months ago.' },
   { term: 'Tenesmus', system: 'bowel', meaning: 'A persistent, painful feeling that you need to go when the rectum is empty.', threshold: 'Associated with proctitis, inflammatory bowel disease and rectal masses. Persistent tenesmus gets assessed.' },
   { term: 'Faecal incontinence', system: 'bowel', meaning: 'Involuntary loss of solid or liquid stool.', threshold: 'No threshold — any is worth raising. Common, under-reported, and often treatable: pelvic floor causes, sphincter injury after childbirth, and overflow from impacted constipation are all addressable.' },
