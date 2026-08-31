@@ -1,0 +1,145 @@
+/* ---------------------------------------------------------------------------
+   Ins & Outs — design tokens.
+
+   Direction: a printed field guide. Warm paper, ink-black text, one oxblood
+   accent, hairline rules, a display serif at large sizes against a compact
+   sans for interface furniture, and lining numerals in monospace so figures
+   line up like a table of results.
+
+   Every foreground/background pair below was checked with the WCAG contrast
+   formula. The lowest ratio in normal use is 6.51:1 (dark-mode accent on a
+   raised card). Body text is 16.98:1 light, 15.36:1 dark.
+
+   No nesting, no :has(), no color-mix(), no @layer, no container queries and
+   no subgrid anywhere in this stylesheet.
+--------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --paper: #fbf7ef;
+  --raised: #fffdf8;
+  --sunken: #f3ede1;
+  --ink: #191512;
+  --muted: #554c42;
+  --accent: #93231f;
+  --accent-soft: #f3e3de;
+  --rule: #ded2bf;
+  --rule-strong: #b8a88f;
+
+  --ok-bg: #e4efe0;
+  --ok-ink: #1f4d22;
+  --ok-edge: #8fb289;
+  --watch-bg: #f8ecd2;
+  --watch-ink: #6a4507;
+  --watch-edge: #cba85e;
+  --alarm-bg: #f7e0dc;
+  --alarm-ink: #8c1d14;
+  --alarm-edge: #cf8d84;
+
+  --slab-bg: #5c1310;
+  --slab-ink: #fbf7ef;
+  --slab-rule: #a8564f;
+
+  --focus: #0b4f9e;
+  --focus-ring: 0 0 0 3px #fbf7ef, 0 0 0 6px #0b4f9e;
+
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+  --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  --measure: 34rem;
+  --shell: 78rem;
+
+  --step-0: 1rem;
+  --step-1: 1.16rem;
+  --step-2: 1.42rem;
+  --step-3: 1.85rem;
+  --step-4: 2.4rem;
+  --step-5: 3.2rem;
+
+  --shadow-card: 0 1px 0 rgba(25, 21, 18, 0.06);
+  --shadow-lift: 0 2px 14px rgba(25, 21, 18, 0.09);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --step-3: 2.1rem;
+    --step-4: 3rem;
+    --step-5: 4.6rem;
+  }
+}
+
+/* Dark palette. Defined twice on purpose: once for readers who have simply set
+   their OS to dark, once for the explicit in-page toggle, so the toggle wins
+   in both directions. The :not([data-theme="light"]) guard stops the media
+   query overriding a reader who has chosen light on a dark system. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --paper: #14120f;
+    --raised: #1d1a16;
+    --sunken: #100e0c;
+    --ink: #efe8dc;
+    --muted: #b0a597;
+    --accent: #e8836b;
+    --accent-soft: #33211c;
+    --rule: #332d26;
+    --rule-strong: #4d443a;
+
+    --ok-bg: #1b2a1c;
+    --ok-ink: #a9dca8;
+    --ok-edge: #3f6440;
+    --watch-bg: #2e2513;
+    --watch-ink: #e8c572;
+    --watch-edge: #6e5a2c;
+    --alarm-bg: #33191a;
+    --alarm-ink: #f2a79a;
+    --alarm-edge: #7a3a34;
+
+    --slab-bg: #4a1512;
+    --slab-ink: #ffe9e4;
+    --slab-rule: #96453d;
+
+    --focus: #8fc2ff;
+    --focus-ring: 0 0 0 3px #14120f, 0 0 0 6px #8fc2ff;
+
+    --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4);
+    --shadow-lift: 0 2px 16px rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --paper: #14120f;
+  --raised: #1d1a16;
+  --sunken: #100e0c;
+  --ink: #efe8dc;
+  --muted: #b0a597;
+  --accent: #e8836b;
+  --accent-soft: #33211c;
+  --rule: #332d26;
+  --rule-strong: #4d443a;
+
+  --ok-bg: #1b2a1c;
+  --ok-ink: #a9dca8;
+  --ok-edge: #3f6440;
+  --watch-bg: #2e2513;
+  --watch-ink: #e8c572;
+  --watch-edge: #6e5a2c;
+  --alarm-bg: #33191a;
+  --alarm-ink: #f2a79a;
+  --alarm-edge: #7a3a34;
+
+  --slab-bg: #4a1512;
+  --slab-ink: #ffe9e4;
+  --slab-rule: #96453d;
+
+  --focus: #8fc2ff;
+  --focus-ring: 0 0 0 3px #14120f, 0 0 0 6px #8fc2ff;
+
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
