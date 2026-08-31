@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="A private, offline tracker for urination and bowel movements. Logs stay in your browser and produce a plain-text summary for your doctor.">
+  <meta name="robots" content="index, follow">
+  <title>Bladder and bowel tracker | Pee &amp; Poo</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%9A%BD%3C/text%3E%3C/svg%3E">
+  <script src="assets/tracker.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Pee <span>&amp;</span> Poo</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="urination.html">Urination</a>
+        <a href="bowels.html">Bowels</a>
+        <a href="red-flags.html">Red flags</a>
+        <a href="tracker.html" aria-current="page">Tracker</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <header class="page-head" id="tracker-root">
+      <p class="eyebrow">Tracker</p>
+      <h1>Track your bladder and bowel habits</h1>
+      <p class="lede">A week of honest notes tells a doctor more than trying to remember it all in the waiting room. Log a pee, a poo or a drink in a few seconds, and this page will add up the totals, show your week at a glance, and point out anything worth raising. Everything you type stays in this browser &mdash; nothing is sent anywhere, and there is no account.</p>
+    </header>
+
+    <section class="section" id="log">
+      <h2 class="section-title">Log an entry</h2>
+
+      <aside class="callout callout--info" id="storage-notice" hidden></aside>
+
+      <aside class="callout callout--info">
+        <p><strong>Your data does not leave this device.</strong> Entries are saved in this browser's own storage. They are not uploaded, not backed up, and not visible to us or anyone else. Clearing your browser data, or using a different browser or device, means starting again.</p>
+      </aside>
+
+      <form class="form" id="entry-form">
+        <div class="grid grid-3">
+          <div class="field">
+            <label for="f-date">Date</label>
+            <input type="date" id="f-date" name="f-date" required>
+          </div>
+          <div class="field">
+            <label for="f-time">Time (24-hour)</label>
+            <input type="time" id="f-time" name="f-time" required>
+          </div>
+          <div class="field">
+            <label for="f-type">What are you logging?</label>
+            <select id="f-type" name="f-type">
+              <option value="pee">Pee</option>
+              <option value="poo">Poo</option>
+              <option value="drink">Drink (fluid intake)</option>
+            </select>
+          </div>
+        </div>
+
+        <article class="card" id="pee-fields">
+          <h3>About this pee</h3>
+          <div class="grid grid-3">
+            <div class="field">
+              <label for="f-pee-volume">Rough volume</label>
+              <select id="f-pee-volume" name="f-pee-volume">
+                <option value="small">Small &mdash; a short go</option>
+                <option value="medium" selected>Medium &mdash; an ordinary go</option>
+                <option value="large">Large &mdash; a long, full go</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-pee-ml">Measured amount in mL (optional)</label>
+              <input type="number" id="f-pee-ml" name="f-pee-ml" min="0" max="2000" step="10" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="f-pee-urgency">Urgency</label>
+              <select id="f-pee-urgency" name="f-pee-urgency">
+                <option value="0" selected>0 &mdash; no urgency</option>
+                <option value="1">1 &mdash; mild, could wait</option>
+                <option value="2">2 &mdash; strong, hard to wait</option>
+                <option value="3">3 &mdash; could not hold on</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="f-pee-colour">Colour</label>
+              <select id="f-pee-colour" name="f-pee-colour">
+                <option value="pale-straw">Pale straw &mdash; very dilute</option>
+                <option value="light-yellow" selected>Light yellow &mdash; well hydrated</option>
+                <option value="dark-yellow">Dark yellow &mdash; drink a bit more</option>
+                <option value="amber">Amber &mdash; on the dehydrated side</option>
+                <option value="orange">Orange &mdash; dehydration, or a medicine or food effect</option>
+                <option value="red-brown">Red or brown &mdash; possible blood, needs checking</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="field field--inline">
+                <input type="checkbox" id="f-pee-pain" name="f-pee-pain">
+                <label for="f-pee-pain">Pain, burning or stinging</label>
+              </div>
+              <div class="field field--inline">
+                <input type="checkbox" id="f-pee-leak" name="f-pee-leak">
+                <label for="f-pee-leak">Leaked before reaching the toilet</label>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" id="poo-fields" hidden>
+          <h3>About this poo</h3>
+          <div class="field">
+            <label for="f-bristol">Bristol stool type</label>
+            <select id="f-bristol" name="f-bristol">
+              <option value="">Not sure / would rather not say</option>
+              <option value="1">Type 1 &mdash; separate hard lumps, like nuts, hard to pass</option>
+              <option value="2">Type 2 &mdash; sausage-shaped but lumpy</option>
+              <option value="3">Type 3 &mdash; like a sausage with cracks on the surface</option>
+              <option value="4" selected>Type 4 &mdash; like a sausage or snake, smooth and soft</option>
+              <option value="5">Type 5 &mdash; soft blobs with clear-cut edges, passed easily</option>
+              <option value="6">Type 6 &mdash; fluffy ragged-edged pieces, a mushy stool</option>
+              <option value="7">Type 7 &mdash; watery, no solid pieces, entirely liquid</option>
+            </select>
+          </div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="f-poo-blood">Any blood?</label>
+              <select id="f-poo-blood" name="f-poo-blood">
+                <option value="none" selected>None seen</option>
+                <option value="paper">On the paper only</option>
+                <option value="bowl">In the bowl or the water</option>
+                <option value="mixed">Mixed into the stool</option>
+                <option value="black">Black and tarry stool</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-poo-urgency">Urgency</label>
+              <select id="f-poo-urgency" name="f-poo-urgency">
+                <option value="0" selected>0 &mdash; no urgency</option>
+                <option value="1">1 &mdash; mild, could wait</option>
+                <option value="2">2 &mdash; strong, hard to wait</option>
+                <option value="3">3 &mdash; could not hold on</option>
+              </select>
+            </div>
+          </div>
+          <div class="field field--inline">
+            <input type="checkbox" id="f-poo-strain" name="f-poo-strain">
+            <label for="f-poo-strain">Had to strain</label>
+          </div>
+          <div class="field field--inline">
+            <input type="checkbox" id="f-poo-incomplete" name="f-poo-incomplete">
+            <label for="f-poo-incomplete">Felt like I had not finished</label>
+          </div>
+        </article>
+
+        <article class="card" id="drink-fields" hidden>
+          <h3>About this drink</h3>
+          <div class="field">
+            <label for="f-drink-ml">Amount in mL</label>
+            <input type="number" id="f-drink-ml" name="f-drink-ml" min="0" max="5000" step="50" inputmode="numeric">
+          </div>
+          <p>A mug is roughly 250 mL, a pint is roughly 570 mL, a standard water bottle is 500 mL. Tea, coffee, squash and soft drinks all count.</p>
+        </article>
+
+        <div class="field">
+          <label for="f-notes">Notes (optional)</label>
+          <textarea id="f-notes" name="f-notes" rows="2"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn">Save entry</button>
+        </div>
+
+        <p id="save-status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="section" id="today">
+      <h2 class="section-title">Today so far</h2>
+      <p>These tiles update as you log. They describe what is typical for most adults, not what is right for you specifically &mdash; a stable pattern that is a bit outside these numbers is usually less interesting than a pattern that has recently changed.</p>
+
+      <div class="grid grid-2" id="today-stats" aria-live="polite">
+        <div class="stat">
+          <span class="stat__num" id="stat-pees">0</span>
+          <span class="stat__label">Pees today</span>
+          <span id="pill-pees"></span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" id="stat-poos">0</span>
+          <span class="stat__label">Poos today</span>
+          <span id="pill-poos"></span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" id="stat-fluid">0</span>
+          <span class="stat__label">Fluid logged today (mL)</span>
+          <span id="pill-fluid"></span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" id="stat-night">0</span>
+          <span class="stat__label">Night pees last night (22:00&ndash;06:00)</span>
+          <span id="pill-night"></span>
+        </div>
+      </div>
+
+      <p id="entry-count">No entries saved yet.</p>
+
+      <ul class="ticks">
+        <li>Four to ten pees in 24 hours is the usual range for an adult.</li>
+        <li>Anywhere from three times a day to three times a week is a normal bowel pattern.</li>
+        <li>Waking once in the night to pass urine is common; twice or more, most nights, is worth mentioning.</li>
+        <li>The night count covers 22:00 to 06:00, so it includes the small hours after midnight.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="week">
+      <h2 class="section-title">Your last 7 days</h2>
+      <p>Newest day first. The bar beside the pee count is scaled against your busiest day of the week &mdash; the number next to it is the real figure.</p>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Daily totals for the last seven days</caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Pees</th>
+              <th scope="col">Night pees</th>
+              <th scope="col">Poos</th>
+              <th scope="col">Average Bristol type</th>
+              <th scope="col">Blood logged</th>
+              <th scope="col">Fluid (mL)</th>
+            </tr>
+          </thead>
+          <tbody id="week-body"></tbody>
+        </table>
+      </div>
+      <p>A dash means nothing was logged for that column on that day, which is not the same as a zero.</p>
+    </section>
+
+    <section class="section" id="patterns">
+      <h2 class="section-title">Pattern check</h2>
+      <p>This reads your saved entries and points out anything that crosses a commonly used threshold. It is a prompt to have a conversation, not a diagnosis. It cannot see you, and it only knows what you have logged.</p>
+
+      <div id="pattern-list" aria-live="polite">
+        <aside class="callout callout--info">
+          <p>Nothing logged yet. Add a few entries, or use &ldquo;Add a sample week&rdquo; below to see how the pattern check reads a log.</p>
+        </aside>
+      </div>
+
+      <aside class="callout callout--danger">
+        <p><strong>Some things do not wait for a pattern.</strong> Blood in your urine or stool, black tarry stool, being unable to pass urine at all, or fever with back or side pain all need attention now rather than after another week of logging. Read <a href="red-flags.html">the red flags page</a>.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="summary">
+      <h2 class="section-title">Summary for your doctor</h2>
+      <p>This builds a plain-text summary of your log &mdash; the date range, daily counts, the spread of Bristol types, any blood entries and any flags raised. Read it over first, then copy it into an email, a notes app, or print it out. Nothing is uploaded, and there is no download file.</p>
+
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-build-summary">Build summary</button>
+        <button type="button" class="btn btn--ghost" id="btn-copy">Copy to clipboard</button>
+      </div>
+
+      <div class="field">
+        <label for="doctor-summary">Plain-text summary</label>
+        <textarea id="doctor-summary" rows="16" spellcheck="false"></textarea>
+      </div>
+
+      <p id="copy-status" aria-live="polite"></p>
+
+      <ul class="flags">
+        <li>Say how long the pattern has been going on, not just what this week looked like.</li>
+        <li>Mention any medicines you have started or stopped recently, including supplements.</li>
+        <li>Say plainly if anything has changed: a new pattern matters more than an unusual one.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="data">
+      <h2 class="section-title">Your entries</h2>
+      <p>The last 20 entries, newest first. Delete anything you logged by mistake.</p>
+
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Recent entries</caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Type</th>
+              <th scope="col">Details</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="recent-body"></tbody>
+        </table>
+      </div>
+
+      <article class="card">
+      <h3>Manage this log</h3>
+      <div class="btn-row">
+        <button type="button" class="btn btn--ghost" id="btn-demo">Add a sample week</button>
+        <button type="button" class="btn btn--ghost" id="btn-remove-demo">Remove sample data</button>
+        <button type="button" class="btn btn--danger" id="btn-clear">Delete all data</button>
+      </div>
+      <p>&ldquo;Add a sample week&rdquo; fills the tracker with made-up entries so you can see how it behaves. They are labelled <em>sample data</em> in the table above and in any summary you build, and &ldquo;Remove sample data&rdquo; takes them out again without touching anything you logged yourself. &ldquo;Delete all data&rdquo; wipes everything and asks you to confirm first; it cannot be undone.</p>
+      </article>
+
+      <details class="faq">
+        <summary>Where is my data actually stored?</summary>
+        <p>In your browser's local storage, under a single key on this site. It never travels over the network. It is not encrypted, so anyone with access to your unlocked device and this browser could open this page and read it.</p>
+      </details>
+      <details class="faq">
+        <summary>Why does the page say it cannot save?</summary>
+        <p>Private or incognito windows, and some privacy settings, block a page from storing anything. The tracker still works for the current session, but the log disappears when you close the tab. Build the summary and copy it out before you go.</p>
+      </details>
+      <details class="faq">
+        <summary>How long should I log for?</summary>
+        <p>Three days gives a doctor something useful; seven days is better, because it covers a weekend and a working week. Longer than a fortnight is rarely needed unless you have been asked for it.</p>
+      </details>
+      <details class="faq">
+        <summary>Do I have to log everything?</summary>
+        <p>No. A log with only pees, or only bowel motions, is still useful. Just remember that the totals and the pattern check can only count what you actually enter &mdash; a low fluid total may mean you drank little, or simply that you did not log your drinks.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="disclaimer">This site is general health information, not medical advice.</p>
+      <p>It cannot examine you, does not know your history, and is no substitute for a clinician who can. If a symptom is listed here as urgent, treat it as urgent. If something feels badly wrong and this site does not mention it, that is a reason to get seen, not a reason to wait.</p>
+      <p>Figures are drawn from mainstream clinical sources and are given as ranges. Where the evidence is weak, that is stated rather than smoothed over.</p>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="urination.html">Urination</a>
+        <a href="bowels.html">Bowels</a>
+        <a href="red-flags.html">Red flags</a>
+        <a href="tracker.html">Tracker</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
