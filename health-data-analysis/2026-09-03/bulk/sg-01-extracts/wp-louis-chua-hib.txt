@@ -1,0 +1,159 @@
+Health Information Bill: January 2026
+
+Chua Kheng Wee Louis
+
+‍
+
+Introduction
+
+‍
+
+Mr Speaker, one’s medical information is more than just a set of data points on a server; it is deeply personal and sensitive, and a digital diary of our physical and mental lives. Therefore, the public's trust is sacrosanct to the implementation of the National Electronic Health Record (NEHR). We must ensure that the Government and healthcare stakeholders do their utmost to safeguard the privacy of this data.
+
+‍
+
+While I broadly agree with the principles of the Health Information Bill, which delineates the responsibilities of our healthcare ecosystem and mandates data contribution, I believe it is important that we continue to significantly strengthen areas of data privacy, transparency, and individual agency. As we move toward a "Smart Nation," we must ensure that our progress does not leave Singaporeans feeling as though the power asymmetry between themselves and the state is growing, and that they are losing control of their own data and privacy, and that public education measures would be stepped up to foster a deeper understanding of the NEHR and one’s rights as patients.
+
+‍
+
+Uploading of Information despite an Access Restriction
+
+‍
+
+One crucial aspect of this Bill is that patients opt in or out of the NEHR by way of an Access Restriction, which blocks medical practitioners from viewing all of the patient’s NEHR records, save for important details such as one’s allergies and personal information. Patients may also select the medical institutions they impose an Access Restriction on.
+
+‍
+
+Notably, clause 30, subsection 7 reveals that even with a restriction in place, a patient’s information continues to be uploaded to the NEHR in the background. This, according to the MOH, is in the interest of ensuring the expeditious provision of care should the patient wish to opt in to the NEHR in the future or during an emergency situation.
+
+‍
+
+But Mr Speaker, if a citizen says "No" to the NEHR today, should the state be allowed to say, "ok but trust me" and collect their data anyway? 
+
+‍
+
+In a 2017 letter to the Ministry of Health, the then-President of the Singapore Medical Association highlighted that this might compromise the patient’s right to privacy as patients might not wish for their medical records to be uploaded to the NEHR at all.
+
+‍
+
+I urge the Government to reconsider this continuous background uploading and if other additional options can be considered. For example, we should consider offering a total opt-out or “no means no” option, provided the patient is thoroughly briefed on the dangers and risks of doing so and understands the implications of such an option.
+
+‍
+
+Selective Imposition of Access Restrictions and Patient Consent
+
+‍
+
+Second, patients might prefer to block access to certain documents and records only, instead of imposing a wholesale Access Restriction on their records.
+
+‍
+
+I understand that one’s Sensitive Health Information – information that could potentially lead to stigmatisation and discrimination – would be secured by additional measures such as a double log-in feature. Nevertheless, what is sensitive to one might not be sensitive to another, hence patients might wish for additional flexibility when protecting their health records rather than give a blanket nod. 
+
+‍
+
+Part 3 of the Bill also allows for the sharing of both administrative and clinical information to facilitate the continuity of care and outreach efforts for national health programmes through data sharing agreements. Notably, patient consent is also not required for the sharing of such data between healthcare providers and public agencies, as established under Clause 50.
+
+‍
+
+Therefore, I hope that patients would be accorded some flexibility and control over the types of health information they wish to disclose and how they would like their information to be used. While I appreciate that we can already check our NEHR Access History in HealthHub, patient consent should also be sought for data-sharing between healthcare providers and public agencies. 
+
+‍
+
+Use of Data for Secondary Purposes
+
+‍
+
+On that note, Part 2, Division 4 of the Bill also sets out the requirements for the usage of NEHR data for secondary purposes or derived information. After all, a national health record database provides a valuable snapshot of our population’s health condition, which could be used by researchers for developing solutions to public health issues faced by our society.
+
+‍
+
+The Bill separates such derived information into two categories: Type 1 – which is information that is individually-identifiable, as well as Type 2 – data that is aggregated and anonymised.
+
+‍
+
+It is worth noting that clause 30, subsection 5, paragraph (a) states that the imposition of an access restriction does not preclude one’s NEHR records, be it individually-identifiable or anonymised, from being disclosed as derived information if an approval is granted by the Minister. 
+
+‍
+
+I agree with Clause 25 subsection 2 that the Minister may approve an application to obtain type 2 derived information if the Minister is satisfied, having regard to the purpose for which the application is made, that it is in the public interest to do so. However, what are the instances in which subsection 1 will apply, where individually-identifiable health information is required in the name of promoting public health? 
+
+‍
+
+This is another case where even if an individual exercises his right to impose an access restriction, it can be again overruled with ministerial approval for his individually-identifiable information to be shared on public health grounds. 
+
+‍
+
+Although the cost to the patient’s privacy may be outweighed by the benefits such research brings to society, that should not preclude the Government from giving patients more agency over secondary usage of their health information, especially for research purposes.
+
+‍
+
+This is a principle that is adopted by other healthcare systems worldwide. For instance, both Taiwan and the European Union have enacted regulations empowering patients to restrict the use of their identifiable health data for secondary purposes. Therefore, I hope that the Government would consider allowing patients to exercise greater control over the secondary usage of their health data.
+
+‍
+
+Transparency on Requests for Derived Data
+
+‍
+
+To follow up on the Ministerial approval requirement under clause 25, according to the MOH TRUST platform, which provides anonymised healthcare-related data for secondary usage, the Data Access Committee (DAC) reviews the social value and public interest of each data request. 
+
+‍
+
+I agree that access to NEHR data unlocks Research and Development potential and supports long term public health outcomes. When it comes to commercial-linked entities, however, while such parties might use the data for genuine public health reasons, it raises ethical concerns surrounding transparency and privacy, especially if access to data is excessive, insufficiently justified, or beyond the stated secondary use. 
+
+‍
+
+Back in 2015 in the United Kingdom, the Royal Free NHS Foundation Trust in London signed an agreement with Google DeepMind. This allowed the British AI firm to analyse sensitive information about 1.6 million patients who use the Trust’s hospitals each year. The access was used for monitoring software for mobile devices, called Streams, which promises to improve clinicians’ ability to support patients with Acute Kidney Injury (AKI). But according to the study’s authors, the purposes stated in the agreement were far less specific and made more open-ended references to using data to improve services.
+
+‍
+
+In the last few years, there has been a significant drive and race across providers to train AI models using the largest and most diverse datasets available in order to achieve better performance. However, this trend also raises important concerns about data privacy, particularly in regard to sensitive records such as NEHR data. For this reason, we should exercise caution before granting third parties, especially commercial organisations, excessive or unconstrained access to NEHR data, especially when longitudinal studies examining individuals' health over prolonged time periods are involved, and be mindful of scope creep, given commercial incentives. 
+
+‍
+
+Streamlining of Healthcare Mobile Applications
+
+‍
+
+Besides commercial and R&D applications, I do believe the Government should capitalise on the NEHR’s capabilities to boost the efficiency of healthcare delivery and financial assistance to all Singaporeans.
+
+‍
+
+With allied health professionals such as medical social workers having access to the patient’s NEHR record, I hope that the possibility of financial assistance being further streamlined via enhanced data-sharing procedures with the likes of the SSO can be explored – with the patient’s consent of course. This would be most helpful in cases such as long-term assistance to those permanently unable to work due to illness or disability. And in turn, also help to alleviate the workload of our medical social workers while easing the experience of those seeking financial and social support. 
+
+Strengthening Public Education Efforts
+
+‍
+
+Finally, an extensive public education effort on the NEHR should be implemented should this Bill be passed. A 2018 Singapore Medical Association survey revealed that only 50.2% of respondents heard about the NEHR and 14.9% fully understood what the NEHR was.
+
+‍
+
+As shared in the Feedback Report on the Public Consultation for the Health Information Bill, during the public consultation exercise, MOH received feedback requesting for greater clarity and clearer communication of the policy positions under the bill. Will the MOH be conducting an updated public awareness survey upon implementation of this Bill; to measure how public understanding of NEHR has evolved, particularly regarding access restrictions and the use of individually-identifiable data? 
+
+‍
+
+It is nevertheless critical that the Government ramp up its patient education efforts regarding the purposes of the NEHR and how it might benefit them, as well as to explain the rights of each patient pertaining to their medical data.
+
+‍
+
+Conclusion
+
+‍
+
+In conclusion, Mr Speaker, the NEHR represents a significant milestone in our Smart Nation journey, but its success rests entirely on a foundation of trust. Medical information is among the most intimate forms of data a person can share, and the success of the NEHR ultimately depends not on compulsion, but on trust. 
+
+‍
+
+To ensure this trust is not eroded by a perceived power asymmetry between the state and the individual, we must move beyond a "collect first, tell later" approach. Throughout my speech, I have highlighted three recurring themes: agency, transparency, and proportionality. I hope Singaporeans can be granted more meaningful control and disclosure over how their health information is accessed, shared, and used. More importantly, we cannot have a well-functioning healthcare system if only 15% of people fully understood what the NEHR was. We must ramp up public education to ensure every Singaporean knows their rights and how their data is being used to serve the common good, in order to foster the trust that turns our national database into a national asset.
+
+. 
+
+Notwithstanding these clarifications, I support the Bill.
+
+‍
+
+Categories
+
+ Back to topShare

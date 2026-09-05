@@ -1,0 +1,59 @@
+--- ctx/BUNDLE-CORE.md	2026-09-03 03:50:28.831739782 +0000
++++ out/BUNDLE-CORE.corrected-2026-09-03.md	2026-09-03 04:21:04.222163088 +0000
+@@ -5,6 +5,29 @@
+ 
+ ---
+ 
++> ## Corrigendum (3 September 2026)
++>
++> Two errors identified in the adversarial review of 25 August 2026 are corrected in this
++> version. **No other statement in this bundle has been re-anchored; everything else remains
++> as at 15 August 2026.**
++>
++> 1. **GL-10-R1 (HSA Best Practices Guide for Medical Device Cybersecurity).** §3F item 46
++>    and §5 item 11 recorded it as "published but NOT YET IN FORCE". It **took effect on
++>    17 August 2026** and has been in force since. It remains expressly non-binding
++>    best-practice guidance, not regulatory guidance. Verified 3 September 2026 against the
++>    guide's own Revision History (p 3) and HSA's medical-device guidance index.
++> 2. **HCSA s 59(8).** §4.2.1 correctly records that s 59(8) never commenced and was
++>    deleted by the Statutes (Miscellaneous Amendments) Act 2022 (Act 31 of 2022) s 24(1)
++>    with effect from 1 November 2022 (S 850/2022), but a later sentence in the same section
++>    ("Key data provisions") still said it "remains in force because PDPA s 44 has never
++>    commenced". That sentence is wrong and has been rewritten.
++>
++> **Health Information Act 2026 status is NOT restated in this bundle.** For the position as
++> at 3 September 2026 — including the e-Gazette queries run and the gazette entries from
++> 15 August to 3 September 2026 — see **`SG-02-currency-pass.md`**.
++
++---
++
+ # 1. HOW TO USE THIS BUNDLE
+ 
+ ### 1.1 What this covers
+@@ -366,7 +389,7 @@
+ 
+ | # | Obligation | Instrument | Takes effect | Notes | Source |
+ |---|---|---|---|---|---|
+-| 46 | **GL-10-R1, Best Practices Guide for Medical Device Cybersecurity — first release** | HSA GL-10 Revision 1, published **14 August 2026** (38 pp) | **17 August 2026** | ⚠️ **Two days after the retrieval date: published but NOT YET IN FORCE as at 15 August 2026.** The newest instrument in the project. Expressly **not** regulatory guidance and it **creates no breach-notification duty**. Concludes a consultation that ran 10 Mar – 13 May 2025 (123 responses from 16 stakeholders); the Summary of Responses was published the same day. Title discrepancy: HSA's index says "Guide **on** Medical Device Cybersecurity", the PDF says "**for**" — cite the PDF | `file.go.gov.sg/gl-10-r1-14-08-2026.pdf` — **P** |
++| 46 | **GL-10-R1, Best Practices Guide for Medical Device Cybersecurity — first release** | HSA GL-10 Revision 1, published **14 August 2026** (38 pp) | **17 August 2026** | ✅ **CORRECTED 3 Sep 2026 — IN FORCE since 17 August 2026.** Published 14 August 2026, it was not yet in force at this bundle's 15 August 2026 anchor and took effect two days later: the guide's own Revision History (GL-10 R1, p 3) reads "First Release (17 August 2026)". Still listed as a current guidance document on HSA's medical-device guidance index (retrieved 3 September 2026). The newest instrument in the project. Expressly **not** regulatory guidance and it **creates no breach-notification duty**. Concludes a consultation that ran 10 Mar – 13 May 2025 (123 responses from 16 stakeholders); the Summary of Responses was published the same day. Title discrepancy: HSA's index says "Guide **on** Medical Device Cybersecurity", the PDF says "**for**" — cite the PDF | `file.go.gov.sg/gl-10-r1-14-08-2026.pdf` — **P** |
+ | 47 | **Subsidised genetic testing for Hereditary Breast and Ovarian Cancer** | MOH programme | **December 2026** | Programme launch | MOH press release 7 Aug 2026 — **P** |
+ | 48 | **SmartCMS Certification Framework** | Synapxe programme certification standard | **1 December 2026** | Extends the three mandatory HIA standards (NEHR connectivity; Cyber Essentials for HIMS; data portability) to non-Healthier SG, CHAS, specialist and dental clinics. **Contractual, not statutory** | synapxe.sg — **P** |
+ | 49 | **UDI Phase 3 — all Class C general medical devices and IVDs** | HSA GN-36 Revision 2 (July 2022), Table 14 | **1 November 2026** | ⚠️ **The weakest citation in this register.** The governing document is four years old with no revision since, and HSA states on its face that the compliance dates are "tentative and … subject to adjustments". With the date ten weeks away, tell the client it is announced rather than fixed. Each phase carries a 6-month transition to deplete stock imported beforehand. Excluded: devices for clinical research, investigational testing or clinical trials, and custom-made devices | GN-36 R2 — **P** |
+@@ -778,7 +801,7 @@
+ 
+ **s 28, by contrast, remains genuinely uncommenced** and its text is live on the statute book.
+ 
+-**Key data provisions:** **s 13(1)** (licence conditions) and **s 14** (modification of licence conditions, by the two-step in §4.2.3); **s 16** (duty to provide information); **s 17**; **s 27(1)** (monitoring and evaluation records to be kept "for the prescribed period" — ⚠️ **no period is prescribed in the General Regulations**, a live gap); **s 28** (employment-screening records, uncommenced); **s 36**; **s 37**; **s 38** (codes of practice); **s 51** (information sharing); **s 57** (regulation-making); **s 59(8)** (⚠️ remains in force because PDPA s 44 has never commenced — §3A item 10).
++**Key data provisions:** **s 13(1)** (licence conditions) and **s 14** (modification of licence conditions, by the two-step in §4.2.3); **s 16** (duty to provide information); **s 17**; **s 27(1)** (monitoring and evaluation records to be kept "for the prescribed period" — ⚠️ **no period is prescribed in the General Regulations**, a live gap); **s 28** (employment-screening records, uncommenced); **s 36**; **s 37**; **s 38** (codes of practice); **s 51** (information sharing); **s 57** (regulation-making); **s 59(8)** (⚠️ **never commenced, and deleted with effect from 1 November 2022** by the Statutes (Miscellaneous Amendments) Act 2022 (Act 31 of 2022) s 24(1), S 850/2022 — the statement that it "remains in force because PDPA s 44 has never commenced" is wrong and is corrected above in this same section; see also §3A item 10).
+ 
+ **Records duties in the Regulations.** The General Regulations 2021 are the primary records instrument: **regs 25, 37, 38, 39 and 45**. Each service-specific set repeats a "keeping of other records" pattern — CLS/RS Regulations regs 42–45 and 44A (traceability); Outpatient Medical reg 33; Acute Hospital reg 44; Nursing Home reg 39.
+ 
+@@ -1817,7 +1840,7 @@
+ | 8 | Health Products (Clinical Research Materials) Regulations 2016 | Subsidiary legislation | HSA | **S 332/2016** | 2016 | In force | P (index) |
+ | 9 | **GL-04-R4 Regulatory Guidelines for Software Medical Devices including Machine Learning-Enabled Medical Devices — A Life Cycle Approach** | Regulatory guideline | HSA Medical Devices Cluster | GL-04, Revision 4 | December 2025 | **Effective 31 December 2025.** §3.7 and §8 cybersecurity; **§8.3 patient confidentiality and the PDPA**; §9 machine-learning devices — **training and test dataset source, size, curation, annotation and local-population representativeness must be submitted to HSA**; continuous-learning data traceability; a remove-and-retrain duty | P |
+ | 10 | **GL-07-R2 Guidelines on Risk Classification of Software as a Medical Device and Qualification of Clinical Decision Support Software** | Regulatory guideline | HSA | GL-07, Revision 2 | July 2025 | **Effective 21 July 2025.** Defines the regulatory boundary: **EHR software that displays, receives, collects or stores records "with no processing or analysis" is NOT a medical device** | P |
+-| 11 | **GL-10-R1 Best Practices Guide for Medical Device Cybersecurity** | Best-practices guide, **expressly non-binding** | HSA | GL-10, Revision 1; 38 pp | published 14 August 2026 | ⚠️ **NOT IN FORCE as at 15 Aug 2026 — first release effective 17 August 2026.** See §3F item 45 | P |
++| 11 | **GL-10-R1 Best Practices Guide for Medical Device Cybersecurity** | Best-practices guide, **expressly non-binding** | HSA | GL-10, Revision 1; 38 pp | published 14 August 2026 | ✅ **IN FORCE since 17 August 2026** — corrected 3 Sep 2026; it was not yet in force at this bundle's 15 Aug 2026 anchor. The guide's own Revision History (p 3) reads "First Release (17 August 2026)". It remains **expressly non-binding** best-practice guidance: "This document does not constitute regulatory guidance and does not establish regulatory requirements" (p 6). See §3F item 45 | P |
+ | 12 | GN-05-R3 Guidance on the Reporting of Adverse Events for Medical Devices | Guidance | HSA | GN-05, Revision 3 | September 2023 | Current. **Form MDAR1**; Form CTB_MD_AE for trials; contemplates "exchange of regulatory information with other medical device regulatory agencies" | P |
+ | 13 | GN-10-R4 Guidance on Medical Device Field Safety Corrective Action | Guidance | HSA | GN-10, Revision 4 | July 2025 | **Effective 11 July 2025.** R4 adds: for implantable devices, disseminate the field safety notice **to the practitioners who performed the implantations**, and report the **number of implantations performed in Singapore** | P |
+ | 14 | GN-06-R3 Guidance on Distribution Records for Medical Devices | Guidance | HSA | GN-06, Revision 3 | November 2022 | Current. §7 records of implants "when supplied by a healthcare facility" | P |

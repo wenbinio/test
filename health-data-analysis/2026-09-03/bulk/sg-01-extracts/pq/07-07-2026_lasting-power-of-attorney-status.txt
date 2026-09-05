@@ -1,0 +1,7 @@
+DATE Tuesday, 7 July 2026 | Vol 96, Sitting No 32 | type WA | qno None
+TITLE: Making Lasting Power of Attorney Status and Donee Identity Accessible on National Electronic Health Record for Clinical Decision Making and Timeline for Integration
+SUB: None
+
+24 Dr Haresh Singaraju asked the Coordinating Minister for Social Policies and Minister for Health in view that Advance Care Planning is visible on the National Electronic Health Record (NEHR) and that the Government is promoting Lasting Power of Attorney (LPA) uptake (a) whether LPA status and donee identity can be made visible on NEHR to help clinicians identify authorised decision makers at the point of care; and (b) what is the Ministry's timeline for such integration.
+Mr Ong Ye Kung: Information on the Lasting Power of Attorney (LPA) cannot be made visible on the National Electronic Health Record system as it is protected under the Mental Capacity Act. Such information may only be disclosed by the Public Guardian to specified persons upon satisfactory submission of evidence(s) required under the law. 
+Typically, the appointed donees would present the LPA to healthcare providers when acting for donors who have lost mental capacity. If the healthcare provider does not know the identity of the donor's next-of-kin or donee, or is unable to contact them after reasonable attempts, they may request for information on the donor's LPA via the Office of the Public Guardian Online portal.

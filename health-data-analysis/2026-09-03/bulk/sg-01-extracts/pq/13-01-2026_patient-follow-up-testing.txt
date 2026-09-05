@@ -1,0 +1,6 @@
+DATE Tuesday, 13 January 2026 | Vol 96, Sitting No 13 | type WA | qno None
+TITLE: Patient Follow-Up Testing at Different Healthcare Cluster Polyclinics
+SUB: None
+
+13 Mr Dennis Tan Lip Fong asked the Coordinating Minister for Social Policies and Minister for Health (a) whether patients may have follow-up tests, including blood tests, scans, or procedures in a polyclinic physically closer to them, but belonging to a different public healthcare cluster from the hospital that ordered the follow-up tests; and (b) whether such hospitals will have access to the ensuing test reports.
+Mr Ong Ye Kung: Patients can have tests, scans or procedures performed if available at polyclinics regardless of the public healthcare cluster of the hospital that ordered them. In some cases, patients may be reviewed by a polyclinic doctor before the tests are performed. The test results are made available to the hospitals via the National Electronic Health Record (NEHR), which enables secure sharing of patient data across public healthcare institutions. Access to this data will become more seamless as we move towards using the same electronic medical record system across all public healthcare institutions.

@@ -1,0 +1,7 @@
+DATE Tuesday, 4 August 2026 | Vol 96, Sitting No 33 | type WA | qno None
+TITLE: Mandatory Data Security Requirements for Patient Data Processed by AI Tools Through Third-party Cloud Services
+SUB: None
+
+21 Assoc Prof Jamus Jerome Lim asked the Coordinating Minister for Social Policies and Minister for Health whether mandatory data security requirements apply to AI tools that process patient data through third-party cloud services.
+Mr Ong Ye Kung: Yes, data security requirements apply to AI tools that process patient data, whether hosted on third-party cloud services or on-premise. These are requirements under both the Healthcare Services Act and the Personal Data Protection Act. 
+ Public healthcare institutions have also adopted additional practices to safeguard data. For example, AI model providers whom they work with must give legally-binding commitments that all input and output data are not stored or retained. The AI tools also need to be accessed from secure environments.

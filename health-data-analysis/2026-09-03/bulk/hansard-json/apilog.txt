@@ -1,0 +1,28 @@
+[A1 plain GET slash sittingDate] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A2 no slash] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A3 lowercase param] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A4 http1.1 + full headers] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A5 POST] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A6 getDisplayData] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A7 fetchData] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A8 04-08-2026] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}
+[A9 root search page] -> 200 3077 :: <!DOCTYPE html>
+<html lang="en" data-critters-container>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Search</title>
+    <base href=".
+[A10 topic search] -> 404 3076 :: <!DOCTYPE html>
+<html lang="en" data-critters-container>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Search</title>
+    <base href=".
+[B1 POST json getHansardReport] -> 200 1282505 :: {"metadata":{"parlimentNO":15,"sessionNO":1,"volumeNO":96,"sittingNO":12,"sittingDate":"12-01-2026","partSessionStr":"FIRST SESSION","startTimeStr":"12:00 noon","speaker":"Mr Speaker","attendancePreviewText":" ","ptbaPreviewText":" ","atbPreviewText"
+[B2 POST json getDisplayData] -> 200 942 :: {"parlVOList":[{"parlNO":0,"parlName":"Legislative Assembly (1955 to 1965)"},{"parlNO":2,"parlName":"2nd (06-05-1968 to 16-08-1972)"},{"parlNO":6,"parlName":"6th (25-02-1985 to 16-08-1988)"},{"parlNO":7,"parlName":"7th (09-01-1989 to 13-08-1991)"},{"
+[B3 POST getToken] -> 405 583 :: <!doctype html><html lang="en"><head><title>HTTP Status 405 – Method Not Allowed</title><style type="text/css">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px
+[B4 POST fetchData] -> 200 30929 :: {"mpVOList":[{"id":0,"fullName":"Abdul Muhaimin Abdul Malik"},{"id":0,"fullName":"Alex Yam"},{"id":0,"fullName":"Alex Yeo"},{"id":0,"fullName":"Alvin Tan"},{"id":0,"fullName":"Ang Wei Neng"},{"id":0,"fullName":"Azhar Othman"},{"id":0,"fullName":"Baey
+[B5 POST searchResult] -> 400 78 :: System error occured while retrieving the results. Please try after some time.
+[B6 GET slash again w cookies] -> 500 91 :: {"errorCode":500,"description":"Unable to process the request. Please try after sometime."}

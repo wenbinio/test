@@ -1,0 +1,7 @@
+DATE Thursday, 7 May 2026 | Vol 96, Sitting No 31 | type WA | qno None
+TITLE: Simplifying HealthHub Terms of Use for Seniors and Residents of All Literacy Levels
+SUB: None
+
+12 Mr Dennis Tan Lip Fong asked the Coordinating Minister for Social Policies and Minister for Health (a) whether the Ministry will provide a simplified version of HealthHub's Terms of Use to ensure digital access to health records is not conditional on accepting broad contractual terms; and (b) what measures are taken to ensure that these terms are accessible and easy to understand for seniors and residents of all literacy levels.
+Mr Ong Ye Kung: HealthHub's Terms of Use (TOU) is broadly similar to those of other digital health apps. It covers the full range of HealthHub's functions, from access to health records and appointment scheduling to bill payment, the caregiver module and more. The TOUs set out protections and liabilities to safeguard against illegal or inappropriate use that could compromise the platform for all users. 
+We will continue to review the TOU to ensure clarity for users. Users who require assistance in understanding the TOU or managing their HealthHub access can call 1800 225 4482 or email contact_us@healthhub.sg.

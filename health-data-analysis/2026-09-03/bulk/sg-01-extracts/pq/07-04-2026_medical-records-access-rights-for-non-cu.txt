@@ -1,0 +1,6 @@
+DATE Tuesday, 7 April 2026 | Vol 96, Sitting No 27 | type WA | qno None
+TITLE: Medical Records Access Rights for Non-custodial Parents and Court-ordered Custody Protections
+SUB: None
+
+27 Mr Victor Lye asked the Coordinating Minister for Social Policies and Minister for Health (a) whether a non-custodial parent is currently able to access or modify a child’s medical records through platforms such as HealthHub; and (b) if so, what safeguards exist where the other parent has been granted sole custody by the Courts.
+Mr Ong Ye Kung: Medical records are provided and updated by healthcare professionals only. HealthHub displays selected medical information from a patient's medical records. Parents will be able to access, but not modify, their child's medical records reflected in HealthHub. They may write to contact_us@healthhub.sg with information on special circumstances that may affect access to their child's records. The Ministry of Health will assess such requests on a case-by-case basis.

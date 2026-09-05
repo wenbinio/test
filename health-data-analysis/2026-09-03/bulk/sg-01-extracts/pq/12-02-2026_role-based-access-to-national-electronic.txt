@@ -1,0 +1,6 @@
+DATE Thursday, 12 February 2026 | Vol 96, Sitting No 17 | type WA | qno None
+TITLE: Role-Based Access to National Electronic Health Records for Registered Community Optometrists
+SUB: None
+
+13 Mr Yip Hon Weng asked the Coordinating Minister for Social Policies and Minister for Health whether the Ministry will grant registered community optometrists role-based access to the National Electronic Health Record to view relevant patient information, as well as to contribute eye-care findings, with the aim of enhancing clinical safety and facilitating seamless care coordination between community providers and public healthcare institutions.
+Mr Ong Ye Kung: Currently, registered optometrists working in institutions licensed under the Healthcare Services Act (HCSA), for example, those assisting ophthalmologists in community eye clinics, may be provided access to the National Electronic Health Record system (NEHR) to support the delivery of care to patients. Health information from optometrists in non-HCSA licensed institutions is currently not required to be submitted to NEHR.

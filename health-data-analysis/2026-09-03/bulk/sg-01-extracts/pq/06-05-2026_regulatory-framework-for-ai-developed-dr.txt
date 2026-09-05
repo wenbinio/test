@@ -1,0 +1,8 @@
+DATE Wednesday, 6 May 2026 | Vol 96, Sitting No 30 | type WA | qno None
+TITLE: Regulatory Framework for AI-developed Drugs and Implications on Clinical Trials, and Adequacy of Data Protection Safeguards for National Patient Data
+SUB: None
+
+16 Mr Yip Hon Weng asked the Coordinating Minister for Social Policies and Minister for Health (a) whether the Ministry has studied if AI-developed drugs can shorten or bypass clinical trials; (b) if so, how will the regulatory approval of AI-developed drugs differ from conventional products; (c) what regulations currently govern AI healthcare innovations; and (d) whether existing personal data protection and cybersecurity safeguards can prevent data leakage when AI accesses national patient data for product conceptualisation.
+Mr Ong Ye Kung: Both artificial intelligence- (AI-)developed and conventionally developed drugs must meet the same international standards of quality, safety and efficacy. The Health Sciences Authority's regulatory approach is aligned with international agencies, such as the US Food and Drug Administration and the European Medicines Agency, that have outlined key principles on the responsible use of AI in drug development. 
+Patient data is robustly protected, including when used for AI development. Existing data protection and cybersecurity safeguards, including those under the Personal Data Protection Act, ensure that patient confidentiality is maintained and that the data is protected.
+We will continue to monitor developments and strengthen our safeguards as needed.

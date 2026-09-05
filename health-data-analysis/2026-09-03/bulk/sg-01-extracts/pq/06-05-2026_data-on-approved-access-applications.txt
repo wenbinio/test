@@ -1,0 +1,7 @@
+DATE Wednesday, 6 May 2026 | Vol 96, Sitting No 30 | type WA | qno None
+TITLE: Data on Approved Access Applications to PRECISE, SG10K and HELIOS, Research Productivity and Outcomes, and Plans for Public Registry
+SUB: None
+
+15 Mr Kenneth Tiong Boon Kiat asked the Coordinating Minister for Social Policies and Minister for Health (a) how many applications to access PRECISE, SG10K and HELIOS data have been received and approved, broken down by public-sector researchers, private-sector firms and local startups, and average time to access; (b) how many approved applications have produced publications, patents or commercial products; and (c) whether the Ministry will publish a public registry of approved projects and outcomes, as the UK Biobank does. 
+Mr Ong Ye Kung: PRECISE-SG100K and the Health for Life in Singapore (HELIOS) are large-scale longitudinal cohort studies to drive research, improve disease understanding, and enable more targeted care. The majority of their datasets were accessible from 2025 through TRUST, our national health research and analytics platform supporting the analysis of anonymised data for health research. 
+Based on applications for data access on TRUST, there have been 40 approved applications to access PRECISE-SG100K and HELIOS' data. Of these, 34 were from public-sector researchers and six were from private companies. Since then, one publication has resulted from these applications, with more in the pipeline as projects mature. Publicly available listings of approved projects are maintained on the TRUST website.

@@ -1,0 +1,6 @@
+DATE Thursday, 12 February 2026 | Vol 96, Sitting No 17 | type WANA | qno None
+TITLE: Plans for Onboarding Traditional Chinese Medicine Practitioners to National Electronic Health Record
+SUB: None
+
+34 Mr Cai Yinzhou asked the Coordinating Minister for Social Policies and Minister for Health (a) whether the Ministry plans to onboard Traditional Chinese Medicine (TCM) practitioners to the National Electronic Health Record (NEHR); (b) if so, what is the timeline; (c) what technical and financial support will be provided to TCM clinics to upgrade their practice management systems; and (d) how will the Ministry ensure data interoperability between TCM diagnostic terminology and Western medical records within NEHR.
+Mr Ong Ye Kung: Traditional Chinese Medicine (TCM) service is not a licensable healthcare service under the Healthcare Services Act 2020, and under the Health Information Bill, data from TCM practitioners are not within the data types to be contributed to the National Electronic Health Record system.
