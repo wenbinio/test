@@ -2,6 +2,8 @@
 
 An animated music video about legal theory, made the same way as the P(doom) video at the root of this branch: lyrics, then a Suno track, then a hand-painted animation cut to it.
 
+Picking this up? Start with [`HANDOVER.md`](HANDOVER.md).
+
 | File | What it is |
 |---|---|
 | [`SUNO.md`](SUNO.md) | Title, style prompt and lyrics to paste into Suno, plus pronunciation fixes |
