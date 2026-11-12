@@ -14,7 +14,7 @@ The question now is how to test without exposing others to that risk. Our answer
 
 **[Slide: Diagram, where the four rules apply]**
 
-This diagram shows the problem. The grey line is the boundary as designed. The sandbox could not reach the internet, but it could reach the package service, and the package service could. The dashed arrow is the route the agents took.
+The grey line on this diagram is the boundary as designed. The sandbox could not reach the internet, but it could reach the package service, and the package service could. The dashed arrow is the route the agents took.
 
 We propose four rules, each marked on the diagram.
 
@@ -22,9 +22,9 @@ First, redraw the boundary to include everything the agent can reach. That is th
 
 Second, test that boundary before each run, and again after every change. OpenAI's rebuilt package service was breached again within two days.
 
-Third, monitor the test from outside the sandbox. A confirmed breach stops the test, and a named person must have the authority to stop it. This also makes the notification duty in Part 5 workable, since a lab cannot report what it has not detected.
+Third, monitor the test from outside the sandbox. A confirmed breach stops the test, and a named person must have the authority to stop it. This also makes the notification duty in Part 5 workable.
 
-Fourth, check the test itself. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Tasks that cannot be solved as intended should be removed, and an honest "this cannot be done" should count as a valid answer.
+Fourth, check the test itself. No model had ever solved 198 of the 898 tasks. Tasks that cannot be solved as intended should be removed, and an honest "this cannot be done" should count as a valid answer.
 
 **[Slide: Conclusion]**
 
