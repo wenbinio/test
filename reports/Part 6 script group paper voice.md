@@ -28,6 +28,6 @@ Fourth, test the test. No model had ever solved 198 of the 898 tasks, and OpenAI
 
 Admittedly, none of this is binding today.
 
-We therefore submit that they should form the content of the mandatory sandbox standard proposed in Part 3, and the measure of reasonable care in Part 4. They should scale with risk, applying in full only where safeguards are removed. A developer who follows them may rebut the presumption of negligence. One who does not, cannot.
+We therefore submit that these four rules should form the content of the mandatory sandbox standard proposed in Part 3, and the measure of reasonable care in Part 4. They should scale with risk, applying in full only where safeguards are removed. A developer who follows them may rebut the presumption of negligence. One who does not, cannot.
 
 So, while the test may be the danger, the answer is not to stop testing. It is to ensure that the test stays inside the lab.
