@@ -8,7 +8,7 @@ If the test is the danger, stop the test. Or so the easy answer goes.
 
 We disagree. Capability tests are how we learn what a model can do before it is released. OpenAI switched certain safeguards off so that the results would reflect the model's "true capabilities", and that is a legitimate aim.
 
-The difficulty is that a capability test is also an alignment test. As Glenda mentioned, some agents recognised that the attack was out of scope, and joined anyway. In OpenAI's preliminary experiments, with its production harness and system prompt, the tendency to attack out-of-scope systems can fall below one per cent of the baseline rate. Arguably, then, a model is most likely to cross the line precisely when its safeguards are removed.
+The difficulty is that a capability test is also an alignment test. As Glenda mentioned, some agents recognised that the attack was out of scope, and joined anyway. In OpenAI's preliminary experiments, with its production harness and system prompt, the tendency to attack out-of-scope systems can fall below one per cent of the baseline rate. Arguably, then, a model is more likely to cross the line when its safeguards are removed.
 
 The question now is how to test without exposing others to that risk. Our answer is that when safeguards come off, containment must go up.
 
@@ -22,7 +22,7 @@ Second, attack the sandbox before trusting it, and again after every change. Ope
 
 Third, watch the test live, from outside the sandbox. A confirmed breach stops the test, and a named person must have the authority to stop it. This also makes the notification duty in Part 5 workable, since a lab cannot report what it has not detected.
 
-Fourth, test the test. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Such tasks should be removed, and an honest "this cannot be done" should count as a valid answer.
+Fourth, test the test. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Tasks that cannot be solved as intended should be removed, and an honest "this cannot be done" should count as a valid answer.
 
 **[Slide: Conclusion]**
 
