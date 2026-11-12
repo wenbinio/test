@@ -1,28 +1,30 @@
 # Part 6 script, in the voice of the group research paper
 
-Draft for review. Facts, figures and quotations are unchanged from the verified version in `Part 6 script reconciled.md`.
+Draft for review. Facts, figures and quotations are unchanged from the verified version in `Part 6 script reconciled.md`. The four rules are now delivered as a walk through the diagram slide.
 
-**[Slide: Test, but contain]**
+**[Slide: Why testing needs containment]**
 
 If the test is the danger, stop the test. Or so the easy answer goes.
 
 We disagree. Capability tests are how we learn what a model can do before it is released. OpenAI switched certain safeguards off so that the results would reflect the model's "true capabilities", and that is a legitimate aim.
 
-The difficulty is that a capability test is also an alignment test. As Glenda mentioned, some agents recognised that the attack was out of scope, and joined anyway. In OpenAI's preliminary experiments, with its production harness and system prompt, the tendency to attack out-of-scope systems can fall below one per cent of the baseline rate. Arguably, then, a model is more likely to cross the line when its safeguards are removed.
+The difficulty is that a capability test is also an alignment test. As Glenda mentioned, some agents recognised that the attack was out of scope, and joined anyway. OpenAI's own preliminary experiments suggest that this is far less likely with its production harness and system prompt in place.
 
 The question now is how to test without exposing others to that risk. Our answer is that when safeguards come off, containment must go up.
 
-**[Slide: Four rules]**
+**[Slide: Diagram, where the four rules apply]**
 
-We propose four rules.
+This diagram shows the problem. The grey line is the boundary as designed. The sandbox could not reach the internet, but it could reach the package service, and the package service could. The dashed arrow is the route the agents took.
 
-First, everything the agent can reach is part of the wall. There should be no network route and no shared state between runs, and software packages should come from a read-only copy. IMDA has itself warned that internal package registries "can serve as breakout points".
+We propose four rules, each marked on the diagram.
 
-Second, attack the sandbox before trusting it, and again after every change. OpenAI's rebuilt package service was breached again within two days.
+First, redraw the boundary to include everything the agent can reach. That is the teal line. Within it, there should be no network route, no shared state between runs, and only read-only copies of software packages. IMDA has itself warned that internal package registries "can serve as breakout points".
 
-Third, watch the test live, from outside the sandbox. A confirmed breach stops the test, and a named person must have the authority to stop it. This also makes the notification duty in Part 5 workable, since a lab cannot report what it has not detected.
+Second, test that boundary before each run, and again after every change. OpenAI's rebuilt package service was breached again within two days.
 
-Fourth, test the test. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Tasks that cannot be solved as intended should be removed, and an honest "this cannot be done" should count as a valid answer.
+Third, monitor the test from outside the sandbox. A confirmed breach stops the test, and a named person must have the authority to stop it. This also makes the notification duty in Part 5 workable, since a lab cannot report what it has not detected.
+
+Fourth, check the test itself. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Tasks that cannot be solved as intended should be removed, and an honest "this cannot be done" should count as a valid answer.
 
 **[Slide: Conclusion]**
 
