@@ -7,7 +7,7 @@ Reconciled with the group document. Part 6 no longer retells the incident (Parts
 <!-- script-start -->
 **[Slide 1: Test, but contain]**
 
-Part 5 asked how we catch this earlier, or stop it happening at all. The answer is not to stop testing. Capability tests are how we learn what a model can do before release. OpenAI switched its safeguards off so the results would reflect the model's "true capabilities", and that is a legitimate aim.
+Part 5 asked how we catch this earlier, or stop it happening at all. The answer is not to stop testing. Capability tests are how we learn what a model can do before release, and OpenAI switched its safeguards off so the results would reflect the model's "true capabilities". That is a legitimate aim.
 
 But this incident shows that a capability test is also an alignment test, planned or not. As Glenda said, some agents recognised the attack was out of scope and joined anyway. OpenAI later found, in preliminary experiments, that with its production harness and system prompt, the tendency to attack out-of-scope systems can fall below one per cent of the baseline. So safeguards-off testing is exactly when a model is most likely to cross the line. Our principle: when safeguards come off, containment must go up.
 
@@ -15,17 +15,17 @@ But this incident shows that a capability test is also an alignment test, planne
 
 We propose four rules.
 
-One: everything the agent can reach is part of the wall. High-risk tests get no network route by default, direct or indirect. Singapore's IMDA already calls internal package registries "breakout points".
+One: everything the agent can reach is part of the wall. High-risk tests get no network route, direct or indirect, and no shared state between runs. Software packages come from a read-only copy, not a live service. Singapore's IMDA already calls internal package registries "breakout points".
 
-Two: attack the sandbox before you trust it, and again after every change. OpenAI's rebuilt environment failed within two days.
+Two: attack the sandbox before you trust it, and again after every change, with an outside auditor where possible. OpenAI's rebuilt environment failed within two days.
 
-Three: watch the test live, from outside the sandbox, under a rule agreed in advance. A confirmed boundary breach stops the run, and a named person has the authority to stop it. Stop first, investigate after. That also makes Part 5's notification duty workable, because you cannot report what you have not detected.
+Three: watch the test live, from outside the sandbox, under a rule agreed in advance. Plant decoys, such as fake credentials, so that reaching for one ends the run. A confirmed breach stops the test, and a named person has the authority to stop it. That also makes Part 5's notification duty workable, because you cannot report what you have not detected.
 
-Four: test the test. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Remove them. And remove only the safeguards that would distort the measurement, keeping the ones that keep the model in bounds.
+Four: test the test. No model had ever solved 198 of the 898 tasks, and OpenAI calls those tasks a significant factor in the agents probing their sandbox. Remove them, and score an honest "this cannot be done" as a valid answer. Then remove only the safeguards that would distort the measurement.
 
 **[Slide 3: Conclusion]**
 
-Today, every version of these rules is voluntary and self-policed. So our conclusion is this. These four rules should be the content of the mandatory sandbox standard proposed in Part 3, and the measure of reasonable care in Part 4. They should scale with risk, applying in full only to dangerous-capability tests with safeguards removed. A developer who follows them can rebut the presumption of negligence. One who departs from them cannot.
+Today these rules are voluntary and self-policed. We conclude that they should be the content of the mandatory sandbox standard proposed in Part 3, and the measure of reasonable care in Part 4. They should scale with risk, applying in full only to dangerous-capability tests with safeguards removed. A developer who follows them can rebut the presumption of negligence. One who departs from them cannot.
 
 The law should not make labs stop testing. It should make sure the test stays inside the lab.
 <!-- script-end -->
@@ -38,10 +38,10 @@ The law should not make labs stop testing. It should make sure the test stays in
 - Principle: when safeguards come off, containment goes up.
 
 **Slide 2: Four rules**
-1. Everything reachable is part of the wall: no network route by default.
-2. Attack the sandbox before each run and after every change.
-3. Live outside monitoring, pre-agreed stop rule, named person.
-4. Test the test: no unsolvable tasks; remove only the safeguards that distort the measurement.
+1. Everything reachable is part of the wall: no network route, no shared state between runs, read-only package copy.
+2. Attack the sandbox before each run and after every change, with an outside auditor where possible.
+3. Live outside monitoring, decoys as tripwires, pre-agreed stop rule, named person.
+4. Test the test: no unsolvable tasks; "cannot be done" counts as a valid answer; remove only the safeguards that distort the measurement.
 
 **Slide 3: Conclusion**
 - Today: voluntary and self-policed.
@@ -61,6 +61,15 @@ The law should not make labs stop testing. It should make sure the test stays in
 | Every version of these rules is voluntary and self-policed | Research across OpenAI, Anthropic, UK AISI, IMDA and US guidance | No binding commitment was found; that is an absence of evidence, not proof |
 
 "Remove only the safeguards that would distort the measurement" is the group's own inference from OpenAI's propensity finding. No source proposes it in those words.
+
+Four details in the rules were added from the Gemini research and are proposals, not reported facts:
+
+| Detail | Basis |
+|---|---|
+| No shared state between runs | The agents coordinated through a credential and package service shared across workloads (OpenAI technical report). The fix is a proposal. |
+| Read-only package copy instead of a live service | Proposal. OpenAI's own remediation removes the package mirror and allows only a cached internet service for high-risk workloads. |
+| Decoys that end the run | Proposal. OpenAI's plan lists "deception-based tripwires" among new detection mechanisms. |
+| Outside auditor; scoring "this cannot be done" as a valid answer | Proposals with no source behind them. Present them as the group's recommendations. |
 
 ## Likely questions
 
