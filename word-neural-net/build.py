@@ -60,12 +60,14 @@ def tab(rp=''):
 
 
 def para(content='', style=None, jc=None, before=None, after=None, line=None, exact=False,
-         tabs=None, keep=False, extra=''):
+         tabs=None, keep=False, extra='', pre='', ind=''):
+    # pPr children must follow the schema order: borders/shading, tabs, spacing, indent, alignment, sectPr
     x = ''
     if style:
         x += f'<w:pStyle w:val="{style}"/>'
     if keep:
         x += '<w:keepNext/>'
+    x += pre
     if tabs:
         x += '<w:tabs>' + ''.join(f'<w:tab w:val="{k}" w:pos="{p}"/>' for k, p in tabs) + '</w:tabs>'
     if before is not None or after is not None or line is not None:
@@ -77,6 +79,7 @@ def para(content='', style=None, jc=None, before=None, after=None, line=None, ex
         if line is not None:
             x += f' w:line="{line}" w:lineRule="{"exact" if exact else "auto"}"'
         x += '/>'
+    x += ind
     if jc:
         x += f'<w:jc w:val="{jc}"/>'
     x += extra
@@ -267,7 +270,7 @@ def machine(pixels, flat=False):
         line = run(f'{k}  ', mono(11, bold=True, color=NAVY))
         for i in range(BAR_BLOCKS, 0, -1):
             line += d.iff(d.formula([f'o_{k}-m_9+{i * BAR_STEP}']), '>', 0, ON, OFF, barp)[0]
-        c5 += para(line, before=0, after=0, line=270, exact=True, extra='<w:ind w:left="600"/>')
+        c5 += para(line, before=0, after=0, line=270, exact=True, ind='<w:ind w:left="600"/>')
     c5 += para('', before=0, after=0, line=100, exact=True)
 
     # 6 -- the answer
